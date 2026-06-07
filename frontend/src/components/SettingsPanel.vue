@@ -5,7 +5,7 @@
         <p class="eyebrow">Persistencia</p>
         <h2>Configuración de invocación</h2>
       </div>
-      <span class="chip accent">Backend + localStorage</span>
+      <span class="chip accent">Backend</span>
     </div>
 
     <p class="muted">
@@ -35,6 +35,10 @@
         <strong>{{ settings.maxSummonMonsterLevel }}</strong>
       </div>
       <div class="meta-item">
+        <span>Usos diarios</span>
+        <strong>{{ settings.dailyUses.remaining }} / {{ settings.dailyUses.maximum }}</strong>
+      </div>
+      <div class="meta-item">
         <span>Último guardado</span>
         <strong>{{ settings.lastSavedAt ? formatTime(settings.lastSavedAt) : '—' }}</strong>
       </div>
@@ -51,7 +55,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useSettingsStore } from '@/stores/settings'
 
 const settings = useSettingsStore()
@@ -64,6 +68,10 @@ watch(
   },
   { immediate: true }
 )
+
+onMounted(() => {
+  void settings.loadConfiguration()
+})
 
 async function save() {
   await settings.updateMaxSummonMonsterLevel(draft.value)

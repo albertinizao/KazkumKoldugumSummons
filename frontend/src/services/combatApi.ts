@@ -1,39 +1,50 @@
 import { getJson, postJson } from '@/services/http';
-import type { CreatureCatalogListResponse } from '@/types/catalog';
 
-export interface DailyUsesResponse {
+export interface DailyUsesState {
   maximum: number;
   remaining: number;
 }
 
-export interface LastRollResultResponse {
-  text: string;
+export interface ConfigurationResponse {
+  maxSummonMonsterLevel: number;
+  dailyUses: DailyUsesState;
+  availableTemplates: string[];
+  enabledFixedRules: string[];
 }
 
-export function fetchCombatState(): Promise<unknown> {
-  return getJson('/api/combat-state');
+export interface CombatStateSnapshot {
+  groups: unknown[];
+  dailyUses: DailyUsesState;
+  configuration: {
+    maxSummonMonsterLevel: number;
+    dailyUses: DailyUsesState;
+    availableTemplates: string[];
+    enabledFixedRules: string[];
+  };
+  lastRollResult: unknown | null;
 }
 
-export function fetchCatalogCreatures(): Promise<CreatureCatalogListResponse> {
-  return getJson('/api/catalog/creatures');
+export interface DailyUsesMutationResponse {
+  dailyUses: DailyUsesState;
+  combatState: CombatStateSnapshot;
 }
 
-export function fetchConfiguration(): Promise<unknown> {
+export function fetchConfiguration(): Promise<ConfigurationResponse> {
   return getJson('/api/configuration');
 }
 
-export function fetchLastRollResult(): Promise<LastRollResultResponse> {
-  return getJson('/api/combat-state/last-roll-result');
+export function fetchCombatState(): Promise<CombatStateSnapshot> {
+  return getJson('/api/combat-state');
 }
 
-export function increaseDailyUses(): Promise<DailyUsesResponse> {
-  return postJson('/api/daily-uses/increase');
+export function increaseDailyUses(amount: number): Promise<DailyUsesMutationResponse> {
+  return postJson('/api/daily-uses/increase', { amount });
 }
 
-export function decreaseDailyUses(): Promise<DailyUsesResponse> {
-  return postJson('/api/daily-uses/decrease');
+export function decreaseDailyUses(amount: number): Promise<DailyUsesMutationResponse> {
+  return postJson('/api/daily-uses/decrease', { amount });
 }
 
-export function resetDailyUses(): Promise<DailyUsesResponse> {
-  return postJson('/api/daily-uses/reset');
+export function resetDailyUses(): Promise<DailyUsesMutationResponse> {
+  return postJson('/api/daily-uses/reset', {});
 }
