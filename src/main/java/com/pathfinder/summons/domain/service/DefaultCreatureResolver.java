@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
@@ -43,7 +44,10 @@ public class DefaultCreatureResolver implements CreatureResolver {
         AbilityScores augmentedAbilities = augmentAbilities(baseAbilities);
 
         List<Speed> resolvedSpeeds = resolveSpeeds(template, templateType);
-        boolean deepGuardianApplied = hasDeepGuardian(resolvedSpeeds, templateType);
+        List<String> resolvedSenses = resolveSenses(template.getSenses(), templateType, resolvedSpeeds);
+        List<String> resolvedSpecialAttacks = resolveSpecialAttacks(template.getSpecialAttacks(), templateType);
+        List<com.pathfinder.summons.domain.model.SpecialDefense> resolvedSpecialDefenses = resolveSpecialDefenses(template.getSpecialDefenses(), templateType);
+        boolean deepGuardianApplied = hasDeepGuardian(template, resolvedSpeeds);
 
         List<Attack> resolvedAttacks = resolveAttacks(template.getAttacks(), baseAbilities, augmentedAbilities, deepGuardianApplied, templateType);
         ArmorClass armorClass = resolveArmorClass(template.getArmorClass(), deepGuardianApplied);
@@ -84,7 +88,7 @@ public class DefaultCreatureResolver implements CreatureResolver {
                 .creatureType(template.getCreatureType())
                 .subtypes(resolveSubtypes(template.getSubtypes(), templateType))
                 .initiative(template.getInitiative())
-                .senses(template.getSenses())
+                .senses(resolvedSenses)
                 .perception(template.getPerception())
                 .armorClass(armorClass)
                 .maxHitPoints(maxHitPoints)
@@ -95,11 +99,27 @@ public class DefaultCreatureResolver implements CreatureResolver {
                 .attacksText(attacksText)
                 .space(template.getSpace())
                 .reach(template.getReach())
-                .specialAttacks(resolveSpecialAttacks(template.getSpecialAttacks(), templateType))
-                .specialDefenses(resolveSpecialDefenses(template.getSpecialDefenses(), templateType))
+                .specialAttacks(resolvedSpecialAttacks)
+                .specialDefenses(resolvedSpecialDefenses)
                 .shortAbilities(template.getShortAbilities())
                 .expandedAbilities(template.getExpandedAbilities())
-                .fullStatBlock(buildFullStatBlock(displayName, template, armorClass, maxHitPoints, savingThrows, resolvedSpeeds, resolvedAttacks))
+                .fullStatBlock(buildFullStatBlock(
+                        displayName,
+                        resolveAlignment(template.getAlignment(), templateType),
+                        template.getSize(),
+                        template.getCreatureType(),
+                        template.getInitiative(),
+                        resolvedSenses,
+                        template.getPerception(),
+                        armorClass,
+                        maxHitPoints,
+                        savingThrows,
+                        resolvedSpeeds,
+                        resolvedAttacks,
+                        template.getSpace(),
+                        template.getReach(),
+                        resolvedSpecialAttacks,
+                        resolvedSpecialDefenses))
                 .appliedRules(appliedRules)
                 .build();
     }
@@ -136,10 +156,33 @@ public class DefaultCreatureResolver implements CreatureResolver {
         return List.copyOf(speeds);
     }
 
-    private boolean hasDeepGuardian(List<Speed> resolvedSpeeds, SummonTemplateType templateType) {
-        boolean hasBurrow = resolvedSpeeds.stream().anyMatch(speed -> speed.getType() == SpeedType.BURROW);
-        boolean hasEarthSubtype = templateType == SummonTemplateType.CHTHONIC;
-        return hasBurrow || hasEarthSubtype;
+    private List<String> resolveSenses(List<String> baseSenses,
+                                       SummonTemplateType templateType,
+                                       List<Speed> resolvedSpeeds) {
+        List<String> senses = new ArrayList<>(baseSenses == null ? List.of() : baseSenses);
+        if (templateType != null) {
+            appendIfMissing(senses, "darkvision 60 ft.");
+        }
+
+        if (templateType == SummonTemplateType.CHTHONIC || hasBurrowSpeed(resolvedSpeeds)) {
+            appendIfMissing(senses, "tremorsense 60 ft.");
+        }
+
+        return List.copyOf(senses);
+    }
+
+    private boolean hasDeepGuardian(CreatureTemplate template, List<Speed> resolvedSpeeds) {
+        return hasBurrowSpeed(resolvedSpeeds) || hasEarthSubtype(template.getSubtypes());
+    }
+
+    private boolean hasBurrowSpeed(List<Speed> speeds) {
+        return speeds.stream().anyMatch(speed -> speed.getType() == SpeedType.BURROW);
+    }
+
+    private boolean hasEarthSubtype(List<String> subtypes) {
+        return subtypes.stream()
+                .map(value -> value.toLowerCase(Locale.ROOT))
+                .anyMatch(subtype -> subtype.contains("earth"));
     }
 
     private List<Attack> resolveAttacks(List<Attack> baseAttacks,
@@ -399,45 +442,152 @@ public class DefaultCreatureResolver implements CreatureResolver {
     }
 
     private Alignment resolveAlignment(Alignment baseAlignment, SummonTemplateType templateType) {
-        return baseAlignment;
+        return templateType == null ? baseAlignment : Alignment.NG;
     }
 
     private List<String> resolveSubtypes(List<String> baseSubtypes, SummonTemplateType templateType) {
-        List<String> subtypes = new ArrayList<>(baseSubtypes);
-        if (templateType == SummonTemplateType.CHTHONIC && subtypes.stream().map(value -> value.toLowerCase(Locale.ROOT)).noneMatch(subtype -> subtype.contains("earth"))) {
-            subtypes.add("earth");
+        List<String> subtypes = new ArrayList<>(baseSubtypes == null ? List.of() : baseSubtypes);
+        if (templateType == SummonTemplateType.CHTHONIC) {
+            appendIfMissing(subtypes, "earth");
+        }
+        if (templateType == SummonTemplateType.FIERY) {
+            appendIfMissing(subtypes, "fire");
         }
         return List.copyOf(subtypes);
     }
 
     private List<String> resolveSpecialAttacks(List<String> specialAttacks, SummonTemplateType templateType) {
-        return specialAttacks;
+        List<String> resolved = new ArrayList<>(specialAttacks == null ? List.of() : specialAttacks);
+        if (templateType == SummonTemplateType.CELESTIAL) {
+            appendIfMissing(resolved, "Smite evil 1/day (swift action)");
+        } else if (templateType == SummonTemplateType.ENTROPIC) {
+            appendIfMissing(resolved, "Smite law 1/day (swift action)");
+        } else if (templateType == SummonTemplateType.RESOLUTE) {
+            appendIfMissing(resolved, "Smite chaos 1/day (swift action)");
+        }
+        return List.copyOf(resolved);
     }
 
     private List<com.pathfinder.summons.domain.model.SpecialDefense> resolveSpecialDefenses(List<com.pathfinder.summons.domain.model.SpecialDefense> specialDefenses,
                                                                                             SummonTemplateType templateType) {
-        return specialDefenses;
+        List<com.pathfinder.summons.domain.model.SpecialDefense> resolved = new ArrayList<>(specialDefenses == null ? List.of() : specialDefenses);
+        if (templateType == SummonTemplateType.CHTHONIC) {
+            resolved.add(com.pathfinder.summons.domain.model.SpecialDefense.builder()
+                    .type(com.pathfinder.summons.domain.model.SpecialDefenseType.RESISTANCE)
+                    .value("acid 10")
+                    .notes("Template resistance")
+                    .build());
+            resolved.add(com.pathfinder.summons.domain.model.SpecialDefense.builder()
+                    .type(com.pathfinder.summons.domain.model.SpecialDefenseType.OTHER)
+                    .value("listed immunities")
+                    .notes("Template-specific immunities are retained in the final creature")
+                    .build());
+        } else if (templateType == SummonTemplateType.FIERY) {
+            resolved.add(com.pathfinder.summons.domain.model.SpecialDefense.builder()
+                    .type(com.pathfinder.summons.domain.model.SpecialDefenseType.RESISTANCE)
+                    .value("fire 10")
+                    .notes("Template resistance")
+                    .build());
+            resolved.add(com.pathfinder.summons.domain.model.SpecialDefense.builder()
+                    .type(com.pathfinder.summons.domain.model.SpecialDefenseType.IMMUNITY)
+                    .value("fire")
+                    .notes("Granted by the fire subtype")
+                    .build());
+            resolved.add(com.pathfinder.summons.domain.model.SpecialDefense.builder()
+                    .type(com.pathfinder.summons.domain.model.SpecialDefenseType.VULNERABILITY)
+                    .value("cold")
+                    .notes("Granted by the fire subtype")
+                    .build());
+        } else if (templateType == SummonTemplateType.CELESTIAL) {
+            resolved.add(resistance("cold 10"));
+            resolved.add(resistance("acid 10"));
+            resolved.add(resistance("electricity 10"));
+        } else if (templateType == SummonTemplateType.ENTROPIC) {
+            resolved.add(resistance("acid 10"));
+            resolved.add(resistance("fire 10"));
+        } else if (templateType == SummonTemplateType.RESOLUTE) {
+            resolved.add(resistance("acid 10"));
+            resolved.add(resistance("cold 10"));
+            resolved.add(resistance("fire 10"));
+        }
+        return List.copyOf(resolved);
     }
 
     private String buildFullStatBlock(String displayName,
-                                      CreatureTemplate template,
+                                      Alignment alignment,
+                                      CreatureSize size,
+                                      String creatureType,
+                                      int initiative,
+                                      List<String> senses,
+                                      int perception,
                                       ArmorClass armorClass,
                                       int maxHitPoints,
                                       SavingThrows savingThrows,
                                       List<Speed> speeds,
-                                      List<Attack> attacks) {
-        String senses = String.join(", ", template.getSenses());
+                                      List<Attack> attacks,
+                                      String space,
+                                      String reach,
+                                      List<String> specialAttacks,
+                                      List<com.pathfinder.summons.domain.model.SpecialDefense> specialDefenses) {
+        String sensesText = String.join(", ", senses);
         String speedText = formatSpeeds(speeds);
         String attackText = formatAttacks(attacks);
         return displayName + "\n"
-                + template.getAlignment() + " " + template.getSize().name().charAt(0) + template.getSize().name().substring(1).toLowerCase(Locale.ROOT) + " " + template.getCreatureType() + "\n"
-                + "Init +" + template.getInitiative() + "; Senses " + senses + "; Perception +" + template.getPerception() + "\n"
+                + alignment + " " + toDisplaySize(size) + " " + creatureType + "\n"
+                + "Init +" + initiative + "; Senses " + sensesText + "; Perception +" + perception + "\n"
                 + "AC " + armorClass.getNormal() + ", touch " + armorClass.getTouch() + ", flat-footed " + armorClass.getFlatFooted() + " (" + armorClass.getDetail() + ")\n"
-                + "hp " + maxHitPoints + " (" + template.getHitPoints().getFormula() + ")\n"
+                + "hp " + maxHitPoints + "\n"
                 + "Fort +" + savingThrows.getFortitude() + ", Ref +" + savingThrows.getReflex() + ", Will +" + savingThrows.getWill() + "\n"
                 + speedText + "\n"
                 + attackText + "\n"
-                + "Space " + template.getSpace() + "; Reach " + template.getReach() + "\n"
-                + "Special Attacks " + String.join(", ", template.getSpecialAttacks());
+                + "Space " + space + "; Reach " + reach + "\n"
+                + "Special Attacks " + joinOrDash(specialAttacks) + "\n"
+                + "Special Defenses " + joinSpecialDefenses(specialDefenses);
+    }
+
+    private String joinOrDash(List<String> values) {
+        if (values.isEmpty()) {
+            return "—";
+        }
+
+        return String.join(", ", values);
+    }
+
+    private String joinSpecialDefenses(List<com.pathfinder.summons.domain.model.SpecialDefense> specialDefenses) {
+        if (specialDefenses.isEmpty()) {
+            return "—";
+        }
+
+        StringJoiner joiner = new StringJoiner(", ");
+        for (com.pathfinder.summons.domain.model.SpecialDefense specialDefense : specialDefenses) {
+            StringBuilder builder = new StringBuilder(specialDefense.getType().name().toLowerCase(Locale.ROOT));
+            if (specialDefense.getValue() != null && !specialDefense.getValue().isBlank()) {
+                builder.append(' ').append(specialDefense.getValue());
+            }
+            if (specialDefense.getNotes() != null && !specialDefense.getNotes().isBlank()) {
+                builder.append(" (").append(specialDefense.getNotes()).append(')');
+            }
+            joiner.add(builder.toString());
+        }
+        return joiner.toString();
+    }
+
+    private String toDisplaySize(CreatureSize size) {
+        String raw = size.name().toLowerCase(Locale.ROOT);
+        return raw.substring(0, 1).toUpperCase(Locale.ROOT) + raw.substring(1);
+    }
+
+    private com.pathfinder.summons.domain.model.SpecialDefense resistance(String value) {
+        return com.pathfinder.summons.domain.model.SpecialDefense.builder()
+                .type(com.pathfinder.summons.domain.model.SpecialDefenseType.RESISTANCE)
+                .value(value)
+                .notes("Template resistance")
+                .build();
+    }
+
+    private <T> void appendIfMissing(List<T> values, T value) {
+        if (!values.contains(value)) {
+            values.add(value);
+        }
     }
 }

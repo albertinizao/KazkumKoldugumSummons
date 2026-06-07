@@ -81,6 +81,9 @@ class CatalogControllerIT {
                 .extracting(rule -> rule.getType().name())
                 .contains("AUGMENT_SUMMONING", "VERSATILE_SUMMON_MONSTER", "DEEP_GUARDIAN");
         assertThat(previewResponse.getBody().getAttacksText()).contains("fire");
+        assertThat(previewResponse.getBody().getSpecialDefenses())
+                .extracting(defense -> defense.getType().name() + ":" + defense.getValue())
+                .contains("RESISTANCE:fire 10", "IMMUNITY:fire", "VULNERABILITY:cold");
         assertThat(previewResponse.getBody().getFullStatBlock()).contains("Fiery Badger");
     }
 

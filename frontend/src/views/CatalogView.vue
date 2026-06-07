@@ -103,9 +103,9 @@
         </div>
 
         <template v-if="selectedCreature">
-          <div class="summary-grid">
+            <div class="summary-grid">
             <div>
-              <span>Alinhación</span>
+              <span>Alineación</span>
               <strong>{{ preview?.alignment ?? selectedCreature.alignment }}</strong>
             </div>
             <div>
@@ -143,7 +143,10 @@
             <p><strong>Id final:</strong> {{ preview.id }}</p>
             <p><strong>Velocidades:</strong> {{ preview.speedsText }}</p>
             <p><strong>Ataques:</strong> {{ preview.attacksText }}</p>
+            <p><strong>Ataques especiales:</strong> {{ specialAttacksText }}</p>
+            <p><strong>Defensas especiales:</strong> {{ specialDefensesText }}</p>
             <p><strong>Reglas aplicadas:</strong> {{ appliedRulesText }}</p>
+            <pre class="statblock">{{ preview.fullStatBlock }}</pre>
           </div>
 
           <div class="template-strip">
@@ -189,6 +192,29 @@ const selectedCreature = computed(() => items.value.find(item => item.id === sel
 const visibleCount = computed(() => items.value.length);
 const previewTitle = computed(() => preview.value?.displayName ?? selectedCreature.value?.name ?? 'Sin selección');
 const appliedRulesText = computed(() => preview.value?.appliedRules.map(rule => rule.description).join(' · ') ?? '—');
+const specialAttacksText = computed(() =>
+  preview.value?.specialAttacks.length
+    ? preview.value.specialAttacks.join(' · ')
+    : '—',
+);
+const specialDefensesText = computed(() =>
+  preview.value?.specialDefenses.length
+    ? preview.value.specialDefenses
+        .map(defense => {
+          const value = defense.value ? ` ${defense.value}` : '';
+          const notes = defense.notes ? ` (${defense.notes})` : '';
+          const labelMap: Record<string, string> = {
+            DAMAGE_REDUCTION: 'RD',
+            RESISTANCE: 'Resistencia',
+            IMMUNITY: 'Inmunidad',
+            VULNERABILITY: 'Vulnerabilidad',
+            OTHER: 'Otros',
+          };
+          return `${labelMap[defense.type] ?? defense.type}${value}${notes}`;
+        })
+        .join(' · ')
+    : '—',
+);
 const allowedTemplates = computed(() => {
   const allowed = selectedCreature.value?.allowedTemplates ?? [];
   return summonTemplates.filter(template => template.key === 'none' || allowed.includes(template.key.toUpperCase() as SummonTemplateType));
@@ -452,6 +478,16 @@ select {
 .detail-grid p,
 .preview-box p {
   margin-top: 0.45rem;
+}
+
+.statblock {
+  margin: 0.75rem 0 0;
+  padding: 0.85rem;
+  border-radius: 0.75rem;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .template-strip {
