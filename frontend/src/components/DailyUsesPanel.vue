@@ -1,30 +1,38 @@
 <template>
   <section class="panel">
     <div class="panel-header">
-      <h2>Usos diarios</h2>
+      <div>
+        <p class="eyebrow">Combate</p>
+        <h2>Usos diarios</h2>
+      </div>
       <StatusBadge variant="neutral">{{ state.remaining }} / {{ state.maximum }}</StatusBadge>
     </div>
 
     <div class="button-row">
-      <ActionButton>Invocar</ActionButton>
-      <ActionButton>Limpiar invocaciones</ActionButton>
+      <ActionButton :disabled="busy" @click="$emit('summon')">Invocar</ActionButton>
+      <ActionButton :disabled="busy" variant="danger" @click="$emit('clearSummons')">Limpiar invocaciones</ActionButton>
     </div>
 
     <p class="hint">
-      Esqueleto inicial del frontend. Aquí se conectará el estado de combate, el catálogo y las
-      acciones de mesa.
+      El contador se conserva al recargar. Invocar descuenta 1 uso si hay margen, pero no bloquea la mesa si ya está a 0.
     </p>
   </section>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import ActionButton from '@/components/ActionButton.vue';
 import StatusBadge from '@/components/StatusBadge.vue';
-import { useCombatStore } from '@/stores/combat';
+import type { DailyUses } from '@/types/combat';
 
-const store = useCombatStore();
-const state = computed(() => store.dailyUses);
+defineProps<{
+  state: DailyUses;
+  busy?: boolean;
+}>();
+
+defineEmits<{
+  (event: 'summon'): void;
+  (event: 'clearSummons'): void;
+}>();
 </script>
 
 <style scoped>
@@ -43,6 +51,7 @@ const state = computed(() => store.dailyUses);
   margin-bottom: 1rem;
 }
 
+.eyebrow,
 h2 {
   margin: 0;
 }

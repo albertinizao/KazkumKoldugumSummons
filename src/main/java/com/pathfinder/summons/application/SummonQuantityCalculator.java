@@ -14,9 +14,9 @@ public class SummonQuantityCalculator {
             return new SummonQuantityPlan(1, "1");
         }
         if (levelDifference == 1) {
-            return new SummonQuantityPlan(3, "1d3");
+            return new SummonQuantityPlan(4, "1d3+1");
         }
-        return new SummonQuantityPlan(4 + (levelDifference - 1), "1d4+" + (levelDifference - 1));
+        return new SummonQuantityPlan(6, "1d4+2");
     }
 
     public boolean isAvailable(SummonerConfiguration configuration, int creatureSummonLevel) {

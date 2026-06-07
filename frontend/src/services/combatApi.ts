@@ -1,39 +1,48 @@
-import { getJson, postJson } from '@/services/http';
+import { deleteJson, getJson, postJson } from '@/services/http';
+import type {
+  ActiveSummonGroup,
+  AmountRequest,
+  CombatState,
+  SummonCreatureRequest,
+} from '@/types/combat';
 import type { CreatureCatalogListResponse } from '@/types/catalog';
 
-export interface DailyUsesResponse {
-  maximum: number;
-  remaining: number;
-}
-
-export interface LastRollResultResponse {
-  text: string;
-}
-
-export function fetchCombatState(): Promise<unknown> {
+export async function fetchCombatState(): Promise<CombatState> {
   return getJson('/api/combat-state');
+}
+
+export async function summonCreature(request: SummonCreatureRequest): Promise<CombatState> {
+  return postJson<SummonCreatureRequest, CombatState>('/api/combat-state/summons', request);
+}
+
+export async function clearCombatState(): Promise<CombatState> {
+  return deleteJson<CombatState>('/api/combat-state/summons');
+}
+
+export async function damageInstance(instanceId: string, amount: number): Promise<CombatState> {
+  return postJson<AmountRequest, CombatState>(`/api/combat-state/instances/${encodeURIComponent(instanceId)}/damage`, {
+    amount,
+  });
+}
+
+export async function healInstance(instanceId: string, amount: number): Promise<CombatState> {
+  return postJson<AmountRequest, CombatState>(`/api/combat-state/instances/${encodeURIComponent(instanceId)}/heal`, {
+    amount,
+  });
+}
+
+export async function removeInstance(instanceId: string): Promise<CombatState> {
+  return deleteJson<CombatState>(`/api/combat-state/instances/${encodeURIComponent(instanceId)}`);
+}
+
+export async function clearLastRollResult(): Promise<CombatState> {
+  return deleteJson<CombatState>('/api/combat-state/last-roll-result');
 }
 
 export function fetchCatalogCreatures(): Promise<CreatureCatalogListResponse> {
   return getJson('/api/catalog/creatures');
 }
 
-export function fetchConfiguration(): Promise<unknown> {
-  return getJson('/api/configuration');
-}
-
-export function fetchLastRollResult(): Promise<LastRollResultResponse> {
-  return getJson('/api/combat-state/last-roll-result');
-}
-
-export function increaseDailyUses(): Promise<DailyUsesResponse> {
-  return postJson('/api/daily-uses/increase');
-}
-
-export function decreaseDailyUses(): Promise<DailyUsesResponse> {
-  return postJson('/api/daily-uses/decrease');
-}
-
-export function resetDailyUses(): Promise<DailyUsesResponse> {
-  return postJson('/api/daily-uses/reset');
+export function getGroupById(groups: ActiveSummonGroup[], groupId: string): ActiveSummonGroup | null {
+  return groups.find(group => group.id === groupId) ?? null;
 }

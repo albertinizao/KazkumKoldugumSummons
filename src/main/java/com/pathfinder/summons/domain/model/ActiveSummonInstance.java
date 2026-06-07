@@ -7,18 +7,16 @@ import lombok.Value;
 @Builder(toBuilder = true)
 public class ActiveSummonInstance {
     String id;
-    String groupId;
-    int index;
+    int displayNumber;
     String displayName;
     int maxHitPoints;
     int currentHitPoints;
     ActiveSummonStatus status;
 
-    public static ActiveSummonInstance create(String id, String groupId, int index, String displayName, int maxHitPoints) {
+    public static ActiveSummonInstance create(String id, int displayNumber, String displayName, int maxHitPoints) {
         return ActiveSummonInstance.builder()
                 .id(id)
-                .groupId(groupId)
-                .index(index)
+                .displayNumber(displayNumber)
                 .displayName(displayName)
                 .maxHitPoints(maxHitPoints)
                 .currentHitPoints(maxHitPoints)

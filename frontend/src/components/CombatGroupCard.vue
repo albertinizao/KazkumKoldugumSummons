@@ -2,8 +2,9 @@
   <article class="group-card">
     <header class="group-header">
       <div>
-        <h3>{{ name }}</h3>
-        <p>{{ count }} criaturas activas</p>
+        <p class="eyebrow">Grupo activo</p>
+        <h3>{{ title }}</h3>
+        <p class="muted">{{ group.instances.length }} criatura(s) activas</p>
       </div>
       <StatusBadge variant="success">Grupo activo</StatusBadge>
     </header>
@@ -11,38 +12,79 @@
     <div class="summary-grid">
       <div>
         <span>CA</span>
-        <strong>—</strong>
+        <strong>{{ group.resolvedCreature.armorClass.normal }}</strong>
       </div>
       <div>
         <span>PG</span>
-        <strong>—</strong>
+        <strong>{{ group.resolvedCreature.maxHitPoints }}</strong>
       </div>
       <div>
         <span>TS</span>
-        <strong>—</strong>
+        <strong>Fort {{ group.resolvedCreature.savingThrows.fortitude }} / Ref {{ group.resolvedCreature.savingThrows.reflex }} / Vol {{ group.resolvedCreature.savingThrows.will }}</strong>
       </div>
       <div>
         <span>Ataques</span>
-        <strong>—</strong>
+        <strong>{{ group.resolvedCreature.attacksText }}</strong>
       </div>
     </div>
 
+    <div class="details">
+      <p><strong>Alineación:</strong> {{ group.resolvedCreature.alignment }}</p>
+      <p><strong>Tamaño:</strong> {{ group.resolvedCreature.size }}</p>
+      <p><strong>Tipo:</strong> {{ group.resolvedCreature.creatureType }}</p>
+      <p><strong>Velocidades:</strong> {{ group.resolvedCreature.speedsText }}</p>
+      <p><strong>Ataques especiales:</strong> {{ specialAttacks }}</p>
+    </div>
+
     <div class="button-row">
-      <ActionButton>Atacar con todas</ActionButton>
-      <ActionButton>Tirar TS</ActionButton>
-      <ActionButton>Expandir ficha</ActionButton>
+      <ActionButton :disabled="true">Atacar con todas</ActionButton>
+      <ActionButton :disabled="true">Tirar TS</ActionButton>
+      <ActionButton :disabled="busy" @click="$emit('expand')">Expandir ficha</ActionButton>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stack">
+      <CreatureCard
+        v-for="instance in group.instances"
+        :key="instance.id"
+        :instance="instance"
+        :busy="busy"
+        @damage="$emit('damage', instance.id, $event)"
+        @heal="$emit('heal', instance.id, $event)"
+        @remove="$emit('remove', instance.id)"
+      />
     </div>
   </article>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import ActionButton from '@/components/ActionButton.vue';
+import CreatureCard from '@/components/CreatureCard.vue';
 import StatusBadge from '@/components/StatusBadge.vue';
+import type { ActiveSummonGroup } from '@/types/combat';
 
-defineProps<{
-  name: string;
-  count: number;
+const props = defineProps<{
+  group: ActiveSummonGroup;
+  busy?: boolean;
 }>();
+
+defineEmits<{
+  (event: 'damage', instanceId: string, amount: number): void;
+  (event: 'heal', instanceId: string, amount: number): void;
+  (event: 'remove', instanceId: string): void;
+  (event: 'expand'): void;
+}>();
+
+const title = computed(() => props.group.resolvedCreature.displayName);
+const specialAttacks = computed(() => {
+  if (!props.group.resolvedCreature.specialAttacks.length) {
+    return '—';
+  }
+
+  return props.group.resolvedCreature.specialAttacks.join(' · ');
+});
 </script>
 
 <style scoped>
@@ -61,12 +103,13 @@ defineProps<{
   margin-bottom: 1rem;
 }
 
+.eyebrow,
 h3,
 p {
   margin: 0;
 }
 
-p {
+.muted {
   color: #94a3b8;
 }
 
@@ -90,12 +133,25 @@ p {
 }
 
 .summary-grid strong {
-  font-size: 1.1rem;
+  font-size: 0.96rem;
+  word-break: break-word;
+}
+
+.details {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+  color: #cbd5e1;
 }
 
 .button-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+
+.stack {
+  display: grid;
   gap: 0.75rem;
 }
 
