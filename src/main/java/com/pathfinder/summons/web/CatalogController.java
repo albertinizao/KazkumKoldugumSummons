@@ -7,8 +7,8 @@ import com.pathfinder.summons.domain.model.ResolvedCreature;
 import com.pathfinder.summons.domain.model.SummonTemplateType;
 import jakarta.validation.constraints.Min;
 import java.util.List;
+import java.util.Locale;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -85,7 +85,7 @@ public class CatalogController {
         }
 
         try {
-            return SummonTemplateType.valueOf(template.trim().toUpperCase());
+            return SummonTemplateType.valueOf(template.trim().toUpperCase(Locale.ROOT));
         } catch (IllegalArgumentException ex) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Plantilla inválida: " + template, ex);
         }

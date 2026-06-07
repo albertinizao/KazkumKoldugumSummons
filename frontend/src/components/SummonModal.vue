@@ -75,7 +75,7 @@
 
               <div class="meta">
                 <div class="meta-item">
-                  <span>Alinhación</span>
+                  <span>Alineación</span>
                   <strong>{{ preview?.finalAlignment ?? '—' }}</strong>
                 </div>
                 <div class="meta-item">
@@ -106,6 +106,14 @@
                 <div class="stat" v-for="attack in preview.attacks" :key="attack.name">
                   <span>{{ attack.name }}</span>
                   <strong>{{ attack.bonus }} / {{ attack.damage }}</strong>
+                </div>
+                <div class="stat" v-if="preview.specialAttacks.length">
+                  <span>Ataques especiales</span>
+                  <strong>{{ preview.specialAttacks.join(' · ') }}</strong>
+                </div>
+                <div class="stat" v-if="preview.specialDefenses.length">
+                  <span>Defensas especiales</span>
+                  <strong>{{ preview.specialDefenses.join(' · ') }}</strong>
                 </div>
               </div>
 

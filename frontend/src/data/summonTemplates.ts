@@ -8,31 +8,31 @@ export const summonTemplates = [
   {
     key: 'chthonic',
     label: 'Chthonic',
-    short: 'Tierra, oscuridad y presión física',
+    short: 'Subtipo earth, darkvision y daño ácido',
     requiresChoice: true,
   },
   {
     key: 'fiery',
     label: 'Fiery',
-    short: 'Daño de fuego añadido',
+    short: 'Subtipo fire, fire resistance y daño de fuego',
     requiresChoice: true,
   },
   {
     key: 'celestial',
     label: 'Celestial',
-    short: 'Sesgo sagrado y apoyo ofensivo',
+    short: 'Smite evil y resistencias sagradas',
     requiresChoice: true,
   },
   {
     key: 'entropic',
     label: 'Entropic',
-    short: 'Sesgo caótico y presión ofensiva',
+    short: 'Smite law y resistencias caóticas',
     requiresChoice: true,
   },
   {
     key: 'resolute',
     label: 'Resolute',
-    short: 'Sesgo estable y ofensiva resistente',
+    short: 'Smite chaos y resistencias legales',
     requiresChoice: true,
   },
 ] as const;

@@ -1,41 +1,4 @@
-export const summonTemplates = [
-  {
-    key: 'none',
-    label: 'Sin plantilla',
-    short: 'Invocación base',
-    requiresChoice: false
-  },
-  {
-    key: 'chthonic',
-    label: 'Chthonic',
-    short: 'Tierra, oscuridad y ataque ácido',
-    requiresChoice: true
-  },
-  {
-    key: 'fiery',
-    label: 'Fiery',
-    short: 'Fuego, resistencia ígnea y daño de fuego',
-    requiresChoice: true
-  },
-  {
-    key: 'celestial',
-    label: 'Celestial',
-    short: 'Sanctified summon with smite evil',
-    requiresChoice: true
-  },
-  {
-    key: 'entropic',
-    label: 'Entropic',
-    short: 'Chaos-aligned summon with smite good',
-    requiresChoice: true
-  },
-  {
-    key: 'resolute',
-    label: 'Resolute',
-    short: 'Steadfast summon with smite chaos',
-    requiresChoice: true
-  }
-]
+export { summonTemplates } from './summonTemplates.ts'
 
 export const creatureCatalog = [
   {

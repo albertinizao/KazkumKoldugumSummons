@@ -6,6 +6,27 @@ function highestSpeed(creature) {
   return creature.speeds.reduce((max, speed) => Math.max(max, speed.value), 0)
 }
 
+function appendUnique(values, value) {
+  if (!values.includes(value)) {
+    values.push(value)
+  }
+}
+
+function hasEarthSubtype(creature) {
+  return creature.subtype?.toLowerCase().includes('earth') ?? false
+}
+
+function hasBurrowSpeed(creature) {
+  return creature.speeds.some(speed => speed.type === 'burrow')
+}
+
+function templateSpecialAttack(templateKey) {
+  if (templateKey === 'celestial') return 'Smite evil 1/day (swift action)'
+  if (templateKey === 'entropic') return 'Smite law 1/day (swift action)'
+  if (templateKey === 'resolute') return 'Smite chaos 1/day (swift action)'
+  return null
+}
+
 export function getTemplate(templateKey) {
   return TEMPLATE_MAP[templateKey] ?? TEMPLATE_MAP.none
 }
@@ -13,43 +34,71 @@ export function getTemplate(templateKey) {
 export function resolveCreature(creature, templateKey = 'none') {
   const template = getTemplate(templateKey)
   const isTemplate = templateKey !== 'none'
-  const hasEarthSubtype = creature.subtype?.toLowerCase().includes('earth') || templateKey === 'chthonic'
-  const hasBurrow = creature.speeds.some(speed => speed.type === 'burrow') || templateKey === 'chthonic'
+  const templateApplied = isTemplate && template.key !== 'none'
+  const hasEarth = hasEarthSubtype(creature) || templateKey === 'chthonic'
+  const hasBurrow = hasBurrowSpeed(creature) || templateKey === 'chthonic'
   const finalName = isTemplate ? `${template.label} ${creature.name}` : creature.name
-  const speedLines = creature.speeds.map(speed => `${speed.type} ${speed.value} ft`)
+  const resolvedSpeeds = creature.speeds.map(speed => ({ ...speed }))
+  if (templateKey === 'chthonic' && !hasBurrowSpeed(creature)) {
+    resolvedSpeeds.push({
+      type: 'burrow',
+      value: Math.max(5, Math.floor(highestSpeed(creature) / 2)),
+    })
+  }
+  const speedLines = resolvedSpeeds.map(speed => `${speed.type} ${speed.value} ft`)
   const notes = [...(creature.notes ? [creature.notes] : [])]
+  const specialAttacks = [...(creature.specialAttacks ?? [])]
+  const specialDefenses = [...(creature.specialDefenses ?? [])]
 
   const traits = new Set([creature.type, creature.size])
   if (creature.subtype) traits.add(creature.subtype)
   if (isTemplate) traits.add(template.label)
-  if (hasEarthSubtype) traits.add('Earth synergy')
+  if (hasEarth) traits.add('Earth synergy')
   if (hasBurrow) traits.add('Burrow')
 
-  const attackBonus = hasEarthSubtype || hasBurrow ? 1 : 0
-  const armorBonus = hasEarthSubtype || hasBurrow ? 1 : 0
-  const damageBonus = templateKey === 'chthonic'
-    ? 'All attacks gain +1 acid damage'
+  const deepGuardianBonus = hasEarth || hasBurrow ? 1 : 0
+  const templateDamage = templateKey === 'chthonic'
+    ? { type: 'acid', label: 'acid' }
     : templateKey === 'fiery'
-      ? 'All attacks gain +1 fire damage'
+      ? { type: 'fire', label: 'fire' }
       : null
 
-  if (templateKey === 'chthonic') {
+  if (templateApplied) {
     notes.push('Alignment changes to NG.')
+  }
+
+  if (templateKey === 'chthonic') {
     notes.push('Adds earth subtype, darkvision 60 ft and tremorsense 60 ft.')
     const burrowValue = Math.max(5, Math.floor(highestSpeed(creature) / 2))
     notes.push(`Adds burrow speed ${burrowValue} ft based on the highest existing speed.`)
-    notes.push('Adds acid resistance 10 and listed immunities.')
+    specialDefenses.push('Resistance acid 10')
+    specialDefenses.push('Listed immunities')
   } else if (templateKey === 'fiery') {
-    notes.push('Alignment changes to NG.')
     notes.push('Adds fire subtype and darkvision 60 ft.')
-    notes.push('Adds fire resistance 10.')
+    specialDefenses.push('Resistance fire 10')
+    specialDefenses.push('Immunity fire')
+    specialDefenses.push('Vulnerability cold')
   } else if (templateKey === 'celestial' || templateKey === 'entropic' || templateKey === 'resolute') {
-    notes.push('Alignment changes to NG.')
     notes.push('Adds darkvision 60 ft and the template-listed resistances.')
-    notes.push(`Adds a single-use swift-action smite ${templateKey === 'celestial' ? 'evil' : templateKey === 'entropic' ? 'good' : 'chaos'} attack.`)
+    const smite = templateSpecialAttack(templateKey)
+    if (smite) {
+      specialAttacks.push(smite)
+    }
+    if (templateKey === 'celestial') {
+      specialDefenses.push('Resistance cold 10')
+      specialDefenses.push('Resistance acid 10')
+      specialDefenses.push('Resistance electricity 10')
+    } else if (templateKey === 'entropic') {
+      specialDefenses.push('Resistance acid 10')
+      specialDefenses.push('Resistance fire 10')
+    } else if (templateKey === 'resolute') {
+      specialDefenses.push('Resistance acid 10')
+      specialDefenses.push('Resistance cold 10')
+      specialDefenses.push('Resistance fire 10')
+    }
   }
 
-  if (hasEarthSubtype || hasBurrow) {
+  if (hasEarth || hasBurrow) {
     notes.push('Earth or burrow synergy grants +1 attack and +1 AC normal/flat-footed.')
   }
 
@@ -58,28 +107,32 @@ export function resolveCreature(creature, templateKey = 'none') {
     name: finalName,
     templateKey,
     templateLabel: template.label,
-    finalAlignment: isTemplate ? 'NG' : creature.alignment,
-    finalSubtype: [
+    finalAlignment: templateApplied ? 'NG' : creature.alignment,
+    finalSubtype: Array.from(new Set([
       creature.subtype,
       templateKey === 'chthonic' ? 'Earth' : null,
       templateKey === 'fiery' ? 'Fire' : null
-    ].filter(Boolean).join(', ') || creature.type,
+    ].filter(Boolean))).join(', ') || creature.type,
     speedLines,
     attacks: creature.attacks.map(attack => ({
       ...attack,
-      bonus: attack.bonus + attackBonus,
-      damage: damageBonus ? `${attack.damage} (+1 ${templateKey === 'chthonic' ? 'acid' : 'fire'})` : attack.damage
+      bonus: attack.bonus + deepGuardianBonus,
+      damage: templateDamage ? `${attack.damage} (+1 ${templateDamage.label})` : attack.damage
     })),
     defenses: {
       ...creature.defenses,
-      ac: creature.defenses.ac + armorBonus,
-      touch: creature.defenses.ac + armorBonus,
-      flatFooted: creature.defenses.ac + armorBonus
+      ac: creature.defenses.ac + deepGuardianBonus,
+      touch: creature.defenses.ac,
+      flatFooted: creature.defenses.ac + deepGuardianBonus
     },
     traits: Array.from(traits),
     notes,
-    isEarthSynergy: hasEarthSubtype || hasBurrow,
-    burrowSpeed: templateKey === 'chthonic' ? Math.max(5, Math.floor(highestSpeed(creature) / 2)) : creature.speeds.find(speed => speed.type === 'burrow')?.value ?? null
+    specialAttacks,
+    specialDefenses,
+    isEarthSynergy: hasEarth || hasBurrow,
+    burrowSpeed: templateKey === 'chthonic'
+      ? Math.max(5, Math.floor(highestSpeed(creature) / 2))
+      : creature.speeds.find(speed => speed.type === 'burrow')?.value ?? null
   }
 }
 
