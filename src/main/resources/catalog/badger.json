@@ -1,0 +1,104 @@
+{
+  "id": "badger",
+  "nombre": "Badger",
+  "nivelSummon": 1,
+  "alineamiento": "N",
+  "tamano": "Small",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": ["celestial", "fiery", "chthonic", "entropic", "resolute"],
+  "iniciativa": 1,
+  "sentidos": ["low-light vision", "scent"],
+  "percepcion": 5,
+  "atributos": {
+    "fuerza": 10,
+    "destreza": 13,
+    "constitucion": 15,
+    "inteligencia": 2,
+    "sabiduria": 12,
+    "carisma": 6
+  },
+  "ca": {
+    "normal": 13,
+    "toque": 12,
+    "desprevenido": 12,
+    "detalle": "+1 Dex, +1 natural, +1 size"
+  },
+  "pg": {
+    "maximos": 6,
+    "formula": "1d8+2"
+  },
+  "salvaciones": {
+    "fortaleza": 4,
+    "reflejos": 3,
+    "voluntad": 1
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    },
+    {
+      "tipo": "burrow",
+      "valor": 10
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 3,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d3+2",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "claw",
+      "name": "Claw",
+      "attackBonus": 3,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d2+2",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": ["blood rage"],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Blood rage",
+      "resumen": "Puede entrar en furia tras recibir daño."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Blood rage",
+      "texto": "Texto completo o suficientemente detallado de la habilidad."
+    }
+  ],
+  "fullStatBlock": "CR 1/2\nBadger\nN Small animal\nInit +1; Senses low-light vision, scent; Perception +5\n..."
+}

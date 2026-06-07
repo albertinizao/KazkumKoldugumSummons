@@ -1,70 +1,67 @@
 <template>
-  <article class="card">
-    <div class="section-title">
-      <div>
-        <p class="eyebrow">Nivel {{ creature.summonLevel }}</p>
-        <h3>{{ creature.name }}</h3>
-      </div>
-      <span class="chip accent">{{ isAvailable ? 'Disponible' : 'Bloqueada' }}</span>
+  <article class="creature-card">
+    <div class="creature-card__header">
+      <strong>{{ label }}</strong>
+      <StatusBadge :variant="statusVariant">{{ state }}</StatusBadge>
     </div>
-
-    <div class="chips">
-      <span class="chip">{{ creature.size }}</span>
-      <span class="chip">{{ creature.type }}</span>
-      <span class="chip" v-if="creature.subtype">{{ creature.subtype }}</span>
-      <span class="chip">{{ creature.alignment }}</span>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="meta small">
-      <div class="meta-item">
-        <span>CA</span>
-        <strong>{{ creature.defenses.ac }}</strong>
-      </div>
-      <div class="meta-item">
-        <span>PG</span>
-        <strong>{{ creature.defenses.hp }}</strong>
-      </div>
-      <div class="meta-item">
-        <span>Ataques</span>
-        <strong>{{ creature.attacks.length }}</strong>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="stack small">
-      <div>
-        <strong>Velocidades</strong>
-        <p class="muted">{{ speedSummary }}</p>
-      </div>
-      <div>
-        <strong>Plantillas</strong>
-        <p class="muted">{{ templateSummary }}</p>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="row-actions">
-      <button class="secondary" @click="$emit('preview', creature)">Ver vista previa</button>
-      <button @click="$emit('summon', creature)">Invocar</button>
+    <p>PG: {{ currentHitPoints }} / {{ maxHitPoints }}</p>
+    <div class="button-row">
+      <ActionButton>Dañar</ActionButton>
+      <ActionButton>Curar</ActionButton>
+      <ActionButton>Eliminar</ActionButton>
     </div>
   </article>
 </template>
 
-<script setup>
-import { computed } from 'vue'
+<script setup lang="ts">
+import { computed } from 'vue';
+import ActionButton from '@/components/ActionButton.vue';
+import StatusBadge from '@/components/StatusBadge.vue';
+import type { CreatureInstanceState } from '@/types/domain';
 
-const props = defineProps({
-  creature: { type: Object, required: true },
-  maxSummonMonsterLevel: { type: Number, required: true }
-})
+const props = defineProps<{
+  label: string;
+  currentHitPoints: number;
+  maxHitPoints: number;
+  state: CreatureInstanceState;
+}>();
 
-defineEmits(['preview', 'summon'])
+const statusVariant = computed(() => {
+  if (props.state === 'HEALTHY') {
+    return 'success';
+  }
 
-const isAvailable = computed(() => props.creature.summonLevel <= props.maxSummonMonsterLevel)
-const speedSummary = computed(() => props.creature.speeds.map(speed => `${speed.type} ${speed.value} ft`).join(' · '))
-const templateSummary = computed(() => props.creature.allowedTemplates.join(', '))
+  if (props.state === 'DOWN') {
+    return 'danger';
+  }
+
+  return 'warning';
+});
 </script>
+
+<style scoped>
+.creature-card {
+  padding: 0.9rem;
+  border-radius: 0.9rem;
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.creature-card__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+p {
+  margin: 0.5rem 0 0.75rem;
+  color: #cbd5e1;
+}
+
+.button-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+</style>

@@ -1,58 +1,60 @@
 <template>
-  <article class="card">
-    <div class="section-title">
-      <div>
-        <p class="eyebrow">Recursos</p>
-        <h2>Usos diarios</h2>
-      </div>
-      <span class="chip warning">{{ combat.dailyUses.remaining }} / {{ combat.dailyUses.maximum }}</span>
+  <section class="panel">
+    <div class="panel-header">
+      <h2>Usos diarios</h2>
+      <StatusBadge variant="neutral">{{ state.remaining }} / {{ state.maximum }}</StatusBadge>
     </div>
 
-    <div class="meta">
-      <div class="meta-item">
-        <span>Restantes</span>
-        <strong>{{ combat.dailyUses.remaining }}</strong>
-      </div>
-      <div class="meta-item">
-        <span>Máximo</span>
-        <strong>{{ combat.dailyUses.maximum }}</strong>
-      </div>
-      <div class="meta-item">
-        <span>Invocaciones activas</span>
-        <strong>{{ combat.activeInstanceCount }}</strong>
-      </div>
+    <div class="button-row">
+      <ActionButton>Invocar</ActionButton>
+      <ActionButton>Limpiar invocaciones</ActionButton>
     </div>
 
-    <div class="divider"></div>
-
-    <div class="toolbar">
-      <label>
-        <span class="muted small">Máximo</span>
-        <input type="number" min="0" step="1" :value="combat.dailyUses.maximum" @change="onMaximumChange">
-      </label>
-      <label>
-        <span class="muted small">Restantes</span>
-        <input type="number" min="0" step="1" :value="combat.dailyUses.remaining" @change="onRemainingChange">
-      </label>
-      <div class="stack">
-        <button class="secondary" @click="combat.incrementDailyUses">+1 restante</button>
-        <button class="secondary" @click="combat.decrementDailyUses">-1 restante</button>
-      </div>
-      <button class="ghost" @click="combat.resetDailyUses">Restablecer</button>
-    </div>
-  </article>
+    <p class="hint">
+      Esqueleto inicial del frontend. Aquí se conectará el estado de combate, el catálogo y las
+      acciones de mesa.
+    </p>
+  </section>
 </template>
 
-<script setup>
-import { useCombatStore } from '@/stores/combat'
+<script setup lang="ts">
+import { computed } from 'vue';
+import ActionButton from '@/components/ActionButton.vue';
+import StatusBadge from '@/components/StatusBadge.vue';
+import { useCombatStore } from '@/stores/combat';
 
-const combat = useCombatStore()
-
-function onMaximumChange(event) {
-  combat.setDailyUsesMaximum(Number(event.target.value))
-}
-
-function onRemainingChange(event) {
-  combat.setDailyUsesRemaining(Number(event.target.value))
-}
+const store = useCombatStore();
+const state = computed(() => store.dailyUses);
 </script>
+
+<style scoped>
+.panel {
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  background: rgba(15, 23, 42, 0.72);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  margin: 0;
+}
+
+.button-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+
+.hint {
+  margin: 1rem 0 0;
+  color: #94a3b8;
+}
+</style>

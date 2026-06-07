@@ -1,14 +1,12 @@
 <template>
   <div class="app-shell">
-    <AppHeader />
+    <AppTopBar />
     <main class="app-main">
-      <router-view />
+      <RouterView />
     </main>
-    <SummonModal />
   </div>
 </template>
 
-<script setup>
-import AppHeader from '@/components/AppHeader.vue'
-import SummonModal from '@/components/SummonModal.vue'
+<script setup lang="ts">
+import AppTopBar from '@/components/AppTopBar.vue';
 </script>
