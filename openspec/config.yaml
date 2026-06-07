@@ -1,0 +1,14 @@
+schema: spec-driven
+
+context: |
+  Product: Local tabletop web app for Pathfinder 1e summons management.
+  Frontend: Vue 3, responsive first for Android tablets, dark mode by default.
+  Backend: Java + Spring Boot REST API.
+  Domain: Single-character play aid for an Inquisitor Monster Tactician.
+
+rules:
+  specs:
+    - Use Given/When/Then for every scenario.
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY) for requirements.
+    - Keep specs focused on behavior, not implementation.
+    - Prefer one domain per file.
