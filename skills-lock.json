@@ -1,0 +1,331 @@
+{
+  "version": 1,
+  "skills": {
+    "api-design": {
+      "source": "affaan-m/ECC",
+      "sourceType": "github",
+      "skillPath": "skills/api-design/SKILL.md",
+      "computedHash": "cd8dad9f9cf4eae8632a3969cd12f4e9ad1f9d58a9ed607c2d9ce51876d6dd13"
+    },
+    "api-design-principles": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/api-design-principles/SKILL.md",
+      "computedHash": "e04b68ae7b16015d13a1950188a1fd77ac2e7c82356be73572e07dcbf8f2860c"
+    },
+    "architect-review": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/architect-review/SKILL.md",
+      "computedHash": "8f4c53993a32f9e757e60172fc2f13a9baa93d7a4ae5e9c1c3a2fa2a63d047f5"
+    },
+    "architecture-decision-records": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/architecture-decision-records/SKILL.md",
+      "computedHash": "aca9ab1358923b8820009ed5d4bc0c9e11ac6c875f13a0f6a142ab7d12308d13"
+    },
+    "architecture-patterns": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/architecture-patterns/SKILL.md",
+      "computedHash": "4fd509d93ab0897df40e26f974ec3ae78d5c4631c2bb434dc167341535c26c1c"
+    },
+    "backend-patterns": {
+      "source": "affaan-m/ECC",
+      "sourceType": "github",
+      "skillPath": "skills/backend-patterns/SKILL.md",
+      "computedHash": "d7ed6fc2707b070cb8a422ba7f9e1198a2ed8098920789ab0be8be494390391a"
+    },
+    "cavecrew": {
+      "source": "JuliusBrussee/caveman",
+      "sourceType": "github",
+      "skillPath": "skills/cavecrew/SKILL.md",
+      "computedHash": "326e2f95ddfa1d2aca1c33cbcc2c7352561e4e9a1d26b7c9e84f938590063c9f"
+    },
+    "caveman": {
+      "source": "JuliusBrussee/caveman",
+      "sourceType": "github",
+      "skillPath": "skills/caveman/SKILL.md",
+      "computedHash": "7935e83f9c6a8b7cbb5404d144b0d19e3ba93583f4388301c3dada37cd25adf8"
+    },
+    "caveman-commit": {
+      "source": "JuliusBrussee/caveman",
+      "sourceType": "github",
+      "skillPath": "skills/caveman-commit/SKILL.md",
+      "computedHash": "1dd642480aee47934d6c202fd471e41922c7dc312e92a6e38059442b39bb0795"
+    },
+    "caveman-compress": {
+      "source": "JuliusBrussee/caveman",
+      "sourceType": "github",
+      "skillPath": "skills/caveman-compress/SKILL.md",
+      "computedHash": "6a1722a4381909febe8c8b23e87e3396e3688c05c302f625143e194b447f5bd2"
+    },
+    "caveman-help": {
+      "source": "JuliusBrussee/caveman",
+      "sourceType": "github",
+      "skillPath": "skills/caveman-help/SKILL.md",
+      "computedHash": "7a667161d6a0644fa175b0cb4a043b76108a603af70cf25f62afd788191a3fa8"
+    },
+    "caveman-review": {
+      "source": "JuliusBrussee/caveman",
+      "sourceType": "github",
+      "skillPath": "skills/caveman-review/SKILL.md",
+      "computedHash": "b9091dbc51de0f3710ea818fd4d638539f8c1784f8fda931eb159c44861e702e"
+    },
+    "caveman-stats": {
+      "source": "JuliusBrussee/caveman",
+      "sourceType": "github",
+      "skillPath": "skills/caveman-stats/SKILL.md",
+      "computedHash": "331f720e2fa97b68cacdae44384878071e8cac6013479edea68f4c8eca308852"
+    },
+    "clean-code": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/clean-code/SKILL.md",
+      "computedHash": "551e1ac1c416d9df11fce8bc613c3595794f1f5e634d20c5b3e257afded11ed7"
+    },
+    "conventional-branch": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/conventional-branch/SKILL.md",
+      "computedHash": "62d556675f48fd45ebe77b13ce7cac1e37a4982e648f389b4db237864f6702c4"
+    },
+    "create-spring-boot-java-project": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/create-spring-boot-java-project/SKILL.md",
+      "computedHash": "f295d4ddc256642e850e7d7a40526ed10aad2801e0c202e0b4c78506c52f4461"
+    },
+    "cucumber-skill": {
+      "source": "LambdaTest/agent-skills",
+      "sourceType": "github",
+      "skillPath": "cucumber-skill/SKILL.md",
+      "computedHash": "881d0c693236632a8ceeb402a4a5c616f52b90ce3caa4ca3dda019e374d41bf3"
+    },
+    "database": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/database/SKILL.md",
+      "computedHash": "af40b7d08c16de22bb9f4ba7f0add17d75ea802361365971d3d42ace55e5eaf9"
+    },
+    "development": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/development/SKILL.md",
+      "computedHash": "9fe0834002601387b4b32f40a7b633804666c1242ea051b482382c43c1737bd4"
+    },
+    "e2e-testing": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/e2e-testing/SKILL.md",
+      "computedHash": "e10add6400dc9b83bd838cf38a8e491bb172bc2f25bdad75df5add1ad9a25799"
+    },
+    "e2e-testing-patterns": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/e2e-testing-patterns/SKILL.md",
+      "computedHash": "b609f39cfbab9f7817a94c413c7bd0b5475b91e3d9878b04061aa8c7078b5c12"
+    },
+    "frontend-design": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "61fa7d4b112cb239e4ee841b04a46379c8e460546c795653e6da46880b84b0ab"
+    },
+    "frontend-design-direction": {
+      "source": "affaan-m/ECC",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design-direction/SKILL.md",
+      "computedHash": "ddc2a7385e568c0cede201e86d2996a1b9ee70614eba7f86e978aaf508443b1f"
+    },
+    "frontend-dev-guidelines": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-dev-guidelines/SKILL.md",
+      "computedHash": "86c5e118e7c3aa0f4df5662f95898f197e1babb22f982aa2a34a1ee823f2bb98"
+    },
+    "frontend-developer": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-developer/SKILL.md",
+      "computedHash": "2f13e723d068b8d6f53feabf65ce1d830e7d7b5a9b2088f1aa5cb935aaa58127"
+    },
+    "frontend-patterns": {
+      "source": "affaan-m/ECC",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-patterns/SKILL.md",
+      "computedHash": "4c2920da9aef340538f2d579f465fd99c5b679d4afa0daba775215c0e506d0b1"
+    },
+    "github": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/github/SKILL.md",
+      "computedHash": "36d982390ebc16ed84153f7e9d0e197083a2013aadaf205fb6c01e5b2c289876"
+    },
+    "hexagonal-architecture": {
+      "source": "affaan-m/ECC",
+      "sourceType": "github",
+      "skillPath": "skills/hexagonal-architecture/SKILL.md",
+      "computedHash": "74bb41df595b6b2b70569fec4c63180a936254377d81f2d3d44aa3a0d2bd6d5d"
+    },
+    "java-architect": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "skillPath": "skills/java-architect/SKILL.md",
+      "computedHash": "7f202287a1ad819b41a9235b8bb570eed217a431e4e60d7196fd9330d52001c2"
+    },
+    "java-coding-standards": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "skillPath": "skills/java-coding-standards/SKILL.md",
+      "computedHash": "64975ca9d45b1334cf444766c1ae4c22a82207e863de38118b94949f824d4bfd"
+    },
+    "java-junit": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/java-junit/SKILL.md",
+      "computedHash": "fbf3cb0d47ffb44bdb6e1ebcc4d89dd7083208efdfc5b88f316c8bc2b58250b5"
+    },
+    "java-refactoring-extract-method": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/java-refactoring-extract-method/SKILL.md",
+      "computedHash": "8a467a2fe1f1d8c14a2c344dfef7060f5cf1300ad5b4d4f036b336c78f6952ab"
+    },
+    "java-refactoring-remove-parameter": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/java-refactoring-remove-parameter/SKILL.md",
+      "computedHash": "96f080496b55308f9e65e35789f243641e6986139a798fed81b452bac3cda34e"
+    },
+    "java-spring-boot": {
+      "source": "pluginagentmarketplace/custom-plugin-java",
+      "sourceType": "github",
+      "skillPath": "skills/java-spring-boot/SKILL.md",
+      "computedHash": "c1d1523ec6ead1de3c7efd73e7a6041af983ef0dc38ae2050f75c6375ba6b7ae"
+    },
+    "java-springboot": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/java-springboot/SKILL.md",
+      "computedHash": "f1b9c6b1277178fc33e5a612761c1cd1cf6ab5f946d05d69d52026d142c0a0c1"
+    },
+    "javascript-testing-patterns": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/javascript-testing-patterns/SKILL.md",
+      "computedHash": "95ad413f093136d91738e3e065cb0cb2fc6031449b2b4f8f8d1aadf848f514ca"
+    },
+    "jpa-patterns": {
+      "source": "affaan-m/ECC",
+      "sourceType": "github",
+      "skillPath": "skills/jpa-patterns/SKILL.md",
+      "computedHash": "9e81a5773027f8ea3079cbdd3fbbee01ec1e7891f8dd663a4cef3cf3ba208061"
+    },
+    "openapi-spec-generation": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/openapi-spec-generation/SKILL.md",
+      "computedHash": "a1ec1e5c36a2ae17e4bd4d302b8f524342ad6ff53d66839e03551e57b02699cf"
+    },
+    "prompt-optimizer": {
+      "source": "affaan-m/ECC",
+      "sourceType": "github",
+      "skillPath": "skills/prompt-optimizer/SKILL.md",
+      "computedHash": "86b33802d68684557e4da9808ff58d8256f75e995523c820e94280e8bc578d76"
+    },
+    "refactor": {
+      "source": "smithery.ai",
+      "sourceType": "well-known",
+      "computedHash": "87789a786b96f99ba0680e89345a975106e10e7db1071c7cdc2e76d507c449d6"
+    },
+    "skill-scout": {
+      "source": "affaan-m/ECC",
+      "sourceType": "github",
+      "skillPath": "skills/skill-scout/SKILL.md",
+      "computedHash": "2f66a689c3479b15c2b7d8faa33415ed11fd370cb69947d2f776194ca2547f2b"
+    },
+    "smithery-ai-cli": {
+      "source": "smithery.ai",
+      "sourceType": "well-known",
+      "computedHash": "dc17f090c975afe1d96a25dbe843fc9c978e96d5699eed1bb7c12b411e10b830"
+    },
+    "springboot-patterns": {
+      "source": "affaan-m/ECC",
+      "sourceType": "github",
+      "skillPath": "skills/springboot-patterns/SKILL.md",
+      "computedHash": "15fe91e6fdca18ec9a4322c78010fc6788ee2df0f6828b5fd07a05c869c8b79f"
+    },
+    "springboot-tdd": {
+      "source": "affaan-m/ECC",
+      "sourceType": "github",
+      "skillPath": "skills/springboot-tdd/SKILL.md",
+      "computedHash": "ff44f4d2e2044957ec39f7f28b87fe4eda18531cbed47c9e9360f82fba676258"
+    },
+    "springboot-verification": {
+      "source": "affaan-m/ECC",
+      "sourceType": "github",
+      "skillPath": "skills/springboot-verification/SKILL.md",
+      "computedHash": "4d3b3ad668a5f0a2806f65b345df6f7bb646e3a2d33c16309d13b8af88aa0345"
+    },
+    "sqlite-expert": {
+      "source": "RightNow-AI/openfang",
+      "sourceType": "github",
+      "skillPath": "crates/openfang-skills/bundled/sqlite-expert/SKILL.md",
+      "computedHash": "daa1e0a26a20a3eabe3067cf4c2fb3576fa6539a4be83d72f3223e434e239509"
+    },
+    "sqlite-schema-design": {
+      "source": "fastrepl/anarlog",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/sqlite-schema-design/SKILL.md",
+      "computedHash": "12eef9b4d1767e8b02679d7b09a09c99c4e4cf5b572547f7a1f09775c884bfda"
+    },
+    "strategic-compact": {
+      "source": "affaan-m/ECC",
+      "sourceType": "github",
+      "skillPath": "skills/strategic-compact/SKILL.md",
+      "computedHash": "8a8693690de936ab543a8412330bdff12552cc9d4067e3b5d663f1782dcd7893"
+    },
+    "tdd-workflow": {
+      "source": "affaan-m/ECC",
+      "sourceType": "github",
+      "skillPath": "skills/tdd-workflow/SKILL.md",
+      "computedHash": "c03b44b81e6baa41000b3ce8305640900721becc1e707f4dbdf65b1c6d76d300"
+    },
+    "ui-to-vue": {
+      "source": "affaan-m/ECC",
+      "sourceType": "github",
+      "skillPath": "skills/ui-to-vue/SKILL.md",
+      "computedHash": "5ef727b248c3e128202a40724488f9d01139cad3e90d1679d34ea8aa70791696"
+    },
+    "unit-testing-test-generate": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/unit-testing-test-generate/SKILL.md",
+      "computedHash": "85b82f753f26abb8a1d4c235adb3927331b991320b69b99a99937180b89f728d"
+    },
+    "verification-loop": {
+      "source": "affaan-m/ECC",
+      "sourceType": "github",
+      "skillPath": "skills/verification-loop/SKILL.md",
+      "computedHash": "c936d8f1c28920133a6dd6b4c70e9784315f64f71b8d8bb69e61fa8e044cb175"
+    },
+    "web-design-reviewer": {
+      "source": "smithery.ai",
+      "sourceType": "well-known",
+      "computedHash": "10c6fad8b4f01dbeae969009d81d6c306c8a96d56077cad9bfe2a73a38f5dcbe"
+    },
+    "webapp-testing": {
+      "source": "smithery.ai",
+      "sourceType": "well-known",
+      "computedHash": "ad5b1fc52807e9afa4635e59218a026b164dc58b6c3f41b0f7c644dcd6ccf572"
+    },
+    "writing-skills": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "skillPath": "skills/writing-skills/SKILL.md",
+      "computedHash": "b0e3065034610df41b9119445b5fd052042752bb3e598ca66aea2403a7c7685e"
+    }
+  }
+}

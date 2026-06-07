@@ -1,0 +1,1788 @@
+openapi: 3.0.3
+info:
+  title: Invocaciones Pathfinder API
+  version: 0.1.0
+  description: 'API REST local para gestionar invocaciones de un Inquisidor Monster Tactician en Pathfinder 1e. La API está
+    orientada al MVP jugable en mesa: invocar criaturas, gestionar PG individuales, tirar ataques y TS por grupo, consultar
+    fichas y persistir estado.'
+servers:
+- url: http://localhost:8080
+  description: Servidor local de desarrollo
+tags:
+- name: Catalog
+  description: Consulta del catálogo de criaturas base
+- name: Combat State
+  description: Estado actual de combate e invocaciones activas
+- name: Hit Points
+  description: Daño, curación y eliminación de criaturas individuales
+- name: Rolls
+  description: Tiradas de ataque y salvación
+- name: Configuration
+  description: Configuración funcional y usos diarios
+paths:
+  /api/catalog/creatures:
+    get:
+      tags:
+      - Catalog
+      summary: Listar o buscar criaturas base
+      description: Devuelve criaturas base del catálogo. No aplica reglas fijas del personaje.
+      operationId: listCreatureTemplates
+      parameters:
+      - $ref: '#/components/parameters/QueryParam'
+      - $ref: '#/components/parameters/SummonLevelParam'
+      - $ref: '#/components/parameters/MaxSummonLevelParam'
+      - $ref: '#/components/parameters/TemplateQueryParam'
+      - $ref: '#/components/parameters/LimitParam'
+      - $ref: '#/components/parameters/OffsetParam'
+      responses:
+        '200':
+          description: Listado de criaturas base
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatureCatalogListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/catalog/creatures/{creatureTemplateId}:
+    get:
+      tags:
+      - Catalog
+      summary: Obtener detalle de criatura base
+      description: Devuelve la ficha base sin aplicar reglas fijas ni plantilla.
+      operationId: getCreatureTemplate
+      parameters:
+      - $ref: '#/components/parameters/CreatureTemplateIdPath'
+      responses:
+        '200':
+          description: Detalle de criatura base
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatureTemplate'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/catalog/creatures/{creatureTemplateId}/resolved-preview:
+    get:
+      tags:
+      - Catalog
+      summary: Previsualizar criatura final
+      description: Genera una previsualización de la criatura final aplicando reglas fijas y plantilla. No crea invocaciones,
+        no consume usos diarios y no persiste estado.
+      operationId: previewResolvedCreature
+      parameters:
+      - $ref: '#/components/parameters/CreatureTemplateIdPath'
+      - $ref: '#/components/parameters/TemplateQueryParam'
+      responses:
+        '200':
+          description: Criatura final previsualizada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResolvedCreature'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/combat-state:
+    get:
+      tags:
+      - Combat State
+      summary: Obtener estado actual de combate
+      description: Endpoint principal para pintar la pantalla de combate.
+      operationId: getCombatState
+      responses:
+        '200':
+          description: Estado actual de combate
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CombatState'
+  /api/combat-state/summons:
+    post:
+      tags:
+      - Combat State
+      summary: Invocar una criatura
+      description: Invoca una criatura del catálogo, aplica reglas fijas, calcula cantidad automáticamente, crea instancias,
+        agrupa por criatura final, descuenta un uso diario y persiste estado. Si dailyUses.remaining > 0, descuenta 1 uso;
+        si remaining = 0, no bloquea rígidamente en el MVP y no baja de 0.
+      operationId: summonCreature
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SummonCreatureRequest'
+      responses:
+        '200':
+          description: Resultado de invocación y estado actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SummonCreatureResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+      - Combat State
+      summary: Limpiar todas las invocaciones activas
+      description: Elimina todos los grupos e instancias activas. Conserva configuración, usos diarios, últimas usadas y más
+        usadas.
+      operationId: clearActiveSummons
+      responses:
+        '200':
+          description: Invocaciones limpiadas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClearSummonsResponse'
+  /api/combat-state/instances/{instanceId}:
+    delete:
+      tags:
+      - Hit Points
+      summary: Eliminar criatura individual
+      description: Elimina una instancia concreta sin afectar a las demás del mismo grupo.
+      operationId: removeSummonInstance
+      parameters:
+      - $ref: '#/components/parameters/InstanceIdPath'
+      responses:
+        '200':
+          description: Instancia eliminada y estado actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveInstanceResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/combat-state/instances/{instanceId}/damage:
+    post:
+      tags:
+      - Hit Points
+      summary: Aplicar daño individual
+      description: Resta PG a una instancia concreta usando amount como entero positivo obligatorio mayor o igual que 1. No
+        calcula RD, resistencias ni inmunidades. Permite PG negativos y marca como DOWN si queda a 0 o menos.
+      operationId: damageSummonInstance
+      parameters:
+      - $ref: '#/components/parameters/InstanceIdPath'
+      requestBody:
+        $ref: '#/components/requestBodies/AmountRequestBody'
+      responses:
+        '200':
+          description: Instancia actualizada y estado actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceMutationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/combat-state/instances/{instanceId}/heal:
+    post:
+      tags:
+      - Hit Points
+      summary: Aplicar curación individual
+      description: Suma PG a una instancia concreta usando amount como entero positivo obligatorio mayor o igual que 1. En
+        el MVP la curación no supera los PG máximos. Tras curar, el estado se recalcula como HEALTHY, DAMAGED o DOWN según
+        PG actuales y máximos.
+      operationId: healSummonInstance
+      parameters:
+      - $ref: '#/components/parameters/InstanceIdPath'
+      requestBody:
+        $ref: '#/components/requestBodies/AmountRequestBody'
+      responses:
+        '200':
+          description: Instancia actualizada y estado actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceMutationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/combat-state/groups/{groupId}/roll-attacks:
+    post:
+      tags:
+      - Rolls
+      summary: Atacar con todas
+      description: Tira todos los ataques de todas las criaturas del grupo, tira daño, detecta amenaza de crítico, tira confirmación
+        y daño crítico. No decide impacto ni aplica daño.
+      operationId: rollGroupAttacks
+      parameters:
+      - $ref: '#/components/parameters/GroupIdPath'
+      requestBody:
+        $ref: '#/components/requestBodies/EmptyObjectRequestBody'
+      responses:
+        '200':
+          description: Resultado de ataque del grupo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupAttackRollResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+  /api/combat-state/groups/{groupId}/roll-saving-throws:
+    post:
+      tags:
+      - Rolls
+      summary: Tirar TS
+      description: Tira Fortaleza, Reflejos y Voluntad para todas las criaturas del grupo. No resuelve consecuencias.
+      operationId: rollGroupSavingThrows
+      parameters:
+      - $ref: '#/components/parameters/GroupIdPath'
+      requestBody:
+        $ref: '#/components/requestBodies/EmptyObjectRequestBody'
+      responses:
+        '200':
+          description: Resultado de TS del grupo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupSavingThrowsRollResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+  /api/combat-state/groups/{groupId}/expanded-stat-block:
+    get:
+      tags:
+      - Combat State
+      summary: Obtener ficha expandida final
+      description: Devuelve la ficha completa final de la criatura de un grupo activo mediante fullStatBlock. No devuelve
+        como ficha principal la criatura base sin transformar.
+      operationId: getExpandedStatBlock
+      parameters:
+      - $ref: '#/components/parameters/GroupIdPath'
+      responses:
+        '200':
+          description: Ficha expandida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpandedStatBlockResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/configuration:
+    get:
+      tags:
+      - Configuration
+      summary: Obtener configuración
+      operationId: getConfiguration
+      responses:
+        '200':
+          description: Configuración actual
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Configuration'
+    patch:
+      tags:
+      - Configuration
+      summary: Actualizar configuración básica
+      description: Actualización parcial de nivel máximo de Summon Monster y usos diarios.
+      operationId: updateConfiguration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConfigurationRequest'
+      responses:
+        '200':
+          description: Configuración actualizada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Configuration'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/daily-uses/increase:
+    post:
+      tags:
+      - Configuration
+      summary: Sumar usos diarios
+      operationId: increaseDailyUses
+      requestBody:
+        $ref: '#/components/requestBodies/AmountRequestBody'
+      responses:
+        '200':
+          description: Usos diarios actualizados
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DailyUsesMutationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      description: Suma usos diarios manualmente. amount es entero positivo >= 1 y el resultado se acota a maximum; no permite
+        remaining > maximum.
+  /api/daily-uses/decrease:
+    post:
+      tags:
+      - Configuration
+      summary: Restar usos diarios
+      operationId: decreaseDailyUses
+      requestBody:
+        $ref: '#/components/requestBodies/AmountRequestBody'
+      responses:
+        '200':
+          description: Usos diarios actualizados
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DailyUsesMutationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      description: Resta usos diarios manualmente. amount es entero positivo >= 1 y el resultado se acota a 0; no permite
+        remaining < 0.
+  /api/daily-uses/reset:
+    post:
+      tags:
+      - Configuration
+      summary: Resetear usos diarios
+      operationId: resetDailyUses
+      requestBody:
+        $ref: '#/components/requestBodies/EmptyObjectRequestBody'
+      responses:
+        '200':
+          description: Usos diarios reseteados
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DailyUsesMutationResponse'
+      description: Resetea usos diarios estableciendo remaining = maximum.
+  /api/combat-state/last-roll-result:
+    delete:
+      tags:
+      - Rolls
+      summary: Limpiar resultado de tirada actual
+      description: Limpia únicamente lastRollResult. No elimina grupos, no elimina instancias, no modifica PG, usos diarios
+        ni configuración, y persiste el estado actualizado.
+      operationId: clearLastRollResult
+      responses:
+        '200':
+          description: Resultado de tirada limpiado y estado actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClearLastRollResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    QueryParam:
+      name: query
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Texto de búsqueda
+    SummonLevelParam:
+      name: summonLevel
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 9
+      description: Nivel exacto de Summon Monster
+    MaxSummonLevelParam:
+      name: maxSummonLevel
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 9
+      description: Devuelve criaturas de nivel igual o inferior
+    TemplateQueryParam:
+      name: template
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/SummonTemplateType'
+      description: Plantilla de Versatile Summon Monster
+    LimitParam:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 50
+    OffsetParam:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    CreatureTemplateIdPath:
+      name: creatureTemplateId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: ID de criatura base
+    InstanceIdPath:
+      name: instanceId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: ID de instancia activa
+    GroupIdPath:
+      name: groupId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: ID de grupo activo
+  requestBodies:
+    AmountRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AmountRequest'
+    EmptyObjectRequestBody:
+      required: false
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: false
+  responses:
+    BadRequest:
+      description: Petición inválida
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Recurso no encontrado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Conflict:
+      description: Conflicto de estado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          example: CREATURE_NOT_FOUND
+          description: 'Código técnico estable. Para invocación también pueden aparecer: SHORTCUT_NOT_FOUND, SHORTCUT_REQUIRED,
+            SHORTCUT_NOT_ALLOWED e INVALID_SUMMON_SOURCE. También puede aparecer COMBAT_STATE_NOT_FOUND al limpiar el resultado
+            de tirada. También puede aparecer INVALID_DAILY_USES para valores incoherentes de usos diarios. INVALID_DAILY_USES
+            también cubre amount inválido en /api/daily-uses/increase y /api/daily-uses/decrease.'
+        message:
+          type: string
+          example: No existe la criatura base solicitada.
+        details:
+          type: object
+          additionalProperties: true
+          nullable: true
+    CreatureCatalogListResponse:
+      type: object
+      required:
+      - items
+      - total
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreatureCatalogItem'
+        total:
+          type: integer
+          minimum: 0
+    CreatureCatalogItem:
+      type: object
+      required:
+      - id
+      - name
+      - summonLevel
+      - alignment
+      - size
+      - creatureType
+      - subtypes
+      - allowedTemplates
+      - summary
+      properties:
+        id:
+          type: string
+          example: badger
+        name:
+          type: string
+          example: Badger
+        summonLevel:
+          type: integer
+          minimum: 1
+          maximum: 9
+        alignment:
+          $ref: '#/components/schemas/Alignment'
+        size:
+          $ref: '#/components/schemas/CreatureSize'
+        creatureType:
+          type: string
+          example: animal
+        subtypes:
+          type: array
+          items:
+            type: string
+        allowedTemplates:
+          type: array
+          items:
+            $ref: '#/components/schemas/SummonTemplateType'
+        summary:
+          $ref: '#/components/schemas/CreatureSummary'
+    CreatureSummary:
+      type: object
+      properties:
+        armorClass:
+          $ref: '#/components/schemas/ArmorClass'
+        maxHitPoints:
+          type: integer
+        savingThrows:
+          $ref: '#/components/schemas/SavingThrows'
+        speedsText:
+          type: string
+          example: Speed 30 ft., burrow 10 ft.
+        attacksText:
+          type: string
+          example: Melee bite +3 (1d3+2), 2 claws +3 (1d2+2)
+    CreatureTemplate:
+      type: object
+      required:
+      - id
+      - name
+      - summonLevel
+      - alignment
+      - size
+      - creatureType
+      - subtypes
+      - allowedTemplates
+      - initiative
+      - senses
+      - perception
+      - abilities
+      - armorClass
+      - hitPoints
+      - savingThrows
+      - speeds
+      - attacks
+      - space
+      - reach
+      - specialAttacks
+      - specialDefenses
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        summonLevel:
+          type: integer
+          minimum: 1
+          maximum: 9
+        alignment:
+          $ref: '#/components/schemas/Alignment'
+        size:
+          $ref: '#/components/schemas/CreatureSize'
+        creatureType:
+          type: string
+        subtypes:
+          type: array
+          items:
+            type: string
+        allowedTemplates:
+          type: array
+          items:
+            $ref: '#/components/schemas/SummonTemplateType'
+        initiative:
+          type: integer
+        senses:
+          type: array
+          items:
+            type: string
+        perception:
+          type: integer
+        abilities:
+          $ref: '#/components/schemas/AbilityScores'
+        armorClass:
+          $ref: '#/components/schemas/ArmorClass'
+        hitPoints:
+          $ref: '#/components/schemas/HitPointsDefinition'
+        savingThrows:
+          $ref: '#/components/schemas/SavingThrows'
+        speeds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Speed'
+        attacks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attack'
+        space:
+          type: string
+          example: 5 ft.
+        reach:
+          type: string
+          example: 5 ft.
+        specialAttacks:
+          type: array
+          items:
+            type: string
+        specialDefenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/SpecialDefense'
+        tacticalNotes:
+          type: array
+          items:
+            type: string
+        shortAbilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AbilitySummary'
+        expandedAbilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AbilityDetail'
+        fullStatBlock:
+          type: string
+          description: Ficha base completa almacenada en catálogo. No tiene por qué incluir reglas fijas, plantilla ni Deep
+            Guardian.
+    ResolvedCreature:
+      type: object
+      required:
+      - id
+      - baseTemplateId
+      - displayName
+      - summonLevel
+      - alignment
+      - size
+      - creatureType
+      - subtypes
+      - initiative
+      - senses
+      - perception
+      - armorClass
+      - maxHitPoints
+      - savingThrows
+      - speeds
+      - speedsText
+      - attacks
+      - attacksText
+      - space
+      - reach
+      - specialAttacks
+      - specialDefenses
+      - appliedRules
+      properties:
+        id:
+          type: string
+          example: badger:FIERY:AUGMENT_SUMMONING:DEEP_GUARDIAN
+        baseTemplateId:
+          type: string
+          example: badger
+        displayName:
+          type: string
+          example: Fiery Badger
+        summonLevel:
+          type: integer
+          minimum: 1
+          maximum: 9
+        appliedTemplate:
+          $ref: '#/components/schemas/NullableSummonTemplateType'
+        alignment:
+          $ref: '#/components/schemas/Alignment'
+        size:
+          $ref: '#/components/schemas/CreatureSize'
+        creatureType:
+          type: string
+        subtypes:
+          type: array
+          items:
+            type: string
+        initiative:
+          type: integer
+        senses:
+          type: array
+          items:
+            type: string
+        perception:
+          type: integer
+        armorClass:
+          $ref: '#/components/schemas/ArmorClass'
+        maxHitPoints:
+          type: integer
+        savingThrows:
+          $ref: '#/components/schemas/SavingThrows'
+        speeds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Speed'
+        speedsText:
+          type: string
+        attacks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attack'
+        attacksText:
+          type: string
+        space:
+          type: string
+        reach:
+          type: string
+        specialAttacks:
+          type: array
+          items:
+            type: string
+        specialDefenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/SpecialDefense'
+        shortAbilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AbilitySummary'
+        expandedAbilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AbilityDetail'
+        fullStatBlock:
+          type: string
+          nullable: true
+          description: Ficha completa final transformada, si se puede generar como texto. Debe corresponder a la criatura
+            final, no a la ficha base sin modificar.
+        appliedRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppliedRule'
+    CombatState:
+      type: object
+      required:
+      - groups
+      - dailyUses
+      - configuration
+      - recentlyUsedSummons
+      - mostUsedSummons
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActiveSummonGroup'
+        dailyUses:
+          $ref: '#/components/schemas/DailyUses'
+        configuration:
+          $ref: '#/components/schemas/ConfigurationSummary'
+        lastRollResult:
+          $ref: '#/components/schemas/NullableRollDisplay'
+          description: Resultado actual o más reciente de tirada; se sustituye con nuevas tiradas y queda null tras DELETE
+            /api/combat-state/last-roll-result.
+        recentlyUsedSummons:
+          type: array
+          items:
+            $ref: '#/components/schemas/SummonShortcut'
+        mostUsedSummons:
+          type: array
+          items:
+            $ref: '#/components/schemas/SummonShortcut'
+    ActiveSummonGroup:
+      type: object
+      required:
+      - id
+      - resolvedCreature
+      - instances
+      properties:
+        id:
+          type: string
+          example: group-1
+        resolvedCreature:
+          $ref: '#/components/schemas/ResolvedCreature'
+        instances:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActiveSummonInstance'
+    ActiveSummonInstance:
+      type: object
+      required:
+      - id
+      - displayNumber
+      - displayName
+      - currentHitPoints
+      - maxHitPoints
+      - status
+      properties:
+        id:
+          type: string
+          example: instance-1
+        displayNumber:
+          type: integer
+          minimum: 1
+        displayName:
+          type: string
+          example: Fiery Badger 1
+        currentHitPoints:
+          type: integer
+          example: 7
+        maxHitPoints:
+          type: integer
+          minimum: 1
+          example: 8
+        status:
+          $ref: '#/components/schemas/InstanceStatus'
+    SummonCreatureRequest:
+      type: object
+      description: 'Petición de invocación. Reglas condicionales: con source=MANUAL_SEARCH, creatureTemplateId es obligatorio
+        y shortcutId no debe enviarse; selectedTemplate es obligatorio si la criatura permite varias plantillas. Con source=RECENT
+        o MOST_USED, shortcutId es obligatorio y la API obtiene del shortcut creatureTemplateId y selectedTemplate; el cliente
+        no debe reenviar selectedTemplate ni creatureTemplateId. FAVORITE está reservado para fase futura.'
+      required:
+      - source
+      properties:
+        creatureTemplateId:
+          type: string
+          nullable: true
+          example: badger
+          description: Obligatorio solo con source=MANUAL_SEARCH.
+        selectedTemplate:
+          $ref: '#/components/schemas/NullableSummonTemplateType'
+        shortcutId:
+          type: string
+          nullable: true
+          example: recent-1
+          description: Obligatorio con source=RECENT o source=MOST_USED. No debe usarse con source=MANUAL_SEARCH.
+        source:
+          $ref: '#/components/schemas/SummonSelectionSource'
+      oneOf:
+      - description: Búsqueda manual.
+        required:
+        - source
+        - creatureTemplateId
+        properties:
+          source:
+            enum:
+            - MANUAL_SEARCH
+      - description: Invocación desde últimas usadas.
+        required:
+        - source
+        - shortcutId
+        properties:
+          source:
+            enum:
+            - RECENT
+      - description: Invocación desde más usadas.
+        required:
+        - source
+        - shortcutId
+        properties:
+          source:
+            enum:
+            - MOST_USED
+      examples:
+      - source: MANUAL_SEARCH
+        creatureTemplateId: badger
+        selectedTemplate: FIERY
+      - source: RECENT
+        shortcutId: recent-1
+      - source: MOST_USED
+        shortcutId: most-used-1
+    SummonCreatureResponse:
+      type: object
+      required:
+      - summonResult
+      - combatState
+      properties:
+        summonResult:
+          $ref: '#/components/schemas/SummonResult'
+        combatState:
+          $ref: '#/components/schemas/CombatState'
+    SummonResult:
+      type: object
+      required:
+      - creatureTemplateId
+      - resolvedCreatureId
+      - displayName
+      - quantity
+      - createdInstanceIds
+      - groupId
+      - dailyUsesRemaining
+      properties:
+        creatureTemplateId:
+          type: string
+        resolvedCreatureId:
+          type: string
+        displayName:
+          type: string
+        selectedTemplate:
+          $ref: '#/components/schemas/NullableSummonTemplateType'
+        quantity:
+          $ref: '#/components/schemas/SummonQuantity'
+        createdInstanceIds:
+          type: array
+          items:
+            type: string
+        groupId:
+          type: string
+        dailyUsesRemaining:
+          type: integer
+          minimum: 0
+    SummonQuantity:
+      type: object
+      required:
+      - result
+      - reason
+      properties:
+        formula:
+          type: string
+          nullable: true
+          example: 1d4+2
+        roll:
+          $ref: '#/components/schemas/NullableDiceRoll'
+        result:
+          type: integer
+          minimum: 1
+        reason:
+          type: string
+    AmountRequest:
+      type: object
+      description: Cantidad positiva reutilizada por daño, curación y ajustes manuales de usos diarios. El endpoint determina
+        si el valor se suma o se resta.
+      required:
+      - amount
+      properties:
+        amount:
+          type: integer
+          minimum: 1
+          example: 5
+          description: Entero positivo obligatorio. No admite 0, negativos, decimales, texto, null, vacío ni ausencia del
+            campo.
+    InstanceMutationResponse:
+      type: object
+      required:
+      - instance
+      - combatState
+      properties:
+        instance:
+          $ref: '#/components/schemas/ActiveSummonInstance'
+        combatState:
+          $ref: '#/components/schemas/CombatState'
+    RemoveInstanceResponse:
+      type: object
+      required:
+      - removedInstanceId
+      - combatState
+      properties:
+        removedInstanceId:
+          type: string
+        removedGroupId:
+          type: string
+          nullable: true
+        combatState:
+          $ref: '#/components/schemas/CombatState'
+    ClearSummonsResponse:
+      type: object
+      required:
+      - removedGroups
+      - removedInstances
+      - combatState
+      properties:
+        removedGroups:
+          type: integer
+          minimum: 0
+        removedInstances:
+          type: integer
+          minimum: 0
+        combatState:
+          $ref: '#/components/schemas/CombatState'
+    GroupAttackRollResponse:
+      type: object
+      required:
+      - rollResult
+      - combatState
+      properties:
+        rollResult:
+          $ref: '#/components/schemas/GroupAttackRollResult'
+        combatState:
+          $ref: '#/components/schemas/CombatState'
+    GroupAttackRollResult:
+      type: object
+      required:
+      - id
+      - type
+      - title
+      - groupId
+      - creatureName
+      - createdAt
+      - instanceResults
+      properties:
+        id:
+          type: string
+        type:
+          enum:
+          - ATTACK_GROUP
+        title:
+          type: string
+        groupId:
+          type: string
+        creatureName:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        instanceResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreatureAttackRollResult'
+        displayText:
+          type: string
+          nullable: true
+    CreatureAttackRollResult:
+      type: object
+      required:
+      - instanceId
+      - instanceDisplayName
+      - attackResults
+      properties:
+        instanceId:
+          type: string
+        instanceDisplayName:
+          type: string
+        attackResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/SingleAttackRollResult'
+    SingleAttackRollResult:
+      type: object
+      required:
+      - attackId
+      - attackName
+      - attackRoll
+      - normalDamage
+      properties:
+        attackId:
+          type: string
+        attackName:
+          type: string
+        attackIndex:
+          type: integer
+          nullable: true
+          minimum: 1
+        attackRoll:
+          $ref: '#/components/schemas/DiceRoll'
+        normalDamage:
+          $ref: '#/components/schemas/DamageRollResult'
+        criticalThreat:
+          $ref: '#/components/schemas/NullableCriticalThreatResult'
+        displayText:
+          type: string
+          nullable: true
+    CriticalThreatResult:
+      type: object
+      required:
+      - confirmationRoll
+      - criticalDamage
+      properties:
+        confirmationRoll:
+          $ref: '#/components/schemas/DiceRoll'
+        criticalDamage:
+          $ref: '#/components/schemas/DamageRollResult'
+    DamageRollResult:
+      type: object
+      description: Resultado de daño separado por componentes. En daño crítico, los componentes con multipliesOnCritical=true
+        se multiplican y los componentes con multipliesOnCritical=false se conservan una vez sin multiplicarse. total suma
+        todos los componentes.
+      required:
+      - components
+      - total
+      properties:
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/DamageComponentRollResult'
+        total:
+          type: integer
+        displayText:
+          type: string
+          nullable: true
+    DamageComponentRollResult:
+      type: object
+      description: Resultado de un componente de daño. multipliesOnCritical se conserva para que el frontend pueda mostrar
+        y depurar por qué un componente se multiplicó o se mantuvo una vez en crítico.
+      required:
+      - formula
+      - roll
+      - damageType
+      - multipliesOnCritical
+      - total
+      properties:
+        formula:
+          type: string
+          example: 1d3+4
+        roll:
+          $ref: '#/components/schemas/DiceRoll'
+        damageType:
+          $ref: '#/components/schemas/DamageType'
+        multipliesOnCritical:
+          type: boolean
+          description: Si es false, el componente no se multiplica en crítico, pero se incluye una vez si forma parte del
+            ataque.
+        total:
+          type: integer
+    GroupSavingThrowsRollResponse:
+      type: object
+      required:
+      - rollResult
+      - combatState
+      properties:
+        rollResult:
+          $ref: '#/components/schemas/GroupSavingThrowsRollResult'
+        combatState:
+          $ref: '#/components/schemas/CombatState'
+    GroupSavingThrowsRollResult:
+      type: object
+      required:
+      - id
+      - type
+      - title
+      - groupId
+      - creatureName
+      - createdAt
+      - instanceResults
+      properties:
+        id:
+          type: string
+        type:
+          enum:
+          - SAVING_THROWS_GROUP
+        title:
+          type: string
+        groupId:
+          type: string
+        creatureName:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        instanceResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreatureSavingThrowsRollResult'
+        displayText:
+          type: string
+          nullable: true
+    CreatureSavingThrowsRollResult:
+      type: object
+      required:
+      - instanceId
+      - instanceDisplayName
+      - fortitude
+      - reflex
+      - will
+      properties:
+        instanceId:
+          type: string
+        instanceDisplayName:
+          type: string
+        fortitude:
+          $ref: '#/components/schemas/DiceRoll'
+        reflex:
+          $ref: '#/components/schemas/DiceRoll'
+        will:
+          $ref: '#/components/schemas/DiceRoll'
+        displayText:
+          type: string
+          nullable: true
+    ExpandedStatBlockResponse:
+      type: object
+      required:
+      - groupId
+      - resolvedCreatureId
+      - displayName
+      - fullStatBlock
+      properties:
+        groupId:
+          type: string
+        resolvedCreatureId:
+          type: string
+        displayName:
+          type: string
+        expandedAbilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AbilityDetail'
+        appliedRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppliedRule'
+        fullStatBlock:
+          type: string
+          description: Ficha completa final transformada del grupo activo. Es el campo canónico para la ficha expandida en
+            el MVP.
+          nullable: true
+    Configuration:
+      type: object
+      required:
+      - maxSummonMonsterLevel
+      - dailyUses
+      - availableTemplates
+      - enabledFixedRules
+      properties:
+        maxSummonMonsterLevel:
+          type: integer
+          minimum: 1
+          maximum: 9
+        dailyUses:
+          $ref: '#/components/schemas/DailyUses'
+        availableTemplates:
+          type: array
+          items:
+            $ref: '#/components/schemas/SummonTemplateType'
+        enabledFixedRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/FixedRuleType'
+    ConfigurationSummary:
+      type: object
+      required:
+      - maxSummonMonsterLevel
+      - availableTemplates
+      properties:
+        maxSummonMonsterLevel:
+          type: integer
+          minimum: 1
+          maximum: 9
+        availableTemplates:
+          type: array
+          items:
+            $ref: '#/components/schemas/SummonTemplateType'
+    UpdateConfigurationRequest:
+      type: object
+      properties:
+        maxSummonMonsterLevel:
+          type: integer
+          minimum: 1
+          maximum: 9
+        dailyUsesMaximum:
+          type: integer
+          minimum: 0
+          description: Nuevo máximo de usos diarios. Entero >= 0. Si reduce el máximo por debajo del remaining actual, se
+            ajusta remaining al nuevo máximo.
+        dailyUsesRemaining:
+          type: integer
+          minimum: 0
+          description: Nuevo valor de usos restantes. Entero >= 0 y no puede superar el máximo efectivo.
+      description: Actualización parcial de configuración. Si se reduce dailyUsesMaximum por debajo del remaining actual,
+        la API ajusta remaining = min(remaining, dailyUsesMaximum). Si se envían dailyUsesMaximum y dailyUsesRemaining explícitamente,
+        debe cumplirse 0 <= remaining <= maximum.
+    DailyUsesMutationResponse:
+      type: object
+      required:
+      - dailyUses
+      - combatState
+      properties:
+        dailyUses:
+          $ref: '#/components/schemas/DailyUses'
+        combatState:
+          $ref: '#/components/schemas/CombatState'
+      description: Respuesta de mutación de usos diarios. El dailyUses devuelto debe cumplir maximum >= 0 y 0 <= remaining
+        <= maximum.
+    DailyUses:
+      type: object
+      required:
+      - maximum
+      - remaining
+      properties:
+        maximum:
+          type: integer
+          minimum: 0
+          example: 6
+          description: Usos diarios máximos. Entero >= 0.
+        remaining:
+          type: integer
+          minimum: 0
+          example: 4
+          description: Usos diarios restantes. Entero >= 0 y nunca superior a maximum.
+      description: Contador de usos diarios. Debe cumplir siempre maximum >= 0 y 0 <= remaining <= maximum.
+    RollDisplay:
+      type: object
+      required:
+      - id
+      - type
+      - title
+      - createdAt
+      - content
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/RollDisplayType'
+        title:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        content:
+          type: string
+    NullableRollDisplay:
+      allOf:
+      - $ref: '#/components/schemas/RollDisplay'
+      nullable: true
+      description: Resultado visible actual o más reciente; puede ser null si no hay resultado o si se ha limpiado manualmente.
+    DiceRoll:
+      type: object
+      required:
+      - formula
+      - naturalResults
+      - modifier
+      - total
+      properties:
+        formula:
+          type: string
+          example: 1d20+6
+        naturalResults:
+          type: array
+          items:
+            type: integer
+        modifier:
+          type: integer
+        total:
+          type: integer
+        label:
+          type: string
+          nullable: true
+    NullableDiceRoll:
+      allOf:
+      - $ref: '#/components/schemas/DiceRoll'
+      nullable: true
+    AbilityScores:
+      type: object
+      required:
+      - strength
+      - dexterity
+      - constitution
+      - intelligence
+      - wisdom
+      - charisma
+      properties:
+        strength:
+          type: integer
+        dexterity:
+          type: integer
+        constitution:
+          type: integer
+        intelligence:
+          type: integer
+        wisdom:
+          type: integer
+        charisma:
+          type: integer
+    ArmorClass:
+      type: object
+      required:
+      - normal
+      - touch
+      - flatFooted
+      properties:
+        normal:
+          type: integer
+          description: CA normal. Incluye el +1 de Deep Guardian cuando procede.
+        touch:
+          type: integer
+          description: CA de toque. Deep Guardian no la modifica.
+        flatFooted:
+          type: integer
+          description: CA desprevenida / flat-footed AC. Incluye el +1 de Deep Guardian cuando procede.
+        detail:
+          type: string
+          nullable: true
+      description: Clase de armadura estructurada. Si Deep Guardian está aplicado, normal y flatFooted incluyen el +1; touch
+        no cambia.
+    HitPointsDefinition:
+      type: object
+      required:
+      - maximum
+      - hitDice
+      properties:
+        maximum:
+          type: integer
+          minimum: 1
+        formula:
+          type: string
+          nullable: true
+        hitDice:
+          $ref: '#/components/schemas/HitDice'
+      description: PG base de criatura. hitDice.count permite aplicar Augment Summoning sin parsear texto libre.
+    SavingThrows:
+      type: object
+      required:
+      - fortitude
+      - reflex
+      - will
+      - fortitudeAbility
+      properties:
+        fortitude:
+          type: integer
+        reflex:
+          type: integer
+        will:
+          type: integer
+        fortitudeAbility:
+          $ref: '#/components/schemas/SavingThrowAbility'
+      description: Salvaciones base. fortitudeAbility indica si Augment Summoning modifica Fortaleza.
+    Speed:
+      type: object
+      required:
+      - type
+      - valueFeet
+      properties:
+        type:
+          $ref: '#/components/schemas/SpeedType'
+        valueFeet:
+          type: integer
+          minimum: 0
+        maneuverability:
+          type: string
+          nullable: true
+        notes:
+          type: string
+          nullable: true
+    Attack:
+      type: object
+      required:
+      - id
+      - name
+      - attackBonus
+      - attackAbility
+      - quantity
+      - attackType
+      - damageComponents
+      - critical
+      - notes
+      properties:
+        id:
+          type: string
+          example: bite
+        name:
+          type: string
+          example: Bite
+        attackBonus:
+          type: integer
+          example: 6
+        attackAbility:
+          $ref: '#/components/schemas/AttackAbility'
+        quantity:
+          type: integer
+          minimum: 1
+          example: 1
+        attackType:
+          $ref: '#/components/schemas/AttackType'
+        damageComponents:
+          type: array
+          items:
+            $ref: '#/components/schemas/DamageComponent'
+        critical:
+          $ref: '#/components/schemas/CriticalProfile'
+        notes:
+          type: array
+          items:
+            type: string
+      description: Ataque estructurado. attackAbility indica si Augment Summoning modifica attackBonus.
+    DamageComponent:
+      type: object
+      required:
+      - formula
+      - damageType
+      - damageAbility
+      - damageAbilityMultiplier
+      - multipliesOnCritical
+      properties:
+        formula:
+          type: string
+          example: 1d3+4
+        damageType:
+          $ref: '#/components/schemas/DamageType'
+        multipliesOnCritical:
+          type: boolean
+          default: true
+        damageAbility:
+          $ref: '#/components/schemas/DamageAbility'
+        damageAbilityMultiplier:
+          type: number
+          format: double
+          enum:
+          - 0
+          - 0.5
+          - 1.0
+          - 1.5
+          example: 1.0
+        label:
+          type: string
+          nullable: true
+      description: Componente de daño separado por tipo. damageAbility y damageAbilityMultiplier permiten aplicar Augment
+        Summoning sin inferencias.
+    CriticalProfile:
+      type: object
+      required:
+      - threatRangeStart
+      - multiplier
+      properties:
+        threatRangeStart:
+          type: integer
+          minimum: 1
+          maximum: 20
+          example: 20
+        multiplier:
+          type: integer
+          minimum: 2
+          example: 2
+    SpecialDefense:
+      type: object
+      required:
+      - type
+      - value
+      properties:
+        type:
+          $ref: '#/components/schemas/SpecialDefenseType'
+        value:
+          type: string
+          example: fire 10
+        notes:
+          type: string
+          nullable: true
+    AbilitySummary:
+      type: object
+      required:
+      - name
+      - summary
+      properties:
+        name:
+          type: string
+        summary:
+          type: string
+    AbilityDetail:
+      type: object
+      required:
+      - name
+      - text
+      properties:
+        name:
+          type: string
+        text:
+          type: string
+    AppliedRule:
+      type: object
+      required:
+      - type
+      - description
+      properties:
+        type:
+          $ref: '#/components/schemas/FixedRuleType'
+        description:
+          type: string
+    SummonShortcut:
+      type: object
+      required:
+      - id
+      - creatureTemplateId
+      - displayName
+      - usageCount
+      properties:
+        id:
+          type: string
+          example: recent-1
+          description: Identificador estable que debe enviarse como shortcutId al invocar desde RECENT o MOST_USED.
+        creatureTemplateId:
+          type: string
+        selectedTemplate:
+          $ref: '#/components/schemas/NullableSummonTemplateType'
+        displayName:
+          type: string
+        usageCount:
+          type: integer
+          minimum: 0
+        lastUsedAt:
+          type: string
+          format: date-time
+          nullable: true
+      description: Combinación reutilizable de criatura base + plantilla para últimas usadas o más usadas.
+    NullableSummonTemplateType:
+      type: string
+      nullable: true
+      enum:
+      - CHTHONIC
+      - FIERY
+      - CELESTIAL
+      - ENTROPIC
+      - RESOLUTE
+    SummonTemplateType:
+      type: string
+      enum:
+      - CHTHONIC
+      - FIERY
+      - CELESTIAL
+      - ENTROPIC
+      - RESOLUTE
+    SummonSelectionSource:
+      type: string
+      enum:
+      - MANUAL_SEARCH
+      - RECENT
+      - MOST_USED
+      - FAVORITE
+      description: Origen de selección. FAVORITE queda reservado para fase futura y no se implementa funcionalmente en el
+        MVP.
+    InstanceStatus:
+      type: string
+      description: 'Estado visible/API de una instancia de criatura activa.
+
+        Únicos valores permitidos en el MVP:
+
+        - HEALTHY: currentHitPoints == maxHitPoints.
+
+        - DAMAGED: currentHitPoints > 0 && currentHitPoints < maxHitPoints.
+
+        - DOWN: currentHitPoints <= 0.
+
+        REMOVED no se expone ni se persiste como estado; eliminar una criatura borra la instancia activa.
+
+        ACTIVE no se usa como estado de instancia.
+
+        '
+      enum:
+      - HEALTHY
+      - DAMAGED
+      - DOWN
+    RollDisplayType:
+      type: string
+      enum:
+      - ATTACK_GROUP
+      - SAVING_THROWS_GROUP
+      - SUMMON_QUANTITY
+      - GENERIC
+    FixedRuleType:
+      type: string
+      enum:
+      - AUGMENT_SUMMONING
+      - SUPERIOR_SUMMONING
+      - VERSATILE_SUMMON_MONSTER
+      - DEEP_GUARDIAN
+    AttackType:
+      type: string
+      enum:
+      - MELEE
+      - RANGED
+      - TOUCH
+      - SPECIAL
+    DamageType:
+      type: string
+      enum:
+      - PIERCING
+      - SLASHING
+      - BLUDGEONING
+      - FIRE
+      - COLD
+      - ACID
+      - ELECTRICITY
+      - SONIC
+      - FORCE
+      - UNTYPED
+      - OTHER
+    SpecialDefenseType:
+      type: string
+      enum:
+      - DAMAGE_REDUCTION
+      - RESISTANCE
+      - IMMUNITY
+      - VULNERABILITY
+      - OTHER
+    SpeedType:
+      type: string
+      enum:
+      - LAND
+      - FLY
+      - SWIM
+      - CLIMB
+      - BURROW
+      - OTHER
+    CreatureSize:
+      type: string
+      enum:
+      - FINE
+      - DIMINUTIVE
+      - TINY
+      - SMALL
+      - MEDIUM
+      - LARGE
+      - HUGE
+      - GARGANTUAN
+      - COLOSSAL
+    Alignment:
+      type: string
+      enum:
+      - LG
+      - NG
+      - CG
+      - LN
+      - N
+      - CN
+      - LE
+      - NE
+      - CE
+    AttackAbility:
+      type: string
+      enum:
+      - STRENGTH
+      - DEXTERITY
+      - NONE
+      - OTHER
+    DamageAbility:
+      type: string
+      enum:
+      - STRENGTH
+      - DEXTERITY
+      - NONE
+      - OTHER
+    SavingThrowAbility:
+      type: string
+      enum:
+      - CONSTITUTION
+      - NONE
+      - OTHER
+    HitDice:
+      type: object
+      required:
+      - count
+      - dieSize
+      properties:
+        count:
+          type: integer
+          minimum: 1
+          example: 1
+        dieSize:
+          type: integer
+          minimum: 1
+          example: 8
+    ClearLastRollResultResponse:
+      type: object
+      required:
+      - combatState
+      properties:
+        combatState:
+          $ref: '#/components/schemas/CombatState'
+      description: Respuesta al limpiar solo el resultado actual de tirada. combatState.lastRollResult debe quedar null.
