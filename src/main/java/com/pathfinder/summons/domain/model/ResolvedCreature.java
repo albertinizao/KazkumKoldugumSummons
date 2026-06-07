@@ -30,5 +30,8 @@ public class ResolvedCreature {
     String reach;
     List<String> specialAttacks;
     List<SpecialDefense> specialDefenses;
+    List<AbilitySummary> shortAbilities;
+    List<AbilityDetail> expandedAbilities;
+    String fullStatBlock;
     List<AppliedRule> appliedRules;
 }

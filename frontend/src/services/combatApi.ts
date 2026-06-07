@@ -1,4 +1,5 @@
 import { getJson, postJson } from '@/services/http';
+import type { CreatureCatalogListResponse } from '@/types/catalog';
 
 export interface DailyUsesResponse {
   maximum: number;
@@ -13,7 +14,7 @@ export function fetchCombatState(): Promise<unknown> {
   return getJson('/api/combat-state');
 }
 
-export function fetchCatalogCreatures(): Promise<unknown> {
+export function fetchCatalogCreatures(): Promise<CreatureCatalogListResponse> {
   return getJson('/api/catalog/creatures');
 }
 
