@@ -91,6 +91,24 @@ class DefaultCreatureResolverTest {
     }
 
     @Test
+    void keepsTemplateDamageComponentsAvailableForCriticalMultiplication() {
+        CreatureTemplate template = baseTemplate()
+                .id("template-damage")
+                .name("Template Damage")
+                .allowedTemplates(List.of(SummonTemplateType.CHTHONIC))
+                .speeds(List.of(speed(SpeedType.LAND, 30)))
+                .attacks(List.of(attack("Bite", 3, AttackAbility.STRENGTH, "1d4+1", DamageType.PIERCING)))
+                .build();
+
+        ResolvedCreature resolved = resolver.resolve(template, SummonTemplateType.CHTHONIC, SummonerConfiguration.defaultConfiguration());
+
+        assertThat(resolved.getAttacks().getFirst().getDamageComponents())
+                .last()
+                .extracting(DamageComponent::isMultipliesOnCritical)
+                .isEqualTo(true);
+    }
+
+    @Test
     void addsTemplateSmiteAndListedResistancesForCelestialCreatures() {
         CreatureTemplate template = baseTemplate()
                 .id("archon")

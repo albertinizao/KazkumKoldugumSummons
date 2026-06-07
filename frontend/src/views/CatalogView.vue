@@ -143,6 +143,7 @@
             <p><strong>Id final:</strong> {{ preview.id }}</p>
             <p><strong>Velocidades:</strong> {{ preview.speedsText }}</p>
             <p><strong>Ataques:</strong> {{ preview.attacksText }}</p>
+            <p><strong>Componentes de daño:</strong> {{ attackDamageComponentsText }}</p>
             <p><strong>Ataques especiales:</strong> {{ specialAttacksText }}</p>
             <p><strong>Defensas especiales:</strong> {{ specialDefensesText }}</p>
             <p><strong>Reglas aplicadas:</strong> {{ appliedRulesText }}</p>
@@ -195,6 +196,35 @@ const appliedRulesText = computed(() => preview.value?.appliedRules.map(rule => 
 const specialAttacksText = computed(() =>
   preview.value?.specialAttacks.length
     ? preview.value.specialAttacks.join(' · ')
+    : '—',
+);
+const attackDamageComponentsText = computed(() =>
+  preview.value?.attacks.length
+    ? preview.value.attacks
+        .map(attack => {
+          const components = attack.damageComponents
+            .map(component => {
+              const labelMap: Record<string, string> = {
+                PIERCING: 'perforante',
+                SLASHING: 'cortante',
+                BLUDGEONING: 'contundente',
+                FIRE: 'fuego',
+                COLD: 'frío',
+                ACID: 'ácido',
+                ELECTRICITY: 'electricidad',
+                SONIC: 'sonido',
+                FORCE: 'fuerza',
+                UNTYPED: 'sin tipo',
+                OTHER: 'otro',
+              };
+              const label = labelMap[component.damageType] ?? component.damageType.toLowerCase();
+              const critical = component.multipliesOnCritical ? ' (multiplica en crítico)' : '';
+              return `${component.formula} ${label}${critical}`;
+            })
+            .join(' + ');
+          return `${attack.name}: ${components}`;
+        })
+        .join(' · ')
     : '—',
 );
 const specialDefensesText = computed(() =>
