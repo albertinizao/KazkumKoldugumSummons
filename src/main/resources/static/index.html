@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kazkum Koldugum Summons</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-alt: #1f2937;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #7c3aed;
+      --accent-2: #2563eb;
+      --border: #334155;
+      --good: #10b981;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0%, var(--bg) 60%);
+      color: var(--text);
+    }
+    header, main { width: min(1100px, calc(100% - 2rem)); margin: 0 auto; }
+    header {
+      padding: 1.5rem 0 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: end;
+    }
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      margin-right: 1rem;
+      padding: .55rem .8rem;
+      border: 1px solid var(--border);
+      border-radius: .75rem;
+      background: rgba(15, 23, 42, .6);
+    }
+    nav a:hover { border-color: var(--accent); }
+    .eyebrow { text-transform: uppercase; letter-spacing: .12em; color: var(--muted); font-size: .8rem; margin: 0; }
+    h1 { margin: .25rem 0 0; font-size: clamp(2rem, 5vw, 3rem); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; padding: 1rem 0 2rem; }
+    .card {
+      background: rgba(17, 24, 39, .88);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    .card h2 { margin-top: 0; }
+    label { display: block; margin-bottom: .35rem; color: var(--muted); }
+    input[type=number] {
+      width: 100%;
+      padding: .8rem .9rem;
+      border-radius: .7rem;
+      border: 1px solid var(--border);
+      background: var(--panel-alt);
+      color: var(--text);
+      font-size: 1rem;
+    }
+    button {
+      appearance: none;
+      border: none;
+      border-radius: .8rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      padding: .85rem 1rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button.secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .row { display: flex; gap: .75rem; align-items: end; flex-wrap: wrap; }
+    .row > * { flex: 1 1 180px; }
+    .metric {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: .35rem 1rem;
+      padding: .9rem 0;
+      border-top: 1px solid rgba(51,65,85,.6);
+    }
+    .metric strong { color: var(--good); }
+    .hint { color: var(--muted); margin: .5rem 0 0; }
+    .muted { color: var(--muted); }
+    code {
+      background: rgba(31, 41, 55, .9);
+      padding: .15rem .35rem;
+      border-radius: .4rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <p class="eyebrow">Pathfinder 1e · Inquisidor Monster Tactician</p>
+      <h1>Kazkum Koldugum Summons</h1>
+    </div>
+    <nav>
+      <a href="/">Combate</a>
+      <a href="/catalogo">Catálogo</a>
+      <a href="/configuracion">Configuración</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="grid">
+      <article class="card">
+        <h2>Configuración de invocación</h2>
+        <p class="muted">El valor persistido controla qué criaturas están disponibles y la cantidad de la tirada de invocación.</p>
+        <div class="metric">
+          <span>Nivel máximo actual</span>
+          <strong id="currentLevel">—</strong>
+        </div>
+        <div class="row">
+          <div>
+            <label for="maxLevel">Nuevo nivel máximo</label>
+            <input id="maxLevel" type="number" min="0" step="1" value="3">
+          </div>
+          <button id="saveButton">Guardar</button>
+        </div>
+        <p class="hint" id="saveStatus">La configuración se carga desde el backend al abrir la página.</p>
+      </article>
+
+      <article class="card">
+        <h2>Cálculo de cantidad</h2>
+        <p class="muted">Introduce el nivel de la criatura y la app calculará la fórmula configurada.</p>
+        <div class="row">
+          <div>
+            <label for="creatureLevel">Nivel de la criatura</label>
+            <input id="creatureLevel" type="number" min="0" step="1" value="3">
+          </div>
+          <button class="secondary" id="calculateButton">Calcular</button>
+        </div>
+        <div class="metric">
+          <span>Disponible</span>
+          <strong id="availableValue">—</strong>
+          <span>Fórmula</span>
+          <strong id="formulaValue">—</strong>
+          <span>Máximo posible</span>
+          <strong id="maximumValue">—</strong>
+        </div>
+        <p class="hint">La fórmula sigue la diferencia entre el nivel máximo configurado y el nivel de la criatura.</p>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const currentLevel = document.getElementById('currentLevel');
+    const maxLevel = document.getElementById('maxLevel');
+    const creatureLevel = document.getElementById('creatureLevel');
+    const saveButton = document.getElementById('saveButton');
+    const calculateButton = document.getElementById('calculateButton');
+    const saveStatus = document.getElementById('saveStatus');
+    const availableValue = document.getElementById('availableValue');
+    const formulaValue = document.getElementById('formulaValue');
+    const maximumValue = document.getElementById('maximumValue');
+
+    async function loadConfiguration() {
+      const response = await fetch('/api/configuration');
+      const data = await response.json();
+      currentLevel.textContent = String(data.maxSummonMonsterLevel);
+      maxLevel.value = String(data.maxSummonMonsterLevel);
+      await calculate();
+    }
+
+    async function saveConfiguration() {
+      const value = Number(maxLevel.value);
+      saveStatus.textContent = 'Guardando...';
+      const response = await fetch('/api/configuration', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ maxSummonMonsterLevel: value })
+      });
+      if (!response.ok) {
+        saveStatus.textContent = 'No se pudo guardar la configuración.';
+        return;
+      }
+      const data = await response.json();
+      currentLevel.textContent = String(data.maxSummonMonsterLevel);
+      saveStatus.textContent = 'Configuración guardada y persistida.';
+      await calculate();
+    }
+
+    async function calculate() {
+      const response = await fetch('/api/summons/quantity?creatureSummonLevel=' + encodeURIComponent(creatureLevel.value || '0'));
+      const data = await response.json();
+      availableValue.textContent = data.available ? 'Sí' : 'No';
+      formulaValue.textContent = data.formula;
+      maximumValue.textContent = String(data.maximumPossibleQuantity);
+    }
+
+    saveButton.addEventListener('click', saveConfiguration);
+    calculateButton.addEventListener('click', calculate);
+    creatureLevel.addEventListener('change', calculate);
+
+    loadConfiguration().catch(error => {
+      console.error(error);
+      saveStatus.textContent = 'No se pudo cargar la configuración.';
+    });
+  </script>
+</body>
+</html>
