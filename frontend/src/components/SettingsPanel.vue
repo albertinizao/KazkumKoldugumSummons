@@ -1,0 +1,80 @@
+<template>
+  <article class="card">
+    <div class="section-title">
+      <div>
+        <p class="eyebrow">Persistencia</p>
+        <h2>Configuración de invocación</h2>
+      </div>
+      <span class="chip accent">Backend + localStorage</span>
+    </div>
+
+    <p class="muted">
+      El valor <code>maxSummonMonsterLevel</code> se guarda en el backend y se usa para filtrar criaturas y calcular la cantidad de invocación.
+    </p>
+
+    <div class="grid-2">
+      <label>
+        <span class="muted small">Nivel máximo de Summon Monster</span>
+        <input type="number" min="0" step="1" v-model.number="draft" />
+      </label>
+      <div class="stack">
+        <button @click="save" :disabled="settings.saving">
+          {{ settings.saving ? 'Guardando…' : 'Guardar cambios' }}
+        </button>
+        <button class="secondary" @click="reload" :disabled="settings.loading">
+          {{ settings.loading ? 'Cargando…' : 'Recargar desde backend' }}
+        </button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="meta">
+      <div class="meta-item">
+        <span>Valor actual</span>
+        <strong>{{ settings.maxSummonMonsterLevel }}</strong>
+      </div>
+      <div class="meta-item">
+        <span>Último guardado</span>
+        <strong>{{ settings.lastSavedAt ? formatTime(settings.lastSavedAt) : '—' }}</strong>
+      </div>
+      <div class="meta-item">
+        <span>Estado</span>
+        <strong>{{ settings.error ? 'Error' : settings.loaded ? 'Listo' : 'Pendiente' }}</strong>
+      </div>
+    </div>
+
+    <p v-if="settings.error" class="muted small" style="color: var(--danger); margin-top: 0.75rem;">
+      {{ settings.error }}
+    </p>
+  </article>
+</template>
+
+<script setup>
+import { ref, watch } from 'vue'
+import { useSettingsStore } from '@/stores/settings'
+
+const settings = useSettingsStore()
+const draft = ref(settings.maxSummonMonsterLevel)
+
+watch(
+  () => settings.maxSummonMonsterLevel,
+  value => {
+    draft.value = value
+  },
+  { immediate: true }
+)
+
+async function save() {
+  await settings.updateMaxSummonMonsterLevel(draft.value)
+}
+
+async function reload() {
+  await settings.loadConfiguration()
+  draft.value = settings.maxSummonMonsterLevel
+}
+
+function formatTime(isoString) {
+  return new Date(isoString).toLocaleString()
+}
+</script>
