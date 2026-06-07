@@ -6,6 +6,64 @@ Este documento es una referencia operativa. Debe ayudar a tomar decisiones coher
 
 ---
 
+## Shell environment
+
+This project is being worked on from Windows using PowerShell / pwsh.
+
+When running shell commands, use PowerShell-compatible syntax only.
+
+Do not use Unix/Linux shell commands unless explicitly invoking bash, Git Bash, or WSL.
+
+### Command equivalents
+
+Use these PowerShell forms:
+
+- List files:
+  - Use: `Get-ChildItem`
+  - Use: `Get-ChildItem -Force`
+  - Do not use: `ls -la`
+
+- Print current directory:
+  - Use: `Get-Location`
+  - Do not use: `pwd` unless only displaying the current path and it works in PowerShell.
+
+- Remove files:
+  - Use: `Remove-Item <path>`
+  - Use: `Remove-Item -Recurse -Force <path>`
+  - Do not use: `rm -rf`
+
+- Copy files:
+  - Use: `Copy-Item <source> <destination>`
+  - Do not use: `cp -r`
+
+- Move or rename files:
+  - Use: `Move-Item <source> <destination>`
+  - Do not use: `mv` if flags are needed.
+
+- Create directories:
+  - Use: `New-Item -ItemType Directory -Force -Path <path>`
+  - Do not use: `mkdir -p`
+
+- Search text:
+  - Prefer: `Select-String -Path <path> -Pattern "<pattern>"`
+  - For repository search, prefer `rg` if available.
+  - Do not use: `grep -R`
+
+- Show file content:
+  - Use: `Get-Content <path>`
+  - Use: `Get-Content <path> -TotalCount 100`
+  - Do not use: `cat <path> | head`
+
+- Environment variables:
+  - Use: `$env:NAME`
+  - Do not use: `$NAME` or `export NAME=value`
+
+- Command chaining:
+  - Use PowerShell syntax.
+  - Avoid Bash-only constructs such as `&&`, `||`, `2>/dev/null`, `$(...)` when not valid in PowerShell.
+
+Before running a command, ensure it is valid PowerShell syntax.
+
 # 1. Contexto del proyecto
 
 Este proyecto es una **aplicación web local** para gestionar en mesa las invocaciones de un personaje de **Pathfinder 1e**:
@@ -671,6 +729,7 @@ Priorizar:
 - legibilidad;
 - no depender de hover;
 - uso táctil cómodo.
+- Implementado con Vue 3.
 
 No construir una interfaz de escritorio compleja y luego intentar adaptarla.
 
