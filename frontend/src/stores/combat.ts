@@ -109,7 +109,14 @@ export const useCombatStore = defineStore('combat', {
     },
     selectCreature(creatureId: string) {
       this.selectedCreatureId = creatureId;
-      this.ensureSelectedTemplateIsAllowed();
+      const creature = this.selectedCreature;
+
+      if (!creature) {
+        this.selectedTemplate = null;
+        return;
+      }
+
+      this.selectedTemplate = creature.allowedTemplates.length === 1 ? creature.allowedTemplates[0] : null;
     },
     selectTemplate(template: SummonTemplateType | null) {
       this.selectedTemplate = template;
@@ -125,12 +132,17 @@ export const useCombatStore = defineStore('combat', {
         return;
       }
 
-      this.selectedTemplate = creature.allowedTemplates[0] ?? null;
+      this.selectedTemplate = creature.allowedTemplates.length === 1 ? creature.allowedTemplates[0] : null;
     },
     async summonSelectedCreature() {
       const creature = this.selectedCreature;
       if (!creature) {
         this.error = 'Selecciona una criatura antes de invocar.';
+        return;
+      }
+
+      if (creature.allowedTemplates.length > 1 && !this.selectedTemplate) {
+        this.error = 'Elige una plantilla antes de invocar.';
         return;
       }
 
