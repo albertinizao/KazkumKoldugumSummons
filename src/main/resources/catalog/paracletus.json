@@ -1,0 +1,124 @@
+{
+  "id": "paracletus",
+  "nombre": "Paracletus",
+  "nivelSummon": 3,
+  "alineamiento": "N",
+  "tamano": "Small",
+  "tipo": "outsider",
+  "subtipos": [
+    "aeon",
+    "extraplanar"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "darkvision 60 ft."
+  ],
+  "percepcion": 7,
+  "atributos": {
+    "fuerza": 8,
+    "destreza": 14,
+    "constitucion": 9,
+    "inteligencia": 11,
+    "sabiduria": 13,
+    "carisma": 12
+  },
+  "ca": {
+    "normal": 14,
+    "toque": 13,
+    "desprevenido": 12,
+    "detalle": "+2 Dex, +1 natural, +1 size"
+  },
+  "pg": {
+    "maximos": 13,
+    "formula": "(3d10-3)"
+  },
+  "salvaciones": {
+    "fortaleza": 4,
+    "reflejos": 3,
+    "voluntad": 6
+  },
+  "velocidades": [
+    {
+      "tipo": "fly",
+      "valor": 40,
+      "maneuverability": "good"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slam",
+      "name": "Slam",
+      "attackBonus": 3,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d3-1",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        },
+        {
+          "formula": "1d6",
+          "damageType": "ELECTRICITY",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "IMMUNITY",
+      "valor": "cold",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "critical hits",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "poison",
+      "notas": null
+    },
+    {
+      "tipo": "RESISTANCE",
+      "valor": "electricity 10",
+      "notas": null
+    },
+    {
+      "tipo": "RESISTANCE",
+      "valor": "fire 10",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Emotion Aura (Sp) Each paracletus exists as the embodiment of a specific emotive duality. Three times per day, a paracletus can create an aura representing one of its two programmed emotions. Creatures in the area must make a DC 12 Will save to resist the aura. A creature that makes its save against the aura is unaffected by that aeon's aura for the next 24 hours. The paracletus can choose one creature in the area to ignore its effects. The effect of the aura lasts for 10 minutes, and ends if a creature moves more than 30 feet from the aeon. The aura is a mind-affecting compulsion effect. The save DC is Charisma-based. Specific emotive dualities and their powers follow-any single paracletus can only use one of these three dualistic options and cannot change to a different one.  Courage/Fear: The aura acts as bless or bane.  Empathy/Apathy: The aura gives creatures a +2 bonus or a -2 penalty on Bluff, Diplomacy, and Intimidate checks.  Hope/Despair: The aura gives creatures a +2 morale bonus on Will saving throws or a -2 penalty on Will saving throws."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Emotion Aura (Sp) Each paracletus exists as the embodiment of a specific emotive duality. Three times per day, a paracletus can create an aura representing one of its two programmed emotions. Creatures in the area must make a DC 12 Will save to resist the aura. A creature that makes its save against the aura is unaffected by that aeon's aura for the next 24 hours. The paracletus can choose one creature in the area to ignore its effects. The effect of the aura lasts for 10 minutes, and ends if a creature moves more than 30 feet from the aeon. The aura is a mind-affecting compulsion effect. The save DC is Charisma-based. Specific emotive dualities and their powers follow-any single paracletus can only use one of these three dualistic options and cannot change to a different one.  Courage/Fear: The aura acts as bless or bane.  Empathy/Apathy: The aura gives creatures a +2 bonus or a -2 penalty on Bluff, Diplomacy, and Intimidate checks.  Hope/Despair: The aura gives creatures a +2 morale bonus on Will saving throws or a -2 penalty on Will saving throws."
+    }
+  ],
+  "fullStatBlock": "CR 2\nParacletus\nN Small outsider aeon, extraplanar\nInit +2\nSenses darkvision 60 ft.; Perception +7\nAC 14, touch 13, flat-footed 12 (+2 Dex, +1 natural, +1 size)\nhp 13 ((3d10-3))\nFort +4, Ref +3, Will +6\nSpeed fly 40 ft. (good)\nMelee Slam +3 (1d3-1 bludgeoning + 1d6 electricity)\nSpecial Abilities Emotion Aura (Sp) Each paracletus exists as the embodiment of a specific emotive duality. Three times per day, a paracletus can create an aura representing one of its two programmed emotions. Creatures in the area must make a DC 12 Will save to resist the aura. A creature that makes its save against the aura is unaffected by that aeon's aura for the next 24 hours. The paracletus can choose one creature in the area to ignore its effects. The effect of the aura lasts for 10 minutes, and ends if a creature moves more than 30 feet from the aeon. The aura is a mind-affecting compulsion effect. The save DC is Charisma-based. Specific emotive dualities and their powers follow-any single paracletus can only use one of these three dualistic options and cannot change to a different one.  Courage/Fear: The aura acts as bless or bane.  Empathy/Apathy: The aura gives creatures a +2 bonus or a -2 penalty on Bluff, Diplomacy, and Intimidate checks.  Hope/Despair: The aura gives creatures a +2 morale bonus on Will saving throws or a -2 penalty on Will saving throws.\nSpell-Like Abilities none\nStatistics Str 8, Dex 14, Con 9, Int 11, Wis 13, Cha 12\nBase Atk +3; CMB +1; CMD 13\nFeats Great Fortitude, Iron Will\nSkills Fly +8, Intimidate +7, Knowledge (arcana) +7, Knowledge (planes) +7, Perception +7, Sense Motive +7, Stealth +12\nLanguages envisaging\nEnvironment  any (Outer Planes)\nOrganization solitary, pair, or commune (3-12)\nTreasure none\nImmune cold, critical hits, poison\nResist electricity 10, fire 10\nSource PFRPG Bestiary 2"
+}

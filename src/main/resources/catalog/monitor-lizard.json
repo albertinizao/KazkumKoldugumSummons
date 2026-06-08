@@ -1,0 +1,97 @@
+{
+  "id": "monitor-lizard",
+  "nombre": "Monitor Lizard",
+  "nivelSummon": 3,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 8,
+  "atributos": {
+    "fuerza": 17,
+    "destreza": 15,
+    "constitucion": 17,
+    "inteligencia": 2,
+    "sabiduria": 12,
+    "carisma": 6
+  },
+  "ca": {
+    "normal": 15,
+    "toque": 12,
+    "desprevenido": 13,
+    "detalle": "+2 Dex, +3 natural"
+  },
+  "pg": {
+    "maximos": 22,
+    "formula": "(3d8+9)"
+  },
+  "salvaciones": {
+    "fortaleza": 8,
+    "reflejos": 5,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    },
+    {
+      "tipo": "swim",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 5,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+4",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab",
+        "poison"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Poison (Ex) Bite-injury; save Fort DC 14; onset 1 minute; frequency 1/hour for 6 hours; effect 1d2 Dexterity damage; cure 1 save. The save DC is Constitution-based."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Poison (Ex) Bite-injury; save Fort DC 14; onset 1 minute; frequency 1/hour for 6 hours; effect 1d2 Dexterity damage; cure 1 save. The save DC is Constitution-based."
+    }
+  ],
+  "fullStatBlock": "CR 2\nMonitor Lizard\nN Medium animal\nInit +2\nSenses low-light vision, scent; Perception +8\nAC 15, touch 12, flat-footed 13 (+2 Dex, +3 natural)\nhp 22 ((3d8+9))\nFort +8, Ref +5, Will +2\nSpeed 30 ft., swim 30 ft.\nMelee Bite +5 (1d8+4 piercing)\nSpecial Abilities Poison (Ex) Bite-injury; save Fort DC 14; onset 1 minute; frequency 1/hour for 6 hours; effect 1d2 Dexterity damage; cure 1 save. The save DC is Constitution-based.\nSpell-Like Abilities none\nStatistics Str 17, Dex 15, Con 17, Int 2, Wis 12, Cha 6\nBase Atk +2; CMB +5; CMD 17\nFeats Great Fortitude, Skill Focus (Perception)\nSkills Climb +7, Perception +8, Stealth +10 (+14 in undergrowth), Swim +11\nEnvironment  warm forests or plains\nOrganization solitary, pair, or pack (3-8)\nTreasure none\nSource PFRPG Bestiary"
+}

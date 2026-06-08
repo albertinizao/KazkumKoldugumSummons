@@ -16,9 +16,19 @@
 
         <div class="toolbar">
           <label>
+            <span class="field-label">Nivel</span>
+            <select :value="store.catalogLevelFilter ?? ''" @change="onLevelFilterChange">
+              <option :value="''">Todos</option>
+              <option v-for="level in summonLevels" :key="level" :value="level">
+                {{ level }}
+              </option>
+            </select>
+          </label>
+
+          <label>
             <span class="field-label">Criatura</span>
             <select :value="store.selectedCreatureId ?? ''" @change="onCreatureChange">
-              <option v-for="item in store.catalogItems" :key="item.id" :value="item.id">
+              <option v-for="item in store.filteredCatalogItems" :key="item.id" :value="item.id">
                 {{ item.name }} · nivel {{ item.summonLevel }}
               </option>
             </select>
@@ -224,6 +234,7 @@ const globalRollResult = ref<{ title: string; displayText: string } | null>(null
 const summonToast = ref<string | null>(null);
 let summonToastTimer: number | undefined;
 const globalRollResultTitleId = 'global-roll-result-title';
+const summonLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const allowedTemplates = computed(() => store.selectedCreatureAllowedTemplates);
 const templateSelectionRequired = computed(() => allowedTemplates.value.length > 1);
@@ -302,6 +313,12 @@ function showSummonToast(): void {
 function onCreatureChange(event: Event): void {
   const target = event.target as HTMLSelectElement;
   store.selectCreature(target.value);
+}
+
+function onLevelFilterChange(event: Event): void {
+  const target = event.target as HTMLSelectElement;
+  const value = target.value ? Number(target.value) : null;
+  store.selectCatalogLevel(value);
 }
 
 function onTemplateChange(event: Event): void {

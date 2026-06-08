@@ -1,0 +1,86 @@
+{
+  "id": "gorilla",
+  "nombre": "Gorilla",
+  "nivelSummon": 3,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 0,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 3,
+  "atributos": {
+    "fuerza": 15,
+    "destreza": 13,
+    "constitucion": 15,
+    "inteligencia": 2,
+    "sabiduria": 12,
+    "carisma": 7
+  },
+  "ca": {
+    "normal": 14,
+    "toque": 11,
+    "desprevenido": 13,
+    "detalle": "+1 Dex, +3 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 19,
+    "formula": "3d8+6"
+  },
+  "salvaciones": {
+    "fortaleza": 5,
+    "reflejos": 4,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    },
+    {
+      "tipo": "climb",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slam",
+      "name": "Slam",
+      "attackBonus": 3,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+2",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "10 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [
+    "Ape now resolved as Gorilla per source verification."
+  ],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 2\nGorilla\nN Large animal\nInit +0\nSenses low-light vision, scent; Perception +3\nAC 14, touch 11, flat-footed 13 (+1 Dex, +3 natural, -1 size)\nhp 19 (3d8+6)\nFort +5, Ref +4, Will +2\nSpeed 30 ft., climb 30 ft.\nMelee 2 slams +3 (1d6+2 bludgeoning)\nSpell-Like Abilities none\nStatistics Str 15, Dex 13, Con 15, Int 2, Wis 12, Cha 7\nBase Atk +2; CMB +5; CMD 16\nFeats Skill Focus (Perception)\nSkills Climb +10, Perception +3\nEnvironment  warm forests\nOrganization solitary or pair\nTreasure none\nSource PFRPG Bestiary"
+}

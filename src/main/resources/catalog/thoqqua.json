@@ -1,0 +1,119 @@
+{
+  "id": "thoqqua",
+  "nombre": "Thoqqua",
+  "nivelSummon": 3,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "outsider",
+  "subtipos": [
+    "earth",
+    "elemental",
+    "extraplanar",
+    "fire"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 1,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "tremorsense 60 ft."
+  ],
+  "percepcion": 10,
+  "atributos": {
+    "fuerza": 13,
+    "destreza": 13,
+    "constitucion": 15,
+    "inteligencia": 6,
+    "sabiduria": 12,
+    "carisma": 10
+  },
+  "ca": {
+    "normal": 15,
+    "toque": 11,
+    "desprevenido": 14,
+    "detalle": "+1 Dex, +4 natural"
+  },
+  "pg": {
+    "maximos": 22,
+    "formula": "(3d10+6)"
+  },
+  "salvaciones": {
+    "fortaleza": 5,
+    "reflejos": 4,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    },
+    {
+      "tipo": "burrow",
+      "valor": 20
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slam",
+      "name": "Slam",
+      "attackBonus": 4,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+1",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "burn"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "burn (1d6, DC 13)"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "IMMUNITY",
+      "valor": "fire",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    },
+    {
+      "tipo": "VULNERABILITY",
+      "valor": "cold",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Molten Body (Su) A thoqqua's body is hot enough to melt stone. Anyone striking a thoqqua with a natural weapon or unarmed strike takes 1d6 points of fire damage. A creature that grapples a thoqqua or is grappled by one takes 3d6 points of fire damage each round the grapple persists. A creature that strikes a thoqqua with a manufactured weapon can attempt a DC 13 Reflex save to pull the weapon away from the creature's molten body quickly enough to avoid having the weapon take 1d6 points of fire damage-damage caused to a weapon in this manner is not halved as is normal for damage caused to items, and ignores the first 5 points of hardness possessed by the item. As a result, most metal weapons can generally safely strike a thoqqua without taking much damage, but wooden weapons have a significant chance of burning away if used against one of these creatures. The save DC is Constitution-based."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Molten Body (Su) A thoqqua's body is hot enough to melt stone. Anyone striking a thoqqua with a natural weapon or unarmed strike takes 1d6 points of fire damage. A creature that grapples a thoqqua or is grappled by one takes 3d6 points of fire damage each round the grapple persists. A creature that strikes a thoqqua with a manufactured weapon can attempt a DC 13 Reflex save to pull the weapon away from the creature's molten body quickly enough to avoid having the weapon take 1d6 points of fire damage-damage caused to a weapon in this manner is not halved as is normal for damage caused to items, and ignores the first 5 points of hardness possessed by the item. As a result, most metal weapons can generally safely strike a thoqqua without taking much damage, but wooden weapons have a significant chance of burning away if used against one of these creatures. The save DC is Constitution-based."
+    }
+  ],
+  "fullStatBlock": "CR 2\nThoqqua\nN Medium outsider earth, elemental, extraplanar, fire\nInit +1\nSenses darkvision 60 ft., tremorsense 60 ft.; Perception +10\nAC 15, touch 11, flat-footed 14 (+1 Dex, +4 natural)\nhp 22 ((3d10+6))\nFort +5, Ref +4, Will +2\nSpeed 30 ft., burrow 20 ft.\nMelee Slam +4 (1d6+1 bludgeoning)\nSpecial Attacks burn (1d6, DC 13)\nSpecial Abilities Molten Body (Su) A thoqqua's body is hot enough to melt stone. Anyone striking a thoqqua with a natural weapon or unarmed strike takes 1d6 points of fire damage. A creature that grapples a thoqqua or is grappled by one takes 3d6 points of fire damage each round the grapple persists. A creature that strikes a thoqqua with a manufactured weapon can attempt a DC 13 Reflex save to pull the weapon away from the creature's molten body quickly enough to avoid having the weapon take 1d6 points of fire damage-damage caused to a weapon in this manner is not halved as is normal for damage caused to items, and ignores the first 5 points of hardness possessed by the item. As a result, most metal weapons can generally safely strike a thoqqua without taking much damage, but wooden weapons have a significant chance of burning away if used against one of these creatures. The save DC is Constitution-based.\nSpell-Like Abilities none\nStatistics Str 13, Dex 13, Con 15, Int 6, Wis 12, Cha 10\nBase Atk +3; CMB +4; CMD 15\nFeats Nimble Moves, Skill Focus (Perception)\nSkills Acrobatics +7, Perception +10, Stealth +7, Survival +7\nLanguages Ignan (cannot speak)\nEnvironment  any land (Plane of Fire)\nOrganization solitary or pair\nTreasure none\nImmune fire, elemental traits\nWeakness vulnerable to cold\nSource PFRPG Bestiary 2"
+}

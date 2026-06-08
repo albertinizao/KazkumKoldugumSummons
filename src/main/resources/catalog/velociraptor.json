@@ -1,0 +1,117 @@
+{
+  "id": "velociraptor",
+  "nombre": "Velociraptor",
+  "nivelSummon": 3,
+  "alineamiento": "N",
+  "tamano": "Small",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 7,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 10,
+  "atributos": {
+    "fuerza": 13,
+    "destreza": 17,
+    "constitucion": 17,
+    "inteligencia": 2,
+    "sabiduria": 14,
+    "carisma": 14
+  },
+  "ca": {
+    "normal": 15,
+    "toque": 14,
+    "desprevenido": 12,
+    "detalle": "+3 Dex, +1 natural, +1 size"
+  },
+  "pg": {
+    "maximos": 22,
+    "formula": "(3d8+9)"
+  },
+  "salvaciones": {
+    "fortaleza": 6,
+    "reflejos": 6,
+    "voluntad": 3
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 60
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 6,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4+1",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "talon",
+      "name": "Talon",
+      "attackBonus": 6,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+1",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 19,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "leaping charge"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "OTHER",
+      "valor": "evasion",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Leaping Charge (Ex) A velociraptor can jump while charging, allowing it to ignore difficult terrain when it charges. When a velociraptor makes a charge in this way, it deals double damage with its talons."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Leaping Charge (Ex) A velociraptor can jump while charging, allowing it to ignore difficult terrain when it charges. When a velociraptor makes a charge in this way, it deals double damage with its talons."
+    }
+  ],
+  "fullStatBlock": "CR 2\nVelociraptor\nN Small animal\nInit +7\nSenses low-light vision, scent; Perception +10\nAC 15, touch 14, flat-footed 12 (+3 Dex, +1 natural, +1 size)\nhp 22 ((3d8+9))\nFort +6, Ref +6, Will +3\nSpeed 60 ft.\nMelee Bite +6 (1d4+1 piercing)\nMelee 2 talon +6 (1d6+1 slashing)\nSpecial Attacks leaping charge\nSpecial Abilities Leaping Charge (Ex) A velociraptor can jump while charging, allowing it to ignore difficult terrain when it charges. When a velociraptor makes a charge in this way, it deals double damage with its talons.\nSpell-Like Abilities none\nStatistics Str 13, Dex 17, Con 17, Int 2, Wis 14, Cha 14\nBase Atk +2; CMB +2; CMD 15\nFeats Improved Initiative, Weapon Finesse\nSkills Acrobatics +11 (+23 when jumping), Perception +10, Stealth +15\nEnvironment  warm forests or plains\nOrganization solitary, pair, or pack (3-12)\nTreasure none\nDefensive Abilities evasion\nSource PFRPG Bestiary 4"
+}

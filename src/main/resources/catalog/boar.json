@@ -1,0 +1,88 @@
+{
+  "id": "boar",
+  "nombre": "Boar",
+  "nivelSummon": 3,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 0,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 6,
+  "atributos": {
+    "fuerza": 17,
+    "destreza": 10,
+    "constitucion": 17,
+    "inteligencia": 2,
+    "sabiduria": 13,
+    "carisma": 4
+  },
+  "ca": {
+    "normal": 14,
+    "toque": 10,
+    "desprevenido": 14,
+    "detalle": "+4 natural"
+  },
+  "pg": {
+    "maximos": 18,
+    "formula": "(2d8+9)"
+  },
+  "salvaciones": {
+    "fortaleza": 6,
+    "reflejos": 3,
+    "voluntad": 1
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 40
+    }
+  ],
+  "ataques": [
+    {
+      "id": "gore",
+      "name": "Gore",
+      "attackBonus": 4,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+4",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "melee"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "OTHER",
+      "valor": "ferocity",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 2\nBoar\nN Medium animal\nInit +0\nSenses low-light vision, scent; Perception +6\nAC 14, touch 10, flat-footed 14 (+4 natural)\nhp 18 ((2d8+9))\nFort +6, Ref +3, Will +1\nSpeed 40 ft.\nMelee Gore +4 (1d8+4 piercing)\nSpell-Like Abilities none\nStatistics Str 17, Dex 10, Con 17, Int 2, Wis 13, Cha 4\nBase Atk +1; CMB +4; CMD 14\nFeats Toughness\nSkills Perception +6\nEnvironment  temperate or tropical forests\nOrganization solitary, pair, or group (3-8)\nTreasure none\nDefensive Abilities ferocity\nSource PFRPG Bestiary"
+}

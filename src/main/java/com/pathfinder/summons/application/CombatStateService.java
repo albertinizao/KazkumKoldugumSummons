@@ -39,7 +39,7 @@ public class CombatStateService implements CombatStateUseCase {
 
     private static final int DEFAULT_DAILY_MAXIMUM = 6;
     private static final int DEFAULT_DAILY_REMAINING = 4;
-    private static final int RECENT_SHORTCUT_LIMIT = 8;
+    private static final int RECENT_SHORTCUT_LIMIT = 5;
 
     private final CombatStateRepository combatStateRepository;
     private final CreatureCatalogService creatureCatalogService;

@@ -1,5 +1,5 @@
 import { deleteJson, getJson, postJson } from '@/services/http';
-import type { CreatureCatalogListResponse } from '@/types/catalog';
+import type { CreatureCatalogListResponse, SummonTemplateType } from '@/types/catalog';
 import type {
   ActiveSummonGroup,
   AmountRequest,
@@ -88,8 +88,30 @@ export function resetDailyUses(): Promise<DailyUsesMutationResponse> {
   return postJson('/api/daily-uses/reset', {});
 }
 
-export function fetchCatalogCreatures(): Promise<CreatureCatalogListResponse> {
-  return getJson('/api/catalog/creatures');
+function buildQuery(params: Record<string, string | number | null | undefined>): string {
+  const search = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value === null || value === undefined || value === '') {
+      return;
+    }
+
+    search.set(key, String(value));
+  });
+
+  const query = search.toString();
+  return query ? `?${query}` : '';
+}
+
+export function fetchCatalogCreatures(params: {
+  query?: string;
+  summonLevel?: number | null;
+  maxSummonLevel?: number | null;
+  template?: SummonTemplateType | 'NONE' | null;
+  limit?: number;
+  offset?: number;
+} = {}): Promise<CreatureCatalogListResponse> {
+  return getJson(`/api/catalog/creatures${buildQuery(params)}`);
 }
 
 export function getGroupById(groups: ActiveSummonGroup[], groupId: string): ActiveSummonGroup | null {

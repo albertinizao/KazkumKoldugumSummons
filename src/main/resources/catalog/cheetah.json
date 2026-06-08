@@ -1,0 +1,111 @@
+{
+  "id": "cheetah",
+  "nombre": "Cheetah",
+  "nivelSummon": 3,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 8,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 5,
+  "atributos": {
+    "fuerza": 17,
+    "destreza": 19,
+    "constitucion": 15,
+    "inteligencia": 2,
+    "sabiduria": 12,
+    "carisma": 6
+  },
+  "ca": {
+    "normal": 15,
+    "toque": 14,
+    "desprevenido": 11,
+    "detalle": "+4 Dex, +1 natural"
+  },
+  "pg": {
+    "maximos": 19,
+    "formula": "(3d8+6)"
+  },
+  "salvaciones": {
+    "fortaleza": 5,
+    "reflejos": 7,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 50
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 6,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+3",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "trip"
+      ]
+    },
+    {
+      "id": "claw",
+      "name": "Claw",
+      "attackBonus": 6,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d3+3",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Sprint (Ex) Once per hour, a cheetah can move at 10 times its normal speed (500 feet) when it makes a charge."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Sprint (Ex) Once per hour, a cheetah can move at 10 times its normal speed (500 feet) when it makes a charge."
+    }
+  ],
+  "fullStatBlock": "CR 2\nCheetah\nN Medium animal\nInit +8\nSenses low-light vision, scent; Perception +5\nAC 15, touch 14, flat-footed 11 (+4 Dex, +1 natural)\nhp 19 ((3d8+6))\nFort +5, Ref +7, Will +2\nSpeed 50 ft.\nMelee Bite +6 (1d6+3 piercing)\nMelee 2 claw +6 (1d3+3 slashing)\nSpecial Abilities Sprint (Ex) Once per hour, a cheetah can move at 10 times its normal speed (500 feet) when it makes a charge.\nSpell-Like Abilities none\nStatistics Str 17, Dex 19, Con 15, Int 2, Wis 12, Cha 6\nBase Atk +2; CMB +5; CMD 19\nFeats Improved Initiative, Weapon Finesse\nSkills Acrobatics +8, Perception +5, Stealth +8 (+12 in tall grass)\nEnvironment  warm plains\nOrganization solitary or pair\nTreasure none\nSource PFRPG Bestiary"
+}

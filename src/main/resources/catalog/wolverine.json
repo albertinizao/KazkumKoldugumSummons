@@ -1,0 +1,119 @@
+{
+  "id": "wolverine",
+  "nombre": "Wolverine",
+  "nivelSummon": 3,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 10,
+  "atributos": {
+    "fuerza": 15,
+    "destreza": 15,
+    "constitucion": 15,
+    "inteligencia": 2,
+    "sabiduria": 12,
+    "carisma": 10
+  },
+  "ca": {
+    "normal": 14,
+    "toque": 12,
+    "desprevenido": 12,
+    "detalle": "+2 Dex, +2 natural"
+  },
+  "pg": {
+    "maximos": 22,
+    "formula": "(3d8+9)"
+  },
+  "salvaciones": {
+    "fortaleza": 5,
+    "reflejos": 5,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    },
+    {
+      "tipo": "climb",
+      "valor": 10
+    },
+    {
+      "tipo": "burrow",
+      "valor": 10
+    }
+  ],
+  "ataques": [
+    {
+      "id": "claw",
+      "name": "Claw",
+      "attackBonus": 4,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+2",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 4,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4+2",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "rage"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Rage (Ex) A wolverine that takes damage in combat flies into a rage on its next turn, clawing and biting madly until either it or its opponent is dead. It gains +4 to Strength, +4 to Constitution, and -2 to AC. The creature cannot end its rage voluntarily."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Rage (Ex) A wolverine that takes damage in combat flies into a rage on its next turn, clawing and biting madly until either it or its opponent is dead. It gains +4 to Strength, +4 to Constitution, and -2 to AC. The creature cannot end its rage voluntarily."
+    }
+  ],
+  "fullStatBlock": "CR 2\nWolverine\nN Medium animal\nInit +2\nSenses low-light vision, scent; Perception +10\nAC 14, touch 12, flat-footed 12 (+2 Dex, +2 natural)\nhp 22 ((3d8+9))\nFort +5, Ref +5, Will +2\nSpeed 30 ft., climb 10 ft., burrow 10 ft.\nMelee 2 claw +4 (1d6+2 slashing)\nMelee Bite +4 (1d4+2 piercing)\nSpecial Attacks rage\nSpecial Abilities Rage (Ex) A wolverine that takes damage in combat flies into a rage on its next turn, clawing and biting madly until either it or its opponent is dead. It gains +4 to Strength, +4 to Constitution, and -2 to AC. The creature cannot end its rage voluntarily.\nSpell-Like Abilities none\nStatistics Str 15, Dex 15, Con 15, Int 2, Wis 12, Cha 10\nBase Atk +2; CMB +4; CMD 16\nFeats Skill Focus (Perception), Toughness\nSkills Climb +10, Perception +10\nEnvironment  cold forests\nOrganization solitary\nTreasure none\nSource PFRPG Bestiary"
+}

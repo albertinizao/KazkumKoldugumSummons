@@ -1,0 +1,120 @@
+{
+  "id": "electric-eel",
+  "nombre": "Electric Eel",
+  "nivelSummon": 3,
+  "alineamiento": "N",
+  "tamano": "Small",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 6,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 4,
+  "atributos": {
+    "fuerza": 13,
+    "destreza": 14,
+    "constitucion": 19,
+    "inteligencia": 1,
+    "sabiduria": 10,
+    "carisma": 6
+  },
+  "ca": {
+    "normal": 15,
+    "toque": 13,
+    "desprevenido": 13,
+    "detalle": "+2 Dex, +2 natural, +1 size"
+  },
+  "pg": {
+    "maximos": 17,
+    "formula": "(2d8+8)"
+  },
+  "salvaciones": {
+    "fortaleza": 7,
+    "reflejos": 5,
+    "voluntad": 0
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 5
+    },
+    {
+      "tipo": "swim",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 3,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+1",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "tail",
+      "name": "Tail",
+      "attackBonus": -2,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6",
+          "damageType": "ELECTRICITY",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "touch"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "RESISTANCE",
+      "valor": "electricity 10",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Electricity (Ex) An electric eel can produce a powerful jolt of electricity from its tail, delivering the jolt with a successful touch attack. On a critical hit, the creature struck must make a DC 15 Fortitude save or be stunned for 1d4 rounds. The save DC is Constitution-based."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Electricity (Ex) An electric eel can produce a powerful jolt of electricity from its tail, delivering the jolt with a successful touch attack. On a critical hit, the creature struck must make a DC 15 Fortitude save or be stunned for 1d4 rounds. The save DC is Constitution-based."
+    }
+  ],
+  "fullStatBlock": "CR 2\nElectric Eel\nN Small animal\nInit +6\nSenses low-light vision; Perception +4\nAC 15, touch 13, flat-footed 13 (+2 Dex, +2 natural, +1 size)\nhp 17 ((2d8+8))\nFort +7, Ref +5, Will +0\nSpeed 5 ft., swim 30 ft.\nMelee Bite +3 (1d6+1 piercing)\nMelee Tail -2 (1d6 electricity)\nSpecial Abilities Electricity (Ex) An electric eel can produce a powerful jolt of electricity from its tail, delivering the jolt with a successful touch attack. On a critical hit, the creature struck must make a DC 15 Fortitude save or be stunned for 1d4 rounds. The save DC is Constitution-based.\nSpell-Like Abilities none\nStatistics Str 13, Dex 14, Con 19, Int 1, Wis 10, Cha 6\nBase Atk +1; CMB +1; CMD 13\nFeats Improved Initiative\nSkills Escape Artist +10, Perception +4, Stealth +10, Swim +9\nEnvironment  warm fresh water\nOrganization solitary\nTreasure none\nResist electricity 10\nSource PFRPG Bestiary"
+}

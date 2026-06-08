@@ -57,6 +57,7 @@ export const useCombatStore = defineStore('combat', {
     combatState: defaultCombatState as CombatState,
     lastCombatRollResult: null as CombatRollResult | null,
     catalogItems: [] as CreatureCatalogItem[],
+    catalogLevelFilter: null as number | null,
     selectedCreatureId: null as string | null,
     selectedTemplate: null as SummonTemplateType | null,
     loading: false,
@@ -73,6 +74,7 @@ export const useCombatStore = defineStore('combat', {
     lastRollResult: state => state.combatState.lastRollResult,
     recentlyUsedSummons: state => state.combatState.recentlyUsedSummons,
     mostUsedSummons: state => state.combatState.mostUsedSummons,
+    filteredCatalogItems: state => state.catalogItems.filter(item => state.catalogLevelFilter === null || item.summonLevel === state.catalogLevelFilter),
     selectedCreature: state => state.catalogItems.find(item => item.id === state.selectedCreatureId) ?? null,
     selectedCreatureAllowedTemplates: state => state.catalogItems.find(item => item.id === state.selectedCreatureId)?.allowedTemplates ?? [],
     activeInstanceCount: state => state.combatState.activeGroups.reduce((total, group) => total + group.instances.length, 0),
@@ -93,7 +95,7 @@ export const useCombatStore = defineStore('combat', {
       try {
         const [combatStateResult, catalogResult] = await Promise.allSettled([
           fetchCombatState(),
-          fetchCatalogCreatures(),
+          fetchCatalogCreatures({ limit: 1000, offset: 0 }),
         ]);
 
         if (combatStateResult.status === 'fulfilled') {
@@ -112,9 +114,13 @@ export const useCombatStore = defineStore('combat', {
         this.lastCombatRollResult = null;
         this.initialized = true;
 
-        if (!this.selectedCreatureId && this.catalogItems.length > 0) {
-          this.selectCreature(this.catalogItems[0].id);
-        } else if (this.selectedCreatureId) {
+        if (this.catalogLevelFilter === null) {
+          this.catalogLevelFilter = this.combatState.configuration.maxSummonMonsterLevel;
+        }
+
+        this.ensureSelectedCreatureMatchesFilter();
+
+        if (this.selectedCreatureId) {
           this.ensureSelectedTemplateIsAllowed();
         }
       } catch (error) {
@@ -141,8 +147,26 @@ export const useCombatStore = defineStore('combat', {
 
       this.selectedTemplate = creature.allowedTemplates.length === 1 ? creature.allowedTemplates[0] : null;
     },
+    selectCatalogLevel(level: number | null) {
+      this.catalogLevelFilter = level;
+      this.ensureSelectedCreatureMatchesFilter();
+    },
     selectTemplate(template: SummonTemplateType | null) {
       this.selectedTemplate = template;
+    },
+    ensureSelectedCreatureMatchesFilter() {
+      const filteredCatalogItems = this.filteredCatalogItems;
+
+      if (filteredCatalogItems.length === 0) {
+        this.selectedCreatureId = null;
+        this.selectedTemplate = null;
+        return;
+      }
+
+      const selectedCreatureStillVisible = filteredCatalogItems.some(item => item.id === this.selectedCreatureId);
+      if (!selectedCreatureStillVisible) {
+        this.selectCreature(filteredCatalogItems[0].id);
+      }
     },
     ensureSelectedTemplateIsAllowed() {
       const creature = this.selectedCreature;
