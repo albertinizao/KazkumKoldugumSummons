@@ -2,37 +2,63 @@
   <section class="panel">
     <div class="panel-header">
       <div>
-        <p class="eyebrow">Combate</p>
+        <p class="eyebrow">Recursos</p>
         <h2>Usos diarios</h2>
       </div>
       <StatusBadge variant="neutral">{{ state.remaining }} / {{ state.maximum }}</StatusBadge>
     </div>
 
-    <div class="button-row">
-      <ActionButton :disabled="busy" @click="$emit('summon')">Invocar</ActionButton>
-      <ActionButton :disabled="busy" variant="danger" @click="$emit('clearSummons')">Limpiar invocaciones</ActionButton>
+    <div class="controls">
+      <label class="amount-field">
+        <span class="small muted">Cantidad</span>
+        <input v-model.number="amount" type="number" min="1" step="1" inputmode="numeric" />
+      </label>
+
+      <div class="button-row">
+        <ActionButton :disabled="isBusy || !isAmountValid" @click="increment">+{{ amount }}</ActionButton>
+        <ActionButton :disabled="isBusy || !isAmountValid" @click="decrement">-{{ amount }}</ActionButton>
+        <ActionButton :disabled="isBusy" @click="resetUses">Resetear</ActionButton>
+      </div>
     </div>
 
     <p class="hint">
-      El contador se conserva al recargar. Invocar descuenta 1 uso si hay margen, pero no bloquea la mesa si ya está a 0.
+      El contador se mantiene dentro de sus límites y se sincroniza con el backend. No se bloquea rígidamente a 0.
+    </p>
+
+    <p v-if="store.dailyUsesError" class="error">
+      {{ store.dailyUsesError }}
     </p>
   </section>
 </template>
 
 <script setup lang="ts">
+import { computed, onMounted, ref } from 'vue';
 import ActionButton from '@/components/ActionButton.vue';
 import StatusBadge from '@/components/StatusBadge.vue';
-import type { DailyUses } from '@/types/combat';
+import { useCombatStore } from '@/stores/combat';
 
-defineProps<{
-  state: DailyUses;
-  busy?: boolean;
-}>();
+const store = useCombatStore();
+const amount = ref(1);
 
-defineEmits<{
-  (event: 'summon'): void;
-  (event: 'clearSummons'): void;
-}>();
+const state = computed(() => store.dailyUses);
+const isBusy = computed(() => store.dailyUsesLoading);
+const isAmountValid = computed(() => Number.isInteger(amount.value) && amount.value >= 1);
+
+onMounted(() => {
+  void store.loadDailyUses();
+});
+
+async function increment() {
+  await store.increaseDailyUses(amount.value);
+}
+
+async function decrement() {
+  await store.decreaseDailyUses(amount.value);
+}
+
+async function resetUses() {
+  await store.resetDailyUses();
+}
 </script>
 
 <style scoped>
@@ -52,8 +78,28 @@ defineEmits<{
 }
 
 .eyebrow,
-h2 {
+h2,
+p {
   margin: 0;
+}
+
+.controls {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.amount-field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.amount-field input {
+  min-height: 3rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(30, 41, 59, 0.7);
+  color: inherit;
+  padding: 0 0.85rem;
 }
 
 .button-row {
@@ -65,5 +111,10 @@ h2 {
 .hint {
   margin: 1rem 0 0;
   color: #94a3b8;
+}
+
+.error {
+  margin: 0.75rem 0 0;
+  color: #fca5a5;
 }
 </style>

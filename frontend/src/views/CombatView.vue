@@ -3,12 +3,7 @@
     <div v-if="store.error" class="error-banner">{{ store.error }}</div>
 
     <div class="top-grid">
-      <DailyUsesPanel
-        :state="store.dailyUses"
-        :busy="store.busy"
-        @summon="handleSummon"
-        @clearSummons="handleClearSummons"
-      />
+      <DailyUsesPanel />
 
       <section class="summon-panel card">
         <div class="section-title">

@@ -18,17 +18,30 @@ public class SummonerConfiguration {
     @Column(nullable = false)
     private int maxSummonMonsterLevel = DEFAULT_MAX_SUMMON_MONSTER_LEVEL;
 
+    @Column(nullable = false)
+    private int dailyUsesMaximum = DailyUses.DEFAULT_MAXIMUM;
+
+    @Column(nullable = false)
+    private int dailyUsesRemaining = DailyUses.DEFAULT_REMAINING;
+
     protected SummonerConfiguration() {
         // JPA only
     }
 
-    private SummonerConfiguration(Long id, int maxSummonMonsterLevel) {
+    private SummonerConfiguration(Long id, int maxSummonMonsterLevel, int dailyUsesMaximum, int dailyUsesRemaining) {
         this.id = id;
         this.maxSummonMonsterLevel = maxSummonMonsterLevel;
+        this.dailyUsesMaximum = dailyUsesMaximum;
+        this.dailyUsesRemaining = dailyUsesRemaining;
     }
 
     public static SummonerConfiguration defaultConfiguration() {
-        return new SummonerConfiguration(SINGLETON_ID, DEFAULT_MAX_SUMMON_MONSTER_LEVEL);
+        return new SummonerConfiguration(
+                SINGLETON_ID,
+                DEFAULT_MAX_SUMMON_MONSTER_LEVEL,
+                DailyUses.DEFAULT_MAXIMUM,
+                DailyUses.DEFAULT_REMAINING
+        );
     }
 
     public Long getId() {
@@ -41,5 +54,22 @@ public class SummonerConfiguration {
 
     public void setMaxSummonMonsterLevel(int maxSummonMonsterLevel) {
         this.maxSummonMonsterLevel = maxSummonMonsterLevel;
+    }
+
+    public int getDailyUsesMaximum() {
+        return dailyUsesMaximum;
+    }
+
+    public int getDailyUsesRemaining() {
+        return dailyUsesRemaining;
+    }
+
+    public DailyUses getDailyUses() {
+        return DailyUses.normalize(dailyUsesMaximum, dailyUsesRemaining);
+    }
+
+    public void setDailyUses(DailyUses dailyUses) {
+        this.dailyUsesMaximum = dailyUses.getMaximum();
+        this.dailyUsesRemaining = dailyUses.getRemaining();
     }
 }

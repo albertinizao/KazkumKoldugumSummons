@@ -1,5 +1,19 @@
 import { defineStore } from 'pinia';
-import { clearCombatState, clearLastRollResult, damageInstance, fetchCatalogCreatures, fetchCombatState, healInstance, removeInstance, summonCreature } from '@/services/combatApi';
+import {
+  clearCombatState,
+  clearLastRollResult,
+  decreaseDailyUses as decreaseDailyUsesApi,
+  damageInstance,
+  fetchCatalogCreatures,
+  fetchCombatState,
+  fetchConfiguration,
+  healInstance,
+  increaseDailyUses as increaseDailyUsesApi,
+  removeInstance,
+  resetDailyUses as resetDailyUsesApi,
+  summonCreature,
+  type DailyUsesState,
+} from '@/services/combatApi';
 import type { CreatureCatalogItem, SummonTemplateType } from '@/types/catalog';
 import type { CombatState, SummonShortcut } from '@/types/combat';
 
@@ -18,6 +32,16 @@ const defaultCombatState: CombatState = {
   mostUsedSummons: [],
 };
 
+function clamp(value: number, minimum: number, maximum: number): number {
+  return Math.min(maximum, Math.max(minimum, value));
+}
+
+function normalizeDailyUses(dailyUses: DailyUsesState): DailyUsesState {
+  const maximum = Math.max(0, Number(dailyUses.maximum ?? 0));
+  const remaining = clamp(Number(dailyUses.remaining ?? 0), 0, maximum);
+  return { maximum, remaining };
+}
+
 export const useCombatStore = defineStore('combat', {
   state: () => ({
     combatState: defaultCombatState as CombatState,
@@ -28,6 +52,8 @@ export const useCombatStore = defineStore('combat', {
     busy: false,
     error: '' as string,
     initialized: false,
+    dailyUsesLoading: false,
+    dailyUsesError: null as string | null,
   }),
   getters: {
     groups: state => state.combatState.activeGroups,
@@ -55,7 +81,10 @@ export const useCombatStore = defineStore('combat', {
           fetchCatalogCreatures(),
         ]);
 
-        this.combatState = combatState;
+        this.combatState = {
+          ...combatState,
+          dailyUses: normalizeDailyUses(combatState.dailyUses),
+        };
         this.catalogItems = catalog.items;
         this.initialized = true;
 
@@ -71,7 +100,11 @@ export const useCombatStore = defineStore('combat', {
       }
     },
     async refreshCombatState() {
-      this.combatState = await fetchCombatState();
+      const combatState = await fetchCombatState();
+      this.combatState = {
+        ...combatState,
+        dailyUses: normalizeDailyUses(combatState.dailyUses),
+      };
       this.ensureSelectedTemplateIsAllowed();
     },
     selectCreature(creatureId: string) {
@@ -191,6 +224,72 @@ export const useCombatStore = defineStore('combat', {
         this.error = error instanceof Error ? error.message : 'No se pudo limpiar el último resultado.';
       } finally {
         this.busy = false;
+      }
+    },
+    async loadDailyUses() {
+      this.dailyUsesLoading = true;
+      this.dailyUsesError = null;
+      try {
+        const configuration = await fetchConfiguration();
+        this.combatState = {
+          ...this.combatState,
+          dailyUses: normalizeDailyUses(configuration.dailyUses),
+        };
+      } catch (error) {
+        this.dailyUsesError = error instanceof Error ? error.message : String(error);
+      } finally {
+        this.dailyUsesLoading = false;
+      }
+    },
+    async increaseDailyUses(amount = 1) {
+      this.dailyUsesLoading = true;
+      this.dailyUsesError = null;
+      try {
+        const response = await increaseDailyUsesApi(amount);
+        this.combatState = {
+          ...this.combatState,
+          dailyUses: normalizeDailyUses(response.dailyUses),
+        };
+        return response;
+      } catch (error) {
+        this.dailyUsesError = error instanceof Error ? error.message : String(error);
+        throw error;
+      } finally {
+        this.dailyUsesLoading = false;
+      }
+    },
+    async decreaseDailyUses(amount = 1) {
+      this.dailyUsesLoading = true;
+      this.dailyUsesError = null;
+      try {
+        const response = await decreaseDailyUsesApi(amount);
+        this.combatState = {
+          ...this.combatState,
+          dailyUses: normalizeDailyUses(response.dailyUses),
+        };
+        return response;
+      } catch (error) {
+        this.dailyUsesError = error instanceof Error ? error.message : String(error);
+        throw error;
+      } finally {
+        this.dailyUsesLoading = false;
+      }
+    },
+    async resetDailyUses() {
+      this.dailyUsesLoading = true;
+      this.dailyUsesError = null;
+      try {
+        const response = await resetDailyUsesApi();
+        this.combatState = {
+          ...this.combatState,
+          dailyUses: normalizeDailyUses(response.dailyUses),
+        };
+        return response;
+      } catch (error) {
+        this.dailyUsesError = error instanceof Error ? error.message : String(error);
+        throw error;
+      } finally {
+        this.dailyUsesLoading = false;
       }
     },
   },

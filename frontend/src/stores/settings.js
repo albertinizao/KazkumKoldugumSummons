@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia'
-import { getConfiguration, saveConfiguration } from '@/services/api'
+import { fetchConfiguration } from '@/services/combatApi'
+import { saveConfiguration } from '@/services/api'
 
 export const useSettingsStore = defineStore('settings', {
   state: () => ({
     maxSummonMonsterLevel: 3,
+    dailyUses: { maximum: 6, remaining: 4 },
     loading: false,
     saving: false,
     loaded: false,
@@ -18,8 +20,9 @@ export const useSettingsStore = defineStore('settings', {
       this.loading = true
       this.error = null
       try {
-        const configuration = await getConfiguration()
+        const configuration = await fetchConfiguration()
         this.maxSummonMonsterLevel = configuration.maxSummonMonsterLevel
+        this.dailyUses = configuration.dailyUses
         this.loaded = true
       } catch (error) {
         this.error = error instanceof Error ? error.message : String(error)
