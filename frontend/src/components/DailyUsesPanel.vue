@@ -22,7 +22,7 @@
     </div>
 
     <p class="hint">
-      La invocación nunca se bloquea rígidamente a 0. El contador se mantiene dentro de sus límites y se sincroniza con el backend.
+      El contador se mantiene dentro de sus límites y se sincroniza con el backend. No se bloquea rígidamente a 0.
     </p>
 
     <p v-if="store.dailyUsesError" class="error">

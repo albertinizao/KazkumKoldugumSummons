@@ -1,16 +1,17 @@
 package com.pathfinder.summons.application;
 
 import com.pathfinder.summons.domain.model.CombatState;
+import com.pathfinder.summons.domain.model.ConfigurationSummary;
 import com.pathfinder.summons.domain.model.DailyUses;
 import com.pathfinder.summons.domain.model.SummonerConfiguration;
+import com.pathfinder.summons.domain.model.SummonTemplateType;
 import com.pathfinder.summons.domain.repository.SummonerConfigurationRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.Min;
+import java.util.List;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Transactional
@@ -69,7 +70,7 @@ public class SummonerConfigurationService {
         return CombatState.builder()
                 .activeGroups(List.of())
                 .dailyUses(configuration.getDailyUses())
-                .configuration(configuration)
+                .configuration(getConfigurationSummary())
                 .lastRollResult(null)
                 .build();
     }
@@ -80,6 +81,14 @@ public class SummonerConfigurationService {
 
     public SummonQuantityCalculator.SummonQuantityPlan calculateQuantityFor(int creatureSummonLevel) {
         return quantityCalculator.describe(getConfiguration(), creatureSummonLevel);
+    }
+
+    public ConfigurationSummary getConfigurationSummary() {
+        SummonerConfiguration configuration = getConfiguration();
+        return ConfigurationSummary.builder()
+                .maxSummonMonsterLevel(configuration.getMaxSummonMonsterLevel())
+                .availableTemplates(List.of(SummonTemplateType.values()))
+                .build();
     }
 
     private SummonerConfiguration normalizeConfiguration(SummonerConfiguration configuration) {

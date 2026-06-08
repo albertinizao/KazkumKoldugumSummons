@@ -9,6 +9,8 @@ import java.util.List;
 public class CombatState {
     List<ActiveSummonGroup> activeGroups;
     DailyUses dailyUses;
-    SummonerConfiguration configuration;
+    ConfigurationSummary configuration;
     RollDisplay lastRollResult; // Nullable
+    List<SummonShortcut> recentlyUsedSummons;
+    List<SummonShortcut> mostUsedSummons;
 }

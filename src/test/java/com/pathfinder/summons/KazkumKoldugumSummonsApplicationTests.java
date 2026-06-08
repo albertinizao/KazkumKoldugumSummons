@@ -67,7 +67,7 @@ class KazkumKoldugumSummonsApplicationTests {
 
         assertThat(service.isCreatureAvailable(4)).isTrue();
         assertThat(service.calculateQuantityFor(4).formula()).isEqualTo("1");
-        assertThat(service.calculateQuantityFor(3).formula()).isEqualTo("1d3");
-        assertThat(service.calculateQuantityFor(2).formula()).isEqualTo("1d4+1");
+        assertThat(service.calculateQuantityFor(3).formula()).isEqualTo("1d3+1");
+        assertThat(service.calculateQuantityFor(2).formula()).isEqualTo("1d4+2");
     }
 }

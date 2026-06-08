@@ -1,45 +1,36 @@
 import { defineStore } from 'pinia';
 import {
+  clearCombatState,
+  clearLastRollResult,
   decreaseDailyUses as decreaseDailyUsesApi,
+  damageInstance,
+  fetchCatalogCreatures,
+  fetchCombatState,
   fetchConfiguration,
+  healInstance,
   increaseDailyUses as increaseDailyUsesApi,
+  removeInstance,
   resetDailyUses as resetDailyUsesApi,
+  summonCreature,
   type DailyUsesState,
 } from '@/services/combatApi';
+import type { CreatureCatalogItem, SummonTemplateType } from '@/types/catalog';
+import type { CombatState, SummonShortcut } from '@/types/combat';
 
-export type CreatureInstanceState = 'HEALTHY' | 'DAMAGED' | 'DOWN';
-
-export interface CombatGroupSummary {
-  id: string;
-  name: string;
-  count: number;
-  alignment: string;
-  size: string;
-  creatureType: string;
-  initiative: string;
-  senses: string;
-  perception: string;
-  armorClass: string;
-  touchArmorClass: string;
-  flatFootedArmorClass: string;
-  hitPoints: string;
-  fortitude: string;
-  reflexes: string;
-  will: string;
-  speeds: string[];
-  attacks: string[];
-  space: string;
-  reach: string;
-  specialAttacks: string[];
-}
-
-export interface CombatInstanceSummary {
-  id: string;
-  label: string;
-  currentHitPoints: number;
-  maxHitPoints: number;
-  state: CreatureInstanceState;
-}
+const defaultCombatState: CombatState = {
+  activeGroups: [],
+  dailyUses: {
+    maximum: 6,
+    remaining: 4,
+  },
+  configuration: {
+    maxSummonMonsterLevel: 3,
+    availableTemplates: ['CHTHONIC', 'FIERY', 'CELESTIAL', 'ENTROPIC', 'RESOLUTE'],
+  },
+  lastRollResult: null,
+  recentlyUsedSummons: [],
+  mostUsedSummons: [],
+};
 
 function clamp(value: number, minimum: number, maximum: number): number {
   return Math.min(maximum, Math.max(minimum, value));
@@ -53,26 +44,197 @@ function normalizeDailyUses(dailyUses: DailyUsesState): DailyUsesState {
 
 export const useCombatStore = defineStore('combat', {
   state: () => ({
-    dailyUses: {
-      maximum: 6,
-      remaining: 4,
-    } as DailyUsesState,
+    combatState: defaultCombatState as CombatState,
+    catalogItems: [] as CreatureCatalogItem[],
+    selectedCreatureId: null as string | null,
+    selectedTemplate: null as SummonTemplateType | null,
+    loading: false,
+    busy: false,
+    error: '' as string,
+    initialized: false,
     dailyUsesLoading: false,
     dailyUsesError: null as string | null,
-    lastRollResult: '' as string,
-    groups: [] as CombatGroupSummary[],
-    expandedGroupId: null as string | null,
-    isSummonModalOpen: false,
-    selectedInstanceId: null as string | null,
-    activeInstancesByGroup: {} as Record<string, CombatInstanceSummary[]>,
   }),
+  getters: {
+    groups: state => state.combatState.activeGroups,
+    dailyUses: state => state.combatState.dailyUses,
+    configuration: state => state.combatState.configuration,
+    lastRollResult: state => state.combatState.lastRollResult,
+    recentlyUsedSummons: state => state.combatState.recentlyUsedSummons,
+    mostUsedSummons: state => state.combatState.mostUsedSummons,
+    selectedCreature: state => state.catalogItems.find(item => item.id === state.selectedCreatureId) ?? null,
+    selectedCreatureAllowedTemplates: state => state.catalogItems.find(item => item.id === state.selectedCreatureId)?.allowedTemplates ?? [],
+    activeInstanceCount: state => state.combatState.activeGroups.reduce((total, group) => total + group.instances.length, 0),
+  },
   actions: {
+    async initialize() {
+      if (this.initialized) {
+        return;
+      }
+
+      this.loading = true;
+      this.error = '';
+
+      try {
+        const [combatState, catalog] = await Promise.all([
+          fetchCombatState(),
+          fetchCatalogCreatures(),
+        ]);
+
+        this.combatState = {
+          ...combatState,
+          dailyUses: normalizeDailyUses(combatState.dailyUses),
+        };
+        this.catalogItems = catalog.items;
+        this.initialized = true;
+
+        if (!this.selectedCreatureId && this.catalogItems.length > 0) {
+          this.selectCreature(this.catalogItems[0].id);
+        } else if (this.selectedCreatureId) {
+          this.ensureSelectedTemplateIsAllowed();
+        }
+      } catch (error) {
+        this.error = error instanceof Error ? error.message : 'No se pudo cargar el estado de combate.';
+      } finally {
+        this.loading = false;
+      }
+    },
+    async refreshCombatState() {
+      const combatState = await fetchCombatState();
+      this.combatState = {
+        ...combatState,
+        dailyUses: normalizeDailyUses(combatState.dailyUses),
+      };
+      this.ensureSelectedTemplateIsAllowed();
+    },
+    selectCreature(creatureId: string) {
+      this.selectedCreatureId = creatureId;
+      this.ensureSelectedTemplateIsAllowed();
+    },
+    selectTemplate(template: SummonTemplateType | null) {
+      this.selectedTemplate = template;
+    },
+    ensureSelectedTemplateIsAllowed() {
+      const creature = this.selectedCreature;
+      if (!creature) {
+        this.selectedTemplate = null;
+        return;
+      }
+
+      if (this.selectedTemplate && creature.allowedTemplates.includes(this.selectedTemplate)) {
+        return;
+      }
+
+      this.selectedTemplate = creature.allowedTemplates[0] ?? null;
+    },
+    async summonSelectedCreature() {
+      const creature = this.selectedCreature;
+      if (!creature) {
+        this.error = 'Selecciona una criatura antes de invocar.';
+        return;
+      }
+
+      this.busy = true;
+      this.error = '';
+
+      try {
+        this.combatState = await summonCreature({
+          creatureTemplateId: creature.id,
+          selectedTemplate: this.selectedTemplate,
+          source: 'MANUAL_SEARCH',
+        });
+        this.ensureSelectedTemplateIsAllowed();
+      } catch (error) {
+        this.error = error instanceof Error ? error.message : 'No se pudo invocar la criatura.';
+      } finally {
+        this.busy = false;
+      }
+    },
+    async summonFromShortcut(shortcut: SummonShortcut, source: 'RECENT' | 'MOST_USED') {
+      this.busy = true;
+      this.error = '';
+
+      try {
+        this.combatState = await summonCreature({
+          shortcutId: shortcut.id,
+          source,
+          selectedTemplate: shortcut.selectedTemplate,
+        });
+      } catch (error) {
+        this.error = error instanceof Error ? error.message : 'No se pudo invocar desde el acceso rápido.';
+      } finally {
+        this.busy = false;
+      }
+    },
+    async clearSummons() {
+      this.busy = true;
+      this.error = '';
+
+      try {
+        this.combatState = await clearCombatState();
+      } catch (error) {
+        this.error = error instanceof Error ? error.message : 'No se pudieron limpiar las invocaciones.';
+      } finally {
+        this.busy = false;
+      }
+    },
+    async damageCreature(instanceId: string, amount: number) {
+      this.busy = true;
+      this.error = '';
+
+      try {
+        this.combatState = await damageInstance(instanceId, amount);
+      } catch (error) {
+        this.error = error instanceof Error ? error.message : 'No se pudo aplicar el daño.';
+      } finally {
+        this.busy = false;
+      }
+    },
+    async healCreature(instanceId: string, amount: number) {
+      this.busy = true;
+      this.error = '';
+
+      try {
+        this.combatState = await healInstance(instanceId, amount);
+      } catch (error) {
+        this.error = error instanceof Error ? error.message : 'No se pudo aplicar la curación.';
+      } finally {
+        this.busy = false;
+      }
+    },
+    async removeCreature(instanceId: string) {
+      this.busy = true;
+      this.error = '';
+
+      try {
+        this.combatState = await removeInstance(instanceId);
+      } catch (error) {
+        this.error = error instanceof Error ? error.message : 'No se pudo eliminar la criatura.';
+      } finally {
+        this.busy = false;
+      }
+    },
+    async clearLastRoll() {
+      this.busy = true;
+      this.error = '';
+
+      try {
+        this.combatState = await clearLastRollResult();
+      } catch (error) {
+        this.error = error instanceof Error ? error.message : 'No se pudo limpiar el último resultado.';
+      } finally {
+        this.busy = false;
+      }
+    },
     async loadDailyUses() {
       this.dailyUsesLoading = true;
       this.dailyUsesError = null;
       try {
         const configuration = await fetchConfiguration();
-        this.dailyUses = normalizeDailyUses(configuration.dailyUses);
+        this.combatState = {
+          ...this.combatState,
+          dailyUses: normalizeDailyUses(configuration.dailyUses),
+        };
       } catch (error) {
         this.dailyUsesError = error instanceof Error ? error.message : String(error);
       } finally {
@@ -84,7 +246,10 @@ export const useCombatStore = defineStore('combat', {
       this.dailyUsesError = null;
       try {
         const response = await increaseDailyUsesApi(amount);
-        this.dailyUses = normalizeDailyUses(response.dailyUses);
+        this.combatState = {
+          ...this.combatState,
+          dailyUses: normalizeDailyUses(response.dailyUses),
+        };
         return response;
       } catch (error) {
         this.dailyUsesError = error instanceof Error ? error.message : String(error);
@@ -98,7 +263,10 @@ export const useCombatStore = defineStore('combat', {
       this.dailyUsesError = null;
       try {
         const response = await decreaseDailyUsesApi(amount);
-        this.dailyUses = normalizeDailyUses(response.dailyUses);
+        this.combatState = {
+          ...this.combatState,
+          dailyUses: normalizeDailyUses(response.dailyUses),
+        };
         return response;
       } catch (error) {
         this.dailyUsesError = error instanceof Error ? error.message : String(error);
@@ -112,7 +280,10 @@ export const useCombatStore = defineStore('combat', {
       this.dailyUsesError = null;
       try {
         const response = await resetDailyUsesApi();
-        this.dailyUses = normalizeDailyUses(response.dailyUses);
+        this.combatState = {
+          ...this.combatState,
+          dailyUses: normalizeDailyUses(response.dailyUses),
+        };
         return response;
       } catch (error) {
         this.dailyUsesError = error instanceof Error ? error.message : String(error);

@@ -2,6 +2,7 @@ package com.pathfinder.summons.web;
 
 import com.pathfinder.summons.application.SummonerConfigurationService;
 import com.pathfinder.summons.domain.model.CombatState;
+import com.pathfinder.summons.domain.model.ConfigurationSummary;
 import com.pathfinder.summons.domain.model.DailyUses;
 import com.pathfinder.summons.domain.model.FixedRuleType;
 import com.pathfinder.summons.domain.model.SummonTemplateType;
@@ -44,13 +45,14 @@ public class DailyUsesController {
 
     private CombatStateSnapshot snapshotCombatState(DailyUses dailyUses) {
         CombatState combatState = service.snapshotCombatState();
+        ConfigurationSummary configurationSummary = service.getConfigurationSummary();
         return new CombatStateSnapshot(
                 combatState.getActiveGroups(),
                 dailyUses,
                 new ConfigurationSnapshot(
-                        combatState.getConfiguration().getMaxSummonMonsterLevel(),
-                        combatState.getConfiguration().getDailyUses(),
-                        List.of(SummonTemplateType.values()),
+                        configurationSummary.getMaxSummonMonsterLevel(),
+                        dailyUses,
+                        configurationSummary.getAvailableTemplates(),
                         List.of(
                                 FixedRuleType.AUGMENT_SUMMONING,
                                 FixedRuleType.SUPERIOR_SUMMONING,

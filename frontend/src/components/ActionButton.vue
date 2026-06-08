@@ -1,8 +1,27 @@
 <template>
-  <button class="action-button" type="button">
+  <button class="action-button" :class="buttonClass" type="button" :disabled="disabled">
     <slot />
   </button>
 </template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+
+const props = withDefaults(defineProps<{
+  disabled?: boolean;
+  variant?: 'primary' | 'danger' | 'neutral';
+}>(), {
+  variant: 'primary',
+});
+
+const buttonClass = computed(() => {
+  if (props.variant === 'primary') {
+    return undefined;
+  }
+
+  return `action-button--${props.variant}`;
+});
+</script>
 
 <style scoped>
 .action-button {
@@ -18,5 +37,18 @@
 
 .action-button:hover {
   border-color: rgba(129, 140, 248, 0.55);
+}
+
+.action-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.action-button--danger {
+  background: linear-gradient(135deg, #dc2626, #7f1d1d);
+}
+
+.action-button--neutral {
+  background: rgba(30, 41, 59, 0.9);
 }
 </style>

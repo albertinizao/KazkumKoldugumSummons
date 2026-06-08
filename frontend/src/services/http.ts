@@ -17,7 +17,7 @@ export async function getJson<T>(path: string): Promise<T> {
   return (await response.json()) as T;
 }
 
-export async function postJson<TBody extends Record<string, unknown> | undefined, TResult>(
+export async function postJson<TBody extends object | undefined, TResult>(
   path: string,
   body?: TBody,
 ): Promise<TResult> {
@@ -30,6 +30,22 @@ export async function postJson<TBody extends Record<string, unknown> | undefined
   if (!response.ok) {
     const body = await response.text();
     throw new Error(parseErrorMessage(body, `POST ${path} failed with status ${response.status}`));
+  }
+
+  return (await response.json()) as TResult;
+}
+
+export async function deleteJson<TResult>(path: string): Promise<TResult> {
+  const response = await fetch(path, {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(parseErrorMessage(body, `DELETE ${path} failed with status ${response.status}`));
   }
 
   return (await response.json()) as TResult;
