@@ -19,15 +19,19 @@ public class SummonerConfigurationService {
 
     private final SummonerConfigurationRepository repository;
     private final SummonQuantityCalculator quantityCalculator;
+    private final SummonerConfigurationSchemaMigrator schemaMigrator;
 
     public SummonerConfigurationService(SummonerConfigurationRepository repository,
-                                        SummonQuantityCalculator quantityCalculator) {
+                                        SummonQuantityCalculator quantityCalculator,
+                                        SummonerConfigurationSchemaMigrator schemaMigrator) {
         this.repository = repository;
         this.quantityCalculator = quantityCalculator;
+        this.schemaMigrator = schemaMigrator;
     }
 
     @EventListener(ApplicationReadyEvent.class)
     public void ensureDefaultConfiguration() {
+        schemaMigrator.migrate();
         normalizeConfiguration(repository.findById(SummonerConfiguration.SINGLETON_ID)
                 .orElseGet(() -> repository.save(SummonerConfiguration.defaultConfiguration())));
     }
