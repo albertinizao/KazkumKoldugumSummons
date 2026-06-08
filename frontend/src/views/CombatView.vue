@@ -45,24 +45,54 @@
           </div>
         </div>
 
-      <div class="mini-grid">
-        <div class="meta-item">
-          <span>Criaturas activas</span>
-          <strong>{{ store.activeInstanceCount }}</strong>
-        </div>
-          <div class="meta-item">
-            <span>Grupos activos</span>
-            <strong>{{ store.groups.length }}</strong>
+        <section class="history-section">
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">Historial</p>
+              <h2>Últimas usadas y más usadas</h2>
+            </div>
+            <div class="inline-meta">
+              <span class="meta-pill">Activas: {{ store.activeInstanceCount }}</span>
+              <span class="meta-pill">Grupos: {{ store.groups.length }}</span>
+            </div>
           </div>
-          <div class="meta-item">
-            <span>Último resultado</span>
-            <strong>{{ store.lastRollResult?.title ?? '—' }}</strong>
+
+          <div class="dual-grid">
+            <div>
+              <h3>Últimas usadas</h3>
+              <div class="chip-list">
+                <button
+                  v-for="shortcut in store.recentlyUsedSummons"
+                  :key="shortcut.id"
+                  class="chip-button"
+                  type="button"
+                  :disabled="store.busy"
+                  @click="handleShortcutSummon(shortcut.id, 'RECENT')"
+                >
+                  {{ shortcut.displayName }}
+                </button>
+                <p v-if="store.recentlyUsedSummons.length === 0" class="muted">Todavía no hay accesos recientes.</p>
+              </div>
+            </div>
+
+            <div>
+              <h3>Más usadas</h3>
+              <div class="chip-list">
+                <button
+                  v-for="shortcut in store.mostUsedSummons"
+                  :key="shortcut.id"
+                  class="chip-button"
+                  type="button"
+                  :disabled="store.busy"
+                  @click="handleShortcutSummon(shortcut.id, 'MOST_USED')"
+                >
+                  {{ shortcut.displayName }} · {{ shortcut.usageCount }}
+                </button>
+                <p v-if="store.mostUsedSummons.length === 0" class="muted">Todavía no hay accesos populares.</p>
+              </div>
+            </div>
           </div>
-        <div class="meta-item">
-          <span>Plantillas permitidas</span>
-          <strong>{{ allowedTemplates.map(templateLabel).join(' · ') || '—' }}</strong>
-        </div>
-      </div>
+        </section>
 
       </section>
     </div>
@@ -70,53 +100,17 @@
     <section class="card">
       <div class="section-title">
         <div>
-          <p class="eyebrow">Historial</p>
-          <h2>Últimas usadas y más usadas</h2>
-        </div>
-      </div>
-      <div class="dual-grid">
-        <div>
-          <h3>Últimas usadas</h3>
-          <div class="chip-list">
-            <button
-              v-for="shortcut in store.recentlyUsedSummons"
-              :key="shortcut.id"
-              class="chip-button"
-              type="button"
-              :disabled="store.busy"
-              @click="handleShortcutSummon(shortcut.id, 'RECENT')"
-            >
-              {{ shortcut.displayName }}
-            </button>
-            <p v-if="store.recentlyUsedSummons.length === 0" class="muted">Todavía no hay accesos recientes.</p>
-          </div>
-        </div>
-
-        <div>
-          <h3>Más usadas</h3>
-          <div class="chip-list">
-            <button
-              v-for="shortcut in store.mostUsedSummons"
-              :key="shortcut.id"
-              class="chip-button"
-              type="button"
-              :disabled="store.busy"
-              @click="handleShortcutSummon(shortcut.id, 'MOST_USED')"
-            >
-              {{ shortcut.displayName }} · {{ shortcut.usageCount }}
-            </button>
-            <p v-if="store.mostUsedSummons.length === 0" class="muted">Todavía no hay accesos populares.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="card">
-      <div class="section-title">
-        <div>
-          <p class="eyebrow">Grupos activos</p>
           <h2>Invocaciones en combate</h2>
         </div>
+      </div>
+
+      <div class="global-actions combat-global-actions">
+        <ActionButton :disabled="store.busy || store.groups.length === 0" @click="handleRollAllAttacks">
+          Atacar con todas
+        </ActionButton>
+        <ActionButton :disabled="store.busy || store.groups.length === 0" @click="handleRollAllSavingThrows">
+          Tirar TS con todas
+        </ActionButton>
       </div>
 
       <p v-if="store.groups.length === 0" class="empty">No hay invocaciones activas.</p>
@@ -152,6 +146,20 @@
         </section>
       </div>
 
+      <div v-if="globalRollResult" class="modal-backdrop" @click.self="closeGlobalRollResultModal">
+        <section class="modal roll-modal" role="dialog" aria-modal="true" :aria-labelledby="globalRollResultTitleId">
+          <div class="modal-header">
+            <div>
+              <p class="eyebrow">Resultado global</p>
+              <h2 :id="globalRollResultTitleId">{{ globalRollResult.title }}</h2>
+            </div>
+            <ActionButton @click="closeGlobalRollResultModal">Cerrar</ActionButton>
+          </div>
+
+          <pre class="global-roll-output">{{ globalRollResult.displayText }}</pre>
+        </section>
+      </div>
+
       <div v-if="expandedGroup" class="modal-backdrop" @click.self="expandedGroupId = null">
         <section class="modal expanded-modal" role="dialog" aria-modal="true" aria-labelledby="expanded-title">
           <div class="modal-header">
@@ -163,21 +171,43 @@
           </div>
 
           <div class="expanded-meta">
-            <div><strong>Id:</strong> {{ expandedGroup.resolvedCreature.id }}</div>
-            <div><strong>Alineación:</strong> {{ expandedGroup.resolvedCreature.alignment }}</div>
+            <div><strong>alineamiento:</strong> {{ expandedGroup.resolvedCreature.alignment }}</div>
             <div><strong>Tamaño:</strong> {{ expandedGroup.resolvedCreature.size }}</div>
-            <div><strong>Tipo:</strong> {{ expandedGroup.resolvedCreature.creatureType }}</div>
+            <div><strong>Tipo:</strong> {{ creatureTypeLabel(expandedGroup.resolvedCreature) }}</div>
+            <div><strong>Iniciativa:</strong> {{ expandedGroup.resolvedCreature.initiative }}</div>
+            <div><strong>Sentidos:</strong> {{ joinOrDash(expandedGroup.resolvedCreature.senses) }}</div>
+            <div><strong>Percepción:</strong> {{ expandedGroup.resolvedCreature.perception }}</div>
+            <div><strong>CA:</strong> {{ expandedGroup.resolvedCreature.armorClass.normal }}</div>
+            <div><strong>CA toque:</strong> {{ expandedGroup.resolvedCreature.armorClass.touch }}</div>
+            <div><strong>CA desprevenida:</strong> {{ expandedGroup.resolvedCreature.armorClass.flatFooted }}</div>
+            <div><strong>PG:</strong> {{ expandedGroup.resolvedCreature.maxHitPoints }}</div>
+            <div><strong>Fortaleza:</strong> {{ expandedGroup.resolvedCreature.savingThrows.fortitude }}</div>
+            <div><strong>Reflejos:</strong> {{ expandedGroup.resolvedCreature.savingThrows.reflex }}</div>
+            <div><strong>Voluntad:</strong> {{ expandedGroup.resolvedCreature.savingThrows.will }}</div>
+            <div><strong>Velocidades:</strong> {{ joinOrDashTexts(expandedGroup.resolvedCreature.speedsText) }}</div>
+            <div><strong>Ataques básicos:</strong> {{ joinOrDashTexts(expandedGroup.resolvedCreature.attacksText) }}</div>
+            <div><strong>Espacio:</strong> {{ expandedGroup.resolvedCreature.space }}</div>
+            <div><strong>Alcance:</strong> {{ expandedGroup.resolvedCreature.reach }}</div>
+            <div><strong>Ataques especiales:</strong> {{ joinOrDash(expandedGroup.resolvedCreature.specialAttacks) }}</div>
+            <div><strong>Defensas especiales:</strong> {{ joinOrDash(expandedGroup.resolvedCreature.specialDefenses.map(defense => formatSpecialDefense(defense))) }}</div>
+            <div><strong>Reglas aplicadas:</strong> {{ joinOrDash(expandedGroup.resolvedCreature.appliedRules.map(rule => rule.description)) }}</div>
+            <div><strong>Aptitudes resumidas:</strong> {{ joinOrDash(expandedGroup.resolvedCreature.shortAbilities.map(ability => `${ability.name}: ${ability.summary}`)) }}</div>
+            <div><strong>Aptitudes completas:</strong> {{ joinOrDash(expandedGroup.resolvedCreature.expandedAbilities.map(ability => `${ability.name}: ${ability.text}`)) }}</div>
           </div>
 
           <pre class="statblock">{{ expandedGroup.resolvedCreature.fullStatBlock }}</pre>
         </section>
+      </div>
+
+      <div v-if="summonToast" class="toast" role="status" aria-live="polite">
+        {{ summonToast }}
       </div>
     </teleport>
   </section>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import ActionButton from '@/components/ActionButton.vue';
 import CombatGroupCard from '@/components/CombatGroupCard.vue';
 import CombatRollResultPanel from '@/components/CombatRollResultPanel.vue';
@@ -185,10 +215,15 @@ import DailyUsesPanel from '@/components/DailyUsesPanel.vue';
 import StatusBadge from '@/components/StatusBadge.vue';
 import { useCombatStore } from '@/stores/combat';
 import type { SummonTemplateType } from '@/types/catalog';
+import { formatCreatureTypeWithSubtypes } from '@/utils/creatureDisplay';
 
 const store = useCombatStore();
 const expandedGroupId = ref<string | null>(null);
 const isRollResultModalOpen = ref(false);
+const globalRollResult = ref<{ title: string; displayText: string } | null>(null);
+const summonToast = ref<string | null>(null);
+let summonToastTimer: number | undefined;
+const globalRollResultTitleId = 'global-roll-result-title';
 
 const allowedTemplates = computed(() => store.selectedCreatureAllowedTemplates);
 const templateSelectionRequired = computed(() => allowedTemplates.value.length > 1);
@@ -213,6 +248,57 @@ function templateLabel(template: SummonTemplateType): string {
   return labels[template];
 }
 
+function creatureTypeLabel(creature: { creatureType: string; subtypes: string[] }): string {
+  return formatCreatureTypeWithSubtypes(creature.creatureType, creature.subtypes);
+}
+
+function joinOrDash(values: string[]): string {
+  return values.length === 0 ? '—' : values.join(' · ');
+}
+
+function joinOrDashTexts(value: string): string {
+  return value && value.trim() ? value : '—';
+}
+
+function formatSpecialDefense(defense: { type: string; value?: string | null; notes?: string | null }): string {
+  const labelMap: Record<string, string> = {
+    DAMAGE_REDUCTION: 'RD',
+    RESISTANCE: 'Resistencia',
+    IMMUNITY: 'Inmunidad',
+    VULNERABILITY: 'Vulnerabilidad',
+    OTHER: 'Otros',
+  };
+
+  const value = defense.value ? ` ${defense.value}` : '';
+  const notes = defense.notes ? ` (${defense.notes})` : '';
+  return `${labelMap[defense.type] ?? defense.type}${value}${notes}`;
+}
+
+function showSummonToast(): void {
+  const result = store.lastRollResult;
+  if (result?.type !== 'SUMMON_QUANTITY') {
+    return;
+  }
+
+  const contentParts = result.content.split('=');
+  const quantityText = contentParts[contentParts.length - 1]?.trim();
+  const title = result.title ?? 'Invocación completada';
+
+  if (!quantityText) {
+    return;
+  }
+
+  summonToast.value = `${title.replace('Cantidad invocada: ', '')}: ${quantityText} criatura(s).`;
+
+  if (summonToastTimer) {
+    window.clearTimeout(summonToastTimer);
+  }
+
+  summonToastTimer = window.setTimeout(() => {
+    summonToast.value = null;
+  }, 2500);
+}
+
 function onCreatureChange(event: Event): void {
   const target = event.target as HTMLSelectElement;
   store.selectCreature(target.value);
@@ -224,7 +310,9 @@ function onTemplateChange(event: Event): void {
 }
 
 async function handleSummon(): Promise<void> {
+  summonToast.value = null;
   await store.summonSelectedCreature();
+  showSummonToast();
 }
 
 async function handleShortcutSummon(shortcutId: string, source: 'RECENT' | 'MOST_USED'): Promise<void> {
@@ -236,12 +324,16 @@ async function handleShortcutSummon(shortcutId: string, source: 'RECENT' | 'MOST
     return;
   }
 
+  summonToast.value = null;
   await store.summonFromShortcut(shortcut, source);
+  showSummonToast();
 }
 
 async function handleClearSummons(): Promise<void> {
   await store.clearSummons();
   isRollResultModalOpen.value = false;
+  globalRollResult.value = null;
+  summonToast.value = null;
 }
 
 async function handleAttack(groupId: string): Promise<void> {
@@ -256,6 +348,16 @@ async function handleSavingThrows(groupId: string): Promise<void> {
   if (store.lastCombatRollResult) {
     isRollResultModalOpen.value = true;
   }
+}
+
+async function handleRollAllAttacks(): Promise<void> {
+  globalRollResult.value = null;
+  globalRollResult.value = await store.rollAllGroupAttacks();
+}
+
+async function handleRollAllSavingThrows(): Promise<void> {
+  globalRollResult.value = null;
+  globalRollResult.value = await store.rollAllGroupSavingThrows();
 }
 
 async function handleDamage(instanceId: string, amount: number): Promise<void> {
@@ -274,8 +376,18 @@ function closeRollResultModal(): void {
   isRollResultModalOpen.value = false;
 }
 
+function closeGlobalRollResultModal(): void {
+  globalRollResult.value = null;
+}
+
 onMounted(() => {
   void store.initialize();
+});
+
+onBeforeUnmount(() => {
+  if (summonToastTimer) {
+    window.clearTimeout(summonToastTimer);
+  }
 });
 </script>
 
@@ -344,36 +456,41 @@ p {
   gap: 0.5rem;
 }
 
-.mini-grid {
+.global-actions {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
-.meta-item {
-  padding: 0.85rem;
-  border-radius: 16px;
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(51, 65, 85, 0.8);
+.history-section {
+  display: grid;
+  gap: 1rem;
 }
 
-.meta-item span {
-  display: block;
-  color: #94a3b8;
-  font-size: 0.85rem;
+.inline-meta {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
-.meta-item strong {
-  display: block;
-  margin-top: 0.25rem;
-  font-size: 1rem;
+.meta-pill {
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(30, 41, 59, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  color: #cbd5e1;
+  font-size: 0.82rem;
 }
 
-.last-roll {
-  padding: 0.85rem;
+.global-roll-output {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  padding: 0.9rem;
   border-radius: 0.85rem;
-  background: rgba(2, 6, 23, 0.35);
-  border: 1px solid rgba(148, 163, 184, 0.12);
+  background: rgba(2, 6, 23, 0.45);
+  border: 1px solid rgba(148, 163, 184, 0.14);
 }
 
 .muted {
@@ -456,12 +573,30 @@ p {
   word-break: break-word;
 }
 
+.toast {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 70;
+  padding: 0.85rem 1rem;
+  border-radius: 0.9rem;
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  color: #dcfce7;
+  max-width: min(90vw, 360px);
+}
+
 @media (max-width: 980px) {
   .top-grid,
   .toolbar,
   .dual-grid,
   .expanded-meta {
     grid-template-columns: 1fr;
+  }
+
+  .inline-meta {
+    justify-content: flex-start;
   }
 }
 </style>

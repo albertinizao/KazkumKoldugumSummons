@@ -1,10 +1,12 @@
 import { defineStore } from 'pinia';
 import { fetchConfiguration, type DailyUsesState } from '@/services/combatApi';
 import { saveConfiguration } from '@/services/api';
+import { useCombatStore } from '@/stores/combat';
 
 export const useSettingsStore = defineStore('settings', {
   state: () => ({
     maxSummonMonsterLevel: 3,
+    dailyUsesMaximum: 6,
     dailyUses: {
       maximum: 6,
       remaining: 4,
@@ -25,6 +27,7 @@ export const useSettingsStore = defineStore('settings', {
       try {
         const configuration = await fetchConfiguration();
         this.maxSummonMonsterLevel = configuration.maxSummonMonsterLevel;
+        this.dailyUsesMaximum = configuration.dailyUses.maximum;
         this.dailyUses = configuration.dailyUses;
         this.loaded = true;
       } catch (error) {
@@ -33,14 +36,17 @@ export const useSettingsStore = defineStore('settings', {
         this.loading = false;
       }
     },
-    async updateMaxSummonMonsterLevel(value: number) {
+    async updateConfiguration(maxSummonMonsterLevel: number, dailyUsesMaximum: number) {
       this.saving = true;
       this.error = null;
       try {
-        const configuration = await saveConfiguration(value);
+        const configuration = await saveConfiguration(maxSummonMonsterLevel, dailyUsesMaximum);
         this.maxSummonMonsterLevel = configuration.maxSummonMonsterLevel;
+        this.dailyUsesMaximum = configuration.dailyUses.maximum;
+        this.dailyUses = configuration.dailyUses;
         this.loaded = true;
         this.lastSavedAt = new Date().toISOString();
+        await useCombatStore().refreshCombatState();
         return configuration;
       } catch (error) {
         this.error = error instanceof Error ? error.message : String(error);

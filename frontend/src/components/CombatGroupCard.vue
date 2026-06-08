@@ -10,35 +10,52 @@
     </header>
 
     <div class="summary-grid">
-      <div>
-        <span>CA</span>
-        <strong>{{ group.resolvedCreature.armorClass.normal }}</strong>
+      <div class="summary-core">
+        <div class="summary-card">
+          <span>CA</span>
+          <strong>{{ group.resolvedCreature.armorClass.normal }}</strong>
+        </div>
+        <div class="summary-card">
+          <span>Fortaleza</span>
+          <strong>{{ group.resolvedCreature.savingThrows.fortitude }}</strong>
+        </div>
+        <div class="summary-card">
+          <span>Reflejos</span>
+          <strong>{{ group.resolvedCreature.savingThrows.reflex }}</strong>
+        </div>
+        <div class="summary-card">
+          <span>Voluntad</span>
+          <strong>{{ group.resolvedCreature.savingThrows.will }}</strong>
+        </div>
       </div>
-      <div>
-        <span>PG</span>
-        <strong>{{ group.resolvedCreature.maxHitPoints }}</strong>
-      </div>
-      <div>
-        <span>TS</span>
-        <strong>Fort {{ group.resolvedCreature.savingThrows.fortitude }} / Ref {{ group.resolvedCreature.savingThrows.reflex }} / Vol {{ group.resolvedCreature.savingThrows.will }}</strong>
-      </div>
-      <div>
-        <span>Ataques</span>
-        <strong>{{ group.resolvedCreature.attacksText }}</strong>
+      <div class="summary-attack">
+        <div class="summary-card summary-card-attack">
+          <span>Ataques</span>
+          <strong>{{ group.resolvedCreature.attacksText }}</strong>
+        </div>
       </div>
     </div>
 
-    <div class="details">
-      <p><strong>Alineación:</strong> {{ group.resolvedCreature.alignment }}</p>
-      <p><strong>Tamaño:</strong> {{ group.resolvedCreature.size }}</p>
-      <p><strong>Tipo:</strong> {{ group.resolvedCreature.creatureType }}</p>
-      <p><strong>Velocidades:</strong> {{ group.resolvedCreature.speedsText }}</p>
-      <p><strong>Ataques especiales:</strong> {{ specialAttacks }}</p>
+    <div class="details-columns">
+      <div class="details-column">
+        <p><strong>Alineamiento:</strong> {{ group.resolvedCreature.alignment }}</p>
+        <p><strong>Tamaño:</strong> {{ group.resolvedCreature.size }}</p>
+        <p><strong>Tipo:</strong> {{ creatureTypeLabel }}</p>
+        <p><strong>Velocidades:</strong> {{ group.resolvedCreature.speedsText }}</p>
+        <p><strong>Ataques especiales:</strong> {{ specialAttacks }}</p>
+      </div>
+      <div class="details-column">
+        <p><strong>PG:</strong> {{ hitPointsLabel }}</p>
+        <p><strong>CA toque:</strong> {{ group.resolvedCreature.armorClass.touch }}</p>
+        <p><strong>CA desprevenida:</strong> {{ group.resolvedCreature.armorClass.flatFooted }}</p>
+        <p><strong>CMB:</strong> {{ group.resolvedCreature.cmb }}</p>
+        <p><strong>CMD:</strong> {{ group.resolvedCreature.cmd }}</p>
+      </div>
     </div>
 
     <div class="button-row">
-      <ActionButton :disabled="busy || !hasAttacks" @click="$emit('attack')">Atacar con todas</ActionButton>
-      <ActionButton :disabled="busy || group.instances.length === 0" @click="$emit('saving-throws')">Tirar TS</ActionButton>
+      <ActionButton :disabled="busy || !hasAttacks" @click="$emit('attack')">Atacar</ActionButton>
+      <ActionButton :disabled="busy || group.instances.length === 0" @click="$emit('saving-throws')">Salvaciones</ActionButton>
       <ActionButton :disabled="busy" @click="$emit('expand')">Expandir ficha</ActionButton>
     </div>
 
@@ -46,6 +63,7 @@
 
     <div class="stack">
       <CreatureCard
+        class="creature-card"
         v-for="instance in group.instances"
         :key="instance.id"
         :instance="instance"
@@ -64,6 +82,7 @@ import ActionButton from '@/components/ActionButton.vue';
 import CreatureCard from '@/components/CreatureCard.vue';
 import StatusBadge from '@/components/StatusBadge.vue';
 import type { ActiveSummonGroup } from '@/types/combat';
+import { formatCreatureTypeWithSubtypes } from '@/utils/creatureDisplay';
 
 const props = defineProps<{
   group: ActiveSummonGroup;
@@ -80,7 +99,14 @@ defineEmits<{
 }>();
 
 const title = computed(() => props.group.resolvedCreature.displayName);
+const creatureTypeLabel = computed(() =>
+  formatCreatureTypeWithSubtypes(
+    props.group.resolvedCreature.creatureType,
+    props.group.resolvedCreature.subtypes,
+  ),
+);
 const hasAttacks = computed(() => props.group.resolvedCreature.attacks.length > 0);
+const hitPointsLabel = computed(() => props.group.resolvedCreature.hitPointsFormula?.trim() ?? `${props.group.resolvedCreature.maxHitPoints}`);
 const specialAttacks = computed(() => {
   if (!props.group.resolvedCreature.specialAttacks.length) {
     return '—';
@@ -118,33 +144,59 @@ p {
 
 .summary-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 0.75rem;
   margin-bottom: 1rem;
 }
 
-.summary-grid div {
+.summary-core {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.summary-attack {
+  min-width: 0;
+}
+
+.summary-card {
   padding: 0.75rem;
   border-radius: 0.85rem;
   background: rgba(30, 41, 59, 0.7);
+  min-width: 0;
 }
 
-.summary-grid span {
+.summary-card span {
   display: block;
   color: #94a3b8;
   font-size: 0.78rem;
 }
 
-.summary-grid strong {
-  font-size: 0.96rem;
+.summary-card strong {
+  font-size: 1.05rem;
   word-break: break-word;
 }
 
-.details {
+.summary-card-attack strong {
+  display: block;
+  white-space: normal;
+}
+
+.details-columns {
   display: grid;
-  gap: 0.35rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.85rem;
   margin-bottom: 1rem;
   color: #cbd5e1;
+}
+
+.details-column {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.details strong {
+  text-transform: none;
 }
 
 .button-row {
@@ -155,7 +207,12 @@ p {
 
 .stack {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 0.75rem;
+}
+
+.creature-card {
+  min-width: 0;
 }
 
 @media (max-width: 720px) {
@@ -163,8 +220,9 @@ p {
     flex-direction: column;
   }
 
-  .summary-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .summary-grid,
+  .summary-core {
+    grid-template-columns: 1fr;
   }
 }
 </style>

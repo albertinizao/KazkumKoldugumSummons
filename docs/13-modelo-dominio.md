@@ -321,8 +321,7 @@ updatedAt: Instant
 ### Acciones que modifican CombatState
 
 - invocar;
-- dañar;
-- curar;
+- ajustar PG;
 - eliminar instancia;
 - limpiar invocaciones;
 - modificar usos diarios;
@@ -725,7 +724,7 @@ will: Modifier
 
 ### Reglas
 
-- En el MVP se tiran siempre las tres juntas con el botón `Tirar TS`.
+- En el MVP se tiran siempre las tres juntas con el botón `Salvaciones`.
 - No hay botones separados para Fortaleza, Reflejos y Voluntad.
 
 ---
@@ -867,7 +866,7 @@ GENERIC
 
 ## GroupAttackRollResult
 
-Resultado de pulsar `Atacar con todas`.
+Resultado de pulsar `Atacar`.
 
 ### Campos
 
@@ -991,7 +990,7 @@ total: int
 
 ## GroupSavingThrowsRollResult
 
-Resultado de pulsar `Tirar TS`.
+Resultado de pulsar `Salvaciones`.
 
 ### Campos
 
@@ -1508,7 +1507,7 @@ Reglas:
 
 ## AttackRollService
 
-Responsable de `Atacar con todas`.
+Responsable de `Atacar`.
 
 Operaciones:
 
@@ -1530,7 +1529,7 @@ Reglas:
 
 ## SavingThrowRollService
 
-Responsable de `Tirar TS`.
+Responsable de `Salvaciones`.
 
 Operaciones:
 
@@ -1616,8 +1615,8 @@ Estas reglas deben mantenerse siempre:
 8. La curación se aplica a una sola instancia.
 9. Las criaturas iguales con distinta plantilla son grupos distintos.
 10. Las criaturas iguales con misma plantilla se agrupan.
-11. `Atacar con todas` no aplica daño.
-12. `Tirar TS` no resuelve consecuencias.
+11. `Atacar` no aplica daño.
+12. `Salvaciones` no resuelve consecuencias.
 13. Los daños se conservan separados por tipo.
 14. El daño normal se muestra aunque haya amenaza de crítico.
 15. La ficha expandida muestra criatura final, no criatura base.

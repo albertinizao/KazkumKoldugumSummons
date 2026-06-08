@@ -41,8 +41,8 @@ Debe mostrar:
 
 - botón `Invocar`;
 - botón `Limpiar invocaciones`;
+- botones globales `Atacar con todas` y `Tirar TS con todas`;
 - contador de usos diarios;
-- resultado de tirada más reciente, si existe o si se decide mostrarlo en cabecera.
 
 ## CA-03 — Agrupación por tipo de criatura
 
@@ -70,7 +70,7 @@ Debe mostrar, como mínimo:
 - nombre final;
 - alineamiento;
 - tamaño;
-- tipo;
+- tipo con subtipo visible cuando corresponda;
 - iniciativa;
 - sentidos;
 - percepción;
@@ -99,11 +99,11 @@ No debe mostrar notas tácticas en la ficha resumida del MVP.
 
 Cada card debe mostrar:
 
-- identificador o número de criatura;
+- nombre visible de la criatura;
 - PG máximos;
 - PG actuales;
-- botón `Dañar`;
-- botón `Curar`;
+- botones rápidos `-10`, `-5`, `-1`, `+1`, `+5`, `+10`;
+- campo libre para introducir una cantidad con signo;
 - botón `Eliminar`.
 
 ## CA-06 — Distinguir criaturas sanas, dañadas y caídas
@@ -130,8 +130,8 @@ La aplicación no debe borrar automáticamente criaturas caídas.
 
 Debe mostrar:
 
-- `Atacar con todas`;
-- `Tirar TS`;
+- `Atacar`;
+- `Salvaciones`;
 - `Expandir ficha`.
 
 No debe haber botones separados para Fortaleza, Reflejos y Voluntad en el MVP.
@@ -295,19 +295,18 @@ Debe cumplirse:
 
 El estado resultante debe persistirse.
 
-## CA-21 — Aplicar daño en menos de 3 pulsaciones
+## CA-21 — Aplicar daño o curación en menos de 3 pulsaciones
 
-**Dado** que el usuario quiere dañar una criatura concreta,  
-**cuando** usa un valor rápido de daño,  
-**entonces** debe poder aplicar el daño en menos de 3 pulsaciones desde la pantalla principal.
+**Dado** que el usuario quiere ajustar los PG de una criatura concreta,  
+**cuando** usa un valor rápido o introduce una cantidad con signo,  
+**entonces** debe poder aplicar el cambio en menos de 3 pulsaciones desde la pantalla principal.
 
 Flujo esperado:
 
-1. Pulsar `Dañar`.
-2. Pulsar cantidad rápida o introducir cantidad.
-3. Confirmar si la interfaz lo requiere.
+1. Pulsar una cantidad rápida o escribir un valor.
+2. Confirmar solo si la interfaz lo requiere.
 
-Si se usan botones rápidos con aplicación inmediata, puede resolverse en 2 pulsaciones.
+Si se usan botones rápidos con aplicación inmediata, puede resolverse en 1 o 2 pulsaciones.
 
 ## CA-22 — Daño individual
 
@@ -331,11 +330,11 @@ También debe cumplirse:
 - La API debe devolver `INVALID_DAMAGE_AMOUNT`.
 - El endpoint `/damage` determina la resta; el cliente no debe enviar cantidades negativas.
 
-## CA-24 — Modal de daño con defensas relevantes
+## CA-24 — Ajuste de PG con defensas visibles
 
 **Dado** que la criatura tiene RD, resistencia, inmunidad o vulnerabilidad,  
-**cuando** el usuario pulsa `Dañar`,  
-**entonces** el modal debe mostrar esas defensas como nota.
+**cuando** el usuario ajusta sus PG,  
+**entonces** la interfaz debe mostrar esas defensas como referencia.
 
 La aplicación no debe aplicar automáticamente estas defensas.
 
@@ -351,8 +350,7 @@ La criatura debe seguir visible.
 
 La criatura debe seguir permitiendo:
 
-- dañar;
-- curar;
+- ajustar PG;
 - eliminar.
 
 ## CA-26 — Curación individual
@@ -378,7 +376,7 @@ El estado resultante debe recalcularse según sus PG:
 ## CA-28 — Rechazar curación inválida
 
 **Dado** que el usuario introduce un valor vacío, `0`, negativo, decimal o no numérico,  
-**cuando** intenta curar una criatura,  
+**cuando** intenta ajustar los PG de una criatura,  
 **entonces** la aplicación debe mostrar un error y no modificar los PG.
 
 También debe cumplirse:
@@ -405,7 +403,7 @@ La aplicación no debe eliminar criaturas automáticamente por estar a 0 PG o me
 ## CA-30 — Tirar ataques de todo un grupo con 1 pulsación
 
 **Dado** que existe un grupo de criaturas activas,  
-**cuando** el usuario pulsa `Atacar con todas`,  
+**cuando** el usuario pulsa `Atacar`,  
 **entonces** la aplicación debe tirar todos los ataques de todas las criaturas de ese grupo con una sola pulsación.
 
 ## CA-31 — Resultado agrupado por criatura
@@ -502,10 +500,10 @@ El usuario resuelve esa parte en mesa.
 
 # 5. Tiradas de salvación
 
-## CA-38 — Tirar TS de todo el grupo
+## CA-38 — Salvaciones de todo el grupo
 
 **Dado** que existe un grupo de criaturas activas,  
-**cuando** el usuario pulsa `Tirar TS`,  
+**cuando** el usuario pulsa `Salvaciones`,  
 **entonces** la aplicación debe tirar Fortaleza, Reflejos y Voluntad de todas las criaturas del grupo.
 
 ## CA-39 — Mostrar dado, modificador y total en TS
@@ -534,11 +532,11 @@ Fortaleza: d20 12 + 8 = 20
 
 **Dado** que el usuario realiza una tirada,  
 **cuando** la aplicación muestra el resultado,  
-**entonces** el resultado debe quedar visible hasta que ocurra una de estas acciones:
+**entonces** el resultado debe quedar visible en la modal/panel temporal hasta que ocurra una de estas acciones:
 
 - se haga otra tirada;
-- el usuario limpie el resultado;
-- se limpien las invocaciones activas, si el diseño decide limpiar también el resultado.
+- el usuario cierre la modal/panel;
+- se limpien las invocaciones activas, si el diseño decide cerrar también el resultado.
 
 ## CA-42 — No historial obligatorio
 
@@ -591,8 +589,7 @@ Cuando se exponga mediante API o DTO, el campo técnico del texto completo debe 
 Acciones que deben persistirse:
 
 - invocar;
-- dañar;
-- curar;
+- ajustar PG;
 - eliminar;
 - limpiar invocaciones;
 - modificar usos diarios;

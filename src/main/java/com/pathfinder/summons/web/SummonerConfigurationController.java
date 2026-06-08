@@ -33,10 +33,14 @@ public class SummonerConfigurationController {
 
     @PutMapping
     public SummonerConfigurationResponse updateConfiguration(@Valid @RequestBody UpdateSummonerConfigurationRequest request) {
-        return SummonerConfigurationResponse.from(service.updateMaxSummonMonsterLevel(request.maxSummonMonsterLevel()));
+        return SummonerConfigurationResponse.from(service.updateConfiguration(
+                request.maxSummonMonsterLevel(),
+                request.dailyUsesMaximum()
+        ));
     }
 
-    public record UpdateSummonerConfigurationRequest(@NotNull @Min(0) Integer maxSummonMonsterLevel) {
+    public record UpdateSummonerConfigurationRequest(@NotNull @Min(0) Integer maxSummonMonsterLevel,
+                                                     @NotNull @Min(0) Integer dailyUsesMaximum) {
     }
 
     public record SummonerConfigurationResponse(int maxSummonMonsterLevel,

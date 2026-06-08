@@ -40,7 +40,7 @@ public class CombatRollService {
                 .toList();
 
         String creatureName = group.getResolvedCreature().getDisplayName();
-        String title = "Atacar con todas: " + creatureName;
+        String title = "Atacar: " + creatureName;
         return new GroupAttackRollResult(
                 UUID.randomUUID().toString(),
                 RollDisplayType.ATTACK_GROUP,
@@ -58,7 +58,7 @@ public class CombatRollService {
                 .toList();
 
         String creatureName = group.getResolvedCreature().getDisplayName();
-        String title = "Tirar TS: " + creatureName;
+        String title = "Salvaciones: " + creatureName;
         return new GroupSavingThrowsRollResult(
                 UUID.randomUUID().toString(),
                 RollDisplayType.SAVING_THROWS_GROUP,

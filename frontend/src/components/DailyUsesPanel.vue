@@ -5,25 +5,38 @@
         <p class="eyebrow">Recursos</p>
         <h2>Usos diarios</h2>
       </div>
-      <StatusBadge variant="neutral">{{ state.remaining }} / {{ state.maximum }}</StatusBadge>
+      <StatusBadge variant="neutral"
+        >{{ state.remaining }} / {{ state.maximum }}</StatusBadge
+      >
     </div>
 
     <div class="controls">
       <label class="amount-field">
         <span class="small muted">Cantidad</span>
-        <input v-model.number="amount" type="number" min="1" step="1" inputmode="numeric" />
+        <input
+          v-model.number="amount"
+          type="number"
+          min="1"
+          step="1"
+          inputmode="numeric"
+        />
       </label>
 
       <div class="button-row">
-        <ActionButton :disabled="isBusy || !isAmountValid" @click="increment">+{{ amount }}</ActionButton>
-        <ActionButton :disabled="isBusy || !isAmountValid" @click="decrement">-{{ amount }}</ActionButton>
-        <ActionButton :disabled="isBusy" @click="resetUses">Resetear</ActionButton>
+        <ActionButton :disabled="isBusy || !isAmountValid" @click="increment"
+          >Recuperar</ActionButton
+        >
+        <ActionButton
+          :disabled="isBusy || !isAmountValid"
+          variant="danger"
+          @click="decrement"
+          >Gastar</ActionButton
+        >
+        <ActionButton :disabled="isBusy" @click="resetUses"
+          >Resetear</ActionButton
+        >
       </div>
     </div>
-
-    <p class="hint">
-      El contador se mantiene dentro de sus límites y se sincroniza con el backend. No se bloquea rígidamente a 0.
-    </p>
 
     <p v-if="store.dailyUsesError" class="error">
       {{ store.dailyUsesError }}
@@ -32,17 +45,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
-import ActionButton from '@/components/ActionButton.vue';
-import StatusBadge from '@/components/StatusBadge.vue';
-import { useCombatStore } from '@/stores/combat';
+import { computed, onMounted, ref } from "vue";
+import ActionButton from "@/components/ActionButton.vue";
+import StatusBadge from "@/components/StatusBadge.vue";
+import { useCombatStore } from "@/stores/combat";
 
 const store = useCombatStore();
 const amount = ref(1);
 
 const state = computed(() => store.dailyUses);
 const isBusy = computed(() => store.dailyUsesLoading);
-const isAmountValid = computed(() => Number.isInteger(amount.value) && amount.value >= 1);
+const isAmountValid = computed(
+  () => Number.isInteger(amount.value) && amount.value >= 1,
+);
 
 onMounted(() => {
   void store.loadDailyUses();

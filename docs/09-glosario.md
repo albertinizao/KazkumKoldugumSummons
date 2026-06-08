@@ -238,11 +238,10 @@ Representación visual de una criatura individual.
 
 Debe mostrar:
 
-- identificador;
+- nombre visible de la criatura;
 - PG máximos;
 - PG actuales;
-- botón `Dañar`;
-- botón `Curar`;
+- botones rápidos de ajuste de PG;
 - botón `Eliminar`.
 
 ---
@@ -528,7 +527,7 @@ En inglés, `saving throw`.
 En el MVP, hay un único botón:
 
 ```text
-Tirar TS
+Salvaciones
 ```
 
 Ese botón tira las tres salvaciones para todas las criaturas de un grupo.
@@ -615,7 +614,7 @@ Ejemplo:
 d20 14 + 5 = 19
 ```
 
-## Atacar con todas
+## Atacar
 
 Botón global de un grupo.
 
@@ -878,8 +877,7 @@ Ventana o panel temporal para realizar una acción secundaria.
 Ejemplos:
 
 - invocar;
-- dañar;
-- curar;
+- ajustar PG;
 - expandir ficha;
 - mostrar tirada.
 
@@ -1129,10 +1127,11 @@ Fuera del MVP porque la aplicación es local y personal.
 - Usar `CA`, no `AC`, en textos visibles en español.
 - Usar `TS` para tiradas de salvación.
 - Usar `Fort`, `Ref` y `Vol` como abreviaturas compactas.
-- Usar `Atacar con todas` para el botón de ataques globales.
-- Usar `Tirar TS` para el botón de salvaciones globales.
+- Usar `Atacar` para el botón de grupo.
+- Usar `Atacar con todas` para el botón global de ataques.
+- Usar `Tirar TS con todas` para el botón global de salvaciones.
 - Usar `Expandir ficha`, no `Expandir habilidades`.
-- Usar `Dañar`, `Curar` y `Eliminar` en las cards individuales.
+- Usar `Atacar`, `Salvaciones` y `Eliminar` en las cards o grupos.
 - Usar `Limpiar invocaciones` para borrar todos los grupos activos.
 - Usar `criatura final` para la ficha ya transformada.
 - Usar `criatura base` para la ficha original del JSON.

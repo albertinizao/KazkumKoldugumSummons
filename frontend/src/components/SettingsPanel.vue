@@ -17,6 +17,10 @@
         <span class="muted small">Nivel máximo de Summon Monster</span>
         <input type="number" min="0" step="1" v-model.number="draft" />
       </label>
+      <label>
+        <span class="muted small">Usos diarios máximos</span>
+        <input type="number" min="0" step="1" v-model.number="dailyUsesDraft" />
+      </label>
       <div class="stack">
         <button @click="save" :disabled="settings.saving">
           {{ settings.saving ? 'Guardando…' : 'Guardar cambios' }}
@@ -60,6 +64,7 @@ import { useSettingsStore } from '@/stores/settings'
 
 const settings = useSettingsStore()
 const draft = ref(settings.maxSummonMonsterLevel)
+const dailyUsesDraft = ref(settings.dailyUses.maximum)
 
 watch(
   () => settings.maxSummonMonsterLevel,
@@ -69,17 +74,26 @@ watch(
   { immediate: true }
 )
 
+watch(
+  () => settings.dailyUses.maximum,
+  value => {
+    dailyUsesDraft.value = value
+  },
+  { immediate: true }
+)
+
 onMounted(() => {
   void settings.loadConfiguration()
 })
 
 async function save() {
-  await settings.updateMaxSummonMonsterLevel(draft.value)
+  await settings.updateConfiguration(draft.value, dailyUsesDraft.value)
 }
 
 async function reload() {
   await settings.loadConfiguration()
   draft.value = settings.maxSummonMonsterLevel
+  dailyUsesDraft.value = settings.dailyUses.maximum
 }
 
 function formatTime(isoString) {

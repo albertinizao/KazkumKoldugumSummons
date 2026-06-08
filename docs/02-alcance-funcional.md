@@ -20,9 +20,9 @@ Debe mostrar:
 
 - botón `Invocar`;
 - botón `Limpiar invocaciones`;
+- botones globales `Atacar con todas` y `Tirar TS con todas`;
 - contador de usos diarios;
 - lista de grupos de criaturas activas;
-- resultado más reciente de tiradas, si existe.
 
 La pantalla debe estar optimizada para uso en vertical desde tablet Android.
 
@@ -164,7 +164,7 @@ Cada grupo de criaturas activas debe mostrar una ficha resumida.
 Debe incluir, como mínimo:
 
 - nombre final de la criatura;
-- alineamiento, tamaño y tipo;
+- alineamiento, tamaño y tipo con subtipos visibles cuando existan;
 - iniciativa;
 - sentidos;
 - percepción;
@@ -191,11 +191,11 @@ Dentro de cada grupo, cada criatura activa debe mostrarse como una card individu
 
 Cada card debe mostrar:
 
-- número o identificador dentro del grupo;
+- nombre visible de la criatura dentro del grupo;
 - PG actuales;
 - PG máximos;
-- botón `Dañar`;
-- botón `Curar`;
+- botones rápidos `-10`, `-5`, `-1`, `+1`, `+5`, `+10`;
+- campo libre para introducir una cantidad con signo;
 - botón `Eliminar`.
 
 El botón `Eliminar` debe estar visible siempre.
@@ -208,35 +208,15 @@ Algunas criaturas pueden seguir actuando o existiendo por debajo de 0 PG, así q
 
 La aplicación debe permitir aplicar daño o curación a una criatura individual.
 
-Al pulsar `Dañar` o `Curar`, debe abrirse un modal o control equivalente.
+La acción debe resolverse con botones rápidos y un campo libre.
 
-Debe permitir:
+Reglas de interfaz:
 
-- botones rápidos;
-- entrada manual de cantidad entera positiva mayor o igual que 1.
-
-Botones rápidos recomendados:
-
-```text
--1
--5
--10
-+1
-+5
-+10
-```
-
-Los valores visuales negativos o positivos son etiquetas de interfaz. La petición a la API debe enviar siempre `amount` como entero positivo mayor o igual que 1; el endpoint determina si ese valor se resta como daño o se suma como curación.
-
-La aplicación no debe calcular automáticamente reducción de daño, resistencias ni inmunidades.
-
-Si la criatura tiene alguna de estas defensas:
-
-- reducción de daño;
-- resistencia a un tipo de daño;
-- inmunidad a un tipo de daño;
-
-esa información debe mostrarse como nota en el modal de daño para que el usuario introduzca el valor final correcto.
+- los valores negativos significan daño;
+- los valores positivos significan curación;
+- el campo libre puede aceptar cantidades con signo;
+- la aplicación no debe aplicar automáticamente reducción de daño, resistencias ni inmunidades;
+- si existen defensas especiales, deben mostrarse como referencia, pero no se aplican solas.
 
 ## 9. Eliminar criaturas
 
@@ -258,7 +238,7 @@ Este botón sirve para cerrar un combate o limpiar la mesa entre escenas.
 Cada grupo de criaturas debe tener un botón:
 
 ```text
-Atacar con todas
+Atacar
 ```
 
 Al pulsarlo, la aplicación debe tirar todos los ataques de todas las criaturas individuales de ese grupo.
@@ -328,12 +308,12 @@ Bite: 6 piercing + 1 acid
 
 No debe mostrar únicamente el daño total.
 
-## 13. Tirar TS de todas las criaturas de un tipo
+## 13. Salvaciones de todas las criaturas de un tipo
 
 Cada grupo de criaturas debe tener un botón:
 
 ```text
-Tirar TS
+Salvaciones
 ```
 
 Al pulsarlo, la aplicación debe tirar las tres tiradas de salvación para cada criatura individual del grupo:
@@ -351,6 +331,13 @@ Badger 3: Fort 11 / Ref 19 / Will 13
 ```
 
 No es necesario incluir botones separados para Fortaleza, Reflejos y Voluntad en el MVP.
+
+La cabecera de la pantalla principal debe incluir además los botones globales:
+
+```text
+Atacar con todas
+Tirar TS con todas
+```
 
 ## 14. Expandir ficha
 
@@ -418,13 +405,11 @@ Reglas de límites:
 
 ## 17. Resultado de tiradas
 
-La aplicación debe mostrar el resultado actual o más reciente de las tiradas realizadas.
+La aplicación debe mostrar el resultado de la tirada en una modal o panel temporal.
 
-No es necesario guardar un historial completo en el MVP.
+No es necesario mantener un bloque persistente de "último resultado" en la pantalla principal.
 
-El usuario debe poder limpiar manualmente el resultado actual sin limpiar invocaciones, sin modificar PG y sin modificar usos diarios.
-
-Si el usuario necesita repetir una tirada, puede volver a pulsar el botón correspondiente.
+Si el usuario cierra la modal y necesita la misma tirada otra vez, puede repetir la acción correspondiente.
 
 ## 18. Modo oscuro
 
@@ -578,14 +563,14 @@ La Fase 1 se considerará cumplida cuando sea posible usar la aplicación durant
 5. Generar automáticamente el número de criaturas invocadas.
 6. Ver el grupo de criaturas activas en pantalla.
 7. Ver cards individuales con PG actuales y máximos.
-8. Dañar una criatura individual.
-9. Curar una criatura individual.
+8. Ajustar PG de una criatura individual.
+9. Ajustar PG de una criatura individual.
 10. Eliminar una criatura individual.
 11. Limpiar todas las invocaciones activas.
 12. Tirar todos los ataques de todas las criaturas de un grupo.
 13. Ver daño normal y crítico cuando proceda.
 14. Ver daños separados por tipo.
-15. Tirar Fortaleza, Reflejos y Voluntad de todas las criaturas de un grupo.
+15. Tirar Salvaciones de todas las criaturas de un grupo.
 16. Expandir la ficha completa final de una criatura.
 17. Recargar la página y conservar el estado activo.
 

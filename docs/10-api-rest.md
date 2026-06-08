@@ -222,8 +222,8 @@ VALIDATION_ERROR
 
 | Método | Endpoint | Uso |
 |---|---|---|
-| `POST` | `/api/combat-state/groups/{groupId}/roll-attacks` | Atacar con todas |
-| `POST` | `/api/combat-state/groups/{groupId}/roll-saving-throws` | Tirar TS |
+| `POST` | `/api/combat-state/groups/{groupId}/roll-attacks` | Atacar |
+| `POST` | `/api/combat-state/groups/{groupId}/roll-saving-throws` | Salvaciones |
 
 ## Usos diarios y configuración
 
@@ -989,7 +989,7 @@ Puede enviarse `{}` si el cliente lo necesita.
   "rollResult": {
     "id": "roll-attack-1",
     "type": "ATTACK_GROUP",
-    "title": "Atacar con todas: Fiery Badger",
+"title": "Atacar: Fiery Badger",
     "groupId": "group-1",
     "creatureName": "Fiery Badger",
     "createdAt": "2026-06-06T18:45:00Z",
@@ -1113,7 +1113,7 @@ Puede enviarse `{}` si el cliente lo necesita.
     "lastRollResult": {
       "id": "roll-attack-1",
       "type": "ATTACK_GROUP",
-      "title": "Atacar con todas: Fiery Badger",
+"title": "Atacar: Fiery Badger",
       "createdAt": "2026-06-06T18:45:00Z",
       "content": "Fiery Badger 1\nBite: d20 14 + 4 = 18..."
     }
@@ -1154,7 +1154,7 @@ Tira Fortaleza, Reflejos y Voluntad para todas las criaturas de un grupo.
   "rollResult": {
     "id": "roll-ts-1",
     "type": "SAVING_THROWS_GROUP",
-    "title": "Tirar TS: Fiery Badger",
+"title": "Salvaciones: Fiery Badger",
     "groupId": "group-1",
     "creatureName": "Fiery Badger",
     "createdAt": "2026-06-06T18:45:00Z",
@@ -1193,7 +1193,7 @@ Tira Fortaleza, Reflejos y Voluntad para todas las criaturas de un grupo.
     "lastRollResult": {
       "id": "roll-ts-1",
       "type": "SAVING_THROWS_GROUP",
-      "title": "Tirar TS: Fiery Badger",
+"title": "Salvaciones: Fiery Badger",
       "createdAt": "2026-06-06T18:45:00Z",
       "content": "Fiery Badger 1: Fort 20 / Ref 10 / Will 16"
     }
@@ -1836,8 +1836,8 @@ La API REST del MVP se considera suficiente cuando permite:
 9. Crear instancias separadas.
 10. Agrupar por criatura final.
 11. Descontar usos diarios al invocar.
-12. Dañar una instancia individual.
-13. Curar una instancia individual.
+12. Ajustar PG de una instancia individual.
+13. Ajustar PG de una instancia individual.
 14. Marcar criatura como caída a 0 PG o menos.
 15. Eliminar instancia individual.
 16. Limpiar todas las invocaciones.

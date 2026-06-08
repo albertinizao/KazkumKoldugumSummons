@@ -23,7 +23,7 @@ class KazkumKoldugumSummonsApplicationTests {
 
     @BeforeEach
     void resetConfiguration() {
-        service.updateMaxSummonMonsterLevel(3);
+        service.updateConfiguration(3, 6);
     }
 
     @Test
@@ -47,7 +47,7 @@ class KazkumKoldugumSummonsApplicationTests {
         assertThat(initial.getBody().maxSummonMonsterLevel()).isEqualTo(3);
 
         SummonerConfigurationController.UpdateSummonerConfigurationRequest request =
-                new SummonerConfigurationController.UpdateSummonerConfigurationRequest(5);
+                new SummonerConfigurationController.UpdateSummonerConfigurationRequest(5, 8);
 
         ResponseEntity<SummonerConfigurationController.SummonerConfigurationResponse> updated =
                 restClient.put()
@@ -58,12 +58,14 @@ class KazkumKoldugumSummonsApplicationTests {
 
         assertThat(updated.getBody()).isNotNull();
         assertThat(updated.getBody().maxSummonMonsterLevel()).isEqualTo(5);
+        assertThat(updated.getBody().dailyUses().getMaximum()).isEqualTo(8);
         assertThat(service.getConfiguration().getMaxSummonMonsterLevel()).isEqualTo(5);
+        assertThat(service.getConfiguration().getDailyUses().getMaximum()).isEqualTo(8);
     }
 
     @Test
     void summonQuantityUsesConfiguredLevelDifference() {
-        service.updateMaxSummonMonsterLevel(4);
+        service.updateConfiguration(4, 6);
 
         assertThat(service.isCreatureAvailable(4)).isTrue();
         assertThat(service.calculateQuantityFor(4).formula()).isEqualTo("1");
