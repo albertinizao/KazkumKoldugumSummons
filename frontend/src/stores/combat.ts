@@ -11,11 +11,13 @@ import {
   increaseDailyUses as increaseDailyUsesApi,
   removeInstance,
   resetDailyUses as resetDailyUsesApi,
+  rollGroupAttacks as rollGroupAttacksApi,
+  rollGroupSavingThrows as rollGroupSavingThrowsApi,
   summonCreature,
   type DailyUsesState,
 } from '@/services/combatApi';
 import type { CreatureCatalogItem, SummonTemplateType } from '@/types/catalog';
-import type { CombatState, SummonShortcut } from '@/types/combat';
+import type { CombatRollResult, CombatState, SummonShortcut } from '@/types/combat';
 
 const defaultCombatState: CombatState = {
   activeGroups: [],
@@ -45,6 +47,7 @@ function normalizeDailyUses(dailyUses: DailyUsesState): DailyUsesState {
 export const useCombatStore = defineStore('combat', {
   state: () => ({
     combatState: defaultCombatState as CombatState,
+    lastCombatRollResult: null as CombatRollResult | null,
     catalogItems: [] as CreatureCatalogItem[],
     selectedCreatureId: null as string | null,
     selectedTemplate: null as SummonTemplateType | null,
@@ -85,6 +88,7 @@ export const useCombatStore = defineStore('combat', {
           ...combatState,
           dailyUses: normalizeDailyUses(combatState.dailyUses),
         };
+        this.lastCombatRollResult = null;
         this.catalogItems = catalog.items;
         this.initialized = true;
 
@@ -184,6 +188,7 @@ export const useCombatStore = defineStore('combat', {
 
       try {
         this.combatState = await clearCombatState();
+        this.lastCombatRollResult = null;
       } catch (error) {
         this.error = error instanceof Error ? error.message : 'No se pudieron limpiar las invocaciones.';
       } finally {
@@ -232,8 +237,37 @@ export const useCombatStore = defineStore('combat', {
 
       try {
         this.combatState = await clearLastRollResult();
+        this.lastCombatRollResult = null;
       } catch (error) {
         this.error = error instanceof Error ? error.message : 'No se pudo limpiar el último resultado.';
+      } finally {
+        this.busy = false;
+      }
+    },
+    async rollGroupAttacks(groupId: string) {
+      this.busy = true;
+      this.error = '';
+
+      try {
+        const response = await rollGroupAttacksApi(groupId);
+        this.combatState = response.combatState;
+        this.lastCombatRollResult = response.rollResult;
+      } catch (error) {
+        this.error = error instanceof Error ? error.message : 'No se pudo resolver el ataque del grupo.';
+      } finally {
+        this.busy = false;
+      }
+    },
+    async rollGroupSavingThrows(groupId: string) {
+      this.busy = true;
+      this.error = '';
+
+      try {
+        const response = await rollGroupSavingThrowsApi(groupId);
+        this.combatState = response.combatState;
+        this.lastCombatRollResult = response.rollResult;
+      } catch (error) {
+        this.error = error instanceof Error ? error.message : 'No se pudieron tirar las TS del grupo.';
       } finally {
         this.busy = false;
       }

@@ -20,6 +20,93 @@ export interface RollDisplay {
   content: string;
 }
 
+export interface DiceRoll {
+  formula: string;
+  naturalResults: number[];
+  modifier: number;
+  total: number;
+  label?: string | null;
+}
+
+export interface DamageComponentRollResult {
+  formula: string;
+  roll: DiceRoll;
+  damageType: 'PIERCING' | 'SLASHING' | 'BLUDGEONING' | 'FIRE' | 'COLD' | 'ACID' | 'ELECTRICITY' | 'SONIC' | 'FORCE' | 'UNTYPED' | 'OTHER';
+  multipliesOnCritical: boolean;
+  total: number;
+}
+
+export interface DamageRollResult {
+  components: DamageComponentRollResult[];
+  total: number;
+  displayText: string;
+}
+
+export interface CriticalThreatResult {
+  confirmationRoll: DiceRoll;
+  criticalDamage: DamageRollResult;
+}
+
+export interface SingleAttackRollResult {
+  attackId: string;
+  attackName: string;
+  attackIndex: number | null;
+  attackRoll: DiceRoll;
+  normalDamage: DamageRollResult;
+  criticalThreat: CriticalThreatResult | null;
+  displayText: string;
+}
+
+export interface CreatureAttackRollResult {
+  instanceId: string;
+  instanceDisplayName: string;
+  attackResults: SingleAttackRollResult[];
+  displayText: string;
+}
+
+export interface GroupAttackRollResult {
+  id: string;
+  type: 'ATTACK_GROUP';
+  title: string;
+  groupId: string;
+  creatureName: string;
+  createdAt: string;
+  instanceResults: CreatureAttackRollResult[];
+  displayText: string;
+}
+
+export interface GroupAttackRollResponse {
+  rollResult: GroupAttackRollResult;
+  combatState: CombatState;
+}
+
+export interface CreatureSavingThrowsRollResult {
+  instanceId: string;
+  instanceDisplayName: string;
+  fortitude: DiceRoll;
+  reflex: DiceRoll;
+  will: DiceRoll;
+  displayText: string;
+}
+
+export interface GroupSavingThrowsRollResult {
+  id: string;
+  type: 'SAVING_THROWS_GROUP';
+  title: string;
+  groupId: string;
+  creatureName: string;
+  createdAt: string;
+  instanceResults: CreatureSavingThrowsRollResult[];
+  displayText: string;
+}
+
+export interface GroupSavingThrowsRollResponse {
+  rollResult: GroupSavingThrowsRollResult;
+  combatState: CombatState;
+}
+
+export type CombatRollResult = GroupAttackRollResult | GroupSavingThrowsRollResult;
+
 export interface SummonShortcut {
   id: string;
   creatureTemplateId: string;

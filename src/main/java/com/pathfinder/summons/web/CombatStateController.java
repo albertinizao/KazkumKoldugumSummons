@@ -2,6 +2,8 @@ package com.pathfinder.summons.web;
 
 import com.pathfinder.summons.application.CombatStateService;
 import com.pathfinder.summons.domain.model.CombatState;
+import com.pathfinder.summons.domain.model.GroupAttackRollResponse;
+import com.pathfinder.summons.domain.model.GroupSavingThrowsRollResponse;
 import com.pathfinder.summons.domain.model.SummonTemplateType;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -69,6 +71,16 @@ public class CombatStateController {
     @DeleteMapping("/last-roll-result")
     public CombatState clearLastRollResult() {
         return service.clearLastRollResult();
+    }
+
+    @PostMapping("/groups/{groupId}/roll-attacks")
+    public GroupAttackRollResponse rollGroupAttacks(@PathVariable String groupId) {
+        return service.rollGroupAttacks(groupId);
+    }
+
+    @PostMapping("/groups/{groupId}/roll-saving-throws")
+    public GroupSavingThrowsRollResponse rollGroupSavingThrows(@PathVariable String groupId) {
+        return service.rollGroupSavingThrows(groupId);
     }
 
     private ActiveInstanceReference findInstanceReference(String instanceId) {

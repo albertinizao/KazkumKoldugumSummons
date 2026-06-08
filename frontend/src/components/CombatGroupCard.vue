@@ -37,8 +37,8 @@
     </div>
 
     <div class="button-row">
-      <ActionButton :disabled="true">Atacar con todas</ActionButton>
-      <ActionButton :disabled="true">Tirar TS</ActionButton>
+      <ActionButton :disabled="busy || !hasAttacks" @click="$emit('attack')">Atacar con todas</ActionButton>
+      <ActionButton :disabled="busy || group.instances.length === 0" @click="$emit('saving-throws')">Tirar TS</ActionButton>
       <ActionButton :disabled="busy" @click="$emit('expand')">Expandir ficha</ActionButton>
     </div>
 
@@ -71,6 +71,8 @@ const props = defineProps<{
 }>();
 
 defineEmits<{
+  (event: 'attack'): void;
+  (event: 'saving-throws'): void;
   (event: 'damage', instanceId: string, amount: number): void;
   (event: 'heal', instanceId: string, amount: number): void;
   (event: 'remove', instanceId: string): void;
@@ -78,6 +80,7 @@ defineEmits<{
 }>();
 
 const title = computed(() => props.group.resolvedCreature.displayName);
+const hasAttacks = computed(() => props.group.resolvedCreature.attacks.length > 0);
 const specialAttacks = computed(() => {
   if (!props.group.resolvedCreature.specialAttacks.length) {
     return '—';

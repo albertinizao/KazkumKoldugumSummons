@@ -7,6 +7,10 @@ import com.pathfinder.summons.domain.model.CombatState;
 import com.pathfinder.summons.domain.model.ConfigurationSummary;
 import com.pathfinder.summons.domain.model.CreatureTemplate;
 import com.pathfinder.summons.domain.model.DailyUses;
+import com.pathfinder.summons.domain.model.GroupAttackRollResponse;
+import com.pathfinder.summons.domain.model.GroupAttackRollResult;
+import com.pathfinder.summons.domain.model.GroupSavingThrowsRollResponse;
+import com.pathfinder.summons.domain.model.GroupSavingThrowsRollResult;
 import com.pathfinder.summons.domain.model.RollDisplay;
 import com.pathfinder.summons.domain.model.RollDisplayType;
 import com.pathfinder.summons.domain.model.SummonShortcut;
@@ -42,17 +46,20 @@ public class CombatStateService implements CombatStateUseCase {
     private final SummonerConfigurationService configurationService;
     private final CreatureResolver creatureResolver;
     private final SummonQuantityCalculator summonQuantityCalculator;
+    private final CombatRollService combatRollService;
 
     public CombatStateService(CombatStateRepository combatStateRepository,
                               CreatureCatalogService creatureCatalogService,
                               SummonerConfigurationService configurationService,
                               CreatureResolver creatureResolver,
-                              SummonQuantityCalculator summonQuantityCalculator) {
+                              SummonQuantityCalculator summonQuantityCalculator,
+                              CombatRollService combatRollService) {
         this.combatStateRepository = combatStateRepository;
         this.creatureCatalogService = creatureCatalogService;
         this.configurationService = configurationService;
         this.creatureResolver = creatureResolver;
         this.summonQuantityCalculator = summonQuantityCalculator;
+        this.combatRollService = combatRollService;
     }
 
     @Override
@@ -152,6 +159,24 @@ public class CombatStateService implements CombatStateUseCase {
                 .lastRollResult(null)
                 .build();
         return saveWithCurrentConfiguration(updated);
+    }
+
+    @Override
+    public GroupAttackRollResponse rollGroupAttacks(String groupId) {
+        CombatState state = loadOrCreateState();
+        ActiveSummonGroup group = findGroup(state, groupId);
+        GroupAttackRollResult rollResult = combatRollService.rollGroupAttacks(group);
+        CombatState updated = saveLastRollResult(state, rollResult);
+        return new GroupAttackRollResponse(rollResult, updated);
+    }
+
+    @Override
+    public GroupSavingThrowsRollResponse rollGroupSavingThrows(String groupId) {
+        CombatState state = loadOrCreateState();
+        ActiveSummonGroup group = findGroup(state, groupId);
+        GroupSavingThrowsRollResult rollResult = combatRollService.rollGroupSavingThrows(group);
+        CombatState updated = saveLastRollResult(state, rollResult);
+        return new GroupSavingThrowsRollResponse(rollResult, updated);
     }
 
     @Override
@@ -387,6 +412,32 @@ public class CombatStateService implements CombatStateUseCase {
         return updated;
     }
 
+    private CombatState saveLastRollResult(CombatState state, GroupAttackRollResult rollResult) {
+        CombatState updated = state.toBuilder()
+                .lastRollResult(RollDisplay.builder()
+                        .id(rollResult.id())
+                        .type(rollResult.type())
+                        .title(rollResult.title())
+                        .createdAt(rollResult.createdAt())
+                        .content(rollResult.displayText())
+                        .build())
+                .build();
+        return saveWithCurrentConfiguration(updated);
+    }
+
+    private CombatState saveLastRollResult(CombatState state, GroupSavingThrowsRollResult rollResult) {
+        CombatState updated = state.toBuilder()
+                .lastRollResult(RollDisplay.builder()
+                        .id(rollResult.id())
+                        .type(rollResult.type())
+                        .title(rollResult.title())
+                        .createdAt(rollResult.createdAt())
+                        .content(rollResult.displayText())
+                        .build())
+                .build();
+        return saveWithCurrentConfiguration(updated);
+    }
+
     private CombatState refreshConfiguration(CombatState state) {
         ConfigurationSummary currentConfiguration = configurationService.getConfigurationSummary();
         if (Objects.equals(state.getConfiguration(), currentConfiguration)) {
@@ -407,6 +458,13 @@ public class CombatStateService implements CombatStateUseCase {
             }
         }
         return -1;
+    }
+
+    private ActiveSummonGroup findGroup(CombatState state, String groupId) {
+        return state.getActiveGroups().stream()
+                .filter(group -> Objects.equals(group.getId(), groupId))
+                .findFirst()
+                .orElseThrow(() -> notFound("No existe el grupo activo " + groupId));
     }
 
     private void validateSummonLevel(CreatureTemplate template) {

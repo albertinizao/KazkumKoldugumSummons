@@ -1,6 +1,8 @@
 package com.pathfinder.summons.application;
 
 import com.pathfinder.summons.domain.model.CombatState;
+import com.pathfinder.summons.domain.model.GroupAttackRollResponse;
+import com.pathfinder.summons.domain.model.GroupSavingThrowsRollResponse;
 import com.pathfinder.summons.domain.model.SummonTemplateType;
 
 public interface CombatStateUseCase {
@@ -16,4 +18,6 @@ public interface CombatStateUseCase {
     CombatState incrementDailyUses(int amount);
     CombatState decrementDailyUses(int amount);
     CombatState resetDailyUses();
+    GroupAttackRollResponse rollGroupAttacks(String groupId);
+    GroupSavingThrowsRollResponse rollGroupSavingThrows(String groupId);
 }

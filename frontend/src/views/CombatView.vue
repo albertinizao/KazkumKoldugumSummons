@@ -45,11 +45,11 @@
           </div>
         </div>
 
-        <div class="mini-grid">
-          <div class="meta-item">
-            <span>Criaturas activas</span>
-            <strong>{{ store.activeInstanceCount }}</strong>
-          </div>
+      <div class="mini-grid">
+        <div class="meta-item">
+          <span>Criaturas activas</span>
+          <strong>{{ store.activeInstanceCount }}</strong>
+        </div>
           <div class="meta-item">
             <span>Grupos activos</span>
             <strong>{{ store.groups.length }}</strong>
@@ -58,13 +58,17 @@
             <span>Último resultado</span>
             <strong>{{ store.lastRollResult?.title ?? '—' }}</strong>
           </div>
-          <div class="meta-item">
-            <span>Plantillas permitidas</span>
-            <strong>{{ allowedTemplates.map(templateLabel).join(' · ') || '—' }}</strong>
-          </div>
+        <div class="meta-item">
+          <span>Plantillas permitidas</span>
+          <strong>{{ allowedTemplates.map(templateLabel).join(' · ') || '—' }}</strong>
+        </div>
+      </div>
+
+        <div v-if="store.lastCombatRollResult" class="last-roll">
+          <CombatRollResultPanel :result="store.lastCombatRollResult" />
         </div>
 
-        <div v-if="store.lastRollResult" class="last-roll">
+        <div v-else-if="store.lastRollResult" class="last-roll">
           <p class="eyebrow">Resultado más reciente</p>
           <strong>{{ store.lastRollResult.title }}</strong>
           <p class="muted">{{ store.lastRollResult.content }}</p>
@@ -132,6 +136,8 @@
           :key="group.id"
           :group="group"
           :busy="store.busy"
+          @attack="handleAttack(group.id)"
+          @saving-throws="handleSavingThrows(group.id)"
           @damage="handleDamage"
           @heal="handleHeal"
           @remove="handleRemove"
@@ -169,6 +175,7 @@
 import { computed, onMounted, ref } from 'vue';
 import ActionButton from '@/components/ActionButton.vue';
 import CombatGroupCard from '@/components/CombatGroupCard.vue';
+import CombatRollResultPanel from '@/components/CombatRollResultPanel.vue';
 import DailyUsesPanel from '@/components/DailyUsesPanel.vue';
 import StatusBadge from '@/components/StatusBadge.vue';
 import { useCombatStore } from '@/stores/combat';
@@ -228,6 +235,14 @@ async function handleShortcutSummon(shortcutId: string, source: 'RECENT' | 'MOST
 
 async function handleClearSummons(): Promise<void> {
   await store.clearSummons();
+}
+
+async function handleAttack(groupId: string): Promise<void> {
+  await store.rollGroupAttacks(groupId);
+}
+
+async function handleSavingThrows(groupId: string): Promise<void> {
+  await store.rollGroupSavingThrows(groupId);
 }
 
 async function handleDamage(instanceId: string, amount: number): Promise<void> {
