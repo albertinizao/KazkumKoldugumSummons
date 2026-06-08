@@ -18,6 +18,7 @@ import {
 } from '@/services/combatApi';
 import type { CreatureCatalogItem, SummonTemplateType } from '@/types/catalog';
 import type { CombatRollResult, CombatState, SummonShortcut } from '@/types/combat';
+import { readCombatStateSnapshot, writeCombatStateSnapshot } from '@/utils/combatStatePersistence';
 
 const defaultCombatState: CombatState = {
   activeGroups: [],
@@ -42,6 +43,13 @@ function normalizeDailyUses(dailyUses: DailyUsesState): DailyUsesState {
   const maximum = Math.max(0, Number(dailyUses.maximum ?? 0));
   const remaining = clamp(Number(dailyUses.remaining ?? 0), 0, maximum);
   return { maximum, remaining };
+}
+
+function normalizeCombatState(combatState: CombatState): CombatState {
+  return {
+    ...combatState,
+    dailyUses: normalizeDailyUses(combatState.dailyUses),
+  };
 }
 
 export const useCombatStore = defineStore('combat', {
@@ -77,19 +85,31 @@ export const useCombatStore = defineStore('combat', {
 
       this.loading = true;
       this.error = '';
+      const cachedCombatState = readCombatStateSnapshot(defaultCombatState);
+      if (cachedCombatState) {
+        this.combatState = cachedCombatState;
+      }
 
       try {
-        const [combatState, catalog] = await Promise.all([
+        const [combatStateResult, catalogResult] = await Promise.allSettled([
           fetchCombatState(),
           fetchCatalogCreatures(),
         ]);
 
-        this.combatState = {
-          ...combatState,
-          dailyUses: normalizeDailyUses(combatState.dailyUses),
-        };
+        if (combatStateResult.status === 'fulfilled') {
+          this.combatState = normalizeCombatState(combatStateResult.value);
+          writeCombatStateSnapshot(this.combatState);
+        } else if (!cachedCombatState) {
+          throw combatStateResult.reason;
+        }
+
+        if (catalogResult.status === 'fulfilled') {
+          this.catalogItems = catalogResult.value.items;
+        } else if (!cachedCombatState) {
+          throw catalogResult.reason;
+        }
+
         this.lastCombatRollResult = null;
-        this.catalogItems = catalog.items;
         this.initialized = true;
 
         if (!this.selectedCreatureId && this.catalogItems.length > 0) {
@@ -99,16 +119,15 @@ export const useCombatStore = defineStore('combat', {
         }
       } catch (error) {
         this.error = error instanceof Error ? error.message : 'No se pudo cargar el estado de combate.';
+        this.initialized = true;
       } finally {
         this.loading = false;
       }
     },
     async refreshCombatState() {
       const combatState = await fetchCombatState();
-      this.combatState = {
-        ...combatState,
-        dailyUses: normalizeDailyUses(combatState.dailyUses),
-      };
+      this.combatState = normalizeCombatState(combatState);
+      writeCombatStateSnapshot(this.combatState);
       this.ensureSelectedTemplateIsAllowed();
     },
     selectCreature(creatureId: string) {
@@ -154,11 +173,12 @@ export const useCombatStore = defineStore('combat', {
       this.error = '';
 
       try {
-        this.combatState = await summonCreature({
+        this.combatState = normalizeCombatState(await summonCreature({
           creatureTemplateId: creature.id,
           selectedTemplate: this.selectedTemplate,
           source: 'MANUAL_SEARCH',
-        });
+        }));
+        writeCombatStateSnapshot(this.combatState);
         this.ensureSelectedTemplateIsAllowed();
       } catch (error) {
         this.error = error instanceof Error ? error.message : 'No se pudo invocar la criatura.';
@@ -171,11 +191,12 @@ export const useCombatStore = defineStore('combat', {
       this.error = '';
 
       try {
-        this.combatState = await summonCreature({
+        this.combatState = normalizeCombatState(await summonCreature({
           shortcutId: shortcut.id,
           source,
           selectedTemplate: shortcut.selectedTemplate,
-        });
+        }));
+        writeCombatStateSnapshot(this.combatState);
       } catch (error) {
         this.error = error instanceof Error ? error.message : 'No se pudo invocar desde el acceso rápido.';
       } finally {
@@ -187,7 +208,8 @@ export const useCombatStore = defineStore('combat', {
       this.error = '';
 
       try {
-        this.combatState = await clearCombatState();
+        this.combatState = normalizeCombatState(await clearCombatState());
+        writeCombatStateSnapshot(this.combatState);
         this.lastCombatRollResult = null;
       } catch (error) {
         this.error = error instanceof Error ? error.message : 'No se pudieron limpiar las invocaciones.';
@@ -200,7 +222,8 @@ export const useCombatStore = defineStore('combat', {
       this.error = '';
 
       try {
-        this.combatState = await damageInstance(instanceId, amount);
+        this.combatState = normalizeCombatState(await damageInstance(instanceId, amount));
+        writeCombatStateSnapshot(this.combatState);
       } catch (error) {
         this.error = error instanceof Error ? error.message : 'No se pudo aplicar el daño.';
       } finally {
@@ -212,7 +235,8 @@ export const useCombatStore = defineStore('combat', {
       this.error = '';
 
       try {
-        this.combatState = await healInstance(instanceId, amount);
+        this.combatState = normalizeCombatState(await healInstance(instanceId, amount));
+        writeCombatStateSnapshot(this.combatState);
       } catch (error) {
         this.error = error instanceof Error ? error.message : 'No se pudo aplicar la curación.';
       } finally {
@@ -224,7 +248,8 @@ export const useCombatStore = defineStore('combat', {
       this.error = '';
 
       try {
-        this.combatState = await removeInstance(instanceId);
+        this.combatState = normalizeCombatState(await removeInstance(instanceId));
+        writeCombatStateSnapshot(this.combatState);
       } catch (error) {
         this.error = error instanceof Error ? error.message : 'No se pudo eliminar la criatura.';
       } finally {
@@ -236,7 +261,8 @@ export const useCombatStore = defineStore('combat', {
       this.error = '';
 
       try {
-        this.combatState = await clearLastRollResult();
+        this.combatState = normalizeCombatState(await clearLastRollResult());
+        writeCombatStateSnapshot(this.combatState);
         this.lastCombatRollResult = null;
       } catch (error) {
         this.error = error instanceof Error ? error.message : 'No se pudo limpiar el último resultado.';
@@ -250,7 +276,8 @@ export const useCombatStore = defineStore('combat', {
 
       try {
         const response = await rollGroupAttacksApi(groupId);
-        this.combatState = response.combatState;
+        this.combatState = normalizeCombatState(response.combatState);
+        writeCombatStateSnapshot(this.combatState);
         this.lastCombatRollResult = response.rollResult;
       } catch (error) {
         this.error = error instanceof Error ? error.message : 'No se pudo resolver el ataque del grupo.';
@@ -264,7 +291,8 @@ export const useCombatStore = defineStore('combat', {
 
       try {
         const response = await rollGroupSavingThrowsApi(groupId);
-        this.combatState = response.combatState;
+        this.combatState = normalizeCombatState(response.combatState);
+        writeCombatStateSnapshot(this.combatState);
         this.lastCombatRollResult = response.rollResult;
       } catch (error) {
         this.error = error instanceof Error ? error.message : 'No se pudieron tirar las TS del grupo.';
@@ -281,6 +309,7 @@ export const useCombatStore = defineStore('combat', {
           ...this.combatState,
           dailyUses: normalizeDailyUses(configuration.dailyUses),
         };
+        writeCombatStateSnapshot(this.combatState);
       } catch (error) {
         this.dailyUsesError = error instanceof Error ? error.message : String(error);
       } finally {
@@ -296,6 +325,7 @@ export const useCombatStore = defineStore('combat', {
           ...this.combatState,
           dailyUses: normalizeDailyUses(response.dailyUses),
         };
+        writeCombatStateSnapshot(this.combatState);
         return response;
       } catch (error) {
         this.dailyUsesError = error instanceof Error ? error.message : String(error);
@@ -313,6 +343,7 @@ export const useCombatStore = defineStore('combat', {
           ...this.combatState,
           dailyUses: normalizeDailyUses(response.dailyUses),
         };
+        writeCombatStateSnapshot(this.combatState);
         return response;
       } catch (error) {
         this.dailyUsesError = error instanceof Error ? error.message : String(error);
@@ -330,6 +361,7 @@ export const useCombatStore = defineStore('combat', {
           ...this.combatState,
           dailyUses: normalizeDailyUses(response.dailyUses),
         };
+        writeCombatStateSnapshot(this.combatState);
         return response;
       } catch (error) {
         this.dailyUsesError = error instanceof Error ? error.message : String(error);
