@@ -1,0 +1,100 @@
+{
+  "id": "camel",
+  "nombre": "Camel",
+  "nivelSummon": 2,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 3,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 5,
+  "atributos": {
+    "fuerza": 18,
+    "destreza": 16,
+    "constitucion": 14,
+    "inteligencia": 2,
+    "sabiduria": 11,
+    "carisma": 4
+  },
+  "ca": {
+    "normal": 13,
+    "toque": 12,
+    "desprevenido": 10,
+    "detalle": "+3 Dex, +1 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 13,
+    "formula": "2d8+4"
+  },
+  "salvaciones": {
+    "fortaleza": 5,
+    "reflejos": 6,
+    "voluntad": 0
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 50
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 4,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4+6",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "spit (+3 ranged touch)"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "spit",
+      "resumen": "spit (+3 ranged touch)"
+    },
+    {
+      "nombre": "Spit",
+      "resumen": "Spit (Ex) Once per hour, a camel can regurgitate the contents of its stomach, spitting the foul material at a single target within 10 feet. The target must make a DC 13 Fortitude save or be sickened for 1d4 rounds. The save DC is Constitution-based."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "spit",
+      "texto": "spit (+3 ranged touch)"
+    },
+    {
+      "nombre": "Spit",
+      "texto": "Spit (Ex) Once per hour, a camel can regurgitate the contents of its stomach, spitting the foul material at a single target within 10 feet. The target must make a DC 13 Fortitude save or be sickened for 1d4 rounds. The save DC is Constitution-based."
+    }
+  ],
+  "fullStatBlock": "CR 1\nCamel\nN Large animal\nInit +3\nSenses low-light vision, scent; Perception +5\nAC 13, touch 12, flat-footed 10 (+3 Dex, +1 natural, -1 size)\nhp 13 (2d8+4)\nFort +5, Ref +6, Will +0\nSpeed 50 ft.\nMelee bite +4 (1d4+6)\nSpace 5 ft.; Reach 5 ft.\nSpecial Attacks spit (+3 ranged touch)\nSpecial Abilities Spit (Ex) Once per hour, a camel can regurgitate the contents of its stomach, spitting the foul material at a single target within 10 feet. The target must make a DC 13 Fortitude save or be sickened for 1d4 rounds. The save DC is Constitution-based.\nSpell-Like Abilities none\nStatistics Str 18, Dex 16, Con 14, Int 2, Wis 11, Cha 4\nBase Atk +1; CMB +6; CMD 19\nFeats Endurance\nSkills Perception +5\nEnvironment  warm deserts\nOrganization solitary\nTreasure none\nSource PFRPG Bestiary 2\nDescription Camels are large, desert-dwelling herd animals noted for their stamina and ill tempers. A typical camel stands about 6 feet at the shoulder and 7 feet at the hump."
+}

@@ -1,0 +1,84 @@
+{
+  "id": "vulture",
+  "nombre": "Vulture",
+  "nivelSummon": 1,
+  "alineamiento": "N",
+  "tamano": "Small",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 1,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 9,
+  "atributos": {
+    "fuerza": 12,
+    "destreza": 13,
+    "constitucion": 14,
+    "inteligencia": 2,
+    "sabiduria": 13,
+    "carisma": 7
+  },
+  "ca": {
+    "normal": 13,
+    "toque": 12,
+    "desprevenido": 12,
+    "detalle": "+1 Dex, +1 natural, +1 size"
+  },
+  "pg": {
+    "maximos": 6,
+    "formula": "1d8+2"
+  },
+  "salvaciones": {
+    "fortaleza": 6,
+    "reflejos": 3,
+    "voluntad": 1
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 10
+    },
+    {
+      "tipo": "fly",
+      "valor": 50
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 2,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+1",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 1/2\nVulture\nN Small animal\nInit +1\nSenses low-light vision, scent; Perception +9\nAC 13, touch 12, flat-footed 12 (+1 Dex, +1 natural, +1 size)\nhp 6 (1d8+2)\nFort +6, Ref +3, Will +1\nSpeed 10 ft., fly 50 ft. (average)\nMelee bite +2 (1d6+1)\nSpace 5 ft.; Reach 5 ft.\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 12, Dex 13, Con 14, Int 2, Wis 13, Cha 7\nCMD 11\nFeats Great Fortitude\nSkills Fly +7, Perception +9\nRacial Modifiers +8 Perception\nEnvironment warm plains or hills\nOrganization solitary, pair, or flock (3-24)\nTreasure none\nSource PFRPG Bestiary 3"
+}

@@ -1,0 +1,122 @@
+{
+  "id": "squid",
+  "nombre": "Squid",
+  "nivelSummon": 2,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "animal",
+  "subtipos": [
+    "aquatic"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 6,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 7,
+  "atributos": {
+    "fuerza": 15,
+    "destreza": 15,
+    "constitucion": 11,
+    "inteligencia": 2,
+    "sabiduria": 12,
+    "carisma": 2
+  },
+  "ca": {
+    "normal": 13,
+    "toque": 12,
+    "desprevenido": 11,
+    "detalle": "+2 Dex, +1 natural"
+  },
+  "pg": {
+    "maximos": 13,
+    "formula": "3d8"
+  },
+  "salvaciones": {
+    "fortaleza": 3,
+    "reflejos": 7,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 240
+    },
+    {
+      "tipo": "swim",
+      "valor": 60
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 4,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d3+2",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "tentacles",
+      "name": "Tentacles",
+      "attackBonus": 2,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4+1",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "OTHER",
+      "valor": "ink cloud (5-ft. radius)",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Ink Cloud",
+      "resumen": "Ink Cloud (Ex) A squid can emit a 5-foot-radius cloud of ink once per minute as a free action while underwater. This cloud provides total concealment. The ink persists for 1 minute. Jet (Ex) A squid can jet in a straight line as a full-round action. It does not provoke attacks of opportunity while jetting."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Ink Cloud",
+      "texto": "Ink Cloud (Ex) A squid can emit a 5-foot-radius cloud of ink once per minute as a free action while underwater. This cloud provides total concealment. The ink persists for 1 minute. Jet (Ex) A squid can jet in a straight line as a full-round action. It does not provoke attacks of opportunity while jetting."
+    }
+  ],
+  "fullStatBlock": "CR 1\nSquid\nN Medium animal aquatic\nInit +6\nSenses low-light vision; Perception +7\nAC 13, touch 12, flat-footed 11 (+2 Dex, +1 natural)\nhp 13 (3d8)\nFort +3, Ref +7, Will +2\nSpeed swim 60 ft., jet 240 ft.\nMelee bite +4 (1d3+2), tentacles +2 (1d4+1 plus grab)\nSpace 5 ft.; Reach 5 ft.\nSpecial Abilities Ink Cloud (Ex) A squid can emit a 5-foot-radius cloud of ink once per minute as a free action while underwater. This cloud provides total concealment. The ink persists for 1 minute. Jet (Ex) A squid can jet in a straight line as a full-round action. It does not provoke attacks of opportunity while jetting.\nSpell-Like Abilities none\nStatistics Str 15, Dex 15, Con 11, Int 2, Wis 12, Cha 2\nBase Atk +2; CMB +4; CMD 16\nFeats Improved Initiative, Lightning Reflexes, MultiattackB\nSkills Perception +7, Swim +10\nEnvironment  any ocean\nOrganization solitary, pair, or school (3-12)\nTreasure none\nDefensive Abilities ink cloud (5-ft. radius)\nSource PFRPG Bestiary\nDescription Squids are aggressive predators that fear little and are more than willing to attack prey larger than themselves. Squid Companions Starting Statistics: Size Medium; AC +1 natural; Speed swim 60 ft., jet 240 ft.; Attack tentacles (1d4 plus grab), bite (1d3); Ability Scores Str 14, Dex 15, Con 11, Int 2, Wis 12, Cha 2; Special Qualities low-light vision, ink cloud. 4th-Level Advancement: Ability Scores Str +2, Con +2."
+}

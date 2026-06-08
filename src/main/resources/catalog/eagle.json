@@ -1,0 +1,102 @@
+{
+  "id": "eagle",
+  "nombre": "Eagle",
+  "nivelSummon": 1,
+  "alineamiento": "N",
+  "tamano": "Small",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 10,
+  "atributos": {
+    "fuerza": 10,
+    "destreza": 15,
+    "constitucion": 12,
+    "inteligencia": 2,
+    "sabiduria": 15,
+    "carisma": 7
+  },
+  "ca": {
+    "normal": 14,
+    "toque": 13,
+    "desprevenido": 12,
+    "detalle": "+2 Dex, +1 natural, +1 size"
+  },
+  "pg": {
+    "maximos": 5,
+    "formula": "1d8+1"
+  },
+  "salvaciones": {
+    "fortaleza": 3,
+    "reflejos": 4,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 10
+    },
+    {
+      "tipo": "fly",
+      "valor": 80
+    }
+  ],
+  "ataques": [
+    {
+      "id": "talons",
+      "name": "Talons",
+      "attackBonus": 3,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 3,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 1/2\nEagle\nN Small animal\nInit +2\nSenses low-light vision; Perception +10\nAC 14, touch 13, flat-footed 12 (+2 Dex, +1 natural, +1 size)\nhp 5 (1d8+1)\nFort +3, Ref +4, Will +2\nSpeed 10 ft., fly 80 ft. (average)\nMelee 2 talons +3 (1d4), bite +3 (1d4)\nSpace 5 ft.; Reach 5 ft.\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 10, Dex 15, Con 12, Int 2, Wis 15, Cha 7\nCMB -1; CMD 11\nFeats Weapon Finesse\nSkills Fly +8, Perception +10\nRacial Modifiers +8 Perception\nEnvironment temperate mountains\nOrganization solitary or pair\nTreasure none\nSource PFRPG Bestiary"
+}

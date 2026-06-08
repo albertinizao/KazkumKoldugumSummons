@@ -1,0 +1,82 @@
+{
+  "id": "hyena",
+  "nombre": "Hyena",
+  "nivelSummon": 2,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 8,
+  "atributos": {
+    "fuerza": 14,
+    "destreza": 15,
+    "constitucion": 15,
+    "inteligencia": 2,
+    "sabiduria": 13,
+    "carisma": 6
+  },
+  "ca": {
+    "normal": 14,
+    "toque": 12,
+    "desprevenido": 12,
+    "detalle": "+2 Dex, +2 natural"
+  },
+  "pg": {
+    "maximos": 13,
+    "formula": "2d8+4"
+  },
+  "salvaciones": {
+    "fortaleza": 5,
+    "reflejos": 5,
+    "voluntad": 1
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 50
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 3,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+3",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "trip"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 1\nHyena\nN Medium animal\nInit +2\nSenses low-light vision, scent; Perception +8\nAC 14, touch 12, flat-footed 12 (+2 Dex, +2 natural)\nhp 13 (2d8+4)\nFort +5, Ref +5, Will +1\nSpeed 50 ft.\nMelee bite +3 (1d6+3 plus trip)\nSpace 5 ft.; Reach 5 ft.\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 14, Dex 15, Con 15, Int 2, Wis 13, Cha 6\nBase Atk +1; CMB +3; CMD 15\nFeats Skill Focus (Perception)\nSkills Perception +8, Stealth +6 (+10 in tall grass)\nRacial Modifiers +4 Stealth in tall grass\nEnvironment  warm plains\nOrganization solitary, pair, or pack (3-12)\nTreasure none\nSource PFRPG Bestiary\nDescription Hyenas are pack hunters infamous for their cunning and their unnerving, laughter-like vocalizations. They are largely scavengers, but aren't above supplementing their diet of carrion with fresh prey. Hyenas tend to hunt alone, but when hunting as a pack they typically send one or two members against a foe's front while the rest of the pack circles and attacks from behind. Many of the savage humanoid races, particularly gnolls, use hyenas as guard dogs. Such hyenas typically wear leather barding and are trained from birth to be vicious and savage-many such creatures are advanced hyenas. Hyena Companions Starting Statistics: Size Small; Speed 50 ft.; AC +2 natural armor; Attack bite (1d4 plus trip); Ability Scores Str 10, Dex 17, Con 13, Int 2, Wis 13, Cha 6; Special Qualities lowlight vision, scent. 4th-Level Advancement: Size Medium; Attack bite (1d6 plus trip); Ability Scores Str +4, Dex -2, Con +2."
+}

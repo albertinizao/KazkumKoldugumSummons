@@ -142,6 +142,8 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
                         .map(speed -> Speed.builder()
                                 .type(parseSpeedType(speed.tipo()))
                                 .valueFeet(speed.valor())
+                                .maneuverability(speed.maneuverability())
+                                .notes(speed.notes())
                                 .build())
                         .toList())
                 .attacks(safeList(raw.ataques()).stream()
@@ -323,7 +325,9 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
 
     private record RawSpeed(
             @JsonProperty("tipo") String tipo,
-            @JsonProperty("valor") int valor
+            @JsonProperty("valor") int valor,
+            @JsonProperty("maneuverability") String maneuverability,
+            @JsonProperty("notes") String notes
     ) {
     }
 

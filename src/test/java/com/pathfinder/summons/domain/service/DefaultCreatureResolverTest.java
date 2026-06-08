@@ -91,6 +91,31 @@ class DefaultCreatureResolverTest {
     }
 
     @Test
+    void calculatesMaximumHitPointsFromMaxDieRollPlusAugmentedConstitution() {
+        CreatureTemplate template = baseTemplate()
+                .id("antelope")
+                .name("Antelope")
+                .abilities(AbilityScores.builder()
+                        .strength(10)
+                        .dexterity(17)
+                        .constitution(14)
+                        .intelligence(2)
+                        .wisdom(13)
+                        .charisma(7)
+                        .build())
+                .hitPoints(HitPointsDefinition.builder()
+                        .maximum(6)
+                        .formula("1d8+2")
+                        .hitDice(HitDice.builder().count(1).dieSize(8).build())
+                        .build())
+                .build();
+
+        ResolvedCreature resolved = resolver.resolve(template, null, SummonerConfiguration.defaultConfiguration());
+
+        assertThat(resolved.getMaxHitPoints()).isEqualTo(12);
+    }
+
+    @Test
     void keepsTemplateDamageComponentsAvailableForCriticalMultiplication() {
         CreatureTemplate template = baseTemplate()
                 .id("template-damage")

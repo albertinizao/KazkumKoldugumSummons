@@ -1,0 +1,100 @@
+{
+  "id": "viper",
+  "nombre": "Viper",
+  "nivelSummon": 1,
+  "alineamiento": "N",
+  "tamano": "Tiny",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 3,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 9,
+  "atributos": {
+    "fuerza": 4,
+    "destreza": 17,
+    "constitucion": 8,
+    "inteligencia": 1,
+    "sabiduria": 13,
+    "carisma": 2
+  },
+  "ca": {
+    "normal": 16,
+    "toque": 15,
+    "desprevenido": 13,
+    "detalle": "+3 Dex, +1 natural, +2 size"
+  },
+  "pg": {
+    "maximos": 3,
+    "formula": "1d8-1"
+  },
+  "salvaciones": {
+    "fortaleza": 1,
+    "reflejos": 5,
+    "voluntad": 1
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "climb",
+      "valor": 20
+    },
+    {
+      "tipo": "swim",
+      "valor": 20
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 5,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d2-2",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "poison"
+      ]
+    }
+  ],
+  "espacio": "2 ft.",
+  "alcance": "0 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Poison",
+      "resumen": "Su mordida transmite veneno por herida que daña la Constitución durante 6 asaltos."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Poison",
+      "texto": "Poison (Ex) Bite-injury; save Fort DC 9; frequency 1/round for 6 rounds; effect 1d2 Con; cure 1 save."
+    }
+  ],
+  "fullStatBlock": "CR 1/2\nViper\nN Tiny animal\nInit +3\nSenses low-light vision, scent; Perception +9\nAC 16, touch 15, flat-footed 13 (+3 Dex, +1 natural, +2 size)\nhp 3 (1d8-1)\nFort +1, Ref +5, Will +1\nSpeed 20 ft., climb 20 ft., swim 20 ft.\nMelee bite +5 (1d2-2 plus poison)\nSpace 2 ft.; Reach 0 ft.\nSpecial Abilities Poison (Ex) Bite-injury; save Fort DC 9; frequency 1/round for 6 rounds; effect 1d2 Con; cure 1 save.\nSpell-Like Abilities none\nStatistics Str 4, Dex 17, Con 8, Int 1, Wis 13, Cha 2\nCMB +1; CMD 8\nFeats Weapon Finesse\nSkills Climb +11, Perception +9, Stealth +15, Swim +11\nRacial Modifiers +4 Perception, +4 Stealth\nEnvironment any temperate and warm\nOrganization solitary\nTreasure none\nSource PFRPG Bestiary"
+}

@@ -1,0 +1,79 @@
+{
+  "id": "baboon",
+  "nombre": "Baboon",
+  "nivelSummon": 1,
+  "alineamiento": "N",
+  "tamano": "Small",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 1,
+  "atributos": {
+    "fuerza": 12,
+    "destreza": 15,
+    "constitucion": 12,
+    "inteligencia": 2,
+    "sabiduria": 12,
+    "carisma": 5
+  },
+  "ca": {
+    "normal": 13,
+    "toque": 13,
+    "desprevenido": 11,
+    "detalle": "+2 Dex, +1 size"
+  },
+  "pg": {
+    "maximos": 5,
+    "formula": "1d8+1"
+  },
+  "salvaciones": {
+    "fortaleza": 3,
+    "reflejos": 4,
+    "voluntad": 1
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 3,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4+1",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 1/2\nBaboon\nN Small animal\nInit +2\nSenses low-light vision; Perception +1\nAC 13, touch 13, flat-footed 11 (+2 Dex, +1 size)\nhp 5 (1d8+1)\nFort +3, Ref +4, Will +1\nSpeed 30 ft.\nMelee bite +3 (1d4+1)\nSpace 5 ft.; Reach 5 ft.\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 12, Dex 15, Con 12, Int 2, Wis 12, Cha 5\nCMD 12\nFeats Weapon Finesse\nSkills Acrobatics +10, Climb +5\nRacial Modifiers +4 Acrobatics, +4 Climb\nEnvironment warm forests or plains\nOrganization solitary, pair, or mission (3-6)\nTreasure none\nSource PFRPG Bestiary 2"
+}

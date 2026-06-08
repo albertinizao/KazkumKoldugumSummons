@@ -1,0 +1,94 @@
+{
+  "id": "stingray",
+  "nombre": "Stingray",
+  "nivelSummon": 1,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "animal",
+  "subtipos": [
+    "aquatic"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 1,
+  "sentidos": [
+    "blindsense 30 ft.",
+    "low-light vision"
+  ],
+  "percepcion": 8,
+  "atributos": {
+    "fuerza": 10,
+    "destreza": 13,
+    "constitucion": 15,
+    "inteligencia": 1,
+    "sabiduria": 13,
+    "carisma": 2
+  },
+  "ca": {
+    "normal": 12,
+    "toque": 11,
+    "desprevenido": 11,
+    "detalle": "+1 Dex, +1 natural"
+  },
+  "pg": {
+    "maximos": 13,
+    "formula": "2d8+4"
+  },
+  "salvaciones": {
+    "fortaleza": 5,
+    "reflejos": 4,
+    "voluntad": 1
+  },
+  "velocidades": [
+    {
+      "tipo": "swim",
+      "valor": 40
+    }
+  ],
+  "ataques": [
+    {
+      "id": "sting",
+      "name": "Sting",
+      "attackBonus": 1,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "poison"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Poison",
+      "resumen": "Su aguijón transmite veneno por herida que drena Destreza y Constitución."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Poison",
+      "texto": "Poison (Ex) Sting-injury; save Fort DC 13; frequency 1/round for 4 rounds; effect 1d2 Dex and 1 Con; cure 1 save. The save DC is Constitution-based."
+    }
+  ],
+  "fullStatBlock": "CR 1/2\nStingray\nN Medium animal\nInit +1\nSenses blindsense 30 ft., low-light vision; Perception +8\nAC 12, touch 11, flat-footed 11 (+1 Dex, +1 natural)\nhp 13 (2d8+4)\nFort +5, Ref +4, Will +1\nSpeed swim 40 ft.\nMelee sting +1 (1d4 plus poison)\nSpace 5 ft.; Reach 5 ft.\nSpecial Abilities Poison (Ex) Sting-injury; save Fort DC 13; frequency 1/round for 4 rounds; effect 1d2 Dex and 1 Con; cure 1 save.\nSpell-Like Abilities none\nStatistics Str 10, Dex 13, Con 15, Int 1, Wis 13, Cha 2\nBase Atk +1; CMB +1; CMD 12\nFeats Skill Focus (Perception)\nSkills Perception +8, Stealth +5 (+13 in sand or mud), Swim +8\nRacial Modifiers +8 Stealth in sand or mud\nEnvironment warm oceans\nOrganization solitary, pair, or flight (3-12)\nTreasure none\nSource PFRPG Bestiary 2"
+}

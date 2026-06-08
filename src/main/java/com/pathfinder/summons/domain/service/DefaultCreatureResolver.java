@@ -307,11 +307,27 @@ public class DefaultCreatureResolver implements CreatureResolver {
     }
 
     private int resolveHitPoints(HitPointsDefinition hitPoints, AbilityScores baseAbilities, AbilityScores augmentedAbilities) {
-        int hitDiceCount = Optional.ofNullable(hitPoints.getHitDice())
-                .map(HitDice::getCount)
-                .orElseGet(() -> inferHitDiceCount(hitPoints.getFormula()));
+        int hitDiceCount = resolveHitDiceCount(hitPoints);
+        int hitDieSize = resolveHitDieSize(hitPoints);
+
+        if (hitDiceCount > 0 && hitDieSize > 0) {
+            return (hitDiceCount * hitDieSize) + (hitDiceCount * augmentedAbilities.getConstitutionModifier());
+        }
+
         int conDelta = augmentedAbilities.getConstitutionModifier() - baseAbilities.getConstitutionModifier();
         return hitPoints.getMaximum() + (hitDiceCount * conDelta);
+    }
+
+    private int resolveHitDiceCount(HitPointsDefinition hitPoints) {
+        return Optional.ofNullable(hitPoints.getHitDice())
+                .map(HitDice::getCount)
+                .orElseGet(() -> inferHitDiceCount(hitPoints.getFormula()));
+    }
+
+    private int resolveHitDieSize(HitPointsDefinition hitPoints) {
+        return Optional.ofNullable(hitPoints.getHitDice())
+                .map(HitDice::getDieSize)
+                .orElseGet(() -> inferHitDieSize(hitPoints.getFormula()));
     }
 
     private int inferHitDiceCount(String formula) {
@@ -328,6 +344,33 @@ public class DefaultCreatureResolver implements CreatureResolver {
             return Integer.parseInt(formula.substring(0, dIndex).trim());
         } catch (NumberFormatException ex) {
             return 1;
+        }
+    }
+
+    private int inferHitDieSize(String formula) {
+        if (formula == null || formula.isBlank()) {
+            return 0;
+        }
+
+        String normalized = formula.replace(" ", "").toLowerCase(Locale.ROOT);
+        int dIndex = normalized.indexOf('d');
+        if (dIndex < 0 || dIndex == normalized.length() - 1) {
+            return 0;
+        }
+
+        int endIndex = normalized.length();
+        for (int index = dIndex + 1; index < normalized.length(); index++) {
+            char character = normalized.charAt(index);
+            if (character == '+' || character == '-') {
+                endIndex = index;
+                break;
+            }
+        }
+
+        try {
+            return Integer.parseInt(normalized.substring(dIndex + 1, endIndex));
+        } catch (NumberFormatException ex) {
+            return 0;
         }
     }
 

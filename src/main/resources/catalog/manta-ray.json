@@ -1,0 +1,82 @@
+{
+  "id": "manta-ray",
+  "nombre": "Manta Ray",
+  "nivelSummon": 2,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [
+    "aquatic"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 1,
+  "sentidos": [
+    "blindsense 30 ft.",
+    "low-light vision"
+  ],
+  "percepcion": 6,
+  "atributos": {
+    "fuerza": 16,
+    "destreza": 13,
+    "constitucion": 15,
+    "inteligencia": 1,
+    "sabiduria": 13,
+    "carisma": 2
+  },
+  "ca": {
+    "normal": 13,
+    "toque": 10,
+    "desprevenido": 12,
+    "detalle": "+1 Dex, +3 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 19,
+    "formula": "3d8+6"
+  },
+  "salvaciones": {
+    "fortaleza": 5,
+    "reflejos": 4,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "swim",
+      "valor": 60
+    }
+  ],
+  "ataques": [
+    {
+      "id": "tail-slap",
+      "name": "Tail slap",
+      "attackBonus": 4,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+4",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "10 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 1\nManta Ray\nN Large animal aquatic\nInit +1\nSenses blindsense 30 ft., low-light vision; Perception +6\nAC 13, touch 10, flat-footed 12 (+1 Dex, +3 natural, -1 size)\nhp 19 (3d8+6)\nFort +5, Ref +4, Will +2\nSpeed swim 60 ft.\nMelee tail slap +4 (1d6+4)\nSpace 10 ft.; Reach 10 ft.\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 16, Dex 13, Con 15, Int 1, Wis 13, Cha 2\nBase Atk +2; CMB +6; CMD 17\nFeats Improved Bull Rush, Power Attack\nSkills Perception +6, Swim +15\nEnvironment  warm oceans\nOrganization solitary, pair, or flight (3-12)\nTreasure none\nSource PFRPG Bestiary 2\nDescription These fish are nonaggressive and generally avoid contact with other creatures. They filter plankton and similar small organisms from the water through their gaping, toothless maws.  Manta Ray Companion Starting Statistics: Size Medium; Speed swim 60 ft.; AC +1 natural; Attack tail slap (1d4); Ability Scores Str 8, Dex 15, Con 11, Int 1, Wis 13, Cha 2; Special Qualities low-light vision.  4th-Level Advancement: Size: Large; AC +2 natural armor; Attack tail slap (1d6); Ability Scores Str +8, Dex -2, Con +4; Special Qualities blindsense 30 ft."
+}

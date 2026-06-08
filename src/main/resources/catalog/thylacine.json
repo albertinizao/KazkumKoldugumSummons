@@ -1,0 +1,89 @@
+{
+  "id": "thylacine",
+  "nombre": "Thylacine",
+  "nivelSummon": 1,
+  "alineamiento": "N",
+  "tamano": "Small",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 8,
+  "atributos": {
+    "fuerza": 12,
+    "destreza": 15,
+    "constitucion": 16,
+    "inteligencia": 2,
+    "sabiduria": 13,
+    "carisma": 7
+  },
+  "ca": {
+    "normal": 13,
+    "toque": 13,
+    "desprevenido": 11,
+    "detalle": "+2 Dex, +1 size"
+  },
+  "pg": {
+    "maximos": 7,
+    "formula": "1d8+3"
+  },
+  "salvaciones": {
+    "fortaleza": 5,
+    "reflejos": 4,
+    "voluntad": 1
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 2,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4+1",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 19,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Powerful Jaws",
+      "resumen": "Sus mandíbulas amenazan crítico con una tirada natural de 19 o 20."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Powerful Jaws",
+      "texto": "Powerful Jaws (Ex) The thylacine threatens a critical hit on a natural roll of 19 or 20."
+    }
+  ],
+  "fullStatBlock": "CR 1/2\nThylacine\nN Small animal\nInit +2\nSenses low-light vision; Perception +8\nAC 13, touch 13, flat-footed 11 (+2 Dex, +1 size)\nhp 7 (1d8+3)\nFort +5, Ref +4, Will +1\nSpeed 30 ft.\nMelee bite +2 (1d4+1/19-20)\nSpace 5 ft.; Reach 5 ft.\nSpecial Abilities Powerful Jaws (Ex) The thylacine threatens a critical hit on a natural roll of 19 or 20.\nSpell-Like Abilities none\nStatistics Str 12, Dex 15, Con 16, Int 2, Wis 13, Cha 7\nCMD 12\nFeats Skill Focus (Perception)\nSkills Perception +8\nEnvironment warm hills\nOrganization solitary or pack (2-5)\nTreasure none\nSource PFRPG Bestiary 3"
+}

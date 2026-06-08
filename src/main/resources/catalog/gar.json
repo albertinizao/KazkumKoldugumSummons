@@ -1,0 +1,83 @@
+{
+  "id": "gar",
+  "nombre": "Gar",
+  "nivelSummon": 2,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "animal",
+  "subtipos": [
+    "aquatic"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 6,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 6,
+  "atributos": {
+    "fuerza": 14,
+    "destreza": 14,
+    "constitucion": 15,
+    "inteligencia": 1,
+    "sabiduria": 13,
+    "carisma": 2
+  },
+  "ca": {
+    "normal": 12,
+    "toque": 12,
+    "desprevenido": 11,
+    "detalle": "+2 Dex, +1 natural"
+  },
+  "pg": {
+    "maximos": 13,
+    "formula": "2d8+4"
+  },
+  "salvaciones": {
+    "fortaleza": 5,
+    "reflejos": 5,
+    "voluntad": 1
+  },
+  "velocidades": [
+    {
+      "tipo": "swim",
+      "valor": 60
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 13,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+3",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 1\nGar\nN Medium animal aquatic\nInit +6\nSenses low-light vision; Perception +6\nAC 12, touch 12, flat-footed 11 (+2 Dex, +1 natural)\nhp 13 (2d8+4)\nFort +5, Ref +5, Will +1\nSpeed swim 60 ft.\nMelee bite +13 (1d6+3 plus grab)\nSpace 5 ft.; Reach 5 ft.\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 14, Dex 14, Con 15, Int 1, Wis 13, Cha 2\nBase Atk +1; CMB +3; CMD 15\nFeats Improved Initiative\nSkills Perception +6, Swim +10\nEnvironment  temperate freshwater\nOrganization solitary, pair, or school (3-6)\nTreasure none\nSource PFRPG Bestiary 2\nDescription Gars are predatory fish that live in deep lakes and rivers. Sleek and swift, they regard anything their own size or smaller as food. A typical gar is 7 feet long and weighs 200 pounds. One species known as the alligator gar can grow to lengths of 10 feet. An alligator gar is a gar with the advanced creature template.  GAR COMPANIONS  Starting Statistics: Size Medium; Speed swim 60 ft., AC +1 natural, Attack bite 1d6; Ability Scores Str 14, Dex 14, Con 15, Int 1, Wis 13, Cha 2; Special Ability grab.  7th-Level Advancement: Size Large; AC +3 natural, Attack bite 1d8, Ability Scores +8 Str, -2 Dex, +4 Con."
+}
