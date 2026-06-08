@@ -15,13 +15,13 @@ public class SummonerConfiguration {
     @Id
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "max_summon_monster_level", nullable = false)
     private int maxSummonMonsterLevel = DEFAULT_MAX_SUMMON_MONSTER_LEVEL;
 
-    @Column(nullable = false)
+    @Column(name = "daily_uses_maximum")
     private int dailyUsesMaximum = DailyUses.DEFAULT_MAXIMUM;
 
-    @Column(nullable = false)
+    @Column(name = "daily_uses_remaining")
     private int dailyUsesRemaining = DailyUses.DEFAULT_REMAINING;
 
     protected SummonerConfiguration() {

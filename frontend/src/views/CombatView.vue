@@ -27,7 +27,8 @@
           <label>
             <span class="field-label">Plantilla</span>
             <select :value="store.selectedTemplate ?? ''" @change="onTemplateChange">
-              <option :value="''">Sin plantilla</option>
+              <option v-if="templateSelectionRequired" :value="''">Elige plantilla</option>
+              <option v-else-if="allowedTemplates.length === 0" :value="''">Sin plantilla</option>
               <option v-for="template in allowedTemplates" :key="template" :value="template">
                 {{ templateLabel(template) }}
               </option>
@@ -35,7 +36,7 @@
           </label>
 
           <div class="button-stack">
-            <ActionButton :disabled="store.busy || !store.selectedCreature" @click="handleSummon">
+            <ActionButton :disabled="store.busy || !canSummon" @click="handleSummon">
               Invocar
             </ActionButton>
             <ActionButton :disabled="store.busy" variant="danger" @click="handleClearSummons">
@@ -177,6 +178,14 @@ const store = useCombatStore();
 const expandedGroupId = ref<string | null>(null);
 
 const allowedTemplates = computed(() => store.selectedCreatureAllowedTemplates);
+const templateSelectionRequired = computed(() => allowedTemplates.value.length > 1);
+const canSummon = computed(() => {
+  if (!store.selectedCreature) {
+    return false;
+  }
+
+  return !templateSelectionRequired.value || store.selectedTemplate !== null;
+});
 const expandedGroup = computed(() => store.groups.find(group => group.id === expandedGroupId.value) ?? null);
 
 function templateLabel(template: SummonTemplateType): string {
