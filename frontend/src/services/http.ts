@@ -10,7 +10,8 @@ export async function getJson<T>(path: string): Promise<T> {
   });
 
   if (!response.ok) {
-    throw new Error(`GET ${path} failed with status ${response.status}`);
+    const body = await response.text();
+    throw new Error(parseErrorMessage(body, `GET ${path} failed with status ${response.status}`));
   }
 
   return (await response.json()) as T;
@@ -27,8 +28,29 @@ export async function postJson<TBody extends Record<string, unknown> | undefined
   });
 
   if (!response.ok) {
-    throw new Error(`POST ${path} failed with status ${response.status}`);
+    const body = await response.text();
+    throw new Error(parseErrorMessage(body, `POST ${path} failed with status ${response.status}`));
   }
 
   return (await response.json()) as TResult;
+}
+
+function parseErrorMessage(body: string, fallback: string): string {
+  if (!body) {
+    return fallback;
+  }
+
+  try {
+    const parsed = JSON.parse(body) as { code?: string; message?: string };
+    if (parsed.code && parsed.message) {
+      return `${parsed.code}: ${parsed.message}`;
+    }
+    if (parsed.message) {
+      return parsed.message;
+    }
+  } catch {
+    // Ignore JSON parse failures and fall back to raw text.
+  }
+
+  return body;
 }

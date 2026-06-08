@@ -4,6 +4,9 @@ import lombok.Value;
 
 @Value
 public class DailyUses {
+    public static final int DEFAULT_MAXIMUM = 6;
+    public static final int DEFAULT_REMAINING = 4;
+
     int maximum;
     int remaining;
 
@@ -26,7 +29,7 @@ public class DailyUses {
     }
 
     public DailyUses increase(int amount) {
-        if (amount < 0) {
+        if (amount <= 0) {
             throw new IllegalArgumentException("Amount to increase must be positive");
         }
         int newRemaining = Math.min(maximum, remaining + amount);
@@ -34,7 +37,7 @@ public class DailyUses {
     }
 
     public DailyUses decrease(int amount) {
-        if (amount < 0) {
+        if (amount <= 0) {
             throw new IllegalArgumentException("Amount to decrease must be positive");
         }
         int newRemaining = Math.max(0, remaining - amount);
@@ -51,5 +54,15 @@ public class DailyUses {
         }
         int newRemaining = Math.min(remaining, newMaximum);
         return new DailyUses(newMaximum, newRemaining);
+    }
+
+    public static DailyUses defaultDailyUses() {
+        return new DailyUses(DEFAULT_MAXIMUM, DEFAULT_REMAINING);
+    }
+
+    public static DailyUses normalize(int maximum, int remaining) {
+        int normalizedMaximum = Math.max(0, maximum);
+        int normalizedRemaining = Math.max(0, Math.min(remaining, normalizedMaximum));
+        return new DailyUses(normalizedMaximum, normalizedRemaining);
     }
 }

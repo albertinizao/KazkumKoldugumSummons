@@ -9,10 +9,30 @@ async function request(path, options = {}) {
 
   if (!response.ok) {
     const body = await response.text()
-    throw new Error(body || `Request failed: ${response.status}`)
+    throw new Error(parseErrorMessage(body, `Request failed: ${response.status}`))
   }
 
   return response
+}
+
+function parseErrorMessage(body, fallback) {
+  if (!body) {
+    return fallback
+  }
+
+  try {
+    const parsed = JSON.parse(body)
+    if (parsed.code && parsed.message) {
+      return `${parsed.code}: ${parsed.message}`
+    }
+    if (parsed.message) {
+      return parsed.message
+    }
+  } catch (error) {
+    // Ignore parse failures and return the raw body.
+  }
+
+  return body
 }
 
 export async function getConfiguration() {

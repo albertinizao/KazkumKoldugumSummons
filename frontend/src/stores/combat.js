@@ -1,6 +1,12 @@
 import { defineStore } from 'pinia'
 import { creatureCatalog } from '@/data/catalog'
 import { getSummonQuantity } from '@/services/api'
+import {
+  decreaseDailyUses as decreaseDailyUsesApi,
+  fetchConfiguration,
+  increaseDailyUses as increaseDailyUsesApi,
+  resetDailyUses as resetDailyUsesApi,
+} from '@/services/combatApi'
 import { readJson, writeJson } from '@/utils/persistence'
 import { resolveCreature, rollQuantity } from '@/utils/summoning'
 
@@ -30,6 +36,8 @@ function clamp(value, min, max) {
 export const useCombatStore = defineStore('combat', {
   state: () => ({
     dailyUses: { maximum: 6, remaining: 4 },
+    dailyUsesLoading: false,
+    dailyUsesError: null,
     groups: [],
     recentSummons: [],
     popularSummons: [],
@@ -73,6 +81,22 @@ export const useCombatStore = defineStore('combat', {
       this.dailyUses.maximum = Math.max(0, Number(this.dailyUses.maximum ?? 0))
       this.dailyUses.remaining = clamp(Number(this.dailyUses.remaining ?? 0), 0, this.dailyUses.maximum)
     },
+    async loadDailyUses() {
+      this.dailyUsesLoading = true
+      this.dailyUsesError = null
+      try {
+        const configuration = await fetchConfiguration()
+        this.dailyUses = {
+          maximum: Math.max(0, Number(configuration.dailyUses.maximum ?? 0)),
+          remaining: clamp(Number(configuration.dailyUses.remaining ?? 0), 0, Math.max(0, Number(configuration.dailyUses.maximum ?? 0)))
+        }
+        this.persist()
+      } catch (error) {
+        this.dailyUsesError = error instanceof Error ? error.message : String(error)
+      } finally {
+        this.dailyUsesLoading = false
+      }
+    },
     setDailyUsesMaximum(value) {
       this.dailyUses.maximum = Math.max(0, Number(value))
       this.dailyUses.remaining = clamp(this.dailyUses.remaining, 0, this.dailyUses.maximum)
@@ -82,17 +106,50 @@ export const useCombatStore = defineStore('combat', {
       this.dailyUses.remaining = clamp(Number(value), 0, this.dailyUses.maximum)
       this.persist()
     },
-    incrementDailyUses() {
-      this.dailyUses.remaining = clamp(this.dailyUses.remaining + 1, 0, this.dailyUses.maximum)
-      this.persist()
+    async incrementDailyUses(amount = 1) {
+      this.dailyUsesLoading = true
+      this.dailyUsesError = null
+      try {
+        const response = await increaseDailyUsesApi(amount)
+        this.dailyUses = response.dailyUses
+        this.persist()
+        return response
+      } catch (error) {
+        this.dailyUsesError = error instanceof Error ? error.message : String(error)
+        throw error
+      } finally {
+        this.dailyUsesLoading = false
+      }
     },
-    decrementDailyUses() {
-      this.dailyUses.remaining = clamp(this.dailyUses.remaining - 1, 0, this.dailyUses.maximum)
-      this.persist()
+    async decrementDailyUses(amount = 1) {
+      this.dailyUsesLoading = true
+      this.dailyUsesError = null
+      try {
+        const response = await decreaseDailyUsesApi(amount)
+        this.dailyUses = response.dailyUses
+        this.persist()
+        return response
+      } catch (error) {
+        this.dailyUsesError = error instanceof Error ? error.message : String(error)
+        throw error
+      } finally {
+        this.dailyUsesLoading = false
+      }
     },
-    resetDailyUses() {
-      this.dailyUses.remaining = this.dailyUses.maximum
-      this.persist()
+    async resetDailyUses() {
+      this.dailyUsesLoading = true
+      this.dailyUsesError = null
+      try {
+        const response = await resetDailyUsesApi()
+        this.dailyUses = response.dailyUses
+        this.persist()
+        return response
+      } catch (error) {
+        this.dailyUsesError = error instanceof Error ? error.message : String(error)
+        throw error
+      } finally {
+        this.dailyUsesLoading = false
+      }
     },
     openSummonModal(creature = null, templateKey = 'none') {
       this.selectedCreatureId = creature?.id ?? this.selectedCreatureId
