@@ -53,6 +53,9 @@ public class DefaultCreatureResolver implements CreatureResolver {
         ArmorClass armorClass = resolveArmorClass(template.getArmorClass(), deepGuardianApplied);
         SavingThrows savingThrows = resolveSavingThrows(template.getSavingThrows(), baseAbilities, augmentedAbilities);
         int maxHitPoints = resolveHitPoints(template.getHitPoints(), baseAbilities, augmentedAbilities);
+        String hitPointsFormula = template.getHitPoints().getFormula();
+        int cmb = resolveCombatManeuverBonus(resolvedAttacks);
+        int cmd = 10 + cmb + baseAbilities.getDexterityModifier();
         String speedsText = formatSpeeds(resolvedSpeeds);
         String attacksText = formatAttacks(resolvedAttacks);
         String displayName = buildDisplayName(template.getName(), templateType);
@@ -92,6 +95,9 @@ public class DefaultCreatureResolver implements CreatureResolver {
                 .perception(template.getPerception())
                 .armorClass(armorClass)
                 .maxHitPoints(maxHitPoints)
+                .hitPointsFormula(hitPointsFormula)
+                .cmb(cmb)
+                .cmd(cmd)
                 .savingThrows(savingThrows)
                 .speeds(resolvedSpeeds)
                 .speedsText(speedsText)
@@ -108,6 +114,7 @@ public class DefaultCreatureResolver implements CreatureResolver {
                         resolveAlignment(template.getAlignment(), templateType),
                         template.getSize(),
                         template.getCreatureType(),
+                        resolveSubtypes(template.getSubtypes(), templateType),
                         template.getInitiative(),
                         resolvedSenses,
                         template.getPerception(),
@@ -517,6 +524,7 @@ public class DefaultCreatureResolver implements CreatureResolver {
                                       Alignment alignment,
                                       CreatureSize size,
                                       String creatureType,
+                                      List<String> subtypes,
                                       int initiative,
                                       List<String> senses,
                                       int perception,
@@ -532,8 +540,9 @@ public class DefaultCreatureResolver implements CreatureResolver {
         String sensesText = String.join(", ", senses);
         String speedText = formatSpeeds(speeds);
         String attackText = formatAttacks(attacks);
+        String subtypeText = subtypes == null || subtypes.isEmpty() ? "" : " (" + String.join(", ", subtypes) + ")";
         return displayName + "\n"
-                + alignment + " " + toDisplaySize(size) + " " + creatureType + "\n"
+                + alignment + " " + toDisplaySize(size) + " " + creatureType + subtypeText + "\n"
                 + "Init +" + initiative + "; Senses " + sensesText + "; Perception +" + perception + "\n"
                 + "AC " + armorClass.getNormal() + ", touch " + armorClass.getTouch() + ", flat-footed " + armorClass.getFlatFooted() + " (" + armorClass.getDetail() + ")\n"
                 + "hp " + maxHitPoints + "\n"
@@ -575,6 +584,17 @@ public class DefaultCreatureResolver implements CreatureResolver {
     private String toDisplaySize(CreatureSize size) {
         String raw = size.name().toLowerCase(Locale.ROOT);
         return raw.substring(0, 1).toUpperCase(Locale.ROOT) + raw.substring(1);
+    }
+
+    private int resolveCombatManeuverBonus(List<Attack> attacks) {
+        return attacks.stream()
+                .filter(attack -> attack.getAttackType() == AttackType.MELEE)
+                .mapToInt(Attack::getAttackBonus)
+                .max()
+                .orElseGet(() -> attacks.stream()
+                        .mapToInt(Attack::getAttackBonus)
+                        .max()
+                        .orElse(0));
     }
 
     private com.pathfinder.summons.domain.model.SpecialDefense resistance(String value) {

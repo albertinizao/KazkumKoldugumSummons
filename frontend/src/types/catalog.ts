@@ -20,6 +20,9 @@ export interface SavingThrows {
 export interface CreatureCatalogSummary {
   armorClass: ArmorClass;
   maxHitPoints: number;
+  hitPointsFormula?: string | null;
+  cmb?: number | null;
+  cmd?: number | null;
   savingThrows: SavingThrows;
   speedsText: string;
   attacksText: string;
@@ -152,6 +155,9 @@ export interface ResolvedCreature {
   perception: number;
   armorClass: ArmorClass;
   maxHitPoints: number;
+  hitPointsFormula?: string | null;
+  cmb: number;
+  cmd: number;
   savingThrows: SavingThrows;
   speeds: Speed[];
   speedsText: string;

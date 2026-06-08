@@ -20,10 +20,13 @@ export async function getConfiguration(): Promise<{ maxSummonMonsterLevel: numbe
   return response.json();
 }
 
-export async function saveConfiguration(maxSummonMonsterLevel: number): Promise<{ maxSummonMonsterLevel: number }> {
+export async function saveConfiguration(
+  maxSummonMonsterLevel: number,
+  dailyUsesMaximum: number,
+): Promise<{ maxSummonMonsterLevel: number; dailyUses: { maximum: number; remaining: number } }> {
   const response = await request('/api/configuration', {
     method: 'PUT',
-    body: JSON.stringify({ maxSummonMonsterLevel }),
+    body: JSON.stringify({ maxSummonMonsterLevel, dailyUsesMaximum }),
   });
   return response.json();
 }

@@ -21,6 +21,9 @@ public class ResolvedCreature {
     int perception;
     ArmorClass armorClass;
     int maxHitPoints;
+    String hitPointsFormula;
+    int cmb;
+    int cmd;
     SavingThrows savingThrows;
     List<Speed> speeds;
     String speedsText;

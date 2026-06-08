@@ -5,6 +5,7 @@ import com.pathfinder.summons.domain.model.ConfigurationSummary;
 import com.pathfinder.summons.domain.model.DailyUses;
 import com.pathfinder.summons.domain.model.SummonerConfiguration;
 import com.pathfinder.summons.domain.model.SummonTemplateType;
+import com.pathfinder.summons.domain.repository.CombatStateRepository;
 import com.pathfinder.summons.domain.repository.SummonerConfigurationRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.Min;
@@ -18,13 +19,16 @@ import org.springframework.stereotype.Service;
 public class SummonerConfigurationService {
 
     private final SummonerConfigurationRepository repository;
+    private final CombatStateRepository combatStateRepository;
     private final SummonQuantityCalculator quantityCalculator;
     private final SummonerConfigurationSchemaMigrator schemaMigrator;
 
     public SummonerConfigurationService(SummonerConfigurationRepository repository,
+                                        CombatStateRepository combatStateRepository,
                                         SummonQuantityCalculator quantityCalculator,
                                         SummonerConfigurationSchemaMigrator schemaMigrator) {
         this.repository = repository;
+        this.combatStateRepository = combatStateRepository;
         this.quantityCalculator = quantityCalculator;
         this.schemaMigrator = schemaMigrator;
     }
@@ -41,10 +45,13 @@ public class SummonerConfigurationService {
                 .orElseGet(() -> repository.save(SummonerConfiguration.defaultConfiguration())));
     }
 
-    public SummonerConfiguration updateMaxSummonMonsterLevel(@Min(0) int maxSummonMonsterLevel) {
+    public SummonerConfiguration updateConfiguration(@Min(0) int maxSummonMonsterLevel, @Min(0) int dailyUsesMaximum) {
         SummonerConfiguration configuration = getConfiguration();
         configuration.setMaxSummonMonsterLevel(maxSummonMonsterLevel);
-        return repository.save(configuration);
+        configuration.setDailyUses(configuration.getDailyUses().updateMaximum(dailyUsesMaximum));
+        SummonerConfiguration saved = repository.save(configuration);
+        syncCombatStateDailyUses(saved.getDailyUses());
+        return saved;
     }
 
     public DailyUses getDailyUses() {
@@ -100,9 +107,23 @@ public class SummonerConfigurationService {
         if (normalized.getMaximum() != configuration.getDailyUsesMaximum()
                 || normalized.getRemaining() != configuration.getDailyUsesRemaining()) {
             configuration.setDailyUses(normalized);
-            return repository.save(configuration);
+            SummonerConfiguration saved = repository.save(configuration);
+            syncCombatStateDailyUses(saved.getDailyUses());
+            return saved;
         }
 
         return configuration;
+    }
+
+    private void syncCombatStateDailyUses(DailyUses dailyUses) {
+        CombatState combatState = combatStateRepository.getCombatState();
+        if (combatState == null) {
+            return;
+        }
+
+        CombatState updated = combatState.toBuilder()
+                .dailyUses(dailyUses)
+                .build();
+        combatStateRepository.saveCombatState(updated);
     }
 }

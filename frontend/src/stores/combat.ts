@@ -300,6 +300,72 @@ export const useCombatStore = defineStore('combat', {
         this.busy = false;
       }
     },
+    async rollAllGroupAttacks(): Promise<{ title: string; displayText: string } | null> {
+      const groups = [...this.groups];
+      if (groups.length === 0) {
+        return null;
+      }
+
+      this.busy = true;
+      this.error = '';
+
+      try {
+        const results = await Promise.all(
+          groups.map(group => rollGroupAttacksApi(group.id)),
+        );
+
+        const lastResponse = results[results.length - 1];
+        if (lastResponse) {
+          this.combatState = normalizeCombatState(lastResponse.combatState);
+          writeCombatStateSnapshot(this.combatState);
+        }
+
+        return {
+          title: 'Atacar con todas: todos los grupos',
+          displayText: results
+            .map(response => response.rollResult.displayText)
+            .join('\n\n'),
+        };
+      } catch (error) {
+        this.error = error instanceof Error ? error.message : 'No se pudieron resolver los ataques globales.';
+        return null;
+      } finally {
+        this.busy = false;
+      }
+    },
+    async rollAllGroupSavingThrows(): Promise<{ title: string; displayText: string } | null> {
+      const groups = [...this.groups];
+      if (groups.length === 0) {
+        return null;
+      }
+
+      this.busy = true;
+      this.error = '';
+
+      try {
+        const results = await Promise.all(
+          groups.map(group => rollGroupSavingThrowsApi(group.id)),
+        );
+
+        const lastResponse = results[results.length - 1];
+        if (lastResponse) {
+          this.combatState = normalizeCombatState(lastResponse.combatState);
+          writeCombatStateSnapshot(this.combatState);
+        }
+
+        return {
+          title: 'Tirar TS con todas: todos los grupos',
+          displayText: results
+            .map(response => response.rollResult.displayText)
+            .join('\n\n'),
+        };
+      } catch (error) {
+        this.error = error instanceof Error ? error.message : 'No se pudieron resolver las salvaciones globales.';
+        return null;
+      } finally {
+        this.busy = false;
+      }
+    },
     async loadDailyUses() {
       this.dailyUsesLoading = true;
       this.dailyUsesError = null;

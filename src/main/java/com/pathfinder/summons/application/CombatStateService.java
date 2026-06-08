@@ -135,7 +135,8 @@ public class CombatStateService implements CombatStateUseCase {
 
     @Override
     public CombatState updateMaxSummonLevel(int newLevel) {
-        configurationService.updateMaxSummonMonsterLevel(newLevel);
+        int dailyUsesMaximum = configurationService.getConfiguration().getDailyUses().getMaximum();
+        configurationService.updateConfiguration(newLevel, dailyUsesMaximum);
         CombatState state = loadOrCreateState();
         return refreshConfiguration(state);
     }

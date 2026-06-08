@@ -34,7 +34,7 @@ class CombatStateControllerIT {
 
     @BeforeEach
     void setUp() {
-        configurationService.updateMaxSummonMonsterLevel(1);
+        configurationService.updateConfiguration(1, 6);
         combatStateService.clearCombatState();
     }
 

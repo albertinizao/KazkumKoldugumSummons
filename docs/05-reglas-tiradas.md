@@ -39,9 +39,9 @@ El resultado debe ser una ayuda rápida para mesa, no una automatización comple
 
 # Tiradas de ataque
 
-## Acción: Atacar con todas
+## Acción: Atacar
 
-Cuando el usuario pulsa `Atacar con todas` en un grupo de criaturas, la aplicación debe:
+Cuando el usuario pulsa `Atacar` en un grupo de criaturas, la aplicación debe:
 
 1. Buscar todas las criaturas activas de ese grupo.
 2. Obtener la lista de ataques de la ficha final transformada de ese tipo de criatura.
@@ -343,9 +343,9 @@ Los campos `damageAbility` y `damageAbilityMultiplier` sirven para resolver la c
 
 # Tiradas de salvación
 
-## Acción: Tirar TS
+## Acción: Salvaciones
 
-Cuando el usuario pulsa `Tirar TS` en un grupo de criaturas, la aplicación debe:
+Cuando el usuario pulsa `Salvaciones` en un grupo de criaturas, la aplicación debe:
 
 1. Buscar todas las criaturas activas de ese grupo.
 2. Obtener las tres salvaciones de la ficha final transformada.
@@ -356,7 +356,7 @@ Cuando el usuario pulsa `Tirar TS` en un grupo de criaturas, la aplicación debe
 
 No habrá botones separados para Fortaleza, Reflejos y Voluntad en el MVP.
 
-El botón `Tirar TS` tira siempre las tres salvaciones.
+El botón `Salvaciones` tira siempre las tres salvaciones.
 
 ---
 
@@ -391,11 +391,11 @@ El formato compacto puede ocultar o expandir el detalle del d20 si la interfaz l
 
 # Resultado visible de tirada
 
-La aplicación conserva como máximo el resultado actual o más reciente de tirada.
+La aplicación puede mostrar el resultado de la tirada en una modal o panel temporal.
 
-Cada nueva tirada puede sustituir el resultado anterior.
+No es necesario conservar un bloque persistente del último resultado en la pantalla principal.
 
-El usuario debe poder limpiar manualmente ese resultado visible sin limpiar invocaciones, sin modificar PG, sin modificar usos diarios y sin crear historial de tiradas.
+Si el usuario cierra esa modal o panel, puede repetir la tirada pulsando otra vez el botón correspondiente.
 
 
 ---
@@ -440,7 +440,7 @@ Se crean 5 criaturas individuales.
 
 Las tiradas no necesitan guardarse como historial completo en el MVP.
 
-La aplicación debe mostrar el resultado actual o más reciente.
+La aplicación debe mostrar el resultado en una modal o panel temporal.
 
 El estado persistido debe incluir:
 
@@ -456,7 +456,7 @@ No es obligatorio persistir:
 - resultados antiguos de TS;
 - historial completo de tiradas.
 
-Si el usuario necesita otra tirada, puede volver a pulsar el botón correspondiente.
+Si el usuario cierra la modal o panel, puede volver a pulsar el botón correspondiente para repetir la tirada.
 
 ---
 

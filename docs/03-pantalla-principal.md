@@ -6,6 +6,8 @@ Debe estar optimizada para usarse de forma rápida desde una **tablet Android**,
 
 La prioridad de esta pantalla es permitir consultar criaturas activas, gestionar PG y resolver tiradas frecuentes con el menor número posible de toques.
 
+La cabecera de invocación también debe ofrecer acciones globales para resolver ataques y salvaciones de **todos** los grupos activos.
+
 ---
 
 # Objetivo de la pantalla
@@ -17,10 +19,12 @@ La pantalla principal debe permitir:
 - consultar la ficha resumida de cada tipo de criatura;
 - ver cuántas criaturas concretas hay de cada tipo;
 - gestionar PG individuales;
-- dañar, curar o eliminar criaturas concretas;
+- ajustar PG o eliminar criaturas concretas;
 - tirar ataques de todas las criaturas de un mismo tipo;
-- tirar las tres TS de todas las criaturas de un mismo tipo;
-- abrir la ficha completa final de una criatura cuando haga falta;
+- tirar las tres salvaciones de todas las criaturas de un mismo tipo;
+- tirar ataques de todas las criaturas de todos los grupos;
+- tirar las tres salvaciones de todas las criaturas de todos los grupos;
+- abrir la ficha completa final RAW de una criatura cuando haga falta;
 - limpiar todas las invocaciones activas al terminar un combate o escena.
 
 ---
@@ -36,7 +40,7 @@ Ejemplo:
 ```text
 Pantalla principal
 
-[Invocar] [Limpiar invocaciones] [Usos diarios: 4 / 6]
+[Invocar] [Limpiar invocaciones] [Atacar con todas] [Tirar TS con todas] [Usos diarios: 4 / 6]
 
 Fiery Badger
 - Ficha resumida del tipo de criatura.
@@ -163,7 +167,7 @@ Melee bite +4 (1d3+3 + 1 fire), 2 claws +4 (1d2+3 + 1 fire)
 Space 5 ft., Reach 5 ft.
 Special Attacks blood rage
 
-[Atacar con todas] [Tirar TS] [Expandir ficha]
+[Atacar] [Salvaciones] [Expandir ficha]
 
 [Fiery Badger 1] [Fiery Badger 2] [Fiery Badger 3] ...
 ```
@@ -243,23 +247,28 @@ Special Attacks blood rage
 
 Cada bloque de criatura debe tener estos botones:
 
-- `Atacar con todas`;
-- `Tirar TS`;
+- `Atacar`;
+- `Salvaciones`;
 - `Expandir ficha`.
 
 No debe haber botones separados para Fortaleza, Reflejos y Voluntad en el MVP.
 
-La acción `Tirar TS` tira las tres salvaciones para cada criatura del grupo.
+La acción `Salvaciones` tira las tres salvaciones para cada criatura del grupo.
 
-## Atacar con todas
+La cabecera de invocación debe incluir además:
 
-El botón `Atacar con todas` tira todos los ataques de todas las criaturas individuales de ese tipo.
+- `Atacar con todas`;
+- `Tirar TS con todas`.
+
+## Atacar
+
+El botón `Atacar` tira todos los ataques de todas las criaturas individuales de ese tipo.
 
 La aplicación no necesita permitir ataques individuales en el MVP.
 
 Debe mostrar claramente:
 
-- número o identificador de criatura;
+- nombre visible de criatura, por ejemplo `Fiery Badger 1`;
 - nombre del ataque;
 - tirada de ataque;
 - daño normal;
@@ -306,9 +315,9 @@ Daño crítico: 10 piercing + 2 fire
 
 El daño normal debe mostrarse siempre, incluso cuando haya crítico.
 
-## Tirar TS
+## Salvaciones
 
-El botón `Tirar TS` tira las tres salvaciones para todas las criaturas individuales del grupo:
+El botón `Salvaciones` tira las tres salvaciones para todas las criaturas individuales del grupo:
 
 - Fortaleza;
 - Reflejos;
@@ -334,6 +343,8 @@ Debe mostrar la ficha ya transformada:
 - con plantilla aplicada, si procede;
 - con `Deep Guardian` aplicado, si procede.
 
+Debe mostrar toda la información disponible de la criatura final, aunque el bloque resultante sea feo o largo.
+
 No es necesario mostrar la ficha base sin transformar.
 
 Si la pantalla consume un campo técnico de texto completo, debe usar `fullStatBlock`. En este contexto debe corresponder a la ficha final transformada (`ResolvedCreature.fullStatBlock`) o a una composición equivalente de campos estructurados finales.
@@ -352,35 +363,35 @@ Cada card representa una criatura concreta.
 
 Debe mostrar:
 
-- identificador de criatura;
+- nombre visible de criatura;
 - PG máximos;
 - PG actuales;
-- botón `Dañar`;
-- botón `Curar`;
+- botones rápidos `-10`, `-5`, `-1`, `+1`, `+5`, `+10`;
+- campo libre para introducir una cantidad con signo;
 - botón `Eliminar`.
 
 Ejemplo en formato conceptual:
 
 | Criatura | PG máx | PG actuales | Acciones |
 |---|---:|---:|---|
-| Fiery Badger 1 | 15 | 15 | Dañar / Curar / Eliminar |
-| Fiery Badger 2 | 15 | 7 | Dañar / Curar / Eliminar |
-| Fiery Badger 3 | 15 | -2 | Dañar / Curar / Eliminar |
+| Fiery Badger 1 | 15 | 15 | -10 / -5 / -1 / +1 / +5 / +10 / Eliminar |
+| Fiery Badger 2 | 15 | 7 | -10 / -5 / -1 / +1 / +5 / +10 / Eliminar |
+| Fiery Badger 3 | 15 | -2 | -10 / -5 / -1 / +1 / +5 / +10 / Eliminar |
 
 En tablet vertical, esta información puede representarse así:
 
 ```text
 Fiery Badger 1
 PG: 15 / 15
-[Dañar] [Curar] [Eliminar]
+[-10] [-5] [-1] [+1] [+5] [+10] [Eliminar]
 
 Fiery Badger 2
 PG: 7 / 15
-[Dañar] [Curar] [Eliminar]
+[-10] [-5] [-1] [+1] [+5] [+10] [Eliminar]
 
 Fiery Badger 3
 PG: -2 / 15 · Caída
-[Dañar] [Curar] [Eliminar]
+[-10] [-5] [-1] [+1] [+5] [+10] [Eliminar]
 ```
 
 ---
@@ -431,8 +442,7 @@ La aplicación no debe eliminarla automáticamente.
 
 El usuario puede seguir:
 
-- dañándola;
-- curándola;
+- ajustando PG;
 - eliminándola manualmente.
 
 Eliminar una criatura no cambia su estado a otro valor: la instancia desaparece del grupo. Si el grupo se queda sin instancias, el grupo desaparece.
@@ -441,76 +451,28 @@ Esto es importante porque algunas criaturas pueden seguir actuando o existiendo 
 
 ---
 
-# Dañar criatura
+## Ajustar PG de criatura
 
-El botón `Dañar` abre un modal para aplicar daño a una criatura individual.
+La aplicación debe permitir ajustar PG de una criatura individual con botones rápidos y un campo libre.
 
-El modal debe mostrar:
+Reglas de interfaz:
 
-- nombre de la criatura;
-- PG actuales;
-- PG máximos;
-- botones rápidos de daño;
-- campo para introducir daño manual como entero positivo mayor o igual que 1;
-- notas defensivas relevantes.
+- los valores negativos significan daño;
+- los valores positivos significan curación;
+- el campo libre puede aceptar cantidades con signo;
+- no se aplican automáticamente reducción de daño, resistencias, inmunidades ni vulnerabilidades;
+- si hay defensas relevantes, se muestran como referencia.
 
 Botones rápidos recomendados:
 
 ```text
--1
--5
 -10
-```
-
-Estos botones son etiquetas de interfaz. El endpoint de daño recibe siempre un `amount` positivo, por ejemplo `{ "amount": 5 }`; la resta de PG la determina `/damage`.
-
-El usuario introduce el daño final que quiere aplicar como entero positivo mayor o igual que 1. Si introduce `0`, un número negativo, decimal, texto, `null`, vacío o no informa el campo, la aplicación debe mostrar error y no modificar PG.
-
-La aplicación no debe calcular automáticamente reducción de daño, resistencias ni inmunidades.
-
-## Notas defensivas en el modal de daño
-
-Si la criatura tiene defensas relevantes, deben mostrarse en el modal de daño.
-
-Ejemplos:
-
-```text
-RD 5/good
-Resistencia fire 10
-Inmune poison
-```
-
-Estas notas sirven para que el usuario calcule manualmente el daño final antes de aplicarlo.
-
----
-
-# Curar criatura
-
-El botón `Curar` abre un modal o control equivalente para recuperar PG de una criatura individual.
-
-Debe mostrar:
-
-- nombre de la criatura;
-- PG actuales;
-- PG máximos;
-- botones rápidos de curación;
-- campo para introducir curación manual como entero positivo mayor o igual que 1.
-
-Botones rápidos recomendados:
-
-```text
+-5
+-1
 +1
 +5
 +10
 ```
-
-Estos botones son etiquetas de interfaz. El endpoint de curación recibe siempre un `amount` positivo, por ejemplo `{ "amount": 5 }`; la suma de PG la determina `/heal`.
-
-El usuario introduce la curación como entero positivo mayor o igual que 1. Si introduce `0`, un número negativo, decimal, texto, `null`, vacío o no informa el campo, la aplicación debe mostrar error y no modificar PG.
-
-La curación no debe superar los PG máximos salvo que se decida expresamente permitirlo por configuración.
-
-Para el MVP, la curación debe quedar limitada a los PG máximos.
 
 ---
 
@@ -535,28 +497,11 @@ La aplicación nunca debe borrar criaturas automáticamente por llegar a 0 PG o 
 
 # Resultado de tiradas
 
-La pantalla principal debe mostrar el resultado más reciente de una tirada, si existe.
+La pantalla principal no necesita un bloque persistente de "último resultado".
 
-Junto al resultado visible debe existir una acción discreta para limpiar solo ese resultado, por ejemplo un botón pequeño:
+El resultado de una tirada debe mostrarse en una modal o panel temporal.
 
-```text
-Limpiar resultado
-```
-
-Esta acción no debe saturar la pantalla ni competir visualmente con las acciones principales de combate.
-
-Puede mostrarse en:
-
-- modal;
-- panel inferior;
-- zona destacada bajo la cabecera;
-- zona destacada dentro del bloque de criatura correspondiente.
-
-El MVP no necesita historial completo de tiradas.
-
-Al pulsar `Limpiar resultado`, desaparece el resultado actual de la pantalla. Esta acción no elimina grupos, no elimina instancias, no cambia PG, no modifica usos diarios y no modifica configuración.
-
-Si el usuario necesita repetir una tirada, puede pulsar de nuevo el botón correspondiente.
+Si el usuario cierra esa modal y necesita repetir la tirada, puede pulsar de nuevo el botón correspondiente.
 
 ---
 
@@ -574,28 +519,25 @@ Cuando se invoca una criatura:
 6. Se descuentan usos diarios si `remaining > 0`; si está a 0, se mantiene en 0.
 7. Se persiste el estado.
 
-## Al dañar
+## Al ajustar PG
 
-Cuando se daña una criatura:
+Cuando se ajustan los PG de una criatura:
 
-1. El usuario pulsa `Dañar` en una card individual.
-2. La aplicación muestra notas defensivas relevantes, si existen.
-3. El usuario introduce el daño final.
-4. La aplicación resta PG.
-5. Si los PG quedan a 0 o menos, la card se marca como caída.
-6. La criatura permanece en pantalla.
-7. Se persiste el estado.
+1. El usuario pulsa un botón rápido o introduce una cantidad con signo.
+2. La aplicación aplica el cambio solo a la criatura individual.
+3. Si los PG quedan a 0 o menos, la card se marca como caída.
+4. La criatura permanece en pantalla.
+5. Se persiste el estado.
 
-## Al curar
+## Al ajustar PG (curación)
 
-Cuando se cura una criatura:
+Cuando se ajustan los PG de una criatura:
 
-1. El usuario pulsa `Curar` en una card individual.
-2. El usuario introduce la curación.
-3. La aplicación suma PG hasta el máximo permitido.
-4. Si la criatura estaba caída y pasa a tener más de 0 PG, deja de mostrarse como caída.
-5. El estado se recalcula como `HEALTHY` si queda a PG máximos o `DAMAGED` si queda por encima de 0 y por debajo de PG máximos.
-6. Se persiste el estado.
+1. El usuario pulsa un botón rápido o introduce una cantidad con signo.
+2. La aplicación aplica el cambio solo a la criatura individual.
+3. Si la criatura estaba caída y pasa a tener más de 0 PG, deja de mostrarse como caída.
+4. El estado se recalcula como `HEALTHY` si queda a PG máximos o `DAMAGED` si queda por encima de 0 y por debajo de PG máximos.
+5. Se persiste el estado.
 
 ## Al eliminar
 
@@ -647,10 +589,11 @@ Debe evitar:
 - Las criaturas individuales se muestran como cards, aunque puedan representarse como tabla en pantallas amplias.
 - No se muestran notas tácticas breves en la ficha resumida.
 - No hay botones separados de Fortaleza, Reflejos y Voluntad.
-- Hay un único botón `Tirar TS`.
+- Hay un único botón `Salvaciones`.
+- La cabecera de invocación muestra acciones globales para `Atacar con todas` y `Tirar TS con todas`.
 - El botón de ficha se llama `Expandir ficha`.
 - La ficha expandida muestra toda la ficha final transformada.
 - El botón `Eliminar` está visible siempre.
 - Las criaturas a 0 PG o menos se marcan como caídas pero no se borran automáticamente.
-- El daño y la curación se aplican siempre a criaturas individuales.
+- Los PG se ajustan siempre en criaturas individuales.
 - El estado se persiste tras cada cambio relevante.
