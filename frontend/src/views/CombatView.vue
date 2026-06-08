@@ -64,15 +64,6 @@
         </div>
       </div>
 
-        <div v-if="store.lastCombatRollResult" class="last-roll">
-          <CombatRollResultPanel :result="store.lastCombatRollResult" />
-        </div>
-
-        <div v-else-if="store.lastRollResult" class="last-roll">
-          <p class="eyebrow">Resultado más reciente</p>
-          <strong>{{ store.lastRollResult.title }}</strong>
-          <p class="muted">{{ store.lastRollResult.content }}</p>
-        </div>
       </section>
     </div>
 
@@ -147,6 +138,20 @@
     </section>
 
     <teleport to="body">
+      <div v-if="isRollResultModalOpen && store.lastCombatRollResult" class="modal-backdrop" @click.self="closeRollResultModal">
+        <section class="modal roll-modal" role="dialog" aria-modal="true" aria-labelledby="roll-result-title">
+          <div class="modal-header">
+            <div>
+              <p class="eyebrow">Resultado de tirada</p>
+              <h2 id="roll-result-title">{{ store.lastCombatRollResult.title }}</h2>
+            </div>
+            <ActionButton @click="closeRollResultModal">Cerrar</ActionButton>
+          </div>
+
+          <CombatRollResultPanel :result="store.lastCombatRollResult" />
+        </section>
+      </div>
+
       <div v-if="expandedGroup" class="modal-backdrop" @click.self="expandedGroupId = null">
         <section class="modal expanded-modal" role="dialog" aria-modal="true" aria-labelledby="expanded-title">
           <div class="modal-header">
@@ -183,6 +188,7 @@ import type { SummonTemplateType } from '@/types/catalog';
 
 const store = useCombatStore();
 const expandedGroupId = ref<string | null>(null);
+const isRollResultModalOpen = ref(false);
 
 const allowedTemplates = computed(() => store.selectedCreatureAllowedTemplates);
 const templateSelectionRequired = computed(() => allowedTemplates.value.length > 1);
@@ -235,14 +241,21 @@ async function handleShortcutSummon(shortcutId: string, source: 'RECENT' | 'MOST
 
 async function handleClearSummons(): Promise<void> {
   await store.clearSummons();
+  isRollResultModalOpen.value = false;
 }
 
 async function handleAttack(groupId: string): Promise<void> {
   await store.rollGroupAttacks(groupId);
+  if (store.lastCombatRollResult) {
+    isRollResultModalOpen.value = true;
+  }
 }
 
 async function handleSavingThrows(groupId: string): Promise<void> {
   await store.rollGroupSavingThrows(groupId);
+  if (store.lastCombatRollResult) {
+    isRollResultModalOpen.value = true;
+  }
 }
 
 async function handleDamage(instanceId: string, amount: number): Promise<void> {
@@ -255,6 +268,10 @@ async function handleHeal(instanceId: string, amount: number): Promise<void> {
 
 async function handleRemove(instanceId: string): Promise<void> {
   await store.removeCreature(instanceId);
+}
+
+function closeRollResultModal(): void {
+  isRollResultModalOpen.value = false;
 }
 
 onMounted(() => {
