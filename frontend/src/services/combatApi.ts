@@ -3,8 +3,11 @@ import type { CreatureCatalogListResponse } from '@/types/catalog';
 import type {
   ActiveSummonGroup,
   AmountRequest,
+  CombatRollResult,
   CombatState,
   DailyUses,
+  GroupAttackRollResponse,
+  GroupSavingThrowsRollResponse,
   SummonCreatureRequest,
 } from '@/types/combat';
 
@@ -65,6 +68,14 @@ export function clearLastRollResult(): Promise<CombatState> {
   return deleteJson<CombatState>('/api/combat-state/last-roll-result');
 }
 
+export function rollGroupAttacks(groupId: string): Promise<GroupAttackRollResponse> {
+  return postJson<Record<string, never>, GroupAttackRollResponse>(`/api/combat-state/groups/${encodeURIComponent(groupId)}/roll-attacks`, {});
+}
+
+export function rollGroupSavingThrows(groupId: string): Promise<GroupSavingThrowsRollResponse> {
+  return postJson<Record<string, never>, GroupSavingThrowsRollResponse>(`/api/combat-state/groups/${encodeURIComponent(groupId)}/roll-saving-throws`, {});
+}
+
 export function increaseDailyUses(amount: number): Promise<DailyUsesMutationResponse> {
   return postJson('/api/daily-uses/increase', { amount });
 }
@@ -84,3 +95,5 @@ export function fetchCatalogCreatures(): Promise<CreatureCatalogListResponse> {
 export function getGroupById(groups: ActiveSummonGroup[], groupId: string): ActiveSummonGroup | null {
   return groups.find(group => group.id === groupId) ?? null;
 }
+
+export type { CombatRollResult };
