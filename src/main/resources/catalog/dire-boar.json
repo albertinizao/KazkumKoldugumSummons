@@ -1,0 +1,66 @@
+{
+  "id": "dire-boar",
+  "nombre": "Dire Boar",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 4,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 12,
+  "atributos": {
+    "fuerza": 23,
+    "destreza": 10,
+    "constitucion": 17,
+    "inteligencia": 2,
+    "sabiduria": 13,
+    "carisma": 8
+  },
+  "ca": {
+    "normal": 15,
+    "toque": 9,
+    "desprevenido": 15,
+    "detalle": "+6 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 42,
+    "formula": "(5d8+20)"
+  },
+  "salvaciones": {
+    "fortaleza": 7,
+    "reflejos": 4,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 40
+    }
+  ],
+  "ataques": [],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "OTHER",
+      "valor": "ferocity",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 4\nDire Boar\nN Large animal\nInit +4\nSenses low-light vision, scent; Perception +12\nAC 15, touch 9, flat-footed 15 (+6 natural, -1 size)\nhp 42 ((5d8+20))\nFort +7, Ref +4, Will +2\nSpeed 40 ft.\nSpell-Like Abilities none\nStatistics Str 23, Dex 10, Con 17, Int 2, Wis 13, Cha 8\nBase Atk +3; CMB +10; CMD 20\nFeats Improved Initiative, Skill Focus (Perception), Toughness\nSkills Perception +12\nEnvironment  temperate or tropical forests\nOrganization solitary, pair, or herd (3-8)\nTreasure none\nDefensive Abilities ferocity\nSource PFRPG Bestiary"
+}

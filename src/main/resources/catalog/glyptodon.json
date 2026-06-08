@@ -1,0 +1,82 @@
+{
+  "id": "glyptodon",
+  "nombre": "Glyptodon",
+  "nivelSummon": 5,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 0,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 16,
+  "atributos": {
+    "fuerza": 25,
+    "destreza": 10,
+    "constitucion": 17,
+    "inteligencia": 2,
+    "sabiduria": 13,
+    "carisma": 6
+  },
+  "ca": {
+    "normal": 21,
+    "toque": 9,
+    "desprevenido": 21,
+    "detalle": "+12 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 67,
+    "formula": "(9d8+27)"
+  },
+  "salvaciones": {
+    "fortaleza": 11,
+    "reflejos": 6,
+    "voluntad": 4
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    }
+  ],
+  "ataques": [
+    {
+      "id": "claws",
+      "name": "Claws",
+      "attackBonus": 12,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d10+7",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [
+    "No se encontró coincidencia local en Combat Manager; se usó la ficha oficial de Archives of Nethys."
+  ],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 6\nGlyptodon\nN Large animal\nInit +0\nSenses low-light vision, scent; Perception +16\nAC 21, touch 9, flat-footed 21 (+12 natural, -1 size)\nhp 67 (9d8+27)\nFort +11, Ref +6, Will +4\nSpeed 20 ft.\nMelee 2 claws +12 (1d10+7)\nSpace 10 ft.; Reach 5 ft.\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 25, Dex 10, Con 17, Int 2, Wis 13, Cha 6\nBase Atk +6; CMB +14; CMD 24\nFeats Endurance, Great Fortitude, Improved Bull Rush, Power Attack, Skill Focus (Perception)\nSkills Perception +16\nSource PFRPG Bestiary 2"
+}

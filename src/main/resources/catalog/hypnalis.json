@@ -1,0 +1,101 @@
+{
+  "id": "hypnalis",
+  "nombre": "Hypnalis",
+  "nivelSummon": 5,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "outsider",
+  "subtipos": [
+    "extraplanar"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 6,
+  "sentidos": [
+    "darkvision 60 ft."
+  ],
+  "percepcion": 11,
+  "atributos": {
+    "fuerza": 22,
+    "destreza": 15,
+    "constitucion": 16,
+    "inteligencia": 7,
+    "sabiduria": 13,
+    "carisma": 10
+  },
+  "ca": {
+    "normal": 17,
+    "toque": 12,
+    "desprevenido": 15,
+    "detalle": "+2 Dex, +5 natural"
+  },
+  "pg": {
+    "maximos": 59,
+    "formula": "(7d10+21)"
+  },
+  "salvaciones": {
+    "fortaleza": 5,
+    "reflejos": 7,
+    "voluntad": 6
+  },
+  "velocidades": [
+    {
+      "tipo": "fly",
+      "valor": 60,
+      "maneuverability": "good"
+    },
+    {
+      "tipo": "land",
+      "valor": 40
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 13,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+9",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab",
+        "poison"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "constrict (1d6+9), poison, sneak attack +2d6"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Ghost Touch Fangs (Su) A hypnalis's bite attack is treated as if it has the ghost touch special weapon quality.  Phasing (Su) A hypnalis can shift from the Ethereal Plane to the Material Plane as a free action and shift back again as a move action (or part of a move action). The ability is otherwise identical to ethereal jaunt (CL 15th).  Poison (Su) If a hypnalis poisons an ethereal creature while on the Ethereal Plane (including creatures under the effects of spells or effects that grant etherealness such as ethereal jaunt), the creature is immediately forced onto the Material Plane and takes the specified Constitution damage. Creatures on the Material Plane are affected by this poison as normal. Hypnalis Venom: Bite-injury; save Fort DC 16; frequency 1/round for 6 rounds; effect 1d3 Con and effects listed above; cure 2 consecutive saves. The save DC is Constitution-based."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Ghost Touch Fangs (Su) A hypnalis's bite attack is treated as if it has the ghost touch special weapon quality.  Phasing (Su) A hypnalis can shift from the Ethereal Plane to the Material Plane as a free action and shift back again as a move action (or part of a move action). The ability is otherwise identical to ethereal jaunt (CL 15th).  Poison (Su) If a hypnalis poisons an ethereal creature while on the Ethereal Plane (including creatures under the effects of spells or effects that grant etherealness such as ethereal jaunt), the creature is immediately forced onto the Material Plane and takes the specified Constitution damage. Creatures on the Material Plane are affected by this poison as normal. Hypnalis Venom: Bite-injury; save Fort DC 16; frequency 1/round for 6 rounds; effect 1d3 Con and effects listed above; cure 2 consecutive saves. The save DC is Constitution-based."
+    }
+  ],
+  "fullStatBlock": "CR 5\nHypnalis\nN Medium outsider extraplanar\nInit +6\nSenses darkvision 60 ft.; Perception +11\nAC 17, touch 12, flat-footed 15 (+2 Dex, +5 natural)\nhp 59 (7d10+21)\nFort +5, Ref +7, Will +6\nSpeed 40 ft., fly 60 ft. (good)\nMelee bite +13 (1d6+9 plus grab and poison)\nSpecial Attacks constrict (1d6+9), poison, sneak attack +2d6\nSpecial Abilities Ghost Touch Fangs (Su) A hypnalis's bite attack is treated as if it has the ghost touch special weapon quality.  Phasing (Su) A hypnalis can shift from the Ethereal Plane to the Material Plane as a free action and shift back again as a move action (or part of a move action). The ability is otherwise identical to ethereal jaunt (CL 15th).  Poison (Su) If a hypnalis poisons an ethereal creature while on the Ethereal Plane (including creatures under the effects of spells or effects that grant etherealness such as ethereal jaunt), the creature is immediately forced onto the Material Plane and takes the specified Constitution damage. Creatures on the Material Plane are affected by this poison as normal. Hypnalis Venom: Bite-injury; save Fort DC 16; frequency 1/round for 6 rounds; effect 1d3 Con and effects listed above; cure 2 consecutive saves. The save DC is Constitution-based.\nSpell-Like Abilities none\nStatistics Str 22, Dex 15, Con 16, Int 7, Wis 13, Cha 10\nBase Atk +7; CMB +13; CMD 25\nFeats Blind-Fight, Improved Initiative, Skill Focus (Stealth), Shadow Strike\nSkills Bluff +10, Fly +10, Perception +11, Sense Motive +10, Stealth +15\nLanguages Aklo\nEnvironment  any (Ethereal Plane)\nOrganization solitary, pair, or nest (3-7)\nTreasure none\nSource PFRPG Bestiary 4"
+}

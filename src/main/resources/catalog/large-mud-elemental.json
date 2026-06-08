@@ -1,0 +1,117 @@
+{
+  "id": "large-mud-elemental",
+  "nombre": "Large Mud Elemental",
+  "nivelSummon": 5,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "outsider",
+  "subtipos": [
+    "earth",
+    "elemental",
+    "extraplanar",
+    "water"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 1,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "tremorsense 30 ft."
+  ],
+  "percepcion": 11,
+  "atributos": {
+    "fuerza": 20,
+    "destreza": 12,
+    "constitucion": 17,
+    "inteligencia": 4,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 17,
+    "toque": 10,
+    "desprevenido": 16,
+    "detalle": "+1 Dex, +7 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 68,
+    "formula": "(8d10+24)"
+  },
+  "salvaciones": {
+    "fortaleza": 9,
+    "reflejos": 7,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "swim",
+      "valor": 30
+    },
+    {
+      "tipo": "burrow",
+      "valor": 10
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 12,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+5",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "entrap"
+      ]
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "10 ft.",
+  "ataquesEspeciales": [
+    "entrap (DC 17, 10 minutes, hardness 5, hp 10)"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "5/-",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "acid",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Earth Glide (Ex) A burrowing mud elemental can pass through dirt, gravel, or other loose or porous solid matter as easily as a fish swims through water. It cannot use this ability to pass through a solid barrier such as a stone or brick wall. Its burrowing leaves behind no tunnel or hole, nor does it create any ripple or other sign of its presence. A move earth spell cast on an area containing a burrowing mud elemental flings the elemental back 30 feet, stunning the creature for 1 round unless it succeeds on a DC 15 Fortitude save. Entrap (Ex) The mud from an elemental's entrap ability can be washed away in 1d3 rounds of immersion in water."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Earth Glide (Ex) A burrowing mud elemental can pass through dirt, gravel, or other loose or porous solid matter as easily as a fish swims through water. It cannot use this ability to pass through a solid barrier such as a stone or brick wall. Its burrowing leaves behind no tunnel or hole, nor does it create any ripple or other sign of its presence. A move earth spell cast on an area containing a burrowing mud elemental flings the elemental back 30 feet, stunning the creature for 1 round unless it succeeds on a DC 15 Fortitude save. Entrap (Ex) The mud from an elemental's entrap ability can be washed away in 1d3 rounds of immersion in water."
+    }
+  ],
+  "fullStatBlock": "CR 5\nLarge Mud Elemental\nN Large outsider earth, elemental, extraplanar, water\nInit +1\nSenses darkvision 60 ft., tremorsense 30 ft.; Perception +11\nAC 17, touch 10, flat-footed 16 (+1 Dex, +7 natural, -1 size)\nhp 68 (8d10+24)\nFort +9, Ref +7, Will +2\nSpeed 20 ft., burrow 10 ft., swim 30 ft.\nMelee 2 slams +12 (1d8+5 plus entrap)\nSpecial Attacks entrap (DC 17, 10 minutes, hardness 5, hp 10)\nSpecial Abilities Earth Glide (Ex) A burrowing mud elemental can pass through dirt, gravel, or other loose or porous solid matter as easily as a fish swims through water. It cannot use this ability to pass through a solid barrier such as a stone or brick wall. Its burrowing leaves behind no tunnel or hole, nor does it create any ripple or other sign of its presence. A move earth spell cast on an area containing a burrowing mud elemental flings the elemental back 30 feet, stunning the creature for 1 round unless it succeeds on a DC 15 Fortitude save. Entrap (Ex) The mud from an elemental's entrap ability can be washed away in 1d3 rounds of immersion in water.\nSpell-Like Abilities none\nStatistics Str 20, Dex 12, Con 17, Int 4, Wis 11, Cha 11\nBase Atk +8; CMB +14; CMD 25\nFeats Cleave, Great Cleave, Greater Bull Rush, Improved Bull RushB, Power Attack\nSkills Climb +12, Escape Artist +8, Knowledge (planes) +4, Perception +11, Stealth +4, Swim +13\nLanguages Terran\nEnvironment  any land or water (Plane of Earth)\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDR 5/-\nImmune acid, elemental traits\nSource PFRPG Bestiary 2"
+}

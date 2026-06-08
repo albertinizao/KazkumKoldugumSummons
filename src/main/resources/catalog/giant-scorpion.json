@@ -1,0 +1,121 @@
+{
+  "id": "giant-scorpion",
+  "nombre": "Giant Scorpion",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "vermin",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 0,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "tremorsense 60 ft."
+  ],
+  "percepcion": 4,
+  "atributos": {
+    "fuerza": 19,
+    "destreza": 10,
+    "constitucion": 16,
+    "inteligencia": 0,
+    "sabiduria": 10,
+    "carisma": 2
+  },
+  "ca": {
+    "normal": 16,
+    "toque": 9,
+    "desprevenido": 16,
+    "detalle": "+7 armor, -1 size"
+  },
+  "pg": {
+    "maximos": 37,
+    "formula": "(5d8+15)"
+  },
+  "salvaciones": {
+    "fortaleza": 7,
+    "reflejos": 1,
+    "voluntad": 1
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 50
+    }
+  ],
+  "ataques": [
+    {
+      "id": "claws",
+      "name": "Claws",
+      "attackBonus": 6,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+4",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    },
+    {
+      "id": "sting",
+      "name": "Sting",
+      "attackBonus": 6,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+4",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "poison"
+      ]
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "10 ft.",
+  "ataquesEspeciales": [
+    "constrict (1d6+4)"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "IMMUNITY",
+      "valor": "mind-affecting effects",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Poison (Ex) Sting-injury; save Fort DC 17; frequency 1/round for 6 rounds; effect 1d2 Strength damage; cure 1 save. The save DC is Constitutuion-based and includes a +2 racial bonus."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Poison (Ex) Sting-injury; save Fort DC 17; frequency 1/round for 6 rounds; effect 1d2 Strength damage; cure 1 save. The save DC is Constitutuion-based and includes a +2 racial bonus."
+    }
+  ],
+  "fullStatBlock": "CR 3\nGiant Scorpion\nN Large vermin\nInit +0\nSenses darkvision 60 ft., tremorsense 60 ft.; Perception +4\nAC 16, touch 9, flat-footed 16 (+7 armor, -1 size)\nhp 37 ((5d8+15))\nFort +7, Ref +1, Will +1\nSpeed 50 ft.\nMelee 2 claws +6 (1d6+4 slashing)\nMelee Sting +6 (1d6+4 piercing)\nSpecial Attacks constrict (1d6+4)\nSpecial Abilities Poison (Ex) Sting-injury; save Fort DC 17; frequency 1/round for 6 rounds; effect 1d2 Strength damage; cure 1 save. The save DC is Constitutuion-based and includes a +2 racial bonus.\nSpell-Like Abilities none\nStatistics Str 19, Dex 10, Con 16, Int 0, Wis 10, Cha 2\nBase Atk +3; CMB +8; CMD 18\nSkills Climb +8, Perception +4, Stealth +0\nEnvironment  warm or temperate deserts, forests, plains, or underground\nOrganization solitary\nTreasure none\nImmune mind-affecting effects\nSource PFRPG Bestiary"
+}

@@ -15,9 +15,9 @@
         </div>
 
         <div class="toolbar">
-          <label>
+          <label class="level-filter">
             <span class="field-label">Nivel</span>
-            <select :value="store.catalogLevelFilter ?? ''" @change="onLevelFilterChange">
+            <select class="level-filter__select" :value="store.catalogLevelFilter ?? ''" @change="onLevelFilterChange">
               <option :value="''">Todos</option>
               <option v-for="level in summonLevels" :key="level" :value="level">
                 {{ level }}
@@ -50,7 +50,7 @@
               Invocar
             </ActionButton>
             <ActionButton :disabled="store.busy" variant="danger" @click="handleClearSummons">
-              Limpiar invocaciones
+              Limpiar
             </ActionButton>
           </div>
         </div>
@@ -456,9 +456,18 @@ p {
 
 .toolbar {
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
+  grid-template-columns: auto minmax(0, 1.35fr) minmax(0, 1.1fr) auto;
   gap: 0.75rem;
   align-items: end;
+}
+
+.level-filter {
+  max-width: 5.5rem;
+}
+
+.level-filter__select {
+  min-width: 5.5rem;
+  width: 100%;
 }
 
 .field-label {

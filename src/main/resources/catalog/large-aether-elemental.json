@@ -1,0 +1,131 @@
+{
+  "id": "large-aether-elemental",
+  "nombre": "Large Aether Elemental",
+  "nivelSummon": 5,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "outsider",
+  "subtipos": [
+    "aether",
+    "elemental",
+    "extraplanar"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 11,
+  "sentidos": [
+    "blindsense 60 ft.",
+    "darkvision 60 ft."
+  ],
+  "percepcion": 11,
+  "atributos": {
+    "fuerza": 16,
+    "destreza": 25,
+    "constitucion": 18,
+    "inteligencia": 6,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 20,
+    "toque": 20,
+    "desprevenido": 13,
+    "detalle": "+4 deflection, +7 Dex, -1 size"
+  },
+  "pg": {
+    "maximos": 76,
+    "formula": "(8d10+32)"
+  },
+  "salvaciones": {
+    "fortaleza": 10,
+    "reflejos": 13,
+    "voluntad": 4
+  },
+  "velocidades": [
+    {
+      "tipo": "fly",
+      "valor": 60,
+      "maneuverability": "good"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 10,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+3",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "telekinetic-throw",
+      "name": "Telekinetic Throw",
+      "attackBonus": 14,
+      "quantity": 1,
+      "attackType": "RANGED",
+      "damageComponents": [
+        {
+          "formula": "4d6+6",
+          "damageType": "OTHER",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "10 ft.",
+  "ataquesEspeciales": [
+    "telekinetic maneuver, telekinetic throw (DC 16)"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "5/-",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "force",
+      "notas": null
+    },
+    {
+      "tipo": "OTHER",
+      "valor": "telekinetic deflection",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Telekinetic Invisibility (Ex) An aether elemental's body bends light and dampens sound waves. This works as the kineticist utility wild talent telekinetic invisibility (Pathfinder RPG Occult Adventures 28), except that it is constant and doesn't end when the elemental attacks. As this ability is inherent, it is not subject to effects such as invisibility purge.  Telekinetic Throw (Ex) An aether elemental can fling a creature or object (with a maximum range of 480 feet). A creature receives a Fortitude save to avoid being thrown (the save DC is Constitution-based). The telekinetic throw deals the listed damage to both the thrown creature or object and the target. The aether elemental can throw a creature or object that weighs at most 50 pounds per Hit Die the elemental possesses.  Telekinetic Deflection (Su) An aether elemental gains a deflection bonus to its AC equal to its Constitution modifier.  Telekinetic Maneuver (Su) An aether elemental can attempt a ranged combat maneuver check, as per telekinesis, with a CMB equal to its Hit Dice + its Dexterity modifier."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Telekinetic Invisibility (Ex) An aether elemental's body bends light and dampens sound waves. This works as the kineticist utility wild talent telekinetic invisibility (Pathfinder RPG Occult Adventures 28), except that it is constant and doesn't end when the elemental attacks. As this ability is inherent, it is not subject to effects such as invisibility purge.  Telekinetic Throw (Ex) An aether elemental can fling a creature or object (with a maximum range of 480 feet). A creature receives a Fortitude save to avoid being thrown (the save DC is Constitution-based). The telekinetic throw deals the listed damage to both the thrown creature or object and the target. The aether elemental can throw a creature or object that weighs at most 50 pounds per Hit Die the elemental possesses.  Telekinetic Deflection (Su) An aether elemental gains a deflection bonus to its AC equal to its Constitution modifier.  Telekinetic Maneuver (Su) An aether elemental can attempt a ranged combat maneuver check, as per telekinesis, with a CMB equal to its Hit Dice + its Dexterity modifier."
+    }
+  ],
+  "fullStatBlock": "CR 5\nLarge Aether Elemental\nN Large outsider aether, elemental, extraplanar\nInit +11\nSenses blindsense 60 ft., darkvision 60 ft.; Perception +11\nAC 20, touch 20, flat-footed 13 (+4 deflection, +7 Dex, -1 size)\nhp 76 (8d10+32)\nFort +10, Ref +13, Will +4\nSpeed fly 60 ft. (good)\nMelee 2 slams +10 (1d8+3)\nRanged telekinetic throw +14 (4d6+6)\nSpecial Attacks telekinetic maneuver, telekinetic throw (DC 16)\nSpecial Abilities Telekinetic Invisibility (Ex) An aether elemental's body bends light and dampens sound waves. This works as the kineticist utility wild talent telekinetic invisibility (Pathfinder RPG Occult Adventures 28), except that it is constant and doesn't end when the elemental attacks. As this ability is inherent, it is not subject to effects such as invisibility purge.  Telekinetic Throw (Ex) An aether elemental can fling a creature or object (with a maximum range of 480 feet). A creature receives a Fortitude save to avoid being thrown (the save DC is Constitution-based). The telekinetic throw deals the listed damage to both the thrown creature or object and the target. The aether elemental can throw a creature or object that weighs at most 50 pounds per Hit Die the elemental possesses.  Telekinetic Deflection (Su) An aether elemental gains a deflection bonus to its AC equal to its Constitution modifier.  Telekinetic Maneuver (Su) An aether elemental can attempt a ranged combat maneuver check, as per telekinesis, with a CMB equal to its Hit Dice + its Dexterity modifier.\nSpell-Like Abilities none\nStatistics Str 16, Dex 25, Con 18, Int 6, Wis 11, Cha 11\nBase Atk +8; CMB +12; CMD 33\nFeats Improved InitiativeB, Improved Iron Will, Iron Will, Point-Blank Shot, Precise Shot\nSkills Acrobatics +18, Fly +20, Perception +11, Stealth +14\nEnvironment  any (Ethereal Plane)\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDefensive Abilities telekinetic deflection\nDR 5/-\nImmune elemental traits, force\nSource PFRPG Bestiary 5"
+}

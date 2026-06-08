@@ -1,0 +1,106 @@
+{
+  "id": "large-air-elemental",
+  "nombre": "Large Air Elemental",
+  "nivelSummon": 5,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "outsider",
+  "subtipos": [
+    "air",
+    "elemental",
+    "extraplanar"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 11,
+  "sentidos": [
+    "darkvision 60 ft."
+  ],
+  "percepcion": 11,
+  "atributos": {
+    "fuerza": 18,
+    "destreza": 25,
+    "constitucion": 16,
+    "inteligencia": 6,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 21,
+    "toque": 17,
+    "desprevenido": 13,
+    "detalle": "+7 Dex, +1 dodge, +4 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 68,
+    "formula": "(8d10+24)"
+  },
+  "salvaciones": {
+    "fortaleza": 9,
+    "reflejos": 13,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "fly",
+      "valor": 100,
+      "maneuverability": "perfect"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 14,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+4",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "10 ft.",
+  "ataquesEspeciales": [
+    "whirlwind (DC 18)"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "5/-",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    },
+    {
+      "tipo": "OTHER",
+      "valor": "air mastery",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Air Mastery",
+      "resumen": "Air Mastery (Ex) Airborne creatures take a -1 penalty on attack and damage rolls against an air elemental."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Air Mastery",
+      "texto": "Air Mastery (Ex) Airborne creatures take a -1 penalty on attack and damage rolls against an air elemental."
+    }
+  ],
+  "fullStatBlock": "CR 5\nLarge Air Elemental\nN Large outsider air, elemental, extraplanar\nInit +11\nSenses darkvision 60 ft.; Perception +11\nAC 21, touch 17, flat-footed 13 (+7 Dex, +1 dodge, +4 natural, -1 size)\nhp 68 (8d10+24)\nFort +9, Ref +13, Will +2\nSpeed fly 100 ft. (perfect)\nMelee 2 slams +14 (1d8+4)\nSpecial Attacks whirlwind (DC 18)\nSpecial Abilities Air Mastery (Ex) Airborne creatures take a -1 penalty on attack and damage rolls against an air elemental.\nSpell-Like Abilities none\nStatistics Str 18, Dex 25, Con 16, Int 6, Wis 11, Cha 11\nBase Atk +8; CMB +13; CMD 31\nFeats Combat Reflexes, Dodge, Flyby Attack, Improved InitiativeB, Mobility, Weapon FinesseB\nSkills Acrobatics +15, Escape Artist +15, Fly +21, Knowledge (planes) +5, Perception +11, Stealth +11\nLanguages Auran\nEnvironment  Plane of Air\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDefensive Abilities air mastery\nDR 5/-\nImmune elemental traits\nSource PFRPG Bestiary"
+}

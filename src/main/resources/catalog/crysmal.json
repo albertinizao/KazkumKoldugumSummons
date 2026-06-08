@@ -1,0 +1,121 @@
+{
+  "id": "crysmal",
+  "nombre": "Crysmal",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Small",
+  "tipo": "outsider",
+  "subtipos": [
+    "earth",
+    "elemental"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "crystal sense"
+  ],
+  "percepcion": 11,
+  "atributos": {
+    "fuerza": 15,
+    "destreza": 14,
+    "constitucion": 13,
+    "inteligencia": 6,
+    "sabiduria": 13,
+    "carisma": 14
+  },
+  "ca": {
+    "normal": 17,
+    "toque": 13,
+    "desprevenido": 15,
+    "detalle": "+2 Dex, +4 natural, +1 size"
+  },
+  "pg": {
+    "maximos": 26,
+    "formula": "(4d10+4)"
+  },
+  "salvaciones": {
+    "fortaleza": 7,
+    "reflejos": 8,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    },
+    {
+      "tipo": "burrow",
+      "valor": 20
+    }
+  ],
+  "ataques": [
+    {
+      "id": "sting",
+      "name": "Sting",
+      "attackBonus": 7,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+3",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "shard spike +7 (3d6",
+    "range increment 60 ft.)"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "5/bludgeoning",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "cold",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "fire",
+      "notas": null
+    },
+    {
+      "tipo": "RESISTANCE",
+      "valor": "electricity 10",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Crystal Sense (Sp) Crysmals can sense the presence of any crystals or gems within 30 feet as if using the scent ability.  Shard Spike (Ex) Once per day, a crysmal can launch its tail spike as a ranged attack that shatters when it hits, dealing 3d6 points of piercing damage to the target and 1d4 points of piercing damage to all creatures in adjacent squares. The spike regrows in 24 hours, but until it does, its impaired sting does only 1d6+3 damage."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Crystal Sense (Sp) Crysmals can sense the presence of any crystals or gems within 30 feet as if using the scent ability.  Shard Spike (Ex) Once per day, a crysmal can launch its tail spike as a ranged attack that shatters when it hits, dealing 3d6 points of piercing damage to the target and 1d4 points of piercing damage to all creatures in adjacent squares. The spike regrows in 24 hours, but until it does, its impaired sting does only 1d6+3 damage."
+    }
+  ],
+  "fullStatBlock": "CR 3\nCrysmal\nN Small outsider earth, elemental\nInit +2\nSenses darkvision 60 ft., crystal sense; Perception +11\nAC 17, touch 13, flat-footed 15 (+2 Dex, +4 natural, +1 size)\nhp 26 ((4d10+4))\nFort +7, Ref +8, Will +2\nSpeed 30 ft., burrow 20 ft.\nMelee Sting +7 (2d6+3 piercing)\nSpecial Attacks shard spike +7 (3d6, range increment 60 ft.)\nSpecial Abilities Crystal Sense (Sp) Crysmals can sense the presence of any crystals or gems within 30 feet as if using the scent ability.  Shard Spike (Ex) Once per day, a crysmal can launch its tail spike as a ranged attack that shatters when it hits, dealing 3d6 points of piercing damage to the target and 1d4 points of piercing damage to all creatures in adjacent squares. The spike regrows in 24 hours, but until it does, its impaired sting does only 1d6+3 damage.\nSpell-Like Abilities none\nStatistics Str 15, Dex 14, Con 13, Int 6, Wis 13, Cha 14\nBase Atk +4; CMB +5; CMD 17\nFeats Great FortitudeB, Lightning Reflexes, Skill Focus (Perception)\nSkills Acrobatics +9, Climb +9, Perception +11, Stealth +13 (+15 in rocky areas)\nLanguages Terran\nEnvironment  any underground (Plane of Earth)\nOrganization solitary or cluster (2-5)\nTreasure standard (gems and magic gemstones only)\nDR 5/bludgeoning\nImmune cold, fire\nResist electricity 10\nSource PFRPG Bestiary 2"
+}

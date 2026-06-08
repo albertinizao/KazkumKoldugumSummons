@@ -1,0 +1,105 @@
+{
+  "id": "lion",
+  "nombre": "Lion",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 7,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 9,
+  "atributos": {
+    "fuerza": 21,
+    "destreza": 17,
+    "constitucion": 15,
+    "inteligencia": 2,
+    "sabiduria": 12,
+    "carisma": 6
+  },
+  "ca": {
+    "normal": 15,
+    "toque": 12,
+    "desprevenido": 12,
+    "detalle": "+3 Dex, +3 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 32,
+    "formula": "(5d8+10)"
+  },
+  "salvaciones": {
+    "fortaleza": 6,
+    "reflejos": 7,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 40
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 7,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+5",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    },
+    {
+      "id": "claws",
+      "name": "Claws",
+      "attackBonus": 7,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4+5",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "pounce",
+    "rake (2 claws +7",
+    "1d4+5)"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 3\nLion\nN Large animal\nInit +7\nSenses low-light vision, scent; Perception +9\nAC 15, touch 12, flat-footed 12 (+3 Dex, +3 natural, -1 size)\nhp 32 ((5d8+10))\nFort +6, Ref +7, Will +2\nSpeed 40 ft.\nMelee Bite +7 (1d8+5 piercing)\nMelee 2 claws +7 (1d4+5 slashing)\nSpecial Attacks pounce, rake (2 claws +7, 1d4+5)\nSpell-Like Abilities none\nStatistics Str 21, Dex 17, Con 15, Int 2, Wis 12, Cha 6\nBase Atk +3; CMB +9; CMD 22\nFeats Improved Initiative, Run, Skill Focus (Perception)\nSkills Acrobatics +11, Perception +9, Stealth +8 (+12 in undergrowth)\nEnvironment  warm plains\nOrganization solitary, pair, or pride (3-10)\nTreasure none\nSource PFRPG Bestiary"
+}

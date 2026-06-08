@@ -1,0 +1,97 @@
+{
+  "id": "giant-seahorse",
+  "nombre": "Giant Seahorse",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [
+    "aquatic"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 11,
+  "atributos": {
+    "fuerza": 20,
+    "destreza": 14,
+    "constitucion": 17,
+    "inteligencia": 1,
+    "sabiduria": 12,
+    "carisma": 7
+  },
+  "ca": {
+    "normal": 15,
+    "toque": 11,
+    "desprevenido": 13,
+    "detalle": "+4 armor, +2 Dex, -1 size"
+  },
+  "pg": {
+    "maximos": 30,
+    "formula": "(4d8+12)"
+  },
+  "salvaciones": {
+    "fortaleza": 7,
+    "reflejos": 6,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "swim",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slam",
+      "name": "Slam",
+      "attackBonus": 7,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+7",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "OTHER",
+      "valor": "anchor",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Anchor (Ex) As a move action, a seahorse can wrap its tail around a stationary object. The seahorse remains anchored to the object until it releases its grip (a free action) or is forcibly moved. An anchored seahorse gains a +4 bonus to its combat maneuver defense and on checks and saving throws against effects that would move it against its will."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Anchor (Ex) As a move action, a seahorse can wrap its tail around a stationary object. The seahorse remains anchored to the object until it releases its grip (a free action) or is forcibly moved. An anchored seahorse gains a +4 bonus to its combat maneuver defense and on checks and saving throws against effects that would move it against its will."
+    }
+  ],
+  "fullStatBlock": "CR 3\nGiant Seahorse\nN Large animal aquatic\nInit +2\nSenses low-light vision; Perception +11\nAC 15, touch 11, flat-footed 13 (+4 armor, +2 Dex, -1 size)\nhp 30 ((4d8+12))\nFort +7, Ref +6, Will +2\nSpeed swim 30 ft.\nMelee Slam +7 (1d6+7 bludgeoning)\nSpecial Abilities Anchor (Ex) As a move action, a seahorse can wrap its tail around a stationary object. The seahorse remains anchored to the object until it releases its grip (a free action) or is forcibly moved. An anchored seahorse gains a +4 bonus to its combat maneuver defense and on checks and saving throws against effects that would move it against its will.\nSpell-Like Abilities none\nStatistics Str 20, Dex 14, Con 17, Int 1, Wis 12, Cha 7\nBase Atk +3; CMB +9; CMD 21\nFeats Endurance, Skill Focus (Perception)\nSkills Perception +11, Swim +13\nEnvironment  any oceans\nOrganization solitary, pair, or school (3-20)\nTreasure none\nDefensive Abilities anchor\nSource PFRPG Bestiary 4"
+}

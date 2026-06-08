@@ -1,0 +1,111 @@
+{
+  "id": "giant-skunk",
+  "nombre": "Giant Skunk",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 3,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 7,
+  "atributos": {
+    "fuerza": 17,
+    "destreza": 16,
+    "constitucion": 13,
+    "inteligencia": 2,
+    "sabiduria": 12,
+    "carisma": 9
+  },
+  "ca": {
+    "normal": 15,
+    "toque": 12,
+    "desprevenido": 12,
+    "detalle": "+3 Dex, +3 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 32,
+    "formula": "(5d8+10)"
+  },
+  "salvaciones": {
+    "fortaleza": 5,
+    "reflejos": 7,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 5,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+3",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "claws",
+      "name": "Claws",
+      "attackBonus": 5,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+3",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "musk"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Musk (Ex) Up to twice per day, a giant skunk can spray a stream of noxious musk at a single target within 30 feet as a standard action. With a successful ranged touch attack, the creature struck by this spray must make a DC 17 Fortitude save or be nauseated for 1d6 rounds and then sickened for 1d6 minutes by the horrific stench. A successful save reduces the effect to only 1d4 rounds of being sickened. A creature cannot use the scent ability as long as it is affected by this musk. The save DC is Constitution-based, and includes a +2 racial bonus."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Musk (Ex) Up to twice per day, a giant skunk can spray a stream of noxious musk at a single target within 30 feet as a standard action. With a successful ranged touch attack, the creature struck by this spray must make a DC 17 Fortitude save or be nauseated for 1d6 rounds and then sickened for 1d6 minutes by the horrific stench. A successful save reduces the effect to only 1d4 rounds of being sickened. A creature cannot use the scent ability as long as it is affected by this musk. The save DC is Constitution-based, and includes a +2 racial bonus."
+    }
+  ],
+  "fullStatBlock": "CR 3\nGiant Skunk\nN Large animal\nInit +3\nSenses low-light vision, scent; Perception +7\nAC 15, touch 12, flat-footed 12 (+3 Dex, +3 natural, -1 size)\nhp 32 ((5d8+10))\nFort +5, Ref +7, Will +2\nSpeed 30 ft.\nMelee Bite +5 (1d8+3 piercing)\nMelee 2 claws +5 (1d6+3 slashing)\nSpecial Attacks musk\nSpecial Abilities Musk (Ex) Up to twice per day, a giant skunk can spray a stream of noxious musk at a single target within 30 feet as a standard action. With a successful ranged touch attack, the creature struck by this spray must make a DC 17 Fortitude save or be nauseated for 1d6 rounds and then sickened for 1d6 minutes by the horrific stench. A successful save reduces the effect to only 1d4 rounds of being sickened. A creature cannot use the scent ability as long as it is affected by this musk. The save DC is Constitution-based, and includes a +2 racial bonus.\nSpell-Like Abilities none\nStatistics Str 17, Dex 16, Con 13, Int 2, Wis 12, Cha 9\nBase Atk +3; CMB +7; CMD 20\nFeats Ability Focus (musk), Power Attack, Toughness\nSkills Climb +7, Perception +7, Survival +2\nEnvironment  temperate forests\nOrganization solitary or pair\nTreasure none\nSource PFRPG Bestiary 3"
+}

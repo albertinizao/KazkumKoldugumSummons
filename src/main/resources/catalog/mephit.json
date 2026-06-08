@@ -1,0 +1,108 @@
+{
+  "id": "mephit",
+  "nombre": "Mephit",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Small",
+  "tipo": "outsider",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 6,
+  "sentidos": [
+    "darkvision 60 ft."
+  ],
+  "percepcion": 6,
+  "atributos": {
+    "fuerza": 13,
+    "destreza": 15,
+    "constitucion": 12,
+    "inteligencia": 6,
+    "sabiduria": 11,
+    "carisma": 14
+  },
+  "ca": {
+    "normal": 17,
+    "toque": 14,
+    "desprevenido": 14,
+    "detalle": "+2 Dex, +1 dodge, +3 natural, +1 size"
+  },
+  "pg": {
+    "maximos": 19,
+    "formula": "(3d10+3)"
+  },
+  "salvaciones": {
+    "fortaleza": 2,
+    "reflejos": 5,
+    "voluntad": 3
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    },
+    {
+      "tipo": "fly",
+      "valor": 40,
+      "maneuverability": "average"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "claws",
+      "name": "Claws",
+      "attackBonus": 5,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d3+1",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "breath weapon (15-foot cone",
+    "effect based on type",
+    "Reflex DC 13 for half )"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "5/magic",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [
+    "Generic mephit entry; subtype varies by elemental/mephitic type.",
+    "Generic mephit subtype varies by specific elemental or planar mephit type.",
+    "Source subtype is variable; the generic entry is intentionally kept subtype-empty in the static catalog."
+  ],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Breath Weapon (Su) Each type of mephit can unleash a particular breath weapon every 4 rounds as a standard action. The DC is Constitution-based and includes a +1 racial bonus."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Breath Weapon (Su) Each type of mephit can unleash a particular breath weapon every 4 rounds as a standard action. The DC is Constitution-based and includes a +1 racial bonus."
+    }
+  ],
+  "fullStatBlock": "CR 3\nMephit\nN Small outsider\nInit +6\nSenses darkvision 60 ft.; Perception +6\nAC 17, touch 14, flat-footed 14 (+2 Dex, +1 dodge, +3 natural, +1 size)\nhp 19 ((3d10+3))\nFort +2, Ref +5, Will +3\nSpeed 30 ft., fly 40 ft. (average)\nMelee 2 claws +5 (1d3+1 slashing)\nSpecial Attacks breath weapon (15-foot cone, effect based on type, Reflex DC 13 for half )\nSpecial Abilities Breath Weapon (Su) Each type of mephit can unleash a particular breath weapon every 4 rounds as a standard action. The DC is Constitution-based and includes a +1 racial bonus.\nSpell-Like Abilities none\nStatistics Str 13, Dex 15, Con 12, Int 6, Wis 11, Cha 14\nBase Atk +3; CMB +3; CMD 15\nFeats Dodge, Improved Initiative\nSkills Bluff +8, Fly +10, Perception +6, Stealth +12\nLanguages Common, one appropriate elemental language (Aquan, Auran, Ignan, or Terran)\nEnvironment  any (elemental planes)\nOrganization solitary, pair, gang (3-6), mob (7-12)\nTreasure standard\nDR 5/magic\nSource PFRPG Bestiary"
+}

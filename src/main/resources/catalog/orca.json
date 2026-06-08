@@ -1,0 +1,80 @@
+{
+  "id": "orca",
+  "nombre": "Orca",
+  "nivelSummon": 5,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 6,
+  "sentidos": [
+    "blindsight 120 ft.",
+    "low-light vision"
+  ],
+  "percepcion": 19,
+  "atributos": {
+    "fuerza": 27,
+    "destreza": 15,
+    "constitucion": 16,
+    "inteligencia": 2,
+    "sabiduria": 15,
+    "carisma": 6
+  },
+  "ca": {
+    "normal": 16,
+    "toque": 10,
+    "desprevenido": 14,
+    "detalle": "+2 Dex, +6 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 67,
+    "formula": "(9d8+27)"
+  },
+  "salvaciones": {
+    "fortaleza": 9,
+    "reflejos": 8,
+    "voluntad": 5
+  },
+  "velocidades": [
+    {
+      "tipo": "swim",
+      "valor": 80
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 13,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+12",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "10 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 5\nOrca\nN Huge animal\nInit +6\nSenses blindsight 120 ft., low-light vision; Perception +19\nAC 16, touch 10, flat-footed 14 (+2 Dex, +6 natural, -2 size)\nhp 67 (9d8+27)\nFort +9, Ref +8, Will +5\nSpeed swim 80 ft.\nMelee bite +13 (2d6+12)\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 27, Dex 15, Con 16, Int 2, Wis 15, Cha 6\nBase Atk +6; CMB +16; CMD 28\nFeats Endurance, Improved Initiative, Skill Focus (Perception, Swim), Weapon Focus (bite)\nSkills Perception +19, Swim +28\nEnvironment  cold oceans\nOrganization solitary, pair, or pod (3-20)\nTreasure none\nSource PFRPG Bestiary"
+}

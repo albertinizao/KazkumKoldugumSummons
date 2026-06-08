@@ -1,0 +1,101 @@
+{
+  "id": "medium-air-elemental",
+  "nombre": "Medium Air Elemental",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "outsider",
+  "subtipos": [
+    "air",
+    "elemental",
+    "extraplanar"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 9,
+  "sentidos": [
+    "darkvision 60 ft."
+  ],
+  "percepcion": 7,
+  "atributos": {
+    "fuerza": 14,
+    "destreza": 21,
+    "constitucion": 14,
+    "inteligencia": 4,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 19,
+    "toque": 16,
+    "desprevenido": 13,
+    "detalle": "+5 Dex, +1 dodge, +3 natural"
+  },
+  "pg": {
+    "maximos": 30,
+    "formula": "(4d10+8)"
+  },
+  "salvaciones": {
+    "fortaleza": 6,
+    "reflejos": 9,
+    "voluntad": 1
+  },
+  "velocidades": [
+    {
+      "tipo": "fly",
+      "valor": 100,
+      "maneuverability": "perfect"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slam",
+      "name": "Slam",
+      "attackBonus": 9,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+3",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "whirlwind (DC 14)"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    },
+    {
+      "tipo": "OTHER",
+      "valor": "air mastery",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Air Mastery (Ex) Airborne creatures take a -1 penalty on attack and damage rolls against an air elemental."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Air Mastery (Ex) Airborne creatures take a -1 penalty on attack and damage rolls against an air elemental."
+    }
+  ],
+  "fullStatBlock": "CR 3\nMedium Air Elemental\nN Medium outsider air, elemental, extraplanar\nInit +9\nSenses darkvision 60 ft.; Perception +7\nAC 19, touch 16, flat-footed 13 (+5 Dex, +1 dodge, +3 natural)\nhp 30 ((4d10+8))\nFort +6, Ref +9, Will +1\nSpeed fly 100 ft. (perfect)\nMelee Slam +9 (1d6+3 bludgeoning)\nSpecial Attacks whirlwind (DC 14)\nSpecial Abilities Air Mastery (Ex) Airborne creatures take a -1 penalty on attack and damage rolls against an air elemental.\nSpell-Like Abilities none\nStatistics Str 14, Dex 21, Con 14, Int 4, Wis 11, Cha 11\nBase Atk +4; CMB +6; CMD 22\nFeats Dodge, Flyby Attack, Improved InitiativeB, Weapon FinesseB\nSkills Acrobatics +11, Escape Artist +9, Fly +17, Knowledge (planes) +1, Perception +7, Stealth +10\nLanguages Auran\nEnvironment  Plane of Air\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDefensive Abilities air mastery\nImmune elemental traits\nSource PFRPG Bestiary"
+}

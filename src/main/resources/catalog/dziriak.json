@@ -1,0 +1,96 @@
+{
+  "id": "dziriak",
+  "nombre": "D'ziriak",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "outsider",
+  "subtipos": [
+    "extraplanar"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "darkvision 120 ft.",
+    "low-light vision"
+  ],
+  "percepcion": 9,
+  "atributos": {
+    "fuerza": 13,
+    "destreza": 15,
+    "constitucion": 12,
+    "inteligencia": 13,
+    "sabiduria": 14,
+    "carisma": 16
+  },
+  "ca": {
+    "normal": 16,
+    "toque": 12,
+    "desprevenido": 14,
+    "detalle": "+2 Dex, +4 natural"
+  },
+  "pg": {
+    "maximos": 26,
+    "formula": "(4d10+4)"
+  },
+  "salvaciones": {
+    "fortaleza": 2,
+    "reflejos": 6,
+    "voluntad": 6
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "claws",
+      "name": "Claws",
+      "attackBonus": 6,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+1",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "dazzling burst"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Dazzling Burst (Su) Once per day, a d'ziriak can cause its body to flare with intense, colorful light as a swift action. Non-d'ziriaks within a 20-foot radius must make a DC 13 Fortitude save or be dazzled for 1 minute. After using this ability, the d'ziriak's brilliant glow is extinguished for 24 hours. This ability is a light effect, and creatures that cannot see are immune to it. The save DC is Constitution-based.  Glow (Ex) The colorful runes that decorate a d'ziriak's body create dim light in a 20- foot radius from its body."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Dazzling Burst (Su) Once per day, a d'ziriak can cause its body to flare with intense, colorful light as a swift action. Non-d'ziriaks within a 20-foot radius must make a DC 13 Fortitude save or be dazzled for 1 minute. After using this ability, the d'ziriak's brilliant glow is extinguished for 24 hours. This ability is a light effect, and creatures that cannot see are immune to it. The save DC is Constitution-based.  Glow (Ex) The colorful runes that decorate a d'ziriak's body create dim light in a 20- foot radius from its body."
+    }
+  ],
+  "fullStatBlock": "CR 3\nD'ziriak\nN Medium outsider extraplanar\nInit +2\nSenses darkvision 120 ft., low-light vision; Perception +9\nAC 16, touch 12, flat-footed 14 (+2 Dex, +4 natural)\nhp 26 ((4d10+4))\nFort +2, Ref +6, Will +6\nSpeed 30 ft.\nMelee 2 claws +6 (1d6+1 slashing)\nSpecial Attacks dazzling burst\nSpecial Abilities Dazzling Burst (Su) Once per day, a d'ziriak can cause its body to flare with intense, colorful light as a swift action. Non-d'ziriaks within a 20-foot radius must make a DC 13 Fortitude save or be dazzled for 1 minute. After using this ability, the d'ziriak's brilliant glow is extinguished for 24 hours. This ability is a light effect, and creatures that cannot see are immune to it. The save DC is Constitution-based.  Glow (Ex) The colorful runes that decorate a d'ziriak's body create dim light in a 20- foot radius from its body.\nSpell-Like Abilities none\nStatistics Str 13, Dex 15, Con 12, Int 13, Wis 14, Cha 16\nBase Atk +4; CMB +5; CMD 17\nFeats Combat Reflexes, Weapon Focus (claw)\nSkills Climb +8, Knowledge (arcana) +8, Knowledge (planes) +8, Perception +9, Sense Motive +9, Stealth +9, Survival +7, Use Magic Device +8\nLanguages D'ziriak; telepathy 100 ft.\nEnvironment  any land (Plane of Shadow)\nOrganization solitary, pair, swarm (3-20), or hive (21-100)\nTreasure standard\nSource PFRPG Bestiary 2"
+}

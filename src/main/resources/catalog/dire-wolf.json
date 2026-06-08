@@ -1,0 +1,82 @@
+{
+  "id": "dire-wolf",
+  "nombre": "Dire Wolf",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 10,
+  "atributos": {
+    "fuerza": 19,
+    "destreza": 15,
+    "constitucion": 17,
+    "inteligencia": 2,
+    "sabiduria": 12,
+    "carisma": 10
+  },
+  "ca": {
+    "normal": 14,
+    "toque": 11,
+    "desprevenido": 12,
+    "detalle": "+2 Dex, +3 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 37,
+    "formula": "(5d8+15)"
+  },
+  "salvaciones": {
+    "fortaleza": 7,
+    "reflejos": 6,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 50
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 7,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+6",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "trip"
+      ]
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 3\nDire Wolf\nN Large animal\nInit +2\nSenses low-light vision, scent; Perception +10\nAC 14, touch 11, flat-footed 12 (+2 Dex, +3 natural, -1 size)\nhp 37 ((5d8+15))\nFort +7, Ref +6, Will +2\nSpeed 50 ft.\nMelee Bite +7 (1d8+6 piercing)\nSpell-Like Abilities none\nStatistics Str 19, Dex 15, Con 17, Int 2, Wis 12, Cha 10\nBase Atk +3; CMB +8; CMD 20\nFeats Run, Skill Focus (Perception), Weapon Focus (bite)\nSkills Perception +10, Stealth +3, Survival +1 (+5 scent tracking)\nEnvironment  cold or temperate forests\nOrganization solitary, pair, or pack (3-8)\nTreasure none\nSource PFRPG Bestiary"
+}

@@ -99,6 +99,7 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
     }
 
     private CreatureTemplate map(RawCreatureTemplate raw) {
+        boolean outsider = isOutsider(raw.tipo());
         return CreatureTemplate.builder()
                 .id(raw.id())
                 .name(raw.nombre())
@@ -107,9 +108,11 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
                 .size(parseCreatureSize(raw.tamano()))
                 .creatureType(raw.tipo())
                 .subtypes(safeList(raw.subtipos()))
-                .allowedTemplates(safeList(raw.plantillasPermitidas()).stream()
-                        .map(this::parseTemplateType)
-                        .toList())
+                .allowedTemplates(outsider
+                        ? List.of()
+                        : safeList(raw.plantillasPermitidas()).stream()
+                                .map(this::parseTemplateType)
+                                .toList())
                 .initiative(raw.iniciativa())
                 .senses(safeList(raw.sentidos()))
                 .perception(raw.percepcion())
@@ -174,6 +177,10 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
                         .toList())
                 .fullStatBlock(raw.fullStatBlock())
                 .build();
+    }
+
+    private boolean isOutsider(String creatureType) {
+        return creatureType != null && creatureType.trim().equalsIgnoreCase("outsider");
     }
 
     private Attack mapAttack(RawAttack rawAttack) {
