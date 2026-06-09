@@ -34,7 +34,7 @@
     "detalle": "+4 Dex, +1 dodge, +2 natural, -1 size"
   },
   "pg": {
-    "maximos": 32,
+    "maximos": 50,
     "formula": "(5d8+10)"
   },
   "salvaciones": {

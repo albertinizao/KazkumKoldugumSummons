@@ -1,0 +1,97 @@
+{
+  "id": "elder-earth-elemental",
+  "nombre": "Elder Earth Elemental",
+  "nivelSummon": 8,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "outsider",
+  "subtipos": [
+    "earth",
+    "elemental",
+    "extraplanar"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": -1,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "tremorsense 60 ft."
+  ],
+  "percepcion": 19,
+  "atributos": {
+    "fuerza": 34,
+    "destreza": 8,
+    "constitucion": 21,
+    "inteligencia": 10,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 23,
+    "toque": 7,
+    "desprevenido": 23,
+    "detalle": "-1 Dex, +16 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 240,
+    "formula": "(16d10+80)"
+  },
+  "salvaciones": {
+    "fortaleza": 15,
+    "reflejos": 4,
+    "voluntad": 10
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "burrow",
+      "valor": 20
+    },
+    {
+      "tipo": "land",
+      "valor": 0
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 26,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d10+12",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 19,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/-",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 11\nElder Earth Elemental\nN Huge outsider earth, elemental, extraplanar\nInit +-1\nSenses darkvision 60 ft., tremorsense 60 ft.; Perception +19\nAC 23, touch 7, flat-footed 23 (-1 Dex, +16 natural, -2 size)\nhp 240 (16d10+80)\nFort +15, Ref +4, Will +10\nSpeed 20 ft., burrow 20 ft., earth glide\nMelee 2 slams +26 (2d10+12/19-20)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 34, Dex 8, Con 21, Int 10, Wis 11, Cha 11\nBase Atk +16\nCMB +30\nCMD 39\nEnvironment any (Plane of Earth)\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDR 10/-\nImmune elemental traits\nSource PFRPG Bestiary"
+}

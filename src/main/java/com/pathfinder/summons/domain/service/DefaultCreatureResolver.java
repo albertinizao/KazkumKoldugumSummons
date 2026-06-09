@@ -308,12 +308,6 @@ public class DefaultCreatureResolver implements CreatureResolver {
 
     private int resolveHitPoints(HitPointsDefinition hitPoints, AbilityScores baseAbilities, AbilityScores augmentedAbilities) {
         int hitDiceCount = resolveHitDiceCount(hitPoints);
-        int hitDieSize = resolveHitDieSize(hitPoints);
-
-        if (hitDiceCount > 0 && hitDieSize > 0) {
-            return (hitDiceCount * hitDieSize) + (hitDiceCount * augmentedAbilities.getConstitutionModifier());
-        }
-
         int conDelta = augmentedAbilities.getConstitutionModifier() - baseAbilities.getConstitutionModifier();
         return hitPoints.getMaximum() + (hitDiceCount * conDelta);
     }
@@ -335,13 +329,14 @@ public class DefaultCreatureResolver implements CreatureResolver {
             return 1;
         }
 
-        int dIndex = formula.toLowerCase(Locale.ROOT).indexOf('d');
+        String normalized = normalizeFormula(formula);
+        int dIndex = normalized.toLowerCase(Locale.ROOT).indexOf('d');
         if (dIndex <= 0) {
             return 1;
         }
 
         try {
-            return Integer.parseInt(formula.substring(0, dIndex).trim());
+            return Integer.parseInt(normalized.substring(0, dIndex).trim());
         } catch (NumberFormatException ex) {
             return 1;
         }
@@ -352,7 +347,7 @@ public class DefaultCreatureResolver implements CreatureResolver {
             return 0;
         }
 
-        String normalized = formula.replace(" ", "").toLowerCase(Locale.ROOT);
+        String normalized = normalizeFormula(formula).toLowerCase(Locale.ROOT);
         int dIndex = normalized.indexOf('d');
         if (dIndex < 0 || dIndex == normalized.length() - 1) {
             return 0;
@@ -372,6 +367,14 @@ public class DefaultCreatureResolver implements CreatureResolver {
         } catch (NumberFormatException ex) {
             return 0;
         }
+    }
+
+    private String normalizeFormula(String formula) {
+        String normalized = formula.trim().replace(" ", "");
+        while (normalized.startsWith("(") && normalized.endsWith(")") && normalized.length() > 1) {
+            normalized = normalized.substring(1, normalized.length() - 1).trim().replace(" ", "");
+        }
+        return normalized;
     }
 
     private String formatSpeeds(List<Speed> speeds) {

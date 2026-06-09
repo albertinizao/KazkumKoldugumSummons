@@ -1,0 +1,106 @@
+{
+  "id": "dire-tiger",
+  "nombre": "Dire Tiger",
+  "nivelSummon": 6,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 6,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 12,
+  "atributos": {
+    "fuerza": 27,
+    "destreza": 15,
+    "constitucion": 17,
+    "inteligencia": 2,
+    "sabiduria": 12,
+    "carisma": 10
+  },
+  "ca": {
+    "normal": 17,
+    "toque": 11,
+    "desprevenido": 15,
+    "detalle": "+2 Dex, +6 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 154,
+    "formula": "(14d8+42)"
+  },
+  "salvaciones": {
+    "fortaleza": 12,
+    "reflejos": 11,
+    "voluntad": 5
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 40
+    }
+  ],
+  "ataques": [
+    {
+      "id": "claws",
+      "name": "Claws",
+      "attackBonus": 18,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d4+8",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    },
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 18,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+8",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 19,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "pounce",
+    "rake (2 claws +18, 2d4+8)"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 8\nDire Tiger\nN Large animal\nInit +6\nSenses low-light vision, scent; Perception +12\nAC 17, touch 11, flat-footed 15 (+2 Dex, +6 natural, -1 size)\nhp 105 (14d8+42)\nFort +12, Ref +11, Will +5\nSpeed 40 ft.\nMelee 2 claws +18 (2d4+8 plus grab), bite +18 (2d6+8/19-20 plus grab)\nSpecial Attacks pounce, rake (2 claws +18, 2d4+8)\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 27, Dex 15, Con 17, Int 2, Wis 12, Cha 10\nBase Atk +10; CMB +19; CMD 31\nFeats Improved Critical (bite), Improved Initiative, Run, Skill Focus (Perception), Skill Focus (Stealth), Weapon Focus (bite, claw)\nSkills Acrobatics +6, Perception +12, Stealth +15 (+23 in tall grass), Swim +13\nEnvironment  any forests, plains, and swamps\nOrganization solitary or pair\nTreasure none\nSource PFRPG Bestiary"
+}

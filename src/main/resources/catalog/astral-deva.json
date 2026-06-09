@@ -1,0 +1,155 @@
+{
+  "id": "astral-deva",
+  "nombre": "Astral Deva",
+  "nivelSummon": 9,
+  "alineamiento": "NG",
+  "tamano": "Medium",
+  "tipo": "outsider",
+  "subtipos": [
+    "angel",
+    "extraplanar",
+    "good"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 8,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "low-light vision"
+  ],
+  "percepcion": 26,
+  "atributos": {
+    "fuerza": 26,
+    "destreza": 19,
+    "constitucion": 21,
+    "inteligencia": 18,
+    "sabiduria": 18,
+    "carisma": 23
+  },
+  "ca": {
+    "normal": 29,
+    "toque": 14,
+    "desprevenido": 25,
+    "detalle": "+4 Dex, +15 natural +4 deflection vs. evil"
+  },
+  "pg": {
+    "maximos": 240,
+    "formula": "(15d10+90)"
+  },
+  "salvaciones": {
+    "fortaleza": 16,
+    "reflejos": 13,
+    "voluntad": 11
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 50
+    },
+    {
+      "tipo": "fly",
+      "valor": 100,
+      "maneuverability": "good"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "disrupting-warhammer",
+      "name": "Disrupting warhammer",
+      "attackBonus": 26,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+14",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 3
+      },
+      "notes": [
+        "stun"
+      ]
+    },
+    {
+      "id": "slam",
+      "name": "Slam",
+      "attackBonus": 23,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+12",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": null,
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/evil",
+      "notas": null
+    },
+    {
+      "tipo": "RESISTANCE",
+      "valor": "electricity 10",
+      "notas": null
+    },
+    {
+      "tipo": "RESISTANCE",
+      "valor": "fire 10",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "acid",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "cold",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "petrification",
+      "notas": null
+    },
+    {
+      "tipo": "SPELL_RESISTANCE",
+      "valor": "25",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Qualities",
+      "resumen": "change shape (alter self )"
+    },
+    {
+      "nombre": "Defensive Abilities",
+      "resumen": "uncanny dodge"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Qualities",
+      "texto": "change shape (alter self )"
+    },
+    {
+      "nombre": "Defensive Abilities",
+      "texto": "uncanny dodge"
+    }
+  ],
+  "fullStatBlock": "CR 14\nAstral Deva\nNG Medium outsider angel, extraplanar, good\nInit +8\nSenses darkvision 60 ft., low-light vision; Perception +26\nAura protective aura\nAC 29, touch 14, flat-footed 25 (+4 Dex, +15 natural +4 deflection vs. evil)\nhp 240 (15d10+90)\nFort +16, Ref +13, Will +11; +4 vs. poison, +4 resistance vs. evil\nSpeed 50 ft., fly 100 ft. (good)\nMelee +2 disrupting warhammer +26/+21/+16 (1d8+14/x3 plus stun) or slam +23 (1d8+12)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nSpecial Qualities change shape (alter self )\nDefensive Abilities uncanny dodge\nStatistics Str 26, Dex 19, Con 21, Int 18, Wis 18, Cha 23\nBase Atk +15\nCMB +23\nCMD 37\nEnvironment any good-aligned plane\nOrganization solitary, pair, or squad (3-6)\nTreasure double (+2 disrupting warhammer)\nDR 10/evil\nResist electricity 10, fire 10\nImmune acid, cold, petrification\nSR 25\nSource PFRPG Bestiary"
+}

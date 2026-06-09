@@ -39,7 +39,7 @@
     "detalle": "+4 natural, +1 size +2 deflect vs. evil"
   },
   "pg": {
-    "maximos": 13,
+    "maximos": 22,
     "formula": "(2d10+2)"
   },
   "salvaciones": {

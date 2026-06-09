@@ -34,7 +34,7 @@
     "detalle": "-1 Dex, +1 natural, +2 size"
   },
   "pg": {
-    "maximos": 5,
+    "maximos": 9,
     "formula": "1d8+1"
   },
   "salvaciones": {

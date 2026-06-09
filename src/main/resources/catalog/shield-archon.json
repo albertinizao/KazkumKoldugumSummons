@@ -1,0 +1,115 @@
+{
+  "id": "shield-archon",
+  "nombre": "Shield Archon",
+  "nivelSummon": 7,
+  "alineamiento": "LG",
+  "tamano": "Large",
+  "tipo": "outsider",
+  "subtipos": [
+    "archon",
+    "extraplanar",
+    "good",
+    "lawful"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 5,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "low-light vision"
+  ],
+  "percepcion": 15,
+  "atributos": {
+    "fuerza": 20,
+    "destreza": 13,
+    "constitucion": 25,
+    "inteligencia": 14,
+    "sabiduria": 16,
+    "carisma": 15
+  },
+  "ca": {
+    "normal": 29,
+    "toque": 10,
+    "desprevenido": 28,
+    "detalle": "+9 armor, +1 Dex, +4 natural, +6 shield, -1 size, +2 deflection vs. evil"
+  },
+  "pg": {
+    "maximos": 153,
+    "formula": "(9d10+63)"
+  },
+  "salvaciones": {
+    "fortaleza": 13,
+    "reflejos": 7,
+    "voluntad": 8
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 40
+    },
+    {
+      "tipo": "fly",
+      "valor": 90,
+      "maneuverability": "good"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "shortspear",
+      "name": "Shortspear",
+      "attackBonus": 16,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+10",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "10 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/evil",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "electricity",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "petrification",
+      "notas": null
+    },
+    {
+      "tipo": "SPELL_RESISTANCE",
+      "valor": "21",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Qualities",
+      "resumen": "spear and shield, stability"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Qualities",
+      "texto": "spear and shield, stability"
+    }
+  ],
+  "fullStatBlock": "CR 10\nShield Archon\nLG Large outsider archon, extraplanar, good, lawful\nInit +5\nSenses darkvision 60 ft., low-light vision; Perception +15\nAC 29, touch 10, flat-footed 28 (+9 armor, +1 Dex, +4 natural, +6 shield, -1 size, +2 deflection vs. evil)\nhp 153 (9d10+63)\nFort +13, Ref +7, Will +8\nSpeed 40 ft., fly 90 ft. (good)\nMelee +3 shortspear +16/+11 (1d8+10)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nSpecial Qualities spear and shield, stability\nStatistics Str 20, Dex 13, Con 25, Int 14, Wis 16, Cha 15\nBase Atk +9; CMB +15; CMD 2630\nLanguages Celestial, Draconic, Infernal; truespeech\nEnvironment any (Heaven)\nOrganization solitary, pair, or squad (3-5)\nTreasure standard (full plate, other treasure)\nDR 10/evil\nSR 21\nImmune electricity, petrification\nSource PFRPG Bestiary 2"
+}

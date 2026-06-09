@@ -41,7 +41,7 @@
     "detalle": "+4 Dex, +2 size"
   },
   "pg": {
-    "maximos": 19,
+    "maximos": 33,
     "formula": "(3d10+3)"
   },
   "salvaciones": {

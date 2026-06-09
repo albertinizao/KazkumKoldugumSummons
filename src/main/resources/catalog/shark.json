@@ -36,7 +36,7 @@
     "detalle": "+1 Dex, +4 natural, -1 size"
   },
   "pg": {
-    "maximos": 22,
+    "maximos": 36,
     "formula": "(4d8+4)"
   },
   "salvaciones": {

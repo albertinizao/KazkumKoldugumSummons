@@ -1,0 +1,95 @@
+{
+  "id": "dire-crocodile",
+  "nombre": "Dire Crocodile",
+  "nivelSummon": 7,
+  "alineamiento": "N",
+  "tamano": "Gargantuan",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 4,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 14,
+  "atributos": {
+    "fuerza": 37,
+    "destreza": 10,
+    "constitucion": 25,
+    "inteligencia": 1,
+    "sabiduria": 14,
+    "carisma": 2
+  },
+  "ca": {
+    "normal": 21,
+    "toque": 6,
+    "desprevenido": 21,
+    "detalle": "+15 natural, -4 size"
+  },
+  "pg": {
+    "maximos": 180,
+    "formula": "(12d8+84)"
+  },
+  "salvaciones": {
+    "fortaleza": 15,
+    "reflejos": 8,
+    "voluntad": 8
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "swim",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 18,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "3d6+13",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 19,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab) and tail slap +13 (4d8+6"
+      ]
+    }
+  ],
+  "espacio": "20 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Qualities",
+      "resumen": "hold breath"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Qualities",
+      "texto": "hold breath"
+    }
+  ],
+  "fullStatBlock": "CR 9\nDire Crocodile\nN Gargantuan animal\nInit +4\nSenses low-light vision; Perception +14\nAC 21, touch 6, flat-footed 21 (+15 natural, -4 size)\nhp 180 (12d8+84)\nFort +15, Ref +8, Will +8\nSpeed 20 ft., swim 30 ft.\nMelee bite +18 (3d6+13/19-20 plus grab) and tail slap +13 (4d8+6)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nSpecial Qualities hold breath\nStatistics Str 37, Dex 10, Con 25, Int 1, Wis 14, Cha 2\nBase Atk +9; CMB +2630; CMD 3640\nEnvironment warm rivers and marshes\nOrganization solitary, pair, or colony (3-6)\nTreasure none\nSource PFRPG Bestiary"
+}

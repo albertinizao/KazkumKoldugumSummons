@@ -1,0 +1,136 @@
+{
+  "id": "giant-squid",
+  "nombre": "Giant Squid",
+  "nivelSummon": 7,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "animal",
+  "subtipos": [
+    "aquatic"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 7,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 22,
+  "atributos": {
+    "fuerza": 25,
+    "destreza": 17,
+    "constitucion": 19,
+    "inteligencia": 2,
+    "sabiduria": 12,
+    "carisma": 2
+  },
+  "ca": {
+    "normal": 20,
+    "toque": 11,
+    "desprevenido": 17,
+    "detalle": "+3 Dex, +9 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 144,
+    "formula": "(12d8+48)"
+  },
+  "salvaciones": {
+    "fortaleza": 14,
+    "reflejos": 13,
+    "voluntad": 5
+  },
+  "velocidades": [
+    {
+      "tipo": "swim",
+      "valor": 60
+    },
+    {
+      "tipo": "land",
+      "valor": 0,
+      "notes": "jet 260 ft."
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 14,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+7",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "arms",
+      "name": "Arms",
+      "attackBonus": 14,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+7",
+          "damageType": "OTHER",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "tentacles",
+      "name": "Tentacles",
+      "attackBonus": 12,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "4d6+3",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 19,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft. (30 ft. with arms and tentacles)",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Defensive Abilities",
+      "resumen": "ink cloud (20-ft. radius)"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Defensive Abilities",
+      "texto": "ink cloud (20-ft. radius)"
+    }
+  ],
+  "fullStatBlock": "CR 9\nGiant Squid\nN Huge animal aquatic\nInit +7\nSenses low-light vision; Perception +22\nAC 20, touch 11, flat-footed 17 (+3 Dex, +9 natural, -2 size)\nhp 144 (12d8+48)\nFort +14, Ref +13, Will +5\nSpeed swim 60 ft., jet 260 ft.\nMelee bite +14 (2d6+7), 2 arms +14 (1d6+7), tentacles +12 (4d6+3/19-20 plus grab)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nDefensive Abilities ink cloud (20-ft. radius)\nStatistics Str 25, Dex 17, Con 19, Int 2, Wis 12, Cha 2\nBase Atk +9; CMB +1822; CMD 31\nEnvironment any ocean\nOrganization solitary\nTreasure none\nSource PFRPG Bestiary"
+}

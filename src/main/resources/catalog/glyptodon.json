@@ -34,7 +34,7 @@
     "detalle": "+12 natural, -1 size"
   },
   "pg": {
-    "maximos": 67,
+    "maximos": 99,
     "formula": "(9d8+27)"
   },
   "salvaciones": {

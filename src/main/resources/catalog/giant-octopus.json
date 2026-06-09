@@ -1,0 +1,126 @@
+{
+  "id": "giant-octopus",
+  "nombre": "Giant Octopus",
+  "nivelSummon": 6,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [
+    "aquatic"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 6,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 8,
+  "atributos": {
+    "fuerza": 20,
+    "destreza": 15,
+    "constitucion": 17,
+    "inteligencia": 2,
+    "sabiduria": 12,
+    "carisma": 3
+  },
+  "ca": {
+    "normal": 18,
+    "toque": 11,
+    "desprevenido": 16,
+    "detalle": "+2 Dex, +7 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 132,
+    "formula": "(12d8+36)"
+  },
+  "salvaciones": {
+    "fortaleza": 11,
+    "reflejos": 12,
+    "voluntad": 7
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "swim",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 13,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+5",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "poison"
+      ]
+    },
+    {
+      "id": "tentacles",
+      "name": "Tentacles",
+      "attackBonus": 11,
+      "quantity": 8,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4+2",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "10 ft.",
+  "ataquesEspeciales": [
+    "constrict (tentacle, 1d4+2)"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "OTHER",
+      "valor": "ink cloud (30-foot-radius sphere)",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Poison (Ex) Bite-injury; save Fort DC 19; frequency 1/round for 6 rounds; effect 1d3 Str; cure 2 saves."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Poison (Ex) Bite-injury; save Fort DC 19; frequency 1/round for 6 rounds; effect 1d3 Str; cure 2 saves."
+    }
+  ],
+  "fullStatBlock": "CR 8\nGiant Octopus\nN Large animal aquatic\nInit +6\nSenses low-light vision; Perception +8\nAC 18, touch 11, flat-footed 16 (+2 Dex, +7 natural, -1 size)\nhp 90 (12d8+36)\nFort +11, Ref +12, Will +7\nSpeed 20 ft., swim 30 ft., jet 200 ft.\nMelee bite +13 (1d8+5 plus poison), 8 tentacles +11 (1d4+2 plus grab)\nSpecial Attacks constrict (tentacle, 1d4+2)\nSpecial Abilities Poison (Ex) Bite-injury; save Fort DC 19; frequency 1/round for 6 rounds; effect 1d3 Str; cure 2 saves.\nSpell-Like Abilities none\nStatistics Str 20, Dex 15, Con 17, Int 2, Wis 12, Cha 3\nBase Atk +9; CMB +15; CMD 27\nFeats Combat Reflexes, Improved Initiative, Iron Will, Lightning Reflexes, MultiattackB, Skill Focus (Stealth), Stealthy\nSkills Escape Artist +18, Perception +8, Stealth +18, Swim +13\nEnvironment  any ocean\nOrganization solitary\nTreasure incidental\nDefensive Abilities ink cloud (30-foot-radius sphere)\nSource PFRPG Bestiary"
+}

@@ -1,0 +1,84 @@
+{
+  "id": "elasmosaurus",
+  "nombre": "Elasmosaurus",
+  "nivelSummon": 6,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 14,
+  "atributos": {
+    "fuerza": 26,
+    "destreza": 15,
+    "constitucion": 20,
+    "inteligencia": 2,
+    "sabiduria": 13,
+    "carisma": 9
+  },
+  "ca": {
+    "normal": 20,
+    "toque": 11,
+    "desprevenido": 17,
+    "detalle": "+2 Dex, +1 dodge, +9 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 140,
+    "formula": "(10d8+60)"
+  },
+  "salvaciones": {
+    "fortaleza": 14,
+    "reflejos": 9,
+    "voluntad": 6
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "swim",
+      "valor": 50
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 13,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d8+12",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "20 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 7\nElasmosaurus\nN Huge animal\nInit +2\nSenses low-light vision, scent; Perception +14\nAC 20, touch 11, flat-footed 17 (+2 Dex, +1 dodge, +9 natural, -2 size)\nhp 105 (10d8+60)\nFort +14, Ref +9, Will +6\nSpeed 20 ft., swim 50 ft.\nMelee bite +13 (2d8+12)\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 26, Dex 15, Con 20, Int 2, Wis 13, Cha 9\nBase Atk +7; CMB +17; CMD 30\nFeats Dodge, Great Fortitude, Iron Will, Mobility, Toughness\nSkills Perception +14, Swim +16\nEnvironment  warm aquatic\nOrganization solitary, pair, or school (3-6)\nTreasure none\nSource PFRPG Bestiary"
+}

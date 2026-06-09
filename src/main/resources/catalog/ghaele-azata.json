@@ -1,0 +1,142 @@
+{
+  "id": "ghaele-azata",
+  "nombre": "Ghaele Azata",
+  "nivelSummon": 9,
+  "alineamiento": "CG",
+  "tamano": "Medium",
+  "tipo": "outsider",
+  "subtipos": [
+    "azata",
+    "chaotic",
+    "extraplanar",
+    "good"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 5,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "detect evil",
+    "low-light vision",
+    "see invisibility"
+  ],
+  "percepcion": 20,
+  "atributos": {
+    "fuerza": 25,
+    "destreza": 12,
+    "constitucion": 20,
+    "inteligencia": 16,
+    "sabiduria": 19,
+    "carisma": 17
+  },
+  "ca": {
+    "normal": 28,
+    "toque": 16,
+    "desprevenido": 26,
+    "detalle": "+4 deflection, +1 Dex, +1 dodge, +12 natural"
+  },
+  "pg": {
+    "maximos": 195,
+    "formula": "(13d10+65)"
+  },
+  "salvaciones": {
+    "fortaleza": 17,
+    "reflejos": 11,
+    "voluntad": 16
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 50
+    },
+    {
+      "tipo": "fly",
+      "valor": 150,
+      "maneuverability": "perfect"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "holy-greatsword",
+      "name": "Holy greatsword",
+      "attackBonus": 22,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+12",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": null,
+      "notes": []
+    },
+    {
+      "id": "light-rays",
+      "name": "Light rays",
+      "attackBonus": 14,
+      "quantity": 2,
+      "attackType": "RANGED",
+      "damageComponents": [
+        {
+          "formula": "2d12",
+          "damageType": "OTHER",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": null,
+      "notes": [
+        "ranged touch"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/cold iron and evil",
+      "notas": null
+    },
+    {
+      "tipo": "RESISTANCE",
+      "valor": "cold 10",
+      "notas": null
+    },
+    {
+      "tipo": "RESISTANCE",
+      "valor": "fire 10",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "electricity",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "petrification",
+      "notas": null
+    },
+    {
+      "tipo": "SPELL_RESISTANCE",
+      "valor": "25",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Qualities",
+      "resumen": "light form"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Qualities",
+      "texto": "light form"
+    }
+  ],
+  "fullStatBlock": "CR 13\nGhaele Azata\nCG Medium outsider azata, chaotic, extraplanar, good\nInit +5\nSenses darkvision 60 ft., detect evil, low-light vision, see invisibility; Perception +20\nAura holy aura\nAC 28, touch 16, flat-footed 26 (+4 deflection, +1 Dex, +1 dodge, +12 natural)\nhp 195 (13d10+65)\nFort +17, Ref +11, Will +16\nSpeed 50 ft., fly 150 ft. (perfect)\nMelee +2 holy greatsword +22/+17/+12 (2d6+12)\nRanged 2 light rays +14 ranged touch (2d12)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nSpecial Qualities light form\nStatistics Str 25, Dex 12, Con 20, Int 16, Wis 19, Cha 17\nBase Atk +13\nCMB +20\nCMD 31\nEnvironment any (Elysium)\nOrganization solitary, pair, or squad (3-6)\nTreasure triple (+2 holy greatsword)\nDR 10/cold iron and evil\nResist cold 10, fire 10\nImmune electricity, petrification\nSR 25\nSource PFRPG Bestiary"
+}

@@ -1,0 +1,98 @@
+{
+  "id": "greater-earth-elemental",
+  "nombre": "Greater Earth Elemental",
+  "nivelSummon": 7,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "outsider",
+  "subtipos": [
+    "earth",
+    "elemental",
+    "extraplanar"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": -1,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "tremorsense 60 ft."
+  ],
+  "percepcion": 16,
+  "atributos": {
+    "fuerza": 30,
+    "destreza": 8,
+    "constitucion": 21,
+    "inteligencia": 8,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 21,
+    "toque": 7,
+    "desprevenido": 21,
+    "detalle": "-1 Dex, +14 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 195,
+    "formula": "(13d10+65)"
+  },
+  "salvaciones": {
+    "fortaleza": 13,
+    "reflejos": 3,
+    "voluntad": 8
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "burrow",
+      "valor": 20
+    },
+    {
+      "tipo": "land",
+      "valor": 0,
+      "notes": "earth glide"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 21,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d10+10",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/-",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 9\nGreater Earth Elemental\nN Huge outsider earth, elemental, extraplanar\nInit -1\nSenses darkvision 60 ft., tremorsense 60 ft.; Perception +16\nAC 21, touch 7, flat-footed 21 (-1 Dex, +14 natural, -2 size)\nhp 195 (13d10+65)\nFort +13, Ref +3, Will +8\nSpeed 20 ft., burrow 20 ft., earth glide\nMelee 2 slams +21 (2d10+10)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 30, Dex 8, Con 21, Int 8, Wis 11, Cha 11\nBase Atk +13; CMB +25; CMD 34\nLanguages Terran\nEnvironment any (Plane of Earth)\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDR 10/-\nImmune elemental traits\nSource PFRPG Bestiary"
+}

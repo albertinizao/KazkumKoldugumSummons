@@ -1,0 +1,117 @@
+{
+  "id": "elder-ice-elemental",
+  "nombre": "Elder Ice Elemental",
+  "nivelSummon": 8,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "outsider",
+  "subtipos": [
+    "air",
+    "cold",
+    "elemental",
+    "extraplanar",
+    "water"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 9,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "snow vision"
+  ],
+  "percepcion": 19,
+  "atributos": {
+    "fuerza": 30,
+    "destreza": 20,
+    "constitucion": 19,
+    "inteligencia": 10,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 24,
+    "toque": 14,
+    "desprevenido": 18,
+    "detalle": "+5 Dex, +1 dodge, +10 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 224,
+    "formula": "(16d10+64)"
+  },
+  "salvaciones": {
+    "fortaleza": 14,
+    "reflejos": 17,
+    "voluntad": 5
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "land",
+      "valor": 0,
+      "notes": "ice and snow only"
+    },
+    {
+      "tipo": "swim",
+      "valor": 60
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 24,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d10+10",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 19,
+        "multiplier": 2
+      },
+      "notes": [
+        "2d8 cold"
+      ]
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/-",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "cold",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Qualities",
+      "resumen": "ice glide, icewalking"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Qualities",
+      "texto": "ice glide, icewalking"
+    }
+  ],
+  "fullStatBlock": "CR 11\nElder Ice Elemental\nN Huge outsider air, cold, elemental, extraplanar, water\nInit +9\nSenses darkvision 60 ft., snow vision; Perception +19\nAC 24, touch 14, flat-footed 18 (+5 Dex, +1 dodge, +10 natural, -2 size)\nhp 224 (16d10+64)\nFort +14, Ref +17, Will +5\nSpeed 20 ft., burrow (ice and snow only) 20 ft., swim 60 ft.\nMelee 2 slams +24 (2d10+10/19-20 plus 2d8 cold)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nSpecial Qualities ice glide, icewalking\nStatistics Str 30, Dex 20, Con 19, Int 10, Wis 11, Cha 11\nBase Atk +16\nCMB +28\nCMD 44 (can't be tripped)\nEnvironment any land or water (Plane of Water)\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDR 10/-\nImmune cold, elemental traits\nSource PFRPG Bestiary 2"
+}

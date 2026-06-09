@@ -39,7 +39,7 @@
     "detalle": "+1 Dex, +4 natural"
   },
   "pg": {
-    "maximos": 22,
+    "maximos": 36,
     "formula": "(3d10+6)"
   },
   "salvaciones": {

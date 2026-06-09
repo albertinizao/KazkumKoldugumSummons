@@ -32,7 +32,7 @@
     "detalle": "+1 deflection, +2 Dex, +1 size"
   },
   "pg": {
-    "maximos": 13,
+    "maximos": 22,
     "formula": "2d10+2"
   },
   "salvaciones": {

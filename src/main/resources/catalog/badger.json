@@ -6,9 +6,18 @@
   "tamano": "Small",
   "tipo": "animal",
   "subtipos": [],
-  "plantillasPermitidas": ["celestial", "fiery", "chthonic", "entropic", "resolute"],
+  "plantillasPermitidas": [
+    "celestial",
+    "fiery",
+    "chthonic",
+    "entropic",
+    "resolute"
+  ],
   "iniciativa": 1,
-  "sentidos": ["low-light vision", "scent"],
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
   "percepcion": 5,
   "atributos": {
     "fuerza": 10,
@@ -25,7 +34,7 @@
     "detalle": "+1 Dex, +1 natural, +1 size"
   },
   "pg": {
-    "maximos": 6,
+    "maximos": 10,
     "formula": "1d8+2"
   },
   "salvaciones": {
@@ -85,7 +94,9 @@
   ],
   "espacio": "5 ft.",
   "alcance": "5 ft.",
-  "ataquesEspeciales": ["blood rage"],
+  "ataquesEspeciales": [
+    "blood rage"
+  ],
   "defensasEspeciales": [],
   "notasTacticas": [],
   "habilidadesResumidas": [

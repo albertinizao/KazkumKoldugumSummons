@@ -97,28 +97,68 @@ class DefaultCreatureResolverTest {
     }
 
     @Test
-    void calculatesMaximumHitPointsFromMaxDieRollPlusAugmentedConstitution() {
+    void calculatesMaximumHitPointsForAnkylosaurusUsingMaximumPossibleBaseRoll() {
         CreatureTemplate template = baseTemplate()
-                .id("antelope")
-                .name("Antelope")
+                .id("ankylosaurus")
+                .name("Ankylosaurus")
                 .abilities(AbilityScores.builder()
-                        .strength(10)
-                        .dexterity(17)
-                        .constitution(14)
+                        .strength(27)
+                        .dexterity(10)
+                        .constitution(17)
                         .intelligence(2)
                         .wisdom(13)
-                        .charisma(7)
+                        .charisma(8)
                         .build())
                 .hitPoints(HitPointsDefinition.builder()
-                        .maximum(6)
-                        .formula("1d8+2")
-                        .hitDice(HitDice.builder().count(1).dieSize(8).build())
+                        .maximum(110)
+                        .formula("10d8+30")
+                        .hitDice(HitDice.builder().count(10).dieSize(8).build())
                         .build())
                 .build();
 
         ResolvedCreature resolved = resolver.resolve(template, null, SummonerConfiguration.defaultConfiguration());
 
-        assertThat(resolved.getMaxHitPoints()).isEqualTo(12);
+        assertThat(resolved.getMaxHitPoints()).isEqualTo(130);
+    }
+
+    @Test
+    void calculatesMaximumHitPointsForAllosaurusUsingMaximumPossibleBaseRoll() {
+        CreatureTemplate template = baseTemplate()
+                .id("allosaurus")
+                .name("Allosaurus")
+                .initiative(5)
+                .senses(List.of("low-light vision", "scent"))
+                .perception(28)
+                .abilities(AbilityScores.builder()
+                        .strength(26)
+                        .dexterity(13)
+                        .constitution(19)
+                        .intelligence(2)
+                        .wisdom(15)
+                        .charisma(10)
+                        .build())
+                .armorClass(ArmorClass.builder()
+                        .normal(19)
+                        .touch(9)
+                        .flatFooted(18)
+                        .detail("+1 Dex, +10 natural, -2 size")
+                        .build())
+                .hitPoints(HitPointsDefinition.builder()
+                        .maximum(132)
+                        .formula("11d8+44")
+                        .hitDice(HitDice.builder().count(11).dieSize(8).build())
+                        .build())
+                .savingThrows(SavingThrows.builder()
+                        .fortitude(11)
+                        .reflex(8)
+                        .will(7)
+                        .fortitudeAbility(SavingThrowAbility.CONSTITUTION)
+                        .build())
+                .build();
+
+        ResolvedCreature resolved = resolver.resolve(template, null, SummonerConfiguration.defaultConfiguration());
+
+        assertThat(resolved.getMaxHitPoints()).isEqualTo(154);
     }
 
     @Test

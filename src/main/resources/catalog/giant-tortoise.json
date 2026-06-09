@@ -33,7 +33,7 @@
     "detalle": "-2 Dex, +8 natural"
   },
   "pg": {
-    "maximos": 22,
+    "maximos": 33,
     "formula": "3d8+9"
   },
   "salvaciones": {

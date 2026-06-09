@@ -39,7 +39,7 @@
     "detalle": "+4 armor, +3 Dex, +4 natural, +1 size"
   },
   "pg": {
-    "maximos": 59,
+    "maximos": 91,
     "formula": "(7d10+21)"
   },
   "salvaciones": {

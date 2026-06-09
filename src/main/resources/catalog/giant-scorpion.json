@@ -34,7 +34,7 @@
     "detalle": "+7 armor, -1 size"
   },
   "pg": {
-    "maximos": 37,
+    "maximos": 55,
     "formula": "(5d8+15)"
   },
   "salvaciones": {

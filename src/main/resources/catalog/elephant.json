@@ -1,0 +1,101 @@
+{
+  "id": "elephant",
+  "nombre": "Elephant",
+  "nivelSummon": 6,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 0,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 21,
+  "atributos": {
+    "fuerza": 30,
+    "destreza": 10,
+    "constitucion": 19,
+    "inteligencia": 2,
+    "sabiduria": 13,
+    "carisma": 7
+  },
+  "ca": {
+    "normal": 17,
+    "toque": 8,
+    "desprevenido": 17,
+    "detalle": "+9 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 132,
+    "formula": "(11d8+44)"
+  },
+  "salvaciones": {
+    "fortaleza": 13,
+    "reflejos": 7,
+    "voluntad": 6
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 40
+    }
+  ],
+  "ataques": [
+    {
+      "id": "gore",
+      "name": "Gore",
+      "attackBonus": 16,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d8+10",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "slam",
+      "name": "Slam",
+      "attackBonus": 16,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+10",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "10 ft.",
+  "ataquesEspeciales": [
+    "trample (2d8+15; DC 25)"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 7\nElephant\nN Huge animal\nInit +0\nSenses low-light vision, scent; Perception +21\nAC 17, touch 8, flat-footed 17 (+9 natural, -2 size)\nhp 93 (11d8+44)\nFort +13, Ref +7, Will +6\nSpeed 40 ft.\nMelee gore +16 (2d8+10), slam +16 (2d6+10)\nSpecial Attacks trample (2d8+15; DC 25)\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 30, Dex 10, Con 19, Int 2, Wis 13, Cha 7\nBase Atk +8; CMB +20; CMD 30\nFeats Endurance, Great Fortitude, Improved Bull Rush, Iron Will, Power Attack, Skill Focus (Perception)\nSkills Perception +21\nEnvironment  warm plains\nOrganization solitary or herd (6-30)\nTreasure none\nSource PFRPG Bestiary"
+}

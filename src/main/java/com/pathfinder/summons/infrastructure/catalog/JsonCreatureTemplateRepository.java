@@ -278,7 +278,7 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
             return null;
         }
 
-        String normalized = formula.replace(" ", "");
+        String normalized = normalizeFormula(formula);
         int dIndex = normalized.toLowerCase(Locale.ROOT).indexOf('d');
         if (dIndex <= 0) {
             return null;
@@ -297,6 +297,14 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
         } catch (NumberFormatException ex) {
             return null;
         }
+    }
+
+    private String normalizeFormula(String formula) {
+        String normalized = formula.trim().replace(" ", "");
+        while (normalized.startsWith("(") && normalized.endsWith(")") && normalized.length() > 1) {
+            normalized = normalized.substring(1, normalized.length() - 1).trim().replace(" ", "");
+        }
+        return normalized;
     }
 
     private <T> List<T> safeList(List<T> values) {

@@ -34,7 +34,7 @@
     "detalle": "+5 natural"
   },
   "pg": {
-    "maximos": 18,
+    "maximos": 25,
     "formula": "2d8+9"
   },
   "salvaciones": {

@@ -32,7 +32,7 @@
     "detalle": "-1 Dex, +9 natural"
   },
   "pg": {
-    "maximos": 34,
+    "maximos": 52,
     "formula": "(4d10+12)"
   },
   "salvaciones": {

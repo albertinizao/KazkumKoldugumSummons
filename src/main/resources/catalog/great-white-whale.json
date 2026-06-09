@@ -1,0 +1,100 @@
+{
+  "id": "great-white-whale",
+  "nombre": "Great White Whale",
+  "nivelSummon": 9,
+  "alineamiento": "N",
+  "tamano": "Colossal",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [],
+  "iniciativa": -2,
+  "sentidos": [
+    "blindsight 120 ft.",
+    "low-light vision"
+  ],
+  "percepcion": 13,
+  "atributos": {
+    "fuerza": 50,
+    "destreza": 6,
+    "constitucion": 27,
+    "inteligencia": 2,
+    "sabiduria": 11,
+    "carisma": 5
+  },
+  "ca": {
+    "normal": 28,
+    "toque": 0,
+    "desprevenido": 28,
+    "detalle": "-2 Dex, +28 natural, -8 size"
+  },
+  "pg": {
+    "maximos": 288,
+    "formula": "(18d8+144)"
+  },
+  "salvaciones": {
+    "fortaleza": 21,
+    "reflejos": 9,
+    "voluntad": 8
+  },
+  "velocidades": [
+    {
+      "tipo": "swim",
+      "valor": 40
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 25,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "6d6+20",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 19,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "tail-slap",
+      "name": "Tail slap",
+      "attackBonus": 20,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "3d6+10",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": null,
+      "notes": []
+    }
+  ],
+  "espacio": "30 ft.",
+  "alcance": "30 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Qualities",
+      "resumen": "hold breath"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Qualities",
+      "texto": "hold breath"
+    }
+  ],
+  "fullStatBlock": "CR 14\nGreat White Whale\nN Colossal animal\nInit -2\nSenses blindsight 120 ft., low-light vision; Perception +13\nAC 28, touch 0, flat-footed 28 (-2 Dex, +28 natural, -8 size)\nhp 288 (18d8+144)\nFort +21, Ref +9, Will +8\nSpeed swim 40 ft.\nMelee bite +25 (6d6+20/19-20), tail slap +20 (3d6+10)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nSpecial Qualities hold breath\nStatistics Str 50, Dex 6, Con 27, Int 2, Wis 11, Cha 5\nBase Atk +13\nCMB +41\nCMD 49 (can't be tripped)\nEnvironment any oceans\nOrganization solitary, pair, or pod (3-16)\nTreasure none\nSource PFRPG Bestiary 2"
+}

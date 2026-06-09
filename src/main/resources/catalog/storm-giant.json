@@ -1,0 +1,142 @@
+{
+  "id": "storm-giant",
+  "nombre": "Storm Giant",
+  "nivelSummon": 9,
+  "alineamiento": "CG",
+  "tamano": "Huge",
+  "tipo": "humanoid",
+  "subtipos": [
+    "giant"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 2,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 27,
+  "atributos": {
+    "fuerza": 39,
+    "destreza": 14,
+    "constitucion": 23,
+    "inteligencia": 16,
+    "sabiduria": 20,
+    "carisma": 15
+  },
+  "ca": {
+    "normal": 28,
+    "toque": 10,
+    "desprevenido": 26,
+    "detalle": "+6 armor, +2 Dex, +12 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 266,
+    "formula": "(19d8+114)"
+  },
+  "salvaciones": {
+    "fortaleza": 17,
+    "reflejos": 8,
+    "voluntad": 13
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 50
+    },
+    {
+      "tipo": "swim",
+      "valor": 40
+    },
+    {
+      "tipo": "swim",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "mwk-greatsword",
+      "name": "Mwk greatsword",
+      "attackBonus": 27,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "4d6+21",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 17,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "slam",
+      "name": "Slams",
+      "attackBonus": 26,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+14",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": null,
+      "notes": []
+    },
+    {
+      "id": "mwk-composite-longbow",
+      "name": "Mwk composite longbow",
+      "attackBonus": 15,
+      "quantity": 1,
+      "attackType": "RANGED",
+      "damageComponents": [
+        {
+          "formula": "3d6+14",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 3
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "IMMUNITY",
+      "valor": "electricity",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Qualities",
+      "resumen": "militant, water breathing"
+    },
+    {
+      "nombre": "Defensive Abilities",
+      "resumen": "rock catching"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Qualities",
+      "texto": "militant, water breathing"
+    },
+    {
+      "nombre": "Defensive Abilities",
+      "texto": "rock catching"
+    }
+  ],
+  "fullStatBlock": "CR 13\nStorm Giant\nCG Huge humanoid giant\nInit +2\nSenses low-light vision; Perception +27\nAC 28, touch 10, flat-footed 26 (+6 armor, +2 Dex, +12 natural, -2 size)\nhp 266 (19d8+114)\nFort +17, Ref +8, Will +13\nSpeed 50 ft., swim 40 ft. (35 ft., swim 30 ft. in armor)\nMelee mwk greatsword +27/+22/+17 (4d6+21/17-20) or 2 slams +26 (2d6+14)\nRanged mwk composite longbow +15/+10/+5 (3d6+14/x3)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nSpecial Qualities militant, water breathing\nDefensive Abilities rock catching\nStatistics Str 39, Dex 14, Con 23, Int 16, Wis 20, Cha 15\nBase Atk +14\nCMB +30\nCMD 42\nEnvironment any warm\nOrganization solitary or family (2-5 plus 1 sorcerer or cleric of 7th-10th level, 1-2 rocs, 2-6 griffons, and 2-8 sharks)\nTreasure standard (mwk breastplate, mwk composite longbow [+14 Str bonus] with 20 arrows, mwk greatsword, other treasure)\nImmune electricity\nSource PFRPG Bestiary"
+}

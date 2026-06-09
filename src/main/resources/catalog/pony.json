@@ -34,7 +34,7 @@
     "detalle": "+1 Dex"
   },
   "pg": {
-    "maximos": 13,
+    "maximos": 20,
     "formula": "2d8+4"
   },
   "salvaciones": {

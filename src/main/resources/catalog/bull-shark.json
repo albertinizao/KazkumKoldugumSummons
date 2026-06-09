@@ -37,7 +37,7 @@
     "detalle": "+2 Dex, +2 natural"
   },
   "pg": {
-    "maximos": 11,
+    "maximos": 18,
     "formula": "(2d8+2)"
   },
   "salvaciones": {

@@ -1,0 +1,129 @@
+{
+  "id": "elder-aether-elemental",
+  "nombre": "Elder Aether Elemental",
+  "nivelSummon": 8,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "outsider",
+  "subtipos": [
+    "aether",
+    "elemental",
+    "extraplanar"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 15,
+  "sentidos": [
+    "blindsense 60 ft.",
+    "darkvision 60 ft."
+  ],
+  "percepcion": 19,
+  "atributos": {
+    "fuerza": 22,
+    "destreza": 33,
+    "constitucion": 24,
+    "inteligencia": 10,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 26,
+    "toque": 26,
+    "desprevenido": 15,
+    "detalle": "+7 deflection, +11 Dex, -2 size"
+  },
+  "pg": {
+    "maximos": 272,
+    "formula": "(16d10+112)"
+  },
+  "salvaciones": {
+    "fortaleza": 17,
+    "reflejos": 21,
+    "voluntad": 7
+  },
+  "velocidades": [
+    {
+      "tipo": "fly",
+      "valor": 60,
+      "maneuverability": "good"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 20,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d8+6",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": null,
+      "notes": []
+    },
+    {
+      "id": "telekinetic-throw",
+      "name": "Telekinetic throw",
+      "attackBonus": 25,
+      "quantity": 1,
+      "attackType": "RANGED",
+      "damageComponents": [
+        {
+          "formula": "10d6+7",
+          "damageType": "FORCE",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 19,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/-",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "force",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Qualities",
+      "resumen": "telekinetic invisibility Languages Aquan, Auran, Ignan, Terran"
+    },
+    {
+      "nombre": "Defensive Abilities",
+      "resumen": "telekinetic deflection"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Qualities",
+      "texto": "telekinetic invisibility Languages Aquan, Auran, Ignan, Terran"
+    },
+    {
+      "nombre": "Defensive Abilities",
+      "texto": "telekinetic deflection"
+    }
+  ],
+  "fullStatBlock": "CR 11\nElder Aether Elemental\nN Huge outsider aether, elemental, extraplanar\nInit +15\nSenses blindsense 60 ft., darkvision 60 ft.; Perception +19\nAC 26, touch 26, flat-footed 15 (+7 deflection, +11 Dex, -2 size)\nhp 272 (16d10+112)\nFort +17, Ref +21, Will +7\nSpeed fly 60 ft. (good)\nMelee 2 slams +20 (2d8+6)\nRanged telekinetic throw +25 (10d6+7/19-20)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nSpecial Qualities telekinetic invisibility Languages Aquan, Auran, Ignan, Terran\nDefensive Abilities telekinetic deflection\nStatistics Str 22, Dex 33, Con 24, Int 10, Wis 11, Cha 11\nBase Atk +16\nCMB +24\nCMD 51\nEnvironment any (Ethereal Plane)\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDR 10/-\nImmune elemental traits, force\nSource PFRPG Bestiary 5"
+}

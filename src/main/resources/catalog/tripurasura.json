@@ -39,7 +39,7 @@
     "detalle": "+2 Dex, +1 dodge, +1 insight, +2 size"
   },
   "pg": {
-    "maximos": 19,
+    "maximos": 33,
     "formula": "(3d10+3)"
   },
   "salvaciones": {
