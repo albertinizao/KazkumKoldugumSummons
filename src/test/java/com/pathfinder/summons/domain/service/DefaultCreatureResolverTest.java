@@ -23,6 +23,8 @@ import com.pathfinder.summons.domain.model.SummonTemplateType;
 import com.pathfinder.summons.domain.model.SummonerConfiguration;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -62,6 +64,7 @@ class DefaultCreatureResolverTest {
         assertThat(resolved.getAttacks()).hasSize(1);
         assertThat(resolved.getAttacks().getFirst().getAttackBonus()).isEqualTo(6);
         assertThat(resolved.getAttacks().getFirst().getDamageComponents()).hasSize(2);
+        assertThat(resolved.getAttacks().getFirst().getDamageComponents().getLast().getFormula()).isEqualTo("1d6");
         assertThat(resolved.getAttacks().getFirst().getDamageComponents().getLast().getDamageType()).isEqualTo(DamageType.ACID);
         assertThat(resolved.getSpecialDefenses())
                 .extracting(defense -> defense.getType().name() + ":" + defense.getValue())
@@ -90,10 +93,76 @@ class DefaultCreatureResolverTest {
         assertThat(resolved.getAttacks().getFirst().getDamageComponents())
                 .extracting(DamageComponent::getDamageType)
                 .containsExactly(DamageType.PIERCING, DamageType.FIRE);
+        assertThat(resolved.getAttacks().getFirst().getDamageComponents().getLast().getFormula()).isEqualTo("1");
         assertThat(resolved.getSpecialDefenses())
                 .extracting(defense -> defense.getType().name() + ":" + defense.getValue())
                 .contains("IMMUNITY:fire", "VULNERABILITY:cold")
                 .doesNotContain("RESISTANCE:fire 10");
+    }
+
+    @Test
+    void appliesElementalDamageToTailAttacksAndInfersLogicalPhysicalDamageType() {
+        CreatureTemplate template = baseTemplate()
+                .id("tail-sweep")
+                .name("Tail Sweep Beast")
+                .allowedTemplates(List.of())
+                .hitPoints(HitPointsDefinition.builder()
+                        .maximum(110)
+                        .formula("11d8+33")
+                        .hitDice(HitDice.builder().count(11).dieSize(8).build())
+                        .build())
+                .speeds(List.of(speed(SpeedType.LAND, 30)))
+                .attacks(List.of(attack("Tail Sweep", 7, AttackAbility.STRENGTH, "1d8+3", DamageType.OTHER)))
+                .build();
+
+        ResolvedCreature resolved = resolver.resolve(template, SummonTemplateType.FIERY, SummonerConfiguration.defaultConfiguration());
+
+        assertThat(resolved.getAttacks()).hasSize(1);
+        assertThat(resolved.getAttacks().getFirst().getDamageComponents())
+                .extracting(DamageComponent::getDamageType)
+                .containsExactly(DamageType.BLUDGEONING, DamageType.FIRE);
+        assertThat(resolved.getAttacks().getFirst().getDamageComponents().getLast().getFormula()).isEqualTo("2d6");
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "CHTHONIC,1,1,ACID",
+            "CHTHONIC,5,1d6,ACID",
+            "CHTHONIC,11,2d6,ACID",
+            "FIERY,1,1,FIRE",
+            "FIERY,5,1d6,FIRE",
+            "FIERY,11,2d6,FIRE"
+    })
+    void appliesTieredTemplateDamageToNaturalAttacksOnly(SummonTemplateType templateType,
+                                                         int hitDiceCount,
+                                                         String expectedFormula,
+                                                         DamageType expectedDamageType) {
+        CreatureTemplate template = baseTemplate()
+                .id("template-damage-tiered")
+                .name("Template Damage Tiered")
+                .allowedTemplates(List.of(templateType))
+                .hitPoints(HitPointsDefinition.builder()
+                        .maximum(10 * hitDiceCount)
+                        .formula(hitDiceCount + "d8+5")
+                        .hitDice(HitDice.builder().count(hitDiceCount).dieSize(8).build())
+                        .build())
+                .attacks(List.of(
+                        attack("Bite", 3, AttackAbility.STRENGTH, "1d4+1", DamageType.PIERCING),
+                        attack("Warhammer", 3, AttackAbility.STRENGTH, "1d8+1", DamageType.BLUDGEONING)))
+                .build();
+
+        ResolvedCreature resolved = resolver.resolve(template, templateType, SummonerConfiguration.defaultConfiguration());
+
+        assertThat(resolved.getAttacks()).hasSize(2);
+
+        assertThat(resolved.getAttacks().get(0).getDamageComponents())
+                .hasSize(2);
+        assertThat(resolved.getAttacks().get(0).getDamageComponents().getLast().getFormula()).isEqualTo(expectedFormula);
+        assertThat(resolved.getAttacks().get(0).getDamageComponents().getLast().getDamageType()).isEqualTo(expectedDamageType);
+
+        assertThat(resolved.getAttacks().get(1).getDamageComponents()).hasSize(1);
+        assertThat(resolved.getAttacks().get(1).getDamageComponents().getFirst().getDamageType())
+                .isEqualTo(DamageType.BLUDGEONING);
     }
 
     @Test

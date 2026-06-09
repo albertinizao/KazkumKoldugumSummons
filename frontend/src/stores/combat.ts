@@ -17,7 +17,7 @@ import {
   type DailyUsesState,
 } from '@/services/combatApi';
 import type { CreatureCatalogItem, SummonTemplateType } from '@/types/catalog';
-import type { CombatRollResult, CombatState, SummonShortcut } from '@/types/combat';
+import type { CombatRollResult, CombatState, GlobalCombatRollResult, SummonShortcut } from '@/types/combat';
 import { summonTemplates } from '@/data/summonTemplates';
 import { readCombatStateSnapshot, writeCombatStateSnapshot } from '@/utils/combatStatePersistence';
 
@@ -339,7 +339,7 @@ export const useCombatStore = defineStore('combat', {
         this.busy = false;
       }
     },
-    async rollAllGroupAttacks(): Promise<{ title: string; displayText: string } | null> {
+    async rollAllGroupAttacks(): Promise<GlobalCombatRollResult | null> {
       const groups = [...this.groups];
       if (groups.length === 0) {
         return null;
@@ -361,6 +361,7 @@ export const useCombatStore = defineStore('combat', {
 
         return {
           title: 'Atacar con todas: todos los grupos',
+          results: results.map(response => response.rollResult),
           displayText: results
             .map(response => response.rollResult.displayText)
             .join('\n\n'),
@@ -372,7 +373,7 @@ export const useCombatStore = defineStore('combat', {
         this.busy = false;
       }
     },
-    async rollAllGroupSavingThrows(): Promise<{ title: string; displayText: string } | null> {
+    async rollAllGroupSavingThrows(): Promise<GlobalCombatRollResult | null> {
       const groups = [...this.groups];
       if (groups.length === 0) {
         return null;
@@ -394,6 +395,7 @@ export const useCombatStore = defineStore('combat', {
 
         return {
           title: 'Tirar TS con todas: todos los grupos',
+          results: results.map(response => response.rollResult),
           displayText: results
             .map(response => response.rollResult.displayText)
             .join('\n\n'),

@@ -46,7 +46,7 @@
       </section>
     </div>
 
-    <pre class="roll-summary">{{ result.displayText }}</pre>
+    <pre v-if="showRaw" class="roll-summary">{{ result.displayText }}</pre>
   </article>
 </template>
 
@@ -64,6 +64,7 @@ import type {
 
 const props = defineProps<{
   result: CombatRollResult;
+  showRaw?: boolean;
 }>();
 
 const isAttackResult = computed((): boolean => props.result.type === 'ATTACK_GROUP');
@@ -73,6 +74,7 @@ const createdAtLabel = computed(() => new Date(props.result.createdAt).toLocaleS
 const kindLabel = computed(() => (isAttackResult.value ? 'Ataques de grupo' : 'Tiradas de salvación'));
 const badgeLabel = computed(() => (isAttackResult.value ? 'Ataque' : 'TS'));
 const badgeVariant = computed(() => (isAttackResult.value ? 'warning' : 'success'));
+const showRaw = computed(() => props.showRaw !== false);
 
 function formatAttackName(name: string, index: number | null): string {
   return index === null ? name : `${name} ${index}`;

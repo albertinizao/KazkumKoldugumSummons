@@ -166,7 +166,7 @@
             <ActionButton @click="closeGlobalRollResultModal">Cerrar</ActionButton>
           </div>
 
-          <pre class="global-roll-output">{{ globalRollResult.displayText }}</pre>
+          <GlobalCombatRollResultPanel :result="globalRollResult" />
         </section>
       </div>
 
@@ -224,17 +224,19 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import ActionButton from '@/components/ActionButton.vue';
 import CombatGroupCard from '@/components/CombatGroupCard.vue';
 import CombatRollResultPanel from '@/components/CombatRollResultPanel.vue';
+import GlobalCombatRollResultPanel from '@/components/GlobalCombatRollResultPanel.vue';
 import DailyUsesPanel from '@/components/DailyUsesPanel.vue';
 import StatusBadge from '@/components/StatusBadge.vue';
 import { useCombatStore } from '@/stores/combat';
 import type { SummonTemplateType } from '@/types/catalog';
+import type { GlobalCombatRollResult } from '@/types/combat';
 import { formatCreatureTypeWithSubtypes } from '@/utils/creatureDisplay';
 import { formatSpecialDefense, formatSpecialDefenseList } from '@/utils/specialDefenseDisplay';
 
 const store = useCombatStore();
 const expandedGroupId = ref<string | null>(null);
 const isRollResultModalOpen = ref(false);
-const globalRollResult = ref<{ title: string; displayText: string } | null>(null);
+const globalRollResult = ref<GlobalCombatRollResult | null>(null);
 const summonToast = ref<string | null>(null);
 let summonToastTimer: number | undefined;
 const globalRollResultTitleId = 'global-roll-result-title';
@@ -497,16 +499,6 @@ p {
   border: 1px solid rgba(148, 163, 184, 0.15);
   color: #cbd5e1;
   font-size: 0.82rem;
-}
-
-.global-roll-output {
-  margin: 0;
-  white-space: pre-wrap;
-  word-break: break-word;
-  padding: 0.9rem;
-  border-radius: 0.85rem;
-  background: rgba(2, 6, 23, 0.45);
-  border: 1px solid rgba(148, 163, 184, 0.14);
 }
 
 .muted {
