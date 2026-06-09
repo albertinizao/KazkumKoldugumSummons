@@ -44,6 +44,7 @@
         <p><strong>Velocidades:</strong> {{ group.resolvedCreature.speedsText }}</p>
         <p><strong>Ataques especiales:</strong> {{ specialAttacks }}</p>
         <p v-if="groupDefenses !== '—'"><strong>Inmunidades / SR:</strong> {{ groupDefenses }}</p>
+        <p v-if="vulnerabilityDefenses !== '—'"><strong>Vulnerabilidades:</strong> {{ vulnerabilityDefenses }}</p>
       </div>
       <div class="details-column">
         <p><strong>PG:</strong> {{ hitPointsLabel }}</p>
@@ -69,6 +70,8 @@
         :key="instance.id"
         :instance="instance"
         :defense-summary="instanceDefenses"
+        :immunity-summary="instanceImmunities"
+        :vulnerability-summary="instanceVulnerabilities"
         :busy="busy"
         @damage="$emit('damage', instance.id, $event)"
         @heal="$emit('heal', instance.id, $event)"
@@ -120,8 +123,17 @@ const specialAttacks = computed(() => {
 const groupDefenses = computed(() =>
   formatSpecialDefenseList(props.group.resolvedCreature.specialDefenses, ['IMMUNITY', 'SPELL_RESISTANCE'], true),
 );
+const vulnerabilityDefenses = computed(() =>
+  formatSpecialDefenseList(props.group.resolvedCreature.specialDefenses, ['VULNERABILITY']),
+);
 const instanceDefenses = computed(() =>
   formatSpecialDefenseList(props.group.resolvedCreature.specialDefenses, ['DAMAGE_REDUCTION', 'RESISTANCE']),
+);
+const instanceImmunities = computed(() =>
+  formatSpecialDefenseList(props.group.resolvedCreature.specialDefenses, ['IMMUNITY'], true),
+);
+const instanceVulnerabilities = computed(() =>
+  formatSpecialDefenseList(props.group.resolvedCreature.specialDefenses, ['VULNERABILITY']),
 );
 </script>
 

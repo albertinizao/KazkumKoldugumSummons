@@ -171,6 +171,7 @@ Melee bite +4 (1d3+3 + 1 fire), 2 claws +4 (1d2+3 + 1 fire)
 Space 5 ft., Reach 5 ft.
 Special Attacks blood rage
 Inmunidades / SR: fire; SR 13
+Vulnerabilidades: cold
 RD / resistencias: RD 5/good; Resistencia cold 10
 
 [Atacar] [Salvaciones] [Expandir ficha]

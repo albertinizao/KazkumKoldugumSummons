@@ -9,6 +9,10 @@
 
     <p class="hp-line">PG: {{ instance.currentHitPoints }} / {{ instance.maxHitPoints }}</p>
     <p v-if="visibleDefenseSummary !== '—'" class="defense-line">{{ visibleDefenseSummary }}</p>
+    <p v-if="visibleImmunitySummary !== '—'" class="defense-line">{{ visibleImmunitySummary }}</p>
+    <p v-if="visibleVulnerabilitySummary !== '—'" class="defense-line defense-line--vulnerability">
+      {{ visibleVulnerabilitySummary }}
+    </p>
 
     <div class="quick-grid">
       <button class="mini-button danger" type="button" :disabled="busy" @click="applyDelta(-10)">-10</button>
@@ -77,6 +81,8 @@ import type { ActiveSummonInstance } from '@/types/combat';
 const props = defineProps<{
   instance: ActiveSummonInstance;
   defenseSummary?: string;
+  immunitySummary?: string;
+  vulnerabilitySummary?: string;
   busy?: boolean;
 }>();
 
@@ -85,6 +91,8 @@ const isCustomAmountModalOpen = ref(false);
 const customAmount = ref<number | null>(null);
 const isCustomAmountValid = computed(() => Number.isInteger(customAmount.value) && (customAmount.value ?? 0) >= 1);
 const visibleDefenseSummary = computed(() => props.defenseSummary?.trim() || '—');
+const visibleImmunitySummary = computed(() => props.immunitySummary?.trim() || '—');
+const visibleVulnerabilitySummary = computed(() => props.vulnerabilitySummary?.trim() || '—');
 const emit = defineEmits<{
   (event: 'damage', amount: number): void;
   (event: 'heal', amount: number): void;
@@ -170,6 +178,10 @@ function applyCustomHeal(): void {
   font-size: 0.84rem;
 }
 
+.defense-line--vulnerability {
+  color: #fca5a5;
+}
+
 .muted {
   font-size: 0.82rem;
   color: #94a3b8;
@@ -188,6 +200,11 @@ function applyCustomHeal(): void {
   border-radius: 0.75rem;
   color: #f8fafc;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
 }
 
 .mini-button.danger {

@@ -92,7 +92,8 @@ class DefaultCreatureResolverTest {
                 .containsExactly(DamageType.PIERCING, DamageType.FIRE);
         assertThat(resolved.getSpecialDefenses())
                 .extracting(defense -> defense.getType().name() + ":" + defense.getValue())
-                .contains("RESISTANCE:fire 10", "IMMUNITY:fire", "VULNERABILITY:cold");
+                .contains("IMMUNITY:fire", "VULNERABILITY:cold")
+                .doesNotContain("RESISTANCE:fire 10");
     }
 
     @Test

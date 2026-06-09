@@ -98,6 +98,11 @@
       "tipo": "IMMUNITY",
       "valor": "elemental traits",
       "notas": null
+    },
+    {
+      "tipo": "VULNERABILITY",
+      "valor": "fire",
+      "notas": null
     }
   ],
   "notasTacticas": [],

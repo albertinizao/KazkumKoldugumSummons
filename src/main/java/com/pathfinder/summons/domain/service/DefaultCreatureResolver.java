@@ -535,11 +535,6 @@ public class DefaultCreatureResolver implements CreatureResolver {
                     .build());
         } else if (templateType == SummonTemplateType.FIERY) {
             resolved.add(com.pathfinder.summons.domain.model.SpecialDefense.builder()
-                    .type(com.pathfinder.summons.domain.model.SpecialDefenseType.RESISTANCE)
-                    .value("fire 10")
-                    .notes("Template resistance")
-                    .build());
-            resolved.add(com.pathfinder.summons.domain.model.SpecialDefense.builder()
                     .type(com.pathfinder.summons.domain.model.SpecialDefenseType.IMMUNITY)
                     .value("fire")
                     .notes("Granted by the fire subtype")

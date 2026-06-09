@@ -95,6 +95,11 @@
       "notas": null
     },
     {
+      "tipo": "VULNERABILITY",
+      "valor": "magic",
+      "notas": null
+    },
+    {
       "tipo": "OTHER",
       "valor": "amorphous",
       "notas": null

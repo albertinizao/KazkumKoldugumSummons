@@ -200,6 +200,7 @@
             <div><strong>Alcance:</strong> {{ expandedGroup.resolvedCreature.reach }}</div>
             <div><strong>Ataques especiales:</strong> {{ joinOrDash(expandedGroup.resolvedCreature.specialAttacks) }}</div>
             <div><strong>Inmunidades / SR:</strong> {{ formatSpecialDefenseList(expandedGroup.resolvedCreature.specialDefenses, ['IMMUNITY', 'SPELL_RESISTANCE'], true) }}</div>
+            <div><strong>Vulnerabilidades:</strong> {{ formatSpecialDefenseList(expandedGroup.resolvedCreature.specialDefenses, ['VULNERABILITY']) }}</div>
             <div><strong>RD / resistencias:</strong> {{ formatSpecialDefenseList(expandedGroup.resolvedCreature.specialDefenses, ['DAMAGE_REDUCTION', 'RESISTANCE']) }}</div>
             <div><strong>Defensas especiales:</strong> {{ joinOrDash(expandedGroup.resolvedCreature.specialDefenses.map(defense => formatSpecialDefense(defense))) }}</div>
             <div><strong>Reglas aplicadas:</strong> {{ joinOrDash(expandedGroup.resolvedCreature.appliedRules.map(rule => rule.description)) }}</div>
