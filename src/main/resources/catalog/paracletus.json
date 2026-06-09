@@ -2,6 +2,7 @@
   "id": "paracletus",
   "nombre": "Paracletus",
   "nivelSummon": 3,
+  "challengeRating": "2",
   "alineamiento": "N",
   "tamano": "Small",
   "tipo": "outsider",

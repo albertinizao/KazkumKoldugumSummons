@@ -2,6 +2,7 @@
   "id": "pteranodon",
   "nombre": "Pteranodon",
   "nivelSummon": 4,
+  "challengeRating": "3",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "animal",

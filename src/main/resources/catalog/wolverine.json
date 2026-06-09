@@ -2,6 +2,7 @@
   "id": "wolverine",
   "nombre": "Wolverine",
   "nivelSummon": 3,
+  "challengeRating": "2",
   "alineamiento": "N",
   "tamano": "Medium",
   "tipo": "animal",

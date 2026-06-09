@@ -2,6 +2,7 @@
   "id": "electric-eel",
   "nombre": "Electric Eel",
   "nivelSummon": 3,
+  "challengeRating": "2",
   "alineamiento": "N",
   "tamano": "Small",
   "tipo": "animal",

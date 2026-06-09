@@ -2,6 +2,7 @@
   "id": "giant-ant",
   "nombre": "Giant Ant",
   "nivelSummon": 2,
+  "challengeRating": "2",
   "alineamiento": "N",
   "tamano": "Medium",
   "tipo": "vermin",

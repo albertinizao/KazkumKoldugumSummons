@@ -74,7 +74,7 @@ class DefaultCreatureResolverTest {
         CreatureTemplate template = baseTemplate()
                 .id("hound")
                 .name("Hound")
-                .allowedTemplates(List.of(SummonTemplateType.FIERY))
+                .allowedTemplates(List.of())
                 .speeds(List.of(speed(SpeedType.LAND, 40)))
                 .attacks(List.of(attack("Bite", 3, AttackAbility.STRENGTH, "1d6+1", DamageType.PIERCING)))
                 .build();
@@ -94,6 +94,21 @@ class DefaultCreatureResolverTest {
                 .extracting(defense -> defense.getType().name() + ":" + defense.getValue())
                 .contains("IMMUNITY:fire", "VULNERABILITY:cold")
                 .doesNotContain("RESISTANCE:fire 10");
+    }
+
+    @Test
+    void rejectsTemplatesForOutsidersEvenIfTheTemplateWasListedBefore() {
+        CreatureTemplate template = baseTemplate()
+                .id("astral-deva")
+                .name("Astral Deva")
+                .creatureType("outsider")
+                .allowedTemplates(List.of(SummonTemplateType.CELESTIAL))
+                .build();
+
+        org.assertj.core.api.Assertions.assertThatThrownBy(() ->
+                resolver.resolve(template, SummonTemplateType.CELESTIAL, SummonerConfiguration.defaultConfiguration()))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("outsider");
     }
 
     @Test
@@ -184,6 +199,14 @@ class DefaultCreatureResolverTest {
         CreatureTemplate template = baseTemplate()
                 .id("archon")
                 .name("Archon")
+                .abilities(AbilityScores.builder()
+                        .strength(10)
+                        .dexterity(10)
+                        .constitution(10)
+                        .intelligence(2)
+                        .wisdom(10)
+                        .charisma(14)
+                        .build())
                 .allowedTemplates(List.of(SummonTemplateType.CELESTIAL))
                 .hitPoints(HitPointsDefinition.builder()
                         .maximum(12)
@@ -192,13 +215,14 @@ class DefaultCreatureResolverTest {
                         .build())
                 .speeds(List.of(speed(SpeedType.FLY, 60)))
                 .attacks(List.of(attack("Aura", 0, AttackAbility.NONE, "—", DamageType.OTHER)))
+                .challengeRating("2")
                 .fullStatBlock("CR 2\nArchon\n...")
                 .build();
 
         ResolvedCreature resolved = resolver.resolve(template, SummonTemplateType.CELESTIAL, SummonerConfiguration.defaultConfiguration());
 
         assertThat(resolved.getAlignment()).isEqualTo(Alignment.NG);
-        assertThat(resolved.getSpecialAttacks()).contains("Smite evil 1/day (swift action)");
+        assertThat(resolved.getSpecialAttacks()).contains("Smite evil 1/day (swift action) — attack +2, damage +2");
         assertThat(resolved.getSpecialDefenses())
                 .extracting(defense -> defense.getType().name() + ":" + defense.getValue())
                 .contains("RESISTANCE:cold 5", "RESISTANCE:acid 5", "RESISTANCE:electricity 5", "SPELL_RESISTANCE:7");
@@ -217,6 +241,7 @@ class DefaultCreatureResolverTest {
                         .build())
                 .speeds(List.of(speed(SpeedType.LAND, 60)))
                 .attacks(List.of(attack("Aura", 0, AttackAbility.NONE, "—", DamageType.OTHER)))
+                .challengeRating("2")
                 .fullStatBlock("CR 2\nEntropic\n...")
                 .build();
 
@@ -240,6 +265,7 @@ class DefaultCreatureResolverTest {
                         .build())
                 .speeds(List.of(speed(SpeedType.LAND, 60)))
                 .attacks(List.of(attack("Aura", 0, AttackAbility.NONE, "—", DamageType.OTHER)))
+                .challengeRating("2")
                 .fullStatBlock("CR 2\nResolute\n...")
                 .build();
 
@@ -248,6 +274,45 @@ class DefaultCreatureResolverTest {
         assertThat(resolved.getSpecialDefenses())
                 .extracting(defense -> defense.getType().name() + ":" + defense.getValue())
                 .contains("RESISTANCE:acid 5", "RESISTANCE:cold 5", "RESISTANCE:fire 5", "SPELL_RESISTANCE:7");
+    }
+
+    @Test
+    void scalesTemplateDefensesAndSmiteWithElevenHitDice() {
+        CreatureTemplate template = baseTemplate()
+                .id("resolute-guardian")
+                .name("Resolute Guardian")
+                .abilities(AbilityScores.builder()
+                        .strength(18)
+                        .dexterity(12)
+                        .constitution(16)
+                        .intelligence(2)
+                        .wisdom(12)
+                        .charisma(16)
+                        .build())
+                .allowedTemplates(List.of(SummonTemplateType.RESOLUTE))
+                .hitPoints(HitPointsDefinition.builder()
+                        .maximum(120)
+                        .formula("11d8+32")
+                        .hitDice(HitDice.builder().count(11).dieSize(8).build())
+                        .build())
+                .speeds(List.of(speed(SpeedType.LAND, 40)))
+                .attacks(List.of(attack("Claw", 8, AttackAbility.STRENGTH, "1d6+4", DamageType.SLASHING)))
+                .challengeRating("11")
+                .fullStatBlock("CR 11\nResolute Guardian\n...")
+                .build();
+
+        ResolvedCreature resolved = resolver.resolve(template, SummonTemplateType.RESOLUTE, SummonerConfiguration.defaultConfiguration());
+
+        assertThat(resolved.getSpecialAttacks())
+                .contains("Smite chaos 1/day (swift action) — attack +3, damage +11");
+        assertThat(resolved.getSpecialDefenses())
+                .extracting(defense -> defense.getType().name() + ":" + defense.getValue())
+                .contains(
+                        "RESISTANCE:acid 15",
+                        "RESISTANCE:cold 15",
+                        "RESISTANCE:fire 15",
+                        "SPELL_RESISTANCE:16",
+                        "DAMAGE_REDUCTION:10/chaotic");
     }
 
     @Test
@@ -276,6 +341,7 @@ class DefaultCreatureResolverTest {
                 .id("base")
                 .name("Base")
                 .summonLevel(1)
+                .challengeRating("1/2")
                 .alignment(Alignment.N)
                 .size(CreatureSize.SMALL)
                 .creatureType("beast")

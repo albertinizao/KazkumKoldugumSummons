@@ -2,6 +2,7 @@
   "id": "small-air-elemental",
   "nombre": "Small Air Elemental",
   "nivelSummon": 2,
+  "challengeRating": "1",
   "alineamiento": "N",
   "tamano": "Small",
   "tipo": "outsider",

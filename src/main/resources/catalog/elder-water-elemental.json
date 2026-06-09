@@ -2,6 +2,7 @@
   "id": "elder-water-elemental",
   "nombre": "Elder Water Elemental",
   "nivelSummon": 8,
+  "challengeRating": "11",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "outsider",

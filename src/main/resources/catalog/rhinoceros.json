@@ -2,6 +2,7 @@
   "id": "rhinoceros",
   "nombre": "Rhinoceros",
   "nivelSummon": 4,
+  "challengeRating": "4",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "animal",

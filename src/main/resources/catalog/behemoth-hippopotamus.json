@@ -2,6 +2,7 @@
   "id": "behemoth-hippopotamus",
   "nombre": "Behemoth Hippopotamus",
   "nivelSummon": 7,
+  "challengeRating": "10",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "animal",

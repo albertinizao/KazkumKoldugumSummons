@@ -2,6 +2,7 @@
   "id": "giant-squid",
   "nombre": "Giant Squid",
   "nivelSummon": 7,
+  "challengeRating": "9",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "animal",

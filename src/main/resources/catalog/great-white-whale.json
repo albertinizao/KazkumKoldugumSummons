@@ -2,6 +2,7 @@
   "id": "great-white-whale",
   "nombre": "Great White Whale",
   "nivelSummon": 9,
+  "challengeRating": "14",
   "alineamiento": "N",
   "tamano": "Colossal",
   "tipo": "animal",

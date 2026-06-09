@@ -2,6 +2,7 @@
   "id": "poison-frog",
   "nombre": "Poison Frog",
   "nivelSummon": 1,
+  "challengeRating": "1/2",
   "alineamiento": "N",
   "tamano": "Tiny",
   "tipo": "animal",

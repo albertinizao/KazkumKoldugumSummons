@@ -2,6 +2,7 @@
   "id": "huge-water-elemental",
   "nombre": "Huge Water Elemental",
   "nivelSummon": 6,
+  "challengeRating": "7",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "outsider",

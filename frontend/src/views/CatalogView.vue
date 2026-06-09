@@ -234,8 +234,12 @@ const specialDefensesText = computed(() =>
     : '—',
 );
 const allowedTemplates = computed(() => {
-  const allowed = selectedCreature.value?.allowedTemplates ?? [];
-  return summonTemplates.filter(template => template.key === 'none' || allowed.includes(template.key.toUpperCase() as SummonTemplateType));
+  const creatureType = selectedCreature.value?.creatureType?.toLowerCase() ?? '';
+  if (creatureType.includes('outsider')) {
+    return summonTemplates.filter(template => template.key === 'none');
+  }
+
+  return summonTemplates;
 });
 
 function toApiTemplate(value: string | null): SummonTemplateType | null {

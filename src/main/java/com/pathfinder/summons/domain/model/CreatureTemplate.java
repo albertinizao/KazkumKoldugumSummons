@@ -10,6 +10,7 @@ public class CreatureTemplate {
     String id;
     String name;
     int summonLevel;
+    String challengeRating;
     Alignment alignment;
     CreatureSize size;
     String creatureType;

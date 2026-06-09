@@ -2,6 +2,7 @@
   "id": "archelon",
   "nombre": "Archelon",
   "nivelSummon": 5,
+  "challengeRating": "5",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "animal",

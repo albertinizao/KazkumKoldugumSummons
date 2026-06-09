@@ -80,6 +80,7 @@ Cada criatura invocable debe tener los siguientes campos obligatorios.
   "id": "badger",
   "nombre": "Badger",
   "nivelSummon": 1,
+  "challengeRating": "1/2",
   "alineamiento": "N",
   "tamano": "Small",
   "tipo": "animal",
@@ -132,6 +133,8 @@ Cada criatura invocable debe tener los siguientes campos obligatorios.
   "fullStatBlock": ""
 }
 ```
+
+`challengeRating` debe almacenarse de forma explícita como dato independiente, aunque la ficha completa siga incluyendo la línea `CR` en `fullStatBlock`.
 
 ---
 
@@ -269,13 +272,16 @@ Este campo es importante para detectar reglas como `Deep Guardian`.
 
 Lista de plantillas que pueden aplicarse a la criatura mediante `Versatile Summon Monster`.
 
+Regla práctica del MVP: cualquier criatura que **no** sea `outsider` puede usar plantillas, aunque la lista esté vacía en el JSON.
+Las criaturas `outsider` no pueden recibir plantillas.
+
 Ejemplo:
 
 ```json
 "plantillasPermitidas": ["celestial", "fiery", "chthonic"]
 ```
 
-Si la criatura no permite plantillas, se usará una lista vacía:
+Si la criatura es `outsider`, se usará una lista vacía:
 
 ```json
 "plantillasPermitidas": []

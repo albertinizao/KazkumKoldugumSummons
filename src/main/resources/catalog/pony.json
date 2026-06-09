@@ -2,6 +2,7 @@
   "id": "pony",
   "nombre": "Pony",
   "nivelSummon": 1,
+  "challengeRating": "1/2",
   "alineamiento": "N",
   "tamano": "Medium",
   "tipo": "animal",

@@ -2,6 +2,7 @@
   "id": "dire-bear",
   "nombre": "Dire Bear",
   "nivelSummon": 6,
+  "challengeRating": "7",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "animal",

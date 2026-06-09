@@ -2,6 +2,7 @@
   "id": "giant-porcupine",
   "nombre": "Giant Porcupine",
   "nivelSummon": 3,
+  "challengeRating": "2",
   "alineamiento": "N",
   "tamano": "Medium",
   "tipo": "animal",

@@ -2,6 +2,7 @@
   "id": "octopus",
   "nombre": "Octopus",
   "nivelSummon": 2,
+  "challengeRating": "1",
   "alineamiento": "N",
   "tamano": "Small",
   "tipo": "animal",

@@ -2,6 +2,7 @@
   "id": "iguanodon",
   "nombre": "Iguanodon",
   "nivelSummon": 5,
+  "challengeRating": "6",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "animal",

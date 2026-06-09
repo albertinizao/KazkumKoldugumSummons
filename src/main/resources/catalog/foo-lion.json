@@ -2,6 +2,7 @@
   "id": "foo-lion",
   "nombre": "Foo Lion",
   "nivelSummon": 4,
+  "challengeRating": "4",
   "alineamiento": "NG",
   "tamano": "Large",
   "tipo": "outsider",

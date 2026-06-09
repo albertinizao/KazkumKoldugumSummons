@@ -2,6 +2,7 @@
   "id": "parasaurolophus",
   "nombre": "Parasaurolophus",
   "nivelSummon": 4,
+  "challengeRating": "4",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "animal",

@@ -2,6 +2,7 @@
   "id": "diplodocus",
   "nombre": "Diplodocus",
   "nivelSummon": 8,
+  "challengeRating": "12",
   "alineamiento": "N",
   "tamano": "Colossal",
   "tipo": "animal",

@@ -2,6 +2,7 @@
   "id": "vulture",
   "nombre": "Vulture",
   "nivelSummon": 1,
+  "challengeRating": "1/2",
   "alineamiento": "N",
   "tamano": "Small",
   "tipo": "animal",

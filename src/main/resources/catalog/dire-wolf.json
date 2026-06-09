@@ -2,6 +2,7 @@
   "id": "dire-wolf",
   "nombre": "Dire Wolf",
   "nivelSummon": 4,
+  "challengeRating": "3",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "animal",

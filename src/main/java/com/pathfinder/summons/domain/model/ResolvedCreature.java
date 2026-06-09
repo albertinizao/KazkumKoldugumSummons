@@ -11,6 +11,7 @@ public class ResolvedCreature {
     String baseTemplateId;
     String displayName;
     int summonLevel;
+    String challengeRating;
     SummonTemplateType appliedTemplate; // Nullable
     Alignment alignment;
     CreatureSize size;

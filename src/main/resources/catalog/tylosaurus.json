@@ -2,6 +2,7 @@
   "id": "tylosaurus",
   "nombre": "Tylosaurus",
   "nivelSummon": 6,
+  "challengeRating": "8",
   "alineamiento": "N",
   "tamano": "Gargantuan",
   "tipo": "animal",

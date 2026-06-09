@@ -2,6 +2,7 @@
   "id": "hippopotamus",
   "nombre": "Hippopotamus",
   "nivelSummon": 5,
+  "challengeRating": "5",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "animal",

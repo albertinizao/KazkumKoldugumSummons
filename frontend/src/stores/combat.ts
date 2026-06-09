@@ -18,6 +18,7 @@ import {
 } from '@/services/combatApi';
 import type { CreatureCatalogItem, SummonTemplateType } from '@/types/catalog';
 import type { CombatRollResult, CombatState, SummonShortcut } from '@/types/combat';
+import { summonTemplates } from '@/data/summonTemplates';
 import { readCombatStateSnapshot, writeCombatStateSnapshot } from '@/utils/combatStatePersistence';
 
 const defaultCombatState: CombatState = {
@@ -76,7 +77,21 @@ export const useCombatStore = defineStore('combat', {
     mostUsedSummons: state => state.combatState.mostUsedSummons,
     filteredCatalogItems: state => state.catalogItems.filter(item => state.catalogLevelFilter === null || item.summonLevel === state.catalogLevelFilter),
     selectedCreature: state => state.catalogItems.find(item => item.id === state.selectedCreatureId) ?? null,
-    selectedCreatureAllowedTemplates: state => state.catalogItems.find(item => item.id === state.selectedCreatureId)?.allowedTemplates ?? [],
+    selectedCreatureAllowedTemplates: state => {
+      const creature = state.catalogItems.find(item => item.id === state.selectedCreatureId);
+      if (!creature) {
+        return [];
+      }
+
+      const creatureType = creature.creatureType.toLowerCase();
+      if (creatureType.includes('outsider')) {
+        return [];
+      }
+
+      return summonTemplates
+        .filter(template => template.key !== 'none')
+        .map(template => template.key.toUpperCase() as SummonTemplateType);
+    },
     activeInstanceCount: state => state.combatState.activeGroups.reduce((total, group) => total + group.instances.length, 0),
   },
   actions: {
@@ -145,7 +160,7 @@ export const useCombatStore = defineStore('combat', {
         return;
       }
 
-      this.selectedTemplate = creature.allowedTemplates.length === 1 ? creature.allowedTemplates[0] : null;
+      this.selectedTemplate = this.selectedCreatureAllowedTemplates.length === 1 ? this.selectedCreatureAllowedTemplates[0] : null;
     },
     selectCatalogLevel(level: number | null) {
       this.catalogLevelFilter = level;
@@ -175,11 +190,11 @@ export const useCombatStore = defineStore('combat', {
         return;
       }
 
-      if (this.selectedTemplate && creature.allowedTemplates.includes(this.selectedTemplate)) {
+      if (this.selectedTemplate && this.selectedCreatureAllowedTemplates.includes(this.selectedTemplate)) {
         return;
       }
 
-      this.selectedTemplate = creature.allowedTemplates.length === 1 ? creature.allowedTemplates[0] : null;
+      this.selectedTemplate = this.selectedCreatureAllowedTemplates.length === 1 ? this.selectedCreatureAllowedTemplates[0] : null;
     },
     async summonSelectedCreature() {
       const creature = this.selectedCreature;
@@ -188,7 +203,7 @@ export const useCombatStore = defineStore('combat', {
         return;
       }
 
-      if (creature.allowedTemplates.length > 1 && !this.selectedTemplate) {
+      if (this.selectedCreatureAllowedTemplates.length > 1 && !this.selectedTemplate) {
         this.error = 'Elige una plantilla antes de invocar.';
         return;
       }

@@ -76,6 +76,7 @@ No representa una criatura activa en combate.
 id: CreatureTemplateId
 name: String
 summonLevel: SummonLevel
+challengeRating: String
 alignment: Alignment
 size: CreatureSize
 creatureType: CreatureType
@@ -104,7 +105,8 @@ fullStatBlock: String
 
 - `id` debe ser único y estable.
 - `summonLevel` indica el nivel mínimo de `Summon Monster`.
-- `allowedTemplates` puede estar vacío.
+- `allowedTemplates` puede estar vacío; en la práctica, cualquier criatura que no sea `outsider` puede recibir plantillas.
+- Las criaturas `outsider` no pueden recibir plantillas.
 - El JSON se considera correcto.
 - La aplicación no valida legalidad completa de Pathfinder.
 - No debe contener reglas fijas ya aplicadas salvo que el dato base real lo indique.
@@ -141,6 +143,7 @@ id: ResolvedCreatureId
 baseTemplateId: CreatureTemplateId
 displayName: String
 summonLevel: SummonLevel
+challengeRating: String
 appliedTemplate: SummonTemplateType?
 alignment: Alignment
 size: CreatureSize

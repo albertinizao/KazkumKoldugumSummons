@@ -2,6 +2,7 @@
   "id": "woolly-rhinoceros",
   "nombre": "Woolly Rhinoceros",
   "nivelSummon": 5,
+  "challengeRating": "6",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "animal",

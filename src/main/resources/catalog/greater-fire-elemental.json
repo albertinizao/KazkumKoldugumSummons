@@ -2,6 +2,7 @@
   "id": "greater-fire-elemental",
   "nombre": "Greater Fire Elemental",
   "nivelSummon": 7,
+  "challengeRating": "9",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "outsider",

@@ -2,6 +2,7 @@
   "id": "leonal",
   "nombre": "Leonal",
   "nivelSummon": 8,
+  "challengeRating": "12",
   "alineamiento": "NG",
   "tamano": "Medium",
   "tipo": "outsider",

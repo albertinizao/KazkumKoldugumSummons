@@ -2,6 +2,7 @@
   "id": "ankylosaurus",
   "nombre": "Ankylosaurus",
   "nivelSummon": 5,
+  "challengeRating": "6",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "animal",

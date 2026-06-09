@@ -2,6 +2,7 @@
   "id": "deinonychus",
   "nombre": "Deinonychus",
   "nivelSummon": 4,
+  "challengeRating": "3",
   "alineamiento": "N",
   "tamano": "Medium",
   "tipo": "animal",

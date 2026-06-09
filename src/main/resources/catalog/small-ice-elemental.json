@@ -2,6 +2,7 @@
   "id": "small-ice-elemental",
   "nombre": "Small Ice Elemental",
   "nivelSummon": 2,
+  "challengeRating": "1",
   "alineamiento": "N",
   "tamano": "Small",
   "tipo": "outsider",

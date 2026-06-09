@@ -2,6 +2,7 @@
   "id": "giant-centipede",
   "nombre": "Giant Centipede",
   "nivelSummon": 2,
+  "challengeRating": "1/2",
   "alineamiento": "N",
   "tamano": "Medium",
   "tipo": "vermin",

@@ -2,6 +2,7 @@
   "id": "small-fire-elemental",
   "nombre": "Small Fire Elemental",
   "nivelSummon": 2,
+  "challengeRating": "1",
   "alineamiento": "N",
   "tamano": "Small",
   "tipo": "outsider",

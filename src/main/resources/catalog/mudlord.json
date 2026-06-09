@@ -2,6 +2,7 @@
   "id": "mudlord",
   "nombre": "Mudlord",
   "nivelSummon": 5,
+  "challengeRating": "6",
   "alineamiento": "N",
   "tamano": "Medium",
   "tipo": "outsider",

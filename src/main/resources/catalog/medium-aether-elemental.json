@@ -2,6 +2,7 @@
   "id": "medium-aether-elemental",
   "nombre": "Medium Aether Elemental",
   "nivelSummon": 4,
+  "challengeRating": "3",
   "alineamiento": "N",
   "tamano": "Medium",
   "tipo": "outsider",

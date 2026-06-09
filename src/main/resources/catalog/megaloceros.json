@@ -2,6 +2,7 @@
   "id": "megaloceros",
   "nombre": "Megaloceros",
   "nivelSummon": 4,
+  "challengeRating": "4",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "animal",

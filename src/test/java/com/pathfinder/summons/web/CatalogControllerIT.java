@@ -88,6 +88,18 @@ class CatalogControllerIT {
     }
 
     @Test
+    void rejectsTemplatesForOutsidersOnPreview() {
+        Integer status = restClient().get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/api/catalog/creatures/astral-deva/resolved-preview")
+                        .queryParam("template", "CELESTIAL")
+                        .build())
+                .exchange((request, response) -> response.getStatusCode().value());
+
+        assertThat(status).isEqualTo(400);
+    }
+
+    @Test
     void rejectsUnknownCreatures() {
         Integer status = restClient().get()
                 .uri("/api/catalog/creatures/unknown")

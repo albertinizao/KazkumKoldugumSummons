@@ -2,6 +2,7 @@
   "id": "giant-moray-eel",
   "nombre": "Giant Moray Eel",
   "nivelSummon": 5,
+  "challengeRating": "5",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "animal",

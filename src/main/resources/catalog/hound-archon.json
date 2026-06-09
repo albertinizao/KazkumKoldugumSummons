@@ -2,6 +2,7 @@
   "id": "hound-archon",
   "nombre": "Hound Archon",
   "nivelSummon": 4,
+  "challengeRating": "4",
   "alineamiento": "LG",
   "tamano": "Medium",
   "tipo": "outsider",
