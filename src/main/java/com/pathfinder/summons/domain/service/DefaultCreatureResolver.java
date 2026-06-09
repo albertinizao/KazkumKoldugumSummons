@@ -46,7 +46,7 @@ public class DefaultCreatureResolver implements CreatureResolver {
         List<Speed> resolvedSpeeds = resolveSpeeds(template, templateType);
         List<String> resolvedSenses = resolveSenses(template.getSenses(), templateType, resolvedSpeeds);
         List<String> resolvedSpecialAttacks = resolveSpecialAttacks(template.getSpecialAttacks(), templateType);
-        List<com.pathfinder.summons.domain.model.SpecialDefense> resolvedSpecialDefenses = resolveSpecialDefenses(template.getSpecialDefenses(), templateType);
+        List<com.pathfinder.summons.domain.model.SpecialDefense> resolvedSpecialDefenses = resolveSpecialDefenses(template, templateType);
         boolean deepGuardianApplied = hasDeepGuardian(template, resolvedSpeeds);
 
         List<Attack> resolvedAttacks = resolveAttacks(template.getAttacks(), baseAbilities, augmentedAbilities, deepGuardianApplied, templateType);
@@ -307,11 +307,21 @@ public class DefaultCreatureResolver implements CreatureResolver {
     }
 
     private int resolveHitPoints(HitPointsDefinition hitPoints, AbilityScores baseAbilities, AbilityScores augmentedAbilities) {
-        int hitDiceCount = Optional.ofNullable(hitPoints.getHitDice())
-                .map(HitDice::getCount)
-                .orElseGet(() -> inferHitDiceCount(hitPoints.getFormula()));
+        int hitDiceCount = resolveHitDiceCount(hitPoints);
         int conDelta = augmentedAbilities.getConstitutionModifier() - baseAbilities.getConstitutionModifier();
         return hitPoints.getMaximum() + (hitDiceCount * conDelta);
+    }
+
+    private int resolveHitDiceCount(HitPointsDefinition hitPoints) {
+        return Optional.ofNullable(hitPoints.getHitDice())
+                .map(HitDice::getCount)
+                .orElseGet(() -> inferHitDiceCount(hitPoints.getFormula()));
+    }
+
+    private int resolveHitDieSize(HitPointsDefinition hitPoints) {
+        return Optional.ofNullable(hitPoints.getHitDice())
+                .map(HitDice::getDieSize)
+                .orElseGet(() -> inferHitDieSize(hitPoints.getFormula()));
     }
 
     private int inferHitDiceCount(String formula) {
@@ -319,16 +329,52 @@ public class DefaultCreatureResolver implements CreatureResolver {
             return 1;
         }
 
-        int dIndex = formula.toLowerCase(Locale.ROOT).indexOf('d');
+        String normalized = normalizeFormula(formula);
+        int dIndex = normalized.toLowerCase(Locale.ROOT).indexOf('d');
         if (dIndex <= 0) {
             return 1;
         }
 
         try {
-            return Integer.parseInt(formula.substring(0, dIndex).trim());
+            return Integer.parseInt(normalized.substring(0, dIndex).trim());
         } catch (NumberFormatException ex) {
             return 1;
         }
+    }
+
+    private int inferHitDieSize(String formula) {
+        if (formula == null || formula.isBlank()) {
+            return 0;
+        }
+
+        String normalized = normalizeFormula(formula).toLowerCase(Locale.ROOT);
+        int dIndex = normalized.indexOf('d');
+        if (dIndex < 0 || dIndex == normalized.length() - 1) {
+            return 0;
+        }
+
+        int endIndex = normalized.length();
+        for (int index = dIndex + 1; index < normalized.length(); index++) {
+            char character = normalized.charAt(index);
+            if (character == '+' || character == '-') {
+                endIndex = index;
+                break;
+            }
+        }
+
+        try {
+            return Integer.parseInt(normalized.substring(dIndex + 1, endIndex));
+        } catch (NumberFormatException ex) {
+            return 0;
+        }
+    }
+
+    private String normalizeFormula(String formula) {
+        String normalized = formula.trim().replace(" ", "");
+        while (normalized.startsWith("(") && normalized.endsWith(")") && normalized.length() > 1) {
+            normalized = normalized.substring(1, normalized.length() - 1).trim().replace(" ", "");
+        }
+        return normalized;
     }
 
     private String formatSpeeds(List<Speed> speeds) {
@@ -475,26 +521,22 @@ public class DefaultCreatureResolver implements CreatureResolver {
         return List.copyOf(resolved);
     }
 
-    private List<com.pathfinder.summons.domain.model.SpecialDefense> resolveSpecialDefenses(List<com.pathfinder.summons.domain.model.SpecialDefense> specialDefenses,
+    private List<com.pathfinder.summons.domain.model.SpecialDefense> resolveSpecialDefenses(CreatureTemplate template,
                                                                                             SummonTemplateType templateType) {
+        List<com.pathfinder.summons.domain.model.SpecialDefense> specialDefenses = template.getSpecialDefenses();
         List<com.pathfinder.summons.domain.model.SpecialDefense> resolved = new ArrayList<>(specialDefenses == null ? List.of() : specialDefenses);
+        int hitDiceCount = resolveHitDiceCount(template.getHitPoints());
         if (templateType == SummonTemplateType.CHTHONIC) {
+            String damageReduction = resolveChthonicDamageReduction(hitDiceCount);
+            if (damageReduction != null) {
+                resolved.add(damageReduction(damageReduction, "Template damage reduction"));
+            }
             resolved.add(com.pathfinder.summons.domain.model.SpecialDefense.builder()
                     .type(com.pathfinder.summons.domain.model.SpecialDefenseType.RESISTANCE)
-                    .value("acid 10")
+                    .value("acid " + resolveChthonicAcidResistance(hitDiceCount))
                     .notes("Template resistance")
-                    .build());
-            resolved.add(com.pathfinder.summons.domain.model.SpecialDefense.builder()
-                    .type(com.pathfinder.summons.domain.model.SpecialDefenseType.OTHER)
-                    .value("listed immunities")
-                    .notes("Template-specific immunities are retained in the final creature")
                     .build());
         } else if (templateType == SummonTemplateType.FIERY) {
-            resolved.add(com.pathfinder.summons.domain.model.SpecialDefense.builder()
-                    .type(com.pathfinder.summons.domain.model.SpecialDefenseType.RESISTANCE)
-                    .value("fire 10")
-                    .notes("Template resistance")
-                    .build());
             resolved.add(com.pathfinder.summons.domain.model.SpecialDefense.builder()
                     .type(com.pathfinder.summons.domain.model.SpecialDefenseType.IMMUNITY)
                     .value("fire")
@@ -506,18 +548,196 @@ public class DefaultCreatureResolver implements CreatureResolver {
                     .notes("Granted by the fire subtype")
                     .build());
         } else if (templateType == SummonTemplateType.CELESTIAL) {
-            resolved.add(resistance("cold 10"));
-            resolved.add(resistance("acid 10"));
-            resolved.add(resistance("electricity 10"));
+            resolved.addAll(resolveCelestialDefenses(template, hitDiceCount));
         } else if (templateType == SummonTemplateType.ENTROPIC) {
-            resolved.add(resistance("acid 10"));
-            resolved.add(resistance("fire 10"));
+            resolved.addAll(resolveEntropicDefenses(template, hitDiceCount));
         } else if (templateType == SummonTemplateType.RESOLUTE) {
-            resolved.add(resistance("acid 10"));
-            resolved.add(resistance("cold 10"));
-            resolved.add(resistance("fire 10"));
+            resolved.addAll(resolveResoluteDefenses(template, hitDiceCount));
         }
         return List.copyOf(resolved);
+    }
+
+    private List<com.pathfinder.summons.domain.model.SpecialDefense> resolveCelestialDefenses(CreatureTemplate template, int hitDiceCount) {
+        List<com.pathfinder.summons.domain.model.SpecialDefense> defenses = new ArrayList<>();
+        int resistance = resolveCelestialResistance(hitDiceCount);
+        String damageReduction = resolveCelestialDamageReduction(hitDiceCount);
+        if (damageReduction != null) {
+            defenses.add(damageReduction(damageReduction, "Template damage reduction"));
+        }
+        defenses.add(resistance("cold " + resistance));
+        defenses.add(resistance("acid " + resistance));
+        defenses.add(resistance("electricity " + resistance));
+        addSpellResistance(defenses, template);
+        return defenses;
+    }
+
+    private List<com.pathfinder.summons.domain.model.SpecialDefense> resolveEntropicDefenses(CreatureTemplate template, int hitDiceCount) {
+        List<com.pathfinder.summons.domain.model.SpecialDefense> defenses = new ArrayList<>();
+        int resistance = resolveTemplateResistance(hitDiceCount);
+        String damageReduction = resolveEntropicDamageReduction(hitDiceCount);
+        if (damageReduction != null) {
+            defenses.add(damageReduction(damageReduction, "Template damage reduction"));
+        }
+        defenses.add(resistance("acid " + resistance));
+        defenses.add(resistance("fire " + resistance));
+        addSpellResistance(defenses, template);
+        return defenses;
+    }
+
+    private List<com.pathfinder.summons.domain.model.SpecialDefense> resolveResoluteDefenses(CreatureTemplate template, int hitDiceCount) {
+        List<com.pathfinder.summons.domain.model.SpecialDefense> defenses = new ArrayList<>();
+        int resistance = resolveTemplateResistance(hitDiceCount);
+        String damageReduction = resolveResoluteDamageReduction(hitDiceCount);
+        if (damageReduction != null) {
+            defenses.add(damageReduction(damageReduction, "Template damage reduction"));
+        }
+        defenses.add(resistance("acid " + resistance));
+        defenses.add(resistance("cold " + resistance));
+        defenses.add(resistance("fire " + resistance));
+        addSpellResistance(defenses, template);
+        return defenses;
+    }
+
+    private String resolveChthonicDamageReduction(int hitDiceCount) {
+        if (hitDiceCount >= 11) {
+            return "5/—";
+        }
+        if (hitDiceCount >= 5) {
+            return "3/—";
+        }
+        return null;
+    }
+
+    private int resolveChthonicAcidResistance(int hitDiceCount) {
+        if (hitDiceCount >= 11) {
+            return 20;
+        }
+        if (hitDiceCount >= 5) {
+            return 15;
+        }
+        return 10;
+    }
+
+    private int resolveCelestialResistance(int hitDiceCount) {
+        if (hitDiceCount >= 11) {
+            return 15;
+        }
+        if (hitDiceCount >= 5) {
+            return 10;
+        }
+        return 5;
+    }
+
+    private int resolveTemplateResistance(int hitDiceCount) {
+        if (hitDiceCount >= 11) {
+            return 15;
+        }
+        if (hitDiceCount >= 5) {
+            return 10;
+        }
+        return 5;
+    }
+
+    private String resolveCelestialDamageReduction(int hitDiceCount) {
+        if (hitDiceCount >= 11) {
+            return "10/evil";
+        }
+        if (hitDiceCount >= 5) {
+            return "5/evil";
+        }
+        return null;
+    }
+
+    private String resolveEntropicDamageReduction(int hitDiceCount) {
+        if (hitDiceCount >= 11) {
+            return "10/lawful";
+        }
+        if (hitDiceCount >= 5) {
+            return "5/lawful";
+        }
+        return null;
+    }
+
+    private String resolveResoluteDamageReduction(int hitDiceCount) {
+        if (hitDiceCount >= 11) {
+            return "10/chaotic";
+        }
+        if (hitDiceCount >= 5) {
+            return "5/chaotic";
+        }
+        return null;
+    }
+
+    private void addSpellResistance(List<com.pathfinder.summons.domain.model.SpecialDefense> defenses, CreatureTemplate template) {
+        Integer spellResistance = resolveCelestialSpellResistance(template);
+        if (spellResistance != null) {
+            defenses.add(spellResistance(String.valueOf(spellResistance)));
+        }
+    }
+
+    private com.pathfinder.summons.domain.model.SpecialDefense spellResistance(String value) {
+        return com.pathfinder.summons.domain.model.SpecialDefense.builder()
+                .type(com.pathfinder.summons.domain.model.SpecialDefenseType.SPELL_RESISTANCE)
+                .value(value)
+                .notes("Template spell resistance")
+                .build();
+    }
+
+    private com.pathfinder.summons.domain.model.SpecialDefense damageReduction(String value, String notes) {
+        return com.pathfinder.summons.domain.model.SpecialDefense.builder()
+                .type(com.pathfinder.summons.domain.model.SpecialDefenseType.DAMAGE_REDUCTION)
+                .value(value)
+                .notes(notes)
+                .build();
+    }
+
+    private Integer resolveCelestialSpellResistance(CreatureTemplate template) {
+        double challengeRating = resolveChallengeRating(template.getFullStatBlock());
+        int hitDiceCount = resolveHitDiceCount(template.getHitPoints());
+        if (challengeRating < 0) {
+            return null;
+        }
+
+        double adjustedChallengeRating = challengeRating + (hitDiceCount >= 5 ? 1 : 0);
+        return (int) Math.ceil(adjustedChallengeRating + 5);
+    }
+
+    private double resolveChallengeRating(String fullStatBlock) {
+        if (fullStatBlock == null || fullStatBlock.isBlank()) {
+            return -1;
+        }
+
+        for (String line : fullStatBlock.split("\\R")) {
+            String trimmed = line.trim();
+            if (!trimmed.startsWith("CR ")) {
+                continue;
+            }
+
+            String raw = trimmed.substring(3).trim();
+            int slashIndex = raw.indexOf('/');
+            if (slashIndex >= 0) {
+                try {
+                    double numerator = Double.parseDouble(raw.substring(0, slashIndex).trim());
+                    double denominator = Double.parseDouble(raw.substring(slashIndex + 1).trim());
+                    if (denominator == 0.0d) {
+                        return -1;
+                    }
+                    return numerator / denominator;
+                } catch (NumberFormatException ex) {
+                    return -1;
+                }
+            }
+
+            int spaceIndex = raw.indexOf(' ');
+            String value = spaceIndex >= 0 ? raw.substring(0, spaceIndex) : raw;
+            try {
+                return Double.parseDouble(value.trim());
+            } catch (NumberFormatException ex) {
+                return -1;
+            }
+        }
+
+        return -1;
     }
 
     private String buildFullStatBlock(String displayName,
@@ -569,16 +789,24 @@ public class DefaultCreatureResolver implements CreatureResolver {
 
         StringJoiner joiner = new StringJoiner(", ");
         for (com.pathfinder.summons.domain.model.SpecialDefense specialDefense : specialDefenses) {
-            StringBuilder builder = new StringBuilder(specialDefense.getType().name().toLowerCase(Locale.ROOT));
+            StringBuilder builder = new StringBuilder(formatSpecialDefenseType(specialDefense.getType()));
             if (specialDefense.getValue() != null && !specialDefense.getValue().isBlank()) {
                 builder.append(' ').append(specialDefense.getValue());
-            }
-            if (specialDefense.getNotes() != null && !specialDefense.getNotes().isBlank()) {
-                builder.append(" (").append(specialDefense.getNotes()).append(')');
             }
             joiner.add(builder.toString());
         }
         return joiner.toString();
+    }
+
+    private String formatSpecialDefenseType(com.pathfinder.summons.domain.model.SpecialDefenseType type) {
+        return switch (type) {
+            case DAMAGE_REDUCTION -> "DR";
+            case RESISTANCE -> "Resistance";
+            case IMMUNITY -> "Immune";
+            case SPELL_RESISTANCE -> "SR";
+            case VULNERABILITY -> "Vulnerability";
+            case OTHER -> "";
+        };
     }
 
     private String toDisplaySize(CreatureSize size) {

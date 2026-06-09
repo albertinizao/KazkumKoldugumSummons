@@ -801,6 +801,10 @@ Ejemplo:
     "valor": "fire 5"
   },
   {
+    "tipo": "sr",
+    "valor": "13"
+  },
+  {
     "tipo": "inmunidad",
     "valor": "poison"
   },
@@ -816,10 +820,19 @@ Tipos recomendados:
 - `rd`;
 - `resistencia`;
 - `inmunidad`;
+- `sr` o `spell_resistance`;
 - `vulnerabilidad`;
 - `otra`.
 
 La aplicación debe mostrar estas defensas en el modal de daño.
+
+Compatibilidad con catálogo legado:
+
+- si una entrada antigua guarda `spell resistance` dentro de `otra`, el importador la normaliza a `sr`;
+- las defensas generadas por plantillas se calculan en tiempo de resolución y deben seguir siendo visibles en la criatura final;
+- las plantillas `celestial`, `entropic` y `resolute` aportan SR en la criatura final, además de sus resistencias y reducción de daño cuando corresponda.
+
+En la pantalla principal, las inmunidades y la SR deben verse a nivel de grupo, mientras que la RD y las resistencias deben verse junto al PG de cada card individual para que el jugador las tenga delante antes de aplicar daño.
 
 La aplicación no debe aplicar automáticamente reducción de daño, resistencias ni inmunidades.
 

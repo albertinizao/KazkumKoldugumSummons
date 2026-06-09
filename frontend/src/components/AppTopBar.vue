@@ -23,9 +23,6 @@
   border-bottom: 1px solid rgba(148, 163, 184, 0.2);
   background: rgba(10, 14, 22, 0.8);
   backdrop-filter: blur(12px);
-  position: sticky;
-  top: 0;
-  z-index: 10;
 }
 
 .eyebrow {

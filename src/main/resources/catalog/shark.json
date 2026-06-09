@@ -1,0 +1,92 @@
+{
+  "id": "shark",
+  "nombre": "Shark",
+  "nivelSummon": 3,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [
+    "aquatic"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 5,
+  "sentidos": [
+    "blindsense 30 ft.",
+    "keen scent"
+  ],
+  "percepcion": 8,
+  "atributos": {
+    "fuerza": 17,
+    "destreza": 12,
+    "constitucion": 13,
+    "inteligencia": 1,
+    "sabiduria": 12,
+    "carisma": 2
+  },
+  "ca": {
+    "normal": 14,
+    "toque": 10,
+    "desprevenido": 13,
+    "detalle": "+1 Dex, +4 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 36,
+    "formula": "(4d8+4)"
+  },
+  "salvaciones": {
+    "fortaleza": 7,
+    "reflejos": 5,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "swim",
+      "valor": 60
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 5,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+4",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Keen Scent (Ex) A shark can notice creatures by scent in a 180-foot radius underwater and can detect blood in the water at ranges of up to a mile."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Keen Scent (Ex) A shark can notice creatures by scent in a 180-foot radius underwater and can detect blood in the water at ranges of up to a mile."
+    }
+  ],
+  "fullStatBlock": "CR 2\nShark\nN Large animal aquatic\nInit +5\nSenses blindsense 30 ft., keen scent; Perception +8\nAC 14, touch 10, flat-footed 13 (+1 Dex, +4 natural, -1 size)\nhp 22 ((4d8+4))\nFort +7, Ref +5, Will +2\nSpeed swim 60 ft.\nMelee Bite +5 (1d8+4 piercing)\nSpecial Abilities Keen Scent (Ex) A shark can notice creatures by scent in a 180-foot radius underwater and can detect blood in the water at ranges of up to a mile.\nSpell-Like Abilities none\nStatistics Str 17, Dex 12, Con 13, Int 1, Wis 12, Cha 2\nBase Atk +3; CMB +7; CMD 18\nFeats Great Fortitude, Improved Initiative\nSkills Perception +8, Swim +11\nEnvironment  any ocean\nOrganization solitary, pair, school (3-6), or pack (7-13)\nTreasure none\nSource PFRPG Bestiary"
+}

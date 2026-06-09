@@ -1,0 +1,129 @@
+{
+  "id": "tojanida",
+  "nombre": "Tojanida",
+  "nivelSummon": 5,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "outsider",
+  "subtipos": [
+    "extraplanar",
+    "water"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 1,
+  "sentidos": [
+    "all-around vision",
+    "darkvision 60 ft."
+  ],
+  "percepcion": 14,
+  "atributos": {
+    "fuerza": 16,
+    "destreza": 13,
+    "constitucion": 17,
+    "inteligencia": 10,
+    "sabiduria": 12,
+    "carisma": 9
+  },
+  "ca": {
+    "normal": 21,
+    "toque": 12,
+    "desprevenido": 19,
+    "detalle": "+1 Dex, +1 dodge, +9 natural"
+  },
+  "pg": {
+    "maximos": 78,
+    "formula": "(6d10+18)"
+  },
+  "salvaciones": {
+    "fortaleza": 8,
+    "reflejos": 6,
+    "voluntad": 3
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 10
+    },
+    {
+      "tipo": "swim",
+      "valor": 90
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 9,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+3",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "claws",
+      "name": "Claws",
+      "attackBonus": 9,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+3",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "ink cloud"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "RESISTANCE",
+      "valor": "electricity 10",
+      "notas": null
+    },
+    {
+      "tipo": "RESISTANCE",
+      "valor": "fire 10",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Ink Cloud",
+      "resumen": "Ink Cloud (Ex) A tojanida can emit a 30-foot-radius sphere of ink once per minute as a free action. The ink provides total concealment in water, and persists for 1 minute. If used out of the water, the jet of ink is a line 30 feet long, and creatures in the area must succeed at a DC 16 Reflex save or be blinded for 1 round. The save DC is Constitution-based."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Ink Cloud",
+      "texto": "Ink Cloud (Ex) A tojanida can emit a 30-foot-radius sphere of ink once per minute as a free action. The ink provides total concealment in water, and persists for 1 minute. If used out of the water, the jet of ink is a line 30 feet long, and creatures in the area must succeed at a DC 16 Reflex save or be blinded for 1 round. The save DC is Constitution-based."
+    }
+  ],
+  "fullStatBlock": "CR 5\nTojanida\nN Medium outsider extraplanar, water\nInit +1\nSenses all-around vision, darkvision 60 ft.; Perception +14\nAC 21, touch 12, flat-footed 19 (+1 Dex, +1 dodge, +9 natural)\nhp 51 (6d10+18)\nFort +8, Ref +6, Will +3\nSpeed 10 ft., swim 90 ft.\nMelee bite +9 (1d6+3), 2 claws +9 (1d6+3)\nSpecial Attacks ink cloud\nSpecial Abilities Ink Cloud (Ex) A tojanida can emit a 30-foot-radius sphere of ink once per minute as a free action. The ink provides total concealment in water, and persists for 1 minute. If used out of the water, the jet of ink is a line 30 feet long, and creatures in the area must succeed at a DC 16 Reflex save or be blinded for 1 round. The save DC is Constitution-based.\nSpell-Like Abilities none\nStatistics Str 16, Dex 13, Con 17, Int 10, Wis 12, Cha 9\nBase Atk +6; CMB +9; CMD 21\nFeats Blind-Fight, Dodge, Power Attack\nSkills Bluff +5, Escape Artist +10, Knowledge (planes) +9, Perception +14, Perform (act) +5, Sense Motive +10, Stealth +7, Survival +7, Swim +11\nLanguages Aquan\nEnvironment  any water (Plane of Water)\nOrganization solitary, pair, clutch (3-6), or cult (1 tojanida plus 2-12 humanoid followers)\nTreasure standard\nResist electricity 10, fire 10\nSource PFRPG Bestiary 3"
+}

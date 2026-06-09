@@ -1,0 +1,92 @@
+{
+  "id": "dimetrodon",
+  "nombre": "Dimetrodon",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 6,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 6,
+  "atributos": {
+    "fuerza": 20,
+    "destreza": 15,
+    "constitucion": 18,
+    "inteligencia": 1,
+    "sabiduria": 12,
+    "carisma": 3
+  },
+  "ca": {
+    "normal": 14,
+    "toque": 11,
+    "desprevenido": 12,
+    "detalle": "+2 Dex, +3 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 48,
+    "formula": "(4d8+16)"
+  },
+  "salvaciones": {
+    "fortaleza": 8,
+    "reflejos": 6,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 8,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+7",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "tearing bite"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Tearing Bite (Ex) A dimetrodon's jaws are filled with razor-sharp teeth of two different sizes. This gives the creature a threat range of 19-20 with its bite attack."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Tearing Bite (Ex) A dimetrodon's jaws are filled with razor-sharp teeth of two different sizes. This gives the creature a threat range of 19-20 with its bite attack."
+    }
+  ],
+  "fullStatBlock": "CR 3\nDimetrodon\nN Large animal\nInit +6\nSenses low-light vision, scent; Perception +6\nAC 14, touch 11, flat-footed 12 (+2 Dex, +3 natural, -1 size)\nhp 34 ((4d8+16))\nFort +8, Ref +6, Will +2\nSpeed 30 ft.\nMelee Bite +8 (1d8+7 piercing)\nSpecial Attacks tearing bite\nSpecial Abilities Tearing Bite (Ex) A dimetrodon's jaws are filled with razor-sharp teeth of two different sizes. This gives the creature a threat range of 19-20 with its bite attack.\nSpell-Like Abilities none\nStatistics Str 20, Dex 15, Con 18, Int 1, Wis 12, Cha 3\nBase Atk +3; CMB +9; CMD 21\nFeats Improved Initiative, Weapon Focus (bite)\nSkills Perception +6, Stealth +3\nEnvironment  warm forests\nOrganization solitary, pair, or pack (3-12)\nTreasure none\nSource PFRPG Bestiary 3"
+}

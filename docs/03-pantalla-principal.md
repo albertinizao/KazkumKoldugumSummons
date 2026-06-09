@@ -150,6 +150,10 @@ Debe contener:
 3. botones globales del grupo;
 4. cards individuales de criaturas activas.
 
+La ficha resumida del grupo debe mostrar las inmunidades y la SR si existen.
+
+Las cards individuales deben mostrar la RD y las resistencias junto al PG para que el daño se evalúe con esa referencia a mano.
+
 Ejemplo:
 
 ```text
@@ -166,6 +170,9 @@ Speed 30 ft., burrow 10 ft.
 Melee bite +4 (1d3+3 + 1 fire), 2 claws +4 (1d2+3 + 1 fire)
 Space 5 ft., Reach 5 ft.
 Special Attacks blood rage
+Inmunidades / SR: fire; SR 13
+Vulnerabilidades: cold
+RD / resistencias: RD 5/good; Resistencia cold 10
 
 [Atacar] [Salvaciones] [Expandir ficha]
 
@@ -366,6 +373,7 @@ Debe mostrar:
 - nombre visible de criatura;
 - PG máximos;
 - PG actuales;
+- RD y resistencias, visibles junto al PG si existen;
 - botones rápidos `-10`, `-5`, `-1`, `+1`, `+5`, `+10`;
 - campo libre para introducir una cantidad con signo;
 - botón `Eliminar`.
@@ -383,10 +391,12 @@ En tablet vertical, esta información puede representarse así:
 ```text
 Fiery Badger 1
 PG: 15 / 15
+RD / resistencias: RD 5/good
 [-10] [-5] [-1] [+1] [+5] [+10] [Eliminar]
 
 Fiery Badger 2
 PG: 7 / 15
+RD / resistencias: RD 5/good
 [-10] [-5] [-1] [+1] [+5] [+10] [Eliminar]
 
 Fiery Badger 3

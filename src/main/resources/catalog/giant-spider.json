@@ -1,0 +1,112 @@
+{
+  "id": "giant-spider",
+  "nombre": "Giant Spider",
+  "nivelSummon": 2,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "vermin",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 3,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "tremorsense 60 ft."
+  ],
+  "percepcion": 4,
+  "atributos": {
+    "fuerza": 11,
+    "destreza": 17,
+    "constitucion": 12,
+    "inteligencia": 0,
+    "sabiduria": 10,
+    "carisma": 2
+  },
+  "ca": {
+    "normal": 14,
+    "toque": 13,
+    "desprevenido": 11,
+    "detalle": "+1 armor, +3 Dex"
+  },
+  "pg": {
+    "maximos": 27,
+    "formula": "3d8+3"
+  },
+  "salvaciones": {
+    "fortaleza": 4,
+    "reflejos": 4,
+    "voluntad": 1
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    },
+    {
+      "tipo": "climb",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 2,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "poison"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "web (+5 ranged, DC 12, hp 2)"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "IMMUNITY",
+      "valor": "mind-affecting effects",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "web",
+      "resumen": "web (+5 ranged, DC 12, hp 2)"
+    },
+    {
+      "nombre": "Poison",
+      "resumen": "Poison (Ex) Bite-injury; save Fort DC 14; frequency 1/round for 4 rounds; effect 1d2 Strength damage; cure 1 save."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "web",
+      "texto": "web (+5 ranged, DC 12, hp 2)"
+    },
+    {
+      "nombre": "Poison",
+      "texto": "Poison (Ex) Bite-injury; save Fort DC 14; frequency 1/round for 4 rounds; effect 1d2 Strength damage; cure 1 save."
+    }
+  ],
+  "fullStatBlock": "CR 1\nGiant Spider\nN Medium vermin\nInit +3\nSenses darkvision 60 ft., tremorsense 60 ft.; Perception +4\nAC 14, touch 13, flat-footed 11 (+1 armor, +3 Dex)\nhp 16 (3d8+3)\nFort +4, Ref +4, Will +1\nSpeed 30 ft., climb 30 ft.\nMelee bite +2 (1d6 plus poison)\nSpace 5 ft.; Reach 5 ft.\nSpecial Attacks web (+5 ranged, DC 12, hp 2)\nSpecial Abilities Poison (Ex) Bite-injury; save Fort DC 14; frequency 1/round for 4 rounds; effect 1d2 Strength damage; cure 1 save.\nSpell-Like Abilities none\nStatistics Str 11, Dex 17, Con 12, Int 0, Wis 10, Cha 2\nBase Atk +2; CMB +2; CMD 15\nSkills Climb +16, Perception +4 (+8 in webs), Stealth +7 (+11 in webs)\nRacial Modifiers +4 Perception, +4 Stealth (+8 in webs), +16 Climb\nEnvironment  any\nOrganization solitary, pair, or colony (3-8)\nTreasure incidental\nImmune mind-affecting effects\nSource PFRPG Bestiary\nDescription The statistics above are for a web-spinning spider. Hunting spiders lose the web ability but gain a +8 racial modifier on Acrobatics checks. All giant spiders have a +2 racial bonus on poison save DCs. Other species of giant spiders exist, as detailed below. Species CR Size HD Scarlet spider 1/4 Tiny 1d8 Giant crab spider 1/2 Small 2d8 Giant black widow 3 Large 5d8 Ogre spider 5 Huge 7d8 Giant tarantula 8 Gargantuan 10d8 Goliath spider 11 Colossal 14d8"
+}

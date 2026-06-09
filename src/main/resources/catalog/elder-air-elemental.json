@@ -1,0 +1,96 @@
+{
+  "id": "elder-air-elemental",
+  "nombre": "Elder Air Elemental",
+  "nivelSummon": 8,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "outsider",
+  "subtipos": [
+    "air",
+    "elemental",
+    "extraplanar"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 15,
+  "sentidos": [
+    "darkvision 60 ft."
+  ],
+  "percepcion": 19,
+  "atributos": {
+    "fuerza": 28,
+    "destreza": 33,
+    "constitucion": 18,
+    "inteligencia": 10,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 28,
+    "toque": 20,
+    "desprevenido": 16,
+    "detalle": "+11 Dex, +1 dodge, +8 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 224,
+    "formula": "(16d10+64)"
+  },
+  "salvaciones": {
+    "fortaleza": 14,
+    "reflejos": 21,
+    "voluntad": 7
+  },
+  "velocidades": [
+    {
+      "tipo": "fly",
+      "valor": 100,
+      "maneuverability": "perfect"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 25,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d8+9",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": null,
+      "notes": []
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/-",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Defensive Abilities",
+      "resumen": "air mastery"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Defensive Abilities",
+      "texto": "air mastery"
+    }
+  ],
+  "fullStatBlock": "CR 11\nElder Air Elemental\nN Huge outsider air, elemental, extraplanar\nInit +15\nSenses darkvision 60 ft.; Perception +19\nAC 28, touch 20, flat-footed 16 (+11 Dex, +1 dodge, +8 natural, -2 size)\nhp 224 (16d10+64)\nFort +14, Ref +21, Will +7\nSpeed fly 100 ft. (perfect)\nMelee 2 slams +25 (2d8+9)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nDefensive Abilities air mastery\nStatistics Str 28, Dex 33, Con 18, Int 10, Wis 11, Cha 11\nBase Atk +16\nCMB +27\nCMD 49\nEnvironment Plane of Air\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDR 10/-\nImmune elemental traits\nSource PFRPG Bestiary"
+}

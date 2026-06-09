@@ -1,0 +1,96 @@
+{
+  "id": "giant-moray-eel",
+  "nombre": "Giant Moray Eel",
+  "nivelSummon": 5,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [
+    "aquatic"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 6,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 7,
+  "atributos": {
+    "fuerza": 22,
+    "destreza": 14,
+    "constitucion": 16,
+    "inteligencia": 1,
+    "sabiduria": 12,
+    "carisma": 8
+  },
+  "ca": {
+    "normal": 19,
+    "toque": 11,
+    "desprevenido": 17,
+    "detalle": "+2 Dex, +8 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 77,
+    "formula": "(7d8+21)"
+  },
+  "salvaciones": {
+    "fortaleza": 8,
+    "reflejos": 9,
+    "voluntad": 3
+  },
+  "velocidades": [
+    {
+      "tipo": "swim",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 11,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+9",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "10 ft.",
+  "ataquesEspeciales": [
+    "gnaw"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Gnaw",
+      "resumen": "Gnaw (Ex) If a giant moray begins a round with a grabbed foe, it inflicts automatic bite damage (2d6+9 points of damage). A giant moray eel possesses a second set of jaws in its throat that aid in swallowing-it can make a second bite attack (+11 attack, 1d6+3) against a foe it has already grabbed."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Gnaw",
+      "texto": "Gnaw (Ex) If a giant moray begins a round with a grabbed foe, it inflicts automatic bite damage (2d6+9 points of damage). A giant moray eel possesses a second set of jaws in its throat that aid in swallowing-it can make a second bite attack (+11 attack, 1d6+3) against a foe it has already grabbed."
+    }
+  ],
+  "fullStatBlock": "CR 5\nGiant Moray Eel\nN Large animal aquatic\nInit +6\nSenses low-light vision, scent; Perception +7\nAC 19, touch 11, flat-footed 17 (+2 Dex, +8 natural, -1 size)\nhp 52 (7d8+21)\nFort +8, Ref +9, Will +3\nSpeed swim 30 ft.\nMelee bite +11 (2d6+9 plus grab)\nSpecial Attacks gnaw\nSpecial Abilities Gnaw (Ex) If a giant moray begins a round with a grabbed foe, it inflicts automatic bite damage (2d6+9 points of damage). A giant moray eel possesses a second set of jaws in its throat that aid in swallowing-it can make a second bite attack (+11 attack, 1d6+3) against a foe it has already grabbed.\nSpell-Like Abilities none\nStatistics Str 22, Dex 14, Con 16, Int 1, Wis 12, Cha 8\nBase Atk +5; CMB +12; CMD 24\nFeats Improved Initiative, Lightning Reflexes, Skill Focus (Stealth), Weapon Focus (bite)\nSkills Escape Artist +10, Perception +7, Stealth +8, Swim +14\nEnvironment  warm oceans\nOrganization solitary, pair, or nest (3-6)\nTreasure none\nSource PFRPG Bestiary"
+}

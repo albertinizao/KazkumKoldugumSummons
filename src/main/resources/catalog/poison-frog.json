@@ -1,0 +1,95 @@
+{
+  "id": "poison-frog",
+  "nombre": "Poison Frog",
+  "nivelSummon": 1,
+  "alineamiento": "N",
+  "tamano": "Tiny",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 1,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 3,
+  "atributos": {
+    "fuerza": 2,
+    "destreza": 12,
+    "constitucion": 11,
+    "inteligencia": 1,
+    "sabiduria": 9,
+    "carisma": 10
+  },
+  "ca": {
+    "normal": 13,
+    "toque": 13,
+    "desprevenido": 12,
+    "detalle": "+1 Dex, +2 size"
+  },
+  "pg": {
+    "maximos": 8,
+    "formula": "1d8"
+  },
+  "salvaciones": {
+    "fortaleza": 2,
+    "reflejos": 3,
+    "voluntad": -1
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 10
+    },
+    {
+      "tipo": "swim",
+      "valor": 20
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 3,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "poison"
+      ]
+    }
+  ],
+  "espacio": "2 ft.",
+  "alcance": "0 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Poison",
+      "resumen": "El mordisco transmite veneno por herida que daña la Constitución durante 6 asaltos."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Poison",
+      "texto": "Poison (Ex) Injury; save Fort DC 10; frequency 1/round for 6 rounds; effect 1d2 Con damage; cure 1 save."
+    }
+  ],
+  "fullStatBlock": "CR 1/2\nPoison Frog\nN Tiny animal\nInit +1\nSenses low-light vision; Perception +3\nAC 13, touch 13, flat-footed 12 (+1 Dex, +2 size)\nhp 4 (1d8)\nFort +2, Ref +3, Will +-1\nSpeed 10 ft., swim 20 ft.\nMelee bite +3 (1 plus poison)\nSpace 2 ft.; Reach 0 ft.\nSpecial Abilities Poison (Ex) Injury; save Fort DC 10; frequency 1/round for 6 rounds; effect 1d2 Con damage; cure 1 save.\nSpell-Like Abilities none\nStatistics Str 2, Dex 12, Con 11, Int 1, Wis 9, Cha 10\nCMB -1; CMD 5\nFeats Weapon Finesse\nSkills Acrobatics +5 (+1 jumping), Perception +3, Stealth +13, Swim +9\nRacial Modifiers +4 Acrobatics (+8 jumping), +4 Stealth; uses Dex to swim\nEnvironment warm marshes and aquatic\nOrganization solitary, pair, or army (3-12)\nTreasure none\nSource PFRPG Bestiary"
+}

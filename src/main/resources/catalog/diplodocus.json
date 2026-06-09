@@ -1,0 +1,74 @@
+{
+  "id": "diplodocus",
+  "nombre": "Diplodocus",
+  "nivelSummon": 8,
+  "alineamiento": "N",
+  "tamano": "Colossal",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [],
+  "iniciativa": 6,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 32,
+  "atributos": {
+    "fuerza": 40,
+    "destreza": 14,
+    "constitucion": 21,
+    "inteligencia": 2,
+    "sabiduria": 17,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 25,
+    "toque": 4,
+    "desprevenido": 23,
+    "detalle": "+2 Dex, +21 natural, -8 size"
+  },
+  "pg": {
+    "maximos": 260,
+    "formula": "(20d8+100)"
+  },
+  "salvaciones": {
+    "fortaleza": 17,
+    "reflejos": 14,
+    "voluntad": 11
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "tail-lashes",
+      "name": "Tail lashes",
+      "attackBonus": 22,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "4d6+15",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 19,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "30 ft.",
+  "alcance": "60 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 12\nDiplodocus\nN Colossal animal\nInit +6\nSenses low-light vision, scent; Perception +32\nAC 25, touch 4, flat-footed 23 (+2 Dex, +21 natural, -8 size)\nhp 260 (20d8+100)\nFort +17, Ref +14, Will +11\nSpeed 30 ft.\nMelee 2 tail lashes +22 (4d6+15/19-20)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 40, Dex 14, Con 21, Int 2, Wis 17, Cha 11\nBase Atk +15\nCMB +38 (+40 bull rush)\nCMD 50 (52 vs. bull rush, 54 vs. trip)\nEnvironment warm plains\nOrganization solitary, pair, or herd (3-14)\nTreasure none\nSource PFRPG Bestiary 4"
+}

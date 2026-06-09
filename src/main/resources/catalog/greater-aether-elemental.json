@@ -1,0 +1,132 @@
+{
+  "id": "greater-aether-elemental",
+  "nombre": "Greater Aether Elemental",
+  "nivelSummon": 7,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "outsider",
+  "subtipos": [
+    "aether",
+    "elemental",
+    "extraplanar"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 14,
+  "sentidos": [
+    "blindsense 60 ft.",
+    "darkvision 60 ft."
+  ],
+  "percepcion": 16,
+  "atributos": {
+    "fuerza": 20,
+    "destreza": 31,
+    "constitucion": 22,
+    "inteligencia": 8,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 24,
+    "toque": 24,
+    "desprevenido": 14,
+    "detalle": "+6 deflection, +10 Dex, -2 size"
+  },
+  "pg": {
+    "maximos": 208,
+    "formula": "(13d10+78)"
+  },
+  "salvaciones": {
+    "fortaleza": 14,
+    "reflejos": 18,
+    "voluntad": 6
+  },
+  "velocidades": [
+    {
+      "tipo": "fly",
+      "valor": 60,
+      "maneuverability": "good"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 16,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d8+5",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "telekinetic-throw",
+      "name": "Telekinetic Throw",
+      "attackBonus": 21,
+      "quantity": 1,
+      "attackType": "RANGED",
+      "damageComponents": [
+        {
+          "formula": "8d6+7",
+          "damageType": "FORCE",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 19,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/-",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "force",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Qualities",
+      "resumen": "telekinetic invisibility  Languages Aquan, Auran, Ignan, Terran"
+    },
+    {
+      "nombre": "Defensive Abilities",
+      "resumen": "telekinetic deflection"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Qualities",
+      "texto": "telekinetic invisibility  Languages Aquan, Auran, Ignan, Terran"
+    },
+    {
+      "nombre": "Defensive Abilities",
+      "texto": "telekinetic deflection"
+    }
+  ],
+  "fullStatBlock": "CR 9\nGreater Aether Elemental\nN Huge outsider aether, elemental, extraplanar\nInit +14\nSenses blindsense 60 ft., darkvision 60 ft.; Perception +16\nAC 24, touch 24, flat-footed 14 (+6 deflection, +10 Dex, -2 size)\nhp 208 (13d10+78)\nFort +14, Ref +18, Will +6\nSpeed fly 60 ft. (good)\nMelee 2 slams +16 (2d8+5)\nRanged telekinetic throw +21 (8d6+7/19-20)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nSpecial Qualities telekinetic invisibility  Languages Aquan, Auran, Ignan, Terran\nDefensive Abilities telekinetic deflection\nStatistics Str 20, Dex 31, Con 22, Int 8, Wis 11, Cha 11\nBase Atk +13; CMB +20; CMD 46\nEnvironment any (Ethereal Plane)\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDR 10/-\nImmune elemental traits, force\nSource PFRPG Bestiary 5"
+}

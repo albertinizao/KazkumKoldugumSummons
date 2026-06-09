@@ -99,6 +99,7 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
     }
 
     private CreatureTemplate map(RawCreatureTemplate raw) {
+        boolean outsider = isOutsider(raw.tipo());
         return CreatureTemplate.builder()
                 .id(raw.id())
                 .name(raw.nombre())
@@ -107,9 +108,11 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
                 .size(parseCreatureSize(raw.tamano()))
                 .creatureType(raw.tipo())
                 .subtypes(safeList(raw.subtipos()))
-                .allowedTemplates(safeList(raw.plantillasPermitidas()).stream()
-                        .map(this::parseTemplateType)
-                        .toList())
+                .allowedTemplates(outsider
+                        ? List.of()
+                        : safeList(raw.plantillasPermitidas()).stream()
+                                .map(this::parseTemplateType)
+                                .toList())
                 .initiative(raw.iniciativa())
                 .senses(safeList(raw.sentidos()))
                 .perception(raw.percepcion())
@@ -142,6 +145,8 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
                         .map(speed -> Speed.builder()
                                 .type(parseSpeedType(speed.tipo()))
                                 .valueFeet(speed.valor())
+                                .maneuverability(speed.maneuverability())
+                                .notes(speed.notes())
                                 .build())
                         .toList())
                 .attacks(safeList(raw.ataques()).stream()
@@ -151,11 +156,7 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
                 .reach(raw.alcance())
                 .specialAttacks(safeList(raw.ataquesEspeciales()))
                 .specialDefenses(safeList(raw.defensasEspeciales()).stream()
-                        .map(defense -> SpecialDefense.builder()
-                                .type(parseSpecialDefenseType(defense.tipo()))
-                                .value(defense.valor())
-                                .notes(defense.notas())
-                                .build())
+                        .map(this::mapSpecialDefense)
                         .toList())
                 .tacticalNotes(safeList(raw.notasTacticas()))
                 .shortAbilities(safeList(raw.habilidadesResumidas()).stream()
@@ -172,6 +173,10 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
                         .toList())
                 .fullStatBlock(raw.fullStatBlock())
                 .build();
+    }
+
+    private boolean isOutsider(String creatureType) {
+        return creatureType != null && creatureType.trim().equalsIgnoreCase("outsider");
     }
 
     private Attack mapAttack(RawAttack rawAttack) {
@@ -228,7 +233,44 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
     }
 
     private SpecialDefenseType parseSpecialDefenseType(String value) {
-        return SpecialDefenseType.valueOf(value.trim().toUpperCase(Locale.ROOT));
+        String normalized = value.trim().toUpperCase(Locale.ROOT).replace("-", "_").replace(" ", "_");
+
+        if ("SR".equals(normalized) || "SPELL_RESISTANCE".equals(normalized) || "SPELLRESISTANCE".equals(normalized)) {
+            return SpecialDefenseType.SPELL_RESISTANCE;
+        }
+
+        return SpecialDefenseType.valueOf(normalized);
+    }
+
+    private SpecialDefense mapSpecialDefense(RawSpecialDefense defense) {
+        SpecialDefenseType type = parseSpecialDefenseType(defense.tipo());
+        String value = defense.valor();
+
+        if (type == SpecialDefenseType.OTHER && value != null) {
+            String normalizedValue = value.trim().toLowerCase(Locale.ROOT);
+            if (normalizedValue.startsWith("spell resistance")) {
+                type = SpecialDefenseType.SPELL_RESISTANCE;
+                value = stripPrefix(value, "spell resistance");
+            }
+        }
+
+        return SpecialDefense.builder()
+                .type(type)
+                .value(value)
+                .notes(defense.notas())
+                .build();
+    }
+
+    private String stripPrefix(String value, String prefix) {
+        String trimmed = value.trim();
+        String normalizedPrefix = prefix.trim().toLowerCase(Locale.ROOT);
+        String normalizedValue = trimmed.toLowerCase(Locale.ROOT);
+        if (!normalizedValue.startsWith(normalizedPrefix)) {
+            return value;
+        }
+
+        String remainder = trimmed.substring(prefix.length()).trim();
+        return remainder.isBlank() ? null : remainder;
     }
 
     private HitDice parseHitDice(String formula) {
@@ -236,7 +278,7 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
             return null;
         }
 
-        String normalized = formula.replace(" ", "");
+        String normalized = normalizeFormula(formula);
         int dIndex = normalized.toLowerCase(Locale.ROOT).indexOf('d');
         if (dIndex <= 0) {
             return null;
@@ -255,6 +297,14 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
         } catch (NumberFormatException ex) {
             return null;
         }
+    }
+
+    private String normalizeFormula(String formula) {
+        String normalized = formula.trim().replace(" ", "");
+        while (normalized.startsWith("(") && normalized.endsWith(")") && normalized.length() > 1) {
+            normalized = normalized.substring(1, normalized.length() - 1).trim().replace(" ", "");
+        }
+        return normalized;
     }
 
     private <T> List<T> safeList(List<T> values) {
@@ -323,7 +373,9 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
 
     private record RawSpeed(
             @JsonProperty("tipo") String tipo,
-            @JsonProperty("valor") int valor
+            @JsonProperty("valor") int valor,
+            @JsonProperty("maneuverability") String maneuverability,
+            @JsonProperty("notes") String notes
     ) {
     }
 

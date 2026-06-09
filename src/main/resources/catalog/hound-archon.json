@@ -1,0 +1,140 @@
+{
+  "id": "hound-archon",
+  "nombre": "Hound Archon",
+  "nivelSummon": 4,
+  "alineamiento": "LG",
+  "tamano": "Medium",
+  "tipo": "outsider",
+  "subtipos": [
+    "archon",
+    "extraplanar",
+    "good",
+    "lawful"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 4,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "detect evil",
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 10,
+  "atributos": {
+    "fuerza": 15,
+    "destreza": 10,
+    "constitucion": 13,
+    "inteligencia": 10,
+    "sabiduria": 13,
+    "carisma": 12
+  },
+  "ca": {
+    "normal": 19,
+    "toque": 10,
+    "desprevenido": 19,
+    "detalle": "+9 natural)(+2 deflection vs. evil"
+  },
+  "pg": {
+    "maximos": 66,
+    "formula": "(6d10+6)"
+  },
+  "salvaciones": {
+    "fortaleza": 6,
+    "reflejos": 5,
+    "voluntad": 5
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 40
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 8,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+3",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "slam",
+      "name": "Slam",
+      "attackBonus": 8,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4+1",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/evil",
+      "notas": null
+    },
+    {
+      "tipo": "OTHER",
+      "valor": "spell resistance 15",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "electricity",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "petrification",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [
+    "Natural attacks are listed structurally; the greatsword alternative is preserved in the source stat block text.",
+    "Source attack line includes an alternative mwk greatsword option."
+  ],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Change Shape (Su) A hound archon can assume any canine form of Small to Large size, as if using beast shape II. While in canine form, the hound archon loses its bite, slam, and greatsword attacks, but gains the bite attack of the form it chooses. For the purposes of this ability, canines include any dog-like or wolf-like creature of the animal type."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Change Shape (Su) A hound archon can assume any canine form of Small to Large size, as if using beast shape II. While in canine form, the hound archon loses its bite, slam, and greatsword attacks, but gains the bite attack of the form it chooses. For the purposes of this ability, canines include any dog-like or wolf-like creature of the animal type."
+    }
+  ],
+  "fullStatBlock": "CR 4\nHound Archon\nLG Medium outsider archon, extraplanar, good, lawful\nInit +4\nSenses darkvision 60 ft., detect evil, low-light vision, scent; Perception +10\nAC 19, touch 10, flat-footed 19 (+9 natural)(+2 deflection vs. evil)\nhp 39 ((6d10+6))\nFort +6, Ref +5, Will +5\nSpeed 40 ft.\nMelee Bite +8 (1d8+3 piercing)\nMelee Slam +8 (1d4+1 bludgeoning)\nSpecial Abilities Change Shape (Su) A hound archon can assume any canine form of Small to Large size, as if using beast shape II. While in canine form, the hound archon loses its bite, slam, and greatsword attacks, but gains the bite attack of the form it chooses. For the purposes of this ability, canines include any dog-like or wolf-like creature of the animal type.\nSpell-Like Abilities none\nStatistics Str 15, Dex 10, Con 13, Int 10, Wis 13, Cha 12\nBase Atk +6; CMB +8; CMD 18\nFeats Improved Initiative, Iron Will, Power Attack\nSkills Acrobatics +9, Intimidate +10, Perception +10, Sense Motive +10, Stealth +13, Survival +14\nLanguages Celestial, Draconic, Infernal; truespeech\nEnvironment  any (Heaven)\nOrganization solitary, pair, or squad (3-5)\nTreasure standard (masterwork greatsword, other treasure)\nDR 10/evil\nSR 15\nImmune electricity, petrification\nSource PFRPG Bestiary"
+}

@@ -1,0 +1,125 @@
+{
+  "id": "tripurasura",
+  "nombre": "Tripurasura",
+  "nivelSummon": 3,
+  "alineamiento": "LE",
+  "tamano": "Tiny",
+  "tipo": "outsider",
+  "subtipos": [
+    "asura",
+    "evil",
+    "extraplanar",
+    "lawful"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "detect magic"
+  ],
+  "percepcion": 10,
+  "atributos": {
+    "fuerza": 8,
+    "destreza": 14,
+    "constitucion": 12,
+    "inteligencia": 13,
+    "sabiduria": 15,
+    "carisma": 13
+  },
+  "ca": {
+    "normal": 16,
+    "toque": 16,
+    "desprevenido": 13,
+    "detalle": "+2 Dex, +1 dodge, +1 insight, +2 size"
+  },
+  "pg": {
+    "maximos": 33,
+    "formula": "(3d10+3)"
+  },
+  "salvaciones": {
+    "fortaleza": 4,
+    "reflejos": 3,
+    "voluntad": 5
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    }
+  ],
+  "ataques": [
+    {
+      "id": "sting",
+      "name": "Sting",
+      "attackBonus": 7,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4-1",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "poison"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "IMMUNITY",
+      "valor": "curse effects",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "disease",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "poison",
+      "notas": null
+    },
+    {
+      "tipo": "RESISTANCE",
+      "valor": "acid 10",
+      "notas": null
+    },
+    {
+      "tipo": "RESISTANCE",
+      "valor": "electricity 10",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [
+    "User input said \"Triparasura\"; resolved to Tripurasura."
+  ],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Change Shape (Su) The tripurasura has only one alternative form-when it uses change shape, it always appears as the same Small humanoid. Most take the form of gnomes or human children.  Elusive (Su) The tripurasura and items it carries are considered to be under the effects of a nondetection spell. A caster must succeed at a DC 14 caster level check to overcome this effect.  Poison (Ex) Tongue-injury; save Fort DC 12; frequency 1/round for 6 rounds; effect 1d2 Wis damage; cure 1 save."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Change Shape (Su) The tripurasura has only one alternative form-when it uses change shape, it always appears as the same Small humanoid. Most take the form of gnomes or human children.  Elusive (Su) The tripurasura and items it carries are considered to be under the effects of a nondetection spell. A caster must succeed at a DC 14 caster level check to overcome this effect.  Poison (Ex) Tongue-injury; save Fort DC 12; frequency 1/round for 6 rounds; effect 1d2 Wis damage; cure 1 save."
+    }
+  ],
+  "fullStatBlock": "CR 2\nTripurasura\nLE Tiny outsider asura, evil, extraplanar, lawful\nInit +2\nSenses darkvision 60 ft., detect magic; Perception +10\nAC 16, touch 16, flat-footed 13 (+2 Dex, +1 dodge, +1 insight, +2 size)\nhp 19 ((3d10+3))\nFort +4, Ref +3, Will +5\nSpeed 20 ft.\nMelee Sting +7 (1d4-1 piercing)\nSpecial Abilities Change Shape (Su) The tripurasura has only one alternative form-when it uses change shape, it always appears as the same Small humanoid. Most take the form of gnomes or human children.  Elusive (Su) The tripurasura and items it carries are considered to be under the effects of a nondetection spell. A caster must succeed at a DC 14 caster level check to overcome this effect.  Poison (Ex) Tongue-injury; save Fort DC 12; frequency 1/round for 6 rounds; effect 1d2 Wis damage; cure 1 save.\nSpell-Like Abilities none\nStatistics Str 8, Dex 14, Con 12, Int 13, Wis 15, Cha 13\nBase Atk +3; CMB +3; CMD 14\nFeats Dodge, Weapon Finesse\nSkills Acrobatics +8 (+4 when jumping), Appraise +4, Bluff +7, Escape Artist +8, Knowledge (arcana) +4, Knowledge (planes) +7, Perception +10, Perform (dance) +5, Spellcraft +4, Stealth +14\nLanguages Common, Infernal\nEnvironment  any (Hell)\nOrganization solitary, pair, or gang (3-10)\nTreasure standard\nImmune curse effects, disease, poison\nResist acid 10, electricity 10\nSource PFRPG Bestiary 3"
+}

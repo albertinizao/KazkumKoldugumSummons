@@ -1,0 +1,140 @@
+{
+  "id": "monadic-deva",
+  "nombre": "Monadic Deva",
+  "nivelSummon": 8,
+  "alineamiento": "NG",
+  "tamano": "Medium",
+  "tipo": "outsider",
+  "subtipos": [
+    "angel",
+    "aquatic",
+    "extraplanar",
+    "good"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 8,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "detect evil",
+    "low-light vision"
+  ],
+  "percepcion": 29,
+  "atributos": {
+    "fuerza": 21,
+    "destreza": 19,
+    "constitucion": 18,
+    "inteligencia": 19,
+    "sabiduria": 18,
+    "carisma": 19
+  },
+  "ca": {
+    "normal": 27,
+    "toque": 14,
+    "desprevenido": 23,
+    "detalle": "+4 Dex, +13 natural, +4 deflection vs. evil"
+  },
+  "pg": {
+    "maximos": 210,
+    "formula": "(14d10+70)"
+  },
+  "salvaciones": {
+    "fortaleza": 15,
+    "reflejos": 13,
+    "voluntad": 10
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 40
+    },
+    {
+      "tipo": "fly",
+      "valor": 90,
+      "maneuverability": "good"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "morningstar",
+      "name": "Morningstar",
+      "attackBonus": 22,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+10",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": null,
+      "notes": [
+        "solid blow"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/evil",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "acid",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "cold",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "electricity",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "fire",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "death effects",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "energy drain",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "petrification",
+      "notas": null
+    },
+    {
+      "tipo": "SPELL_RESISTANCE",
+      "valor": "23",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Qualities",
+      "resumen": "amphibious"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Qualities",
+      "texto": "amphibious"
+    }
+  ],
+  "fullStatBlock": "CR 12\nMonadic Deva\nNG Medium outsider angel, aquatic, extraplanar, good\nInit +8\nSenses darkvision 60 ft., detect evil, low-light vision; Perception +29\nAura protective aura\nAC 27, touch 14, flat-footed 23 (+4 Dex, +13 natural, +4 deflection vs. evil)\nhp 210 (14d10+70)\nFort +15, Ref +13, Will +10; +4 vs. poison; +4 resistance vs. evil\nSpeed 40 ft., fly 90 ft. (good)\nMelee +3 morningstar +22/+17/+12 (1d8+10 plus solid blow)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nSpecial Qualities amphibious\nStatistics Str 21, Dex 19, Con 18, Int 19, Wis 18, Cha 19\nBase Atk +14\nCMB +19\nCMD 33\nEnvironment any good-aligned plane\nOrganization solitary, pair, or squad (3-6)\nTreasure double (+3 morningstar, other treasure)\nDR 10/evil\nImmune acid, cold, electricity, fire, death effects, energy drain, petrification\nSR 23\nSource PFRPG Bestiary 2"
+}

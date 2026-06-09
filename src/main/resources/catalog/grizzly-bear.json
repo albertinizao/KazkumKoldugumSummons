@@ -1,0 +1,101 @@
+{
+  "id": "grizzly-bear",
+  "nombre": "Grizzly Bear",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 1,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 6,
+  "atributos": {
+    "fuerza": 21,
+    "destreza": 13,
+    "constitucion": 19,
+    "inteligencia": 2,
+    "sabiduria": 12,
+    "carisma": 6
+  },
+  "ca": {
+    "normal": 16,
+    "toque": 10,
+    "desprevenido": 15,
+    "detalle": "+1 Dex, +6 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 60,
+    "formula": "(5d8+20)"
+  },
+  "salvaciones": {
+    "fortaleza": 8,
+    "reflejos": 5,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 40
+    }
+  ],
+  "ataques": [
+    {
+      "id": "claws",
+      "name": "Claws",
+      "attackBonus": 7,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+5",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    },
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 7,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+5",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 4\nGrizzly Bear\nN Large animal\nInit +1\nSenses low-light vision, scent; Perception +6\nAC 16, touch 10, flat-footed 15 (+1 Dex, +6 natural, -1 size)\nhp 42 ((5d8+20))\nFort +8, Ref +5, Will +2\nSpeed 40 ft.\nMelee 2 claws +7 (1d6+5 slashing)\nMelee Bite +7 (1d6+5 piercing)\nSpell-Like Abilities none\nStatistics Str 21, Dex 13, Con 19, Int 2, Wis 12, Cha 6\nBase Atk +3; CMB +9; CMD 20\nFeats Endurance, Run, Skill Focus (Survival)\nSkills Perception +6, Survival +5, Swim +14\nEnvironment  cold forests\nOrganization solitary or pair\nTreasure none\nSource PFRPG Bestiary"
+}

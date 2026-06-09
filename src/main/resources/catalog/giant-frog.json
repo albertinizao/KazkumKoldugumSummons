@@ -1,0 +1,139 @@
+{
+  "id": "giant-frog",
+  "nombre": "Giant Frog",
+  "nivelSummon": 2,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 1,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 3,
+  "atributos": {
+    "fuerza": 15,
+    "destreza": 13,
+    "constitucion": 16,
+    "inteligencia": 1,
+    "sabiduria": 8,
+    "carisma": 6
+  },
+  "ca": {
+    "normal": 12,
+    "toque": 11,
+    "desprevenido": 11,
+    "detalle": "+1 Dex, +1 natural"
+  },
+  "pg": {
+    "maximos": 22,
+    "formula": "2d8+6"
+  },
+  "salvaciones": {
+    "fortaleza": 6,
+    "reflejos": 6,
+    "voluntad": -1
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    },
+    {
+      "tipo": "swim",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 3,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+2",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    },
+    {
+      "id": "tongue",
+      "name": "Tongue",
+      "attackBonus": 3,
+      "quantity": 1,
+      "attackType": "TOUCH",
+      "damageComponents": [],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "pull (tongue, 5 feet)",
+    "swallow whole (1d4 bludgeoning damage, AC 10, 1 hp)",
+    "tongue"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "pull",
+      "resumen": "pull (tongue, 5 feet)"
+    },
+    {
+      "nombre": "swallow whole",
+      "resumen": "swallow whole (1d4 bludgeoning damage, AC 10, 1 hp)"
+    },
+    {
+      "nombre": "tongue",
+      "resumen": "tongue"
+    },
+    {
+      "nombre": "Tongue",
+      "resumen": "Tongue (Ex) A giant frog's tongue is a primary attack with reach equal to three times the frog's normal reach (15 feet for a Medium giant frog). A giant frog's tongue deals no damage on a hit, but can be used to grab. A giant frog does not gain the grappled condition while using its tongue in this manner."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "pull",
+      "texto": "pull (tongue, 5 feet)"
+    },
+    {
+      "nombre": "swallow whole",
+      "texto": "swallow whole (1d4 bludgeoning damage, AC 10, 1 hp)"
+    },
+    {
+      "nombre": "tongue",
+      "texto": "tongue"
+    },
+    {
+      "nombre": "Tongue",
+      "texto": "Tongue (Ex) A giant frog's tongue is a primary attack with reach equal to three times the frog's normal reach (15 feet for a Medium giant frog). A giant frog's tongue deals no damage on a hit, but can be used to grab. A giant frog does not gain the grappled condition while using its tongue in this manner."
+    }
+  ],
+  "fullStatBlock": "CR 1\nGiant Frog\nN Medium animal\nInit +1\nSenses low-light vision, scent; Perception +3\nAC 12, touch 11, flat-footed 11 (+1 Dex, +1 natural)\nhp 15 (2d8+6)\nFort +6, Ref +6, Will -1\nSpeed 30 ft., swim 30 ft.\nMelee bite +3 (1d6+2 plus grab) or tongue +3 touch (grab)\nSpace 5 ft.; Reach 5 ft.\nSpecial Attacks pull (tongue, 5 feet), swallow whole (1d4 bludgeoning damage, AC 10, 1 hp), tongue\nSpecial Abilities Tongue (Ex) A giant frog's tongue is a primary attack with reach equal to three times the frog's normal reach (15 feet for a Medium giant frog). A giant frog's tongue deals no damage on a hit, but can be used to grab. A giant frog does not gain the grappled condition while using its tongue in this manner.\nSpell-Like Abilities none\nStatistics Str 15, Dex 13, Con 16, Int 1, Wis 8, Cha 6\nBase Atk +1; CMB +3; CMD 14\nFeats Lightning Reflexes\nSkills Acrobatics +9 (+13 jumping), Perception +3, Stealth +5, Swim +10\nRacial Modifiers +4 Acrobatics (+8 jumping), +4 Stealth\nEnvironment  temperate or warm marshes and aquatic\nOrganization solitary, pair, or army (3-8)\nTreasure none\nSource PFRPG Bestiary\nDescription Giant frogs have razor-sharp teeth lining their mouths. They are 6 feet long and weigh 200 pounds. Frog Companions Starting Statistics: Size Medium; Speed 30 ft., swim 30 ft.; AC +1 natural armor; Attack bite (1d6); Ability Scores Str 15, Dex 13, Con 16, Int 1, Wis 9, Cha 6; Special Qualities low-light vision, scent, tongue, pull. 4th-Level Adv.: Ability Scores Str +2, Dex +2; Special Qualities swallow whole."
+}

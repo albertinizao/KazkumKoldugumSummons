@@ -38,7 +38,7 @@ Chthonic MUST change alignment to NG, add earth subtype, add darkvision 60 ft an
 
 ### Requirement: Fiery template
 
-Fiery MUST change alignment to NG, add fire subtype, add darkvision 60 ft, add 1 fire damage to all attacks, and add fire resistance 10.
+Fiery MUST change alignment to NG, add fire subtype, add darkvision 60 ft, add 1 fire damage to all attacks, add immunity to fire, and add vulnerability to cold.
 
 #### Scenario: Fiery creature
 

@@ -1,0 +1,105 @@
+{
+  "id": "greater-mud-elemental",
+  "nombre": "Greater Mud Elemental",
+  "nivelSummon": 7,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "outsider",
+  "subtipos": [
+    "earth",
+    "elemental",
+    "extraplanar",
+    "water"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 4,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "tremorsense 30 ft."
+  ],
+  "percepcion": 16,
+  "atributos": {
+    "fuerza": 28,
+    "destreza": 18,
+    "constitucion": 19,
+    "inteligencia": 8,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 22,
+    "toque": 13,
+    "desprevenido": 17,
+    "detalle": "+4 Dex, +1 dodge, +9 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 182,
+    "formula": "(13d10+52)"
+  },
+  "salvaciones": {
+    "fortaleza": 12,
+    "reflejos": 14,
+    "voluntad": 4
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "burrow",
+      "valor": 10
+    },
+    {
+      "tipo": "swim",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 20,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d8+9",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "entrap"
+      ]
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/-",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "acid",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 9\nGreater Mud Elemental\nN Huge outsider earth, elemental, extraplanar, water\nInit +4\nSenses darkvision 60 ft., tremorsense 30 ft.; Perception +16\nAC 22, touch 13, flat-footed 17 (+4 Dex, +1 dodge, +9 natural, -2 size)\nhp 182 (13d10+52)\nFort +12, Ref +14, Will +4\nSpeed 20 ft., burrow 10 ft., swim 30 ft.\nMelee 2 slams +20 (2d8+9 plus entrap)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 28, Dex 18, Con 19, Int 8, Wis 11, Cha 11\nBase Atk +13; CMB +24; CMD 39\nLanguages Terran\nEnvironment any land or water (Plane of Earth)\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDR 10/-\nImmune acid, elemental traits\nSource PFRPG Bestiary 2"
+}

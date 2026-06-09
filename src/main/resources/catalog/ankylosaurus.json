@@ -1,0 +1,94 @@
+{
+  "id": "ankylosaurus",
+  "nombre": "Ankylosaurus",
+  "nivelSummon": 5,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 0,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 14,
+  "atributos": {
+    "fuerza": 27,
+    "destreza": 10,
+    "constitucion": 17,
+    "inteligencia": 2,
+    "sabiduria": 13,
+    "carisma": 8
+  },
+  "ca": {
+    "normal": 22,
+    "toque": 8,
+    "desprevenido": 22,
+    "detalle": "+14 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 110,
+    "formula": "(10d8+30)"
+  },
+  "salvaciones": {
+    "fortaleza": 12,
+    "reflejos": 7,
+    "voluntad": 4
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "tail",
+      "name": "Tail",
+      "attackBonus": 14,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "3d6+12",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "stun"
+      ]
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [
+    "No se encontró coincidencia local en Combat Manager; se usó la ficha oficial de Archives of Nethys."
+  ],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Stun",
+      "resumen": "Stun (Ex) The ankylosaurus’s tail can deliver a powerful, stunning blow. A creature struck by this attack must make a DC 23 save or be dazed for 1 round. If the strike is a critical hit and the target fails its save, it is instead stunned for 1d4 rounds. The save DC is Strength-based."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Stun",
+      "texto": "Stun (Ex) The ankylosaurus’s tail can deliver a powerful, stunning blow. A creature struck by this attack must make a DC 23 save or be dazed for 1 round. If the strike is a critical hit and the target fails its save, it is instead stunned for 1d4 rounds. The save DC is Strength-based."
+    }
+  ],
+  "fullStatBlock": "CR 6\nAnkylosaurus\nN Huge animal\nInit +0\nSenses low-light vision, scent; Perception +14\nAC 22, touch 8, flat-footed 22 (+14 natural, -2 size)\nhp 75 (10d8+30)\nFort +12, Ref +7, Will +4\nSpeed 30 ft.\nMelee tail +14 (3d6+12 plus stun)\nSpace 15 ft.; Reach 15 ft.\nSpecial Abilities Stun (Ex) The ankylosaurus’s tail can deliver a powerful, stunning blow. A creature struck by this attack must make a DC 23 save or be dazed for 1 round. If the strike is a critical hit and the target fails its save, it is instead stunned for 1d4 rounds. The save DC is Strength-based.\nSpell-Like Abilities none\nStatistics Str 27, Dex 10, Con 17, Int 2, Wis 13, Cha 8\nBase Atk +7; CMB +17; CMD 27\nFeats Great Fortitude, Improved Bull Rush, Improved Overrun, Power Attack, Weapon Focus (tail)\nSkills Perception +14\nSource PFRPG Bestiary"
+}

@@ -174,6 +174,7 @@ import type {
   ResolvedCreature,
   SummonTemplateType,
 } from '@/types/catalog';
+import { formatSpecialDefense } from '@/utils/specialDefenseDisplay';
 
 const summonLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -229,20 +230,7 @@ const attackDamageComponentsText = computed(() =>
 );
 const specialDefensesText = computed(() =>
   preview.value?.specialDefenses.length
-    ? preview.value.specialDefenses
-        .map(defense => {
-          const value = defense.value ? ` ${defense.value}` : '';
-          const notes = defense.notes ? ` (${defense.notes})` : '';
-          const labelMap: Record<string, string> = {
-            DAMAGE_REDUCTION: 'RD',
-            RESISTANCE: 'Resistencia',
-            IMMUNITY: 'Inmunidad',
-            VULNERABILITY: 'Vulnerabilidad',
-            OTHER: 'Otros',
-          };
-          return `${labelMap[defense.type] ?? defense.type}${value}${notes}`;
-        })
-        .join(' · ')
+    ? preview.value.specialDefenses.map(defense => formatSpecialDefense(defense)).join(' · ')
     : '—',
 );
 const allowedTemplates = computed(() => {

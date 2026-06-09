@@ -1,0 +1,100 @@
+{
+  "id": "megalania",
+  "nombre": "Megalania",
+  "nivelSummon": 6,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 1,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 10,
+  "atributos": {
+    "fuerza": 27,
+    "destreza": 13,
+    "constitucion": 19,
+    "inteligencia": 2,
+    "sabiduria": 14,
+    "carisma": 6
+  },
+  "ca": {
+    "normal": 21,
+    "toque": 9,
+    "desprevenido": 20,
+    "detalle": "+1 Dex, +12 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 120,
+    "formula": "(10d8+40)"
+  },
+  "salvaciones": {
+    "fortaleza": 11,
+    "reflejos": 8,
+    "voluntad": 7
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    },
+    {
+      "tipo": "swim",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 14,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d8+12",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab and poison",
+        "grab",
+        "poison"
+      ]
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "10 ft.",
+  "ataquesEspeciales": [
+    "swallow whole (2d8+12 bludgeoning damage, AC 16, 8 hp)"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Poison (Ex) Bite; save Fort DC 19; frequency 1/round for 6 rounds; effect 1d4 Dex damage; cure 2 consecutive saves."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Poison (Ex) Bite; save Fort DC 19; frequency 1/round for 6 rounds; effect 1d4 Dex damage; cure 2 consecutive saves."
+    }
+  ],
+  "fullStatBlock": "CR 7\nMegalania\nN Huge animal\nInit +1\nSenses low-light vision, scent; Perception +10\nAC 21, touch 9, flat-footed 20 (+1 Dex, +12 natural, -2 size)\nhp 85 (10d8+40)\nFort +11, Ref +8, Will +7\nSpeed 30 ft., swim 30 ft.\nMelee bite +14 (2d8+12 plus grab and poison)\nSpecial Attacks swallow whole (2d8+12 bludgeoning damage, AC 16, 8 hp)\nSpecial Abilities Poison (Ex) Bite; save Fort DC 19; frequency 1/round for 6 rounds; effect 1d4 Dex damage; cure 2 consecutive saves.\nSpell-Like Abilities none\nStatistics Str 27, Dex 13, Con 19, Int 2, Wis 14, Cha 6\nBase Atk +7; CMB +17; CMD 28\nFeats Iron Will, Lunge, Skill Focus (Perception), Skill Focus (Stealth), Weapon Focus (bite)\nSkills Climb +12, Perception +10, Stealth +10 (+14 in rocks or undergrowth), Swim +16\nEnvironment  warm forests or plains\nOrganization solitary, pair, or pack (3-12)\nTreasure none\nSource PFRPG Bestiary 3"
+}

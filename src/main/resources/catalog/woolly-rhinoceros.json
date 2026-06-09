@@ -1,0 +1,81 @@
+{
+  "id": "woolly-rhinoceros",
+  "nombre": "Woolly Rhinoceros",
+  "nivelSummon": 5,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 0,
+  "sentidos": [
+    "scent"
+  ],
+  "percepcion": 15,
+  "atributos": {
+    "fuerza": 28,
+    "destreza": 10,
+    "constitucion": 21,
+    "inteligencia": 2,
+    "sabiduria": 13,
+    "carisma": 3
+  },
+  "ca": {
+    "normal": 19,
+    "toque": 9,
+    "desprevenido": 19,
+    "detalle": "+10 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 104,
+    "formula": "(8d8+40)"
+  },
+  "salvaciones": {
+    "fortaleza": 13,
+    "reflejos": 6,
+    "voluntad": 3
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "gore",
+      "name": "Gore",
+      "attackBonus": 14,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d8+13",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "powerful charge (gore, 4d8+18), trample  (2d6+13, DC 23)"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 6\nWoolly Rhinoceros\nN Large animal\nInit +0\nSenses scent; Perception +15\nAC 19, touch 9, flat-footed 19 (+10 natural, -1 size)\nhp 76 (8d8+40)\nFort +13, Ref +6, Will +3\nSpeed 30 ft.\nMelee gore +14 (2d8+13)\nSpecial Attacks powerful charge (gore, 4d8+18), trample  (2d6+13, DC 23)\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 28, Dex 10, Con 21, Int 2, Wis 13, Cha 3\nBase Atk +6; CMB +16; CMD 26\nFeats Diehard, Endurance, Great Fortitude, Skill Focus (Perception)\nSkills Perception +15\nEnvironment  cold plains\nOrganization solitary, pair, or herd (3-12)\nTreasure none\nSource PFRPG Bestiary"
+}

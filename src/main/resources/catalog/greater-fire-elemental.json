@@ -1,0 +1,95 @@
+{
+  "id": "greater-fire-elemental",
+  "nombre": "Greater Fire Elemental",
+  "nivelSummon": 7,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "outsider",
+  "subtipos": [
+    "elemental",
+    "extraplanar",
+    "fire"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 12,
+  "sentidos": [
+    "darkvision 60 ft."
+  ],
+  "percepcion": 16,
+  "atributos": {
+    "fuerza": 24,
+    "destreza": 27,
+    "constitucion": 18,
+    "inteligencia": 8,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 23,
+    "toque": 17,
+    "desprevenido": 14,
+    "detalle": "+8 Dex, +1 dodge, +6 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 182,
+    "formula": "(13d10+52)"
+  },
+  "salvaciones": {
+    "fortaleza": 12,
+    "reflejos": 16,
+    "voluntad": 6
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 60
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 19,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d8+7",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "burn"
+      ]
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/-,",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "fire",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 9\nGreater Fire Elemental\nN Huge outsider elemental, extraplanar, fire\nInit +12\nSenses darkvision 60 ft.; Perception +16\nAC 23, touch 17, flat-footed 14 (+8 Dex, +1 dodge, +6 natural, -2 size)\nhp 182 (13d10+52)\nFort +12, Ref +16, Will +6\nSpeed 60 ft.\nMelee 2 slams +19 (2d8+7 plus burn)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 24, Dex 27, Con 18, Int 8, Wis 11, Cha 11\nBase Atk +13; CMB +22; CMD 41\nLanguages Ignan\nEnvironment any (Plane of Fire)\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDR 10/-,\nImmune elemental traits, fire\nSource PFRPG Bestiary"
+}

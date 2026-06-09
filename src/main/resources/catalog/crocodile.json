@@ -1,0 +1,116 @@
+{
+  "id": "crocodile",
+  "nombre": "Crocodile",
+  "nivelSummon": 3,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 1,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 8,
+  "atributos": {
+    "fuerza": 19,
+    "destreza": 12,
+    "constitucion": 17,
+    "inteligencia": 1,
+    "sabiduria": 12,
+    "carisma": 2
+  },
+  "ca": {
+    "normal": 14,
+    "toque": 10,
+    "desprevenido": 13,
+    "detalle": "+1 Dex, +4 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 33,
+    "formula": "(3d8+9)"
+  },
+  "salvaciones": {
+    "fortaleza": 6,
+    "reflejos": 4,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "swim",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 5,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+4",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    },
+    {
+      "id": "tail-slap",
+      "name": "Tail Slap",
+      "attackBonus": 0,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d12+2",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "death roll (1d8+6 plus trip)"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Death Roll (Ex) When grappling a foe of its size or smaller, a crocodile can perform a death roll upon making a successful grapple check. As it clings to its foe, it tucks in its legs and rolls rapidly, twisting and wrenching its victim. The crocodile inflicts its bite damage and knocks the creature prone. If successful, the crocodile maintains its grapple.  Hold Breath (Ex) A crocodile can hold its breath for a number of rounds equal to 4 times its Constitution score before it risks drowning.  Sprint (Ex) Once per minute a crocodile may sprint, increasing its land speed to 40 feet for 1 round."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Death Roll (Ex) When grappling a foe of its size or smaller, a crocodile can perform a death roll upon making a successful grapple check. As it clings to its foe, it tucks in its legs and rolls rapidly, twisting and wrenching its victim. The crocodile inflicts its bite damage and knocks the creature prone. If successful, the crocodile maintains its grapple.  Hold Breath (Ex) A crocodile can hold its breath for a number of rounds equal to 4 times its Constitution score before it risks drowning.  Sprint (Ex) Once per minute a crocodile may sprint, increasing its land speed to 40 feet for 1 round."
+    }
+  ],
+  "fullStatBlock": "CR 2\nCrocodile\nN Large animal\nInit +1\nSenses low-light vision; Perception +8\nAC 14, touch 10, flat-footed 13 (+1 Dex, +4 natural, -1 size)\nhp 22 ((3d8+9))\nFort +6, Ref +4, Will +2\nSpeed 20 ft., swim 30 ft.\nMelee Bite +5 (1d8+4 piercing)\nMelee Tail Slap +0 (1d12+2 bludgeoning)\nSpecial Attacks death roll (1d8+6 plus trip)\nSpecial Abilities Death Roll (Ex) When grappling a foe of its size or smaller, a crocodile can perform a death roll upon making a successful grapple check. As it clings to its foe, it tucks in its legs and rolls rapidly, twisting and wrenching its victim. The crocodile inflicts its bite damage and knocks the creature prone. If successful, the crocodile maintains its grapple.  Hold Breath (Ex) A crocodile can hold its breath for a number of rounds equal to 4 times its Constitution score before it risks drowning.  Sprint (Ex) Once per minute a crocodile may sprint, increasing its land speed to 40 feet for 1 round.\nSpell-Like Abilities none\nStatistics Str 19, Dex 12, Con 17, Int 1, Wis 12, Cha 2\nBase Atk +2; CMB +7; CMD 18\nFeats Skill Focus (Perception, Stealth)\nSkills Perception +8, Stealth +5 (+13 in water), Swim +12\nEnvironment  warm rivers and marshes\nOrganization solitary, pair, or colony (3-12)\nTreasure none\nSource PFRPG Bestiary"
+}

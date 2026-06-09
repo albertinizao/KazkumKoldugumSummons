@@ -1,0 +1,102 @@
+{
+  "id": "giant-wasp",
+  "nombre": "Giant Wasp",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "vermin",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 1,
+  "sentidos": [
+    "darkvision 60 ft."
+  ],
+  "percepcion": 9,
+  "atributos": {
+    "fuerza": 18,
+    "destreza": 12,
+    "constitucion": 18,
+    "inteligencia": 0,
+    "sabiduria": 13,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 14,
+    "toque": 10,
+    "desprevenido": 13,
+    "detalle": "+1 Dex, +4 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 48,
+    "formula": "(4d8+16)"
+  },
+  "salvaciones": {
+    "fortaleza": 8,
+    "reflejos": 2,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "fly",
+      "valor": 60,
+      "maneuverability": "good"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "sting",
+      "name": "Sting",
+      "attackBonus": 6,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+6",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "poison"
+      ]
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "IMMUNITY",
+      "valor": "mind-affecting effects",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Poison (Ex) Sting-injury; save Fort DC 18; frequency 1/round for 6 rounds; effect 1d2 Dexterity damage; cure 1 save. The save DC is Constitution-based, and includes a +2 racial bonus."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Poison (Ex) Sting-injury; save Fort DC 18; frequency 1/round for 6 rounds; effect 1d2 Dexterity damage; cure 1 save. The save DC is Constitution-based, and includes a +2 racial bonus."
+    }
+  ],
+  "fullStatBlock": "CR 3\nGiant Wasp\nN Large vermin\nInit +1\nSenses darkvision 60 ft.; Perception +9\nAC 14, touch 10, flat-footed 13 (+1 Dex, +4 natural, -1 size)\nhp 34 ((4d8+16))\nFort +8, Ref +2, Will +2\nSpeed 20 ft., fly 60 ft. (good)\nMelee Sting +6 (1d8+6 piercing)\nSpecial Abilities Poison (Ex) Sting-injury; save Fort DC 18; frequency 1/round for 6 rounds; effect 1d2 Dexterity damage; cure 1 save. The save DC is Constitution-based, and includes a +2 racial bonus.\nSpell-Like Abilities none\nStatistics Str 18, Dex 12, Con 18, Int 0, Wis 13, Cha 11\nBase Atk +3; CMB +8; CMD 19\nSkills Fly +3, Perception +9\nEnvironment  temperate forests\nOrganization solitary, pair, group (3-6), or nest (7-19)\nTreasure none\nImmune mind-affecting effects\nSource PFRPG Bestiary"
+}

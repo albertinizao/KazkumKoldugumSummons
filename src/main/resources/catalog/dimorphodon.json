@@ -1,0 +1,107 @@
+{
+  "id": "dimorphodon",
+  "nombre": "Dimorphodon",
+  "nivelSummon": 2,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 3,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 5,
+  "atributos": {
+    "fuerza": 15,
+    "destreza": 17,
+    "constitucion": 12,
+    "inteligencia": 2,
+    "sabiduria": 13,
+    "carisma": 12
+  },
+  "ca": {
+    "normal": 14,
+    "toque": 13,
+    "desprevenido": 11,
+    "detalle": "+3 Dex, +1 natural"
+  },
+  "pg": {
+    "maximos": 18,
+    "formula": "2d8+2"
+  },
+  "salvaciones": {
+    "fortaleza": 4,
+    "reflejos": 6,
+    "voluntad": 1
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 10
+    },
+    {
+      "tipo": "fly",
+      "valor": 30,
+      "maneuverability": "average"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 3,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+3",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "poison"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "poison"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "poison",
+      "resumen": "poison"
+    },
+    {
+      "nombre": "Poison",
+      "resumen": "Poison (Ex) Bite-injury; save Fort DC 12; frequency 1/round for 4 rounds; effect 1d2 Str; cure 1 save."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "poison",
+      "texto": "poison"
+    },
+    {
+      "nombre": "Poison",
+      "texto": "Poison (Ex) Bite-injury; save Fort DC 12; frequency 1/round for 4 rounds; effect 1d2 Str; cure 1 save."
+    }
+  ],
+  "fullStatBlock": "CR 1\nDimorphodon\nN Medium animal\nInit +3\nSenses low-light vision, scent; Perception +5\nAC 14, touch 13, flat-footed 11 (+3 Dex, +1 natural)\nhp 11 (2d8+2)\nFort +4, Ref +6, Will +1\nSpeed 10 ft., fly 30 ft. (average)\nMelee bite +3 (1d6+3 plus poison)\nSpace 5 ft.; Reach 5 ft.\nSpecial Attacks poison\nSpecial Abilities Poison (Ex) Bite-injury; save Fort DC 12; frequency 1/round for 4 rounds; effect 1d2 Str; cure 1 save.\nSpell-Like Abilities none\nStatistics Str 15, Dex 17, Con 12, Int 2, Wis 13, Cha 12\nBase Atk +1; CMB +3; CMD 16\nFeats Flyby Attack\nSkills Fly +7, Perception +5\nEnvironment  warm coasts or forests\nOrganization solitary, pair, or flock (3-9)\nTreasure none\nSource PFRPG Bestiary 4\nDescription The dimorphodon's jaws contain two separate rows teeth: several large fangs near the front (used to grip prey and inject poison) and numerous smaller, sharp teeth along the rest of the jaw. Dimorphodons are known for being easy to train. Handle Animal checks to train dimorphodons are attempted with a +4 bonus, and a dimorphodon can know one bonus trick chosen by its trainer once the creature has been fully domesticated. A dimorphodon's wingspan is between 4 and 5 feet long.  Dimorphodon Companions  Starting Statistics: Size Small; Speed 10 ft., fly 80 ft. (clumsy); AC +1 natural armor; Attack bite (1d4); Ability Scores Str 8, Dex 15, Con 12, Int 2, Wis 14, Cha 6; SQ low-light vision, scent. 4th-Level Advancement: Attack bite (1d6); Ability Scores Str +2, Con +2; Special Attacks poison ( frequency 1 round (6); effect 1 Str damage; cure 1 save, Con-based DC)."
+}

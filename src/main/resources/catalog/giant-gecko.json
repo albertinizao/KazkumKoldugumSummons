@@ -1,0 +1,93 @@
+{
+  "id": "giant-gecko",
+  "nombre": "Giant Gecko",
+  "nivelSummon": 2,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 6,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 6,
+  "atributos": {
+    "fuerza": 13,
+    "destreza": 15,
+    "constitucion": 12,
+    "inteligencia": 2,
+    "sabiduria": 14,
+    "carisma": 7
+  },
+  "ca": {
+    "normal": 14,
+    "toque": 12,
+    "desprevenido": 12,
+    "detalle": "+2 Dex, +2 natural"
+  },
+  "pg": {
+    "maximos": 18,
+    "formula": "2d8+2"
+  },
+  "salvaciones": {
+    "fortaleza": 4,
+    "reflejos": 5,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 40
+    },
+    {
+      "tipo": "climb",
+      "valor": 40
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 2,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d4+1",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Expert Climber",
+      "resumen": "Expert Climber (Ex) A gecko's feet allow it to climb virtually any surface, no matter how slick or sheer. In effect, geckos are treated as constantly being under a natural version of the spell spider climb."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Expert Climber",
+      "texto": "Expert Climber (Ex) A gecko's feet allow it to climb virtually any surface, no matter how slick or sheer. In effect, geckos are treated as constantly being under a natural version of the spell spider climb."
+    }
+  ],
+  "fullStatBlock": "CR 1\nGiant Gecko\nN Medium animal\nInit +6\nSenses low-light vision; Perception +6\nAC 14, touch 12, flat-footed 12 (+2 Dex, +2 natural)\nhp 11 (2d8+2)\nFort +4, Ref +5, Will +2\nSpeed 40 ft., climb 40 ft.\nMelee bite +2 (2d4+1)\nSpace 5 ft.; Reach 5 ft.\nSpecial Abilities Expert Climber (Ex) A gecko's feet allow it to climb virtually any surface, no matter how slick or sheer. In effect, geckos are treated as constantly being under a natural version of the spell spider climb.\nSpell-Like Abilities none\nStatistics Str 13, Dex 15, Con 12, Int 2, Wis 14, Cha 7\nBase Atk +1; CMB +2; CMD 14\nFeats Improved Initiative\nSkills Climb +21, Perception +6\nRacial Modifiers +8 Climb\nEnvironment  warm forests or mountains\nOrganization solitary, pair, or nest (3-6)\nTreasure none\nSource PFRPG Bestiary 3\nDescription These lizards are mostly docile and shy away from attacking creatures larger than a cat or dog. Despite their shyness, they are ultimately curious creatures, and often approach bigger creatures simply to investigate. Of course, a giant gecko is more than capable of defending itself, biting creatures that react violently to the lizard when fleeing is not an option.  Some humanoids train giant geckos as bestial guardians. Smaller humanoids (in particular, goblins) can even use the creatures as mounts, taking advantage of their superior climbing skills to attack from seemingly impossible positions and angles. A giant gecko measures 8 feet from nose to tail and weighs 120 pounds. Coloration among giant geckos can vary wildly, though most are some shade of green.  Giant Gecko Companions  Starting Statistics: Size Small; Speed 30 ft.; Attack bite (1d6); Ability Scores Str 11, Dex 15, Con 12, Int 2, Wis 14, Cha 7; Special Qualities expert climber, low-light vision.  4th-Level Advancement: Size Medium; Speed 40 ft.; AC +2 natural armor; Attack bite (2d4); Ability Scores Str +4, Dex -2, Con +2."
+}

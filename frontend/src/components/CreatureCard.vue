@@ -8,6 +8,11 @@
     </div>
 
     <p class="hp-line">PG: {{ instance.currentHitPoints }} / {{ instance.maxHitPoints }}</p>
+    <p v-if="visibleDefenseSummary !== '—'" class="defense-line">{{ visibleDefenseSummary }}</p>
+    <p v-if="visibleImmunitySummary !== '—'" class="defense-line">{{ visibleImmunitySummary }}</p>
+    <p v-if="visibleVulnerabilitySummary !== '—'" class="defense-line defense-line--vulnerability">
+      {{ visibleVulnerabilitySummary }}
+    </p>
 
     <div class="quick-grid">
       <button class="mini-button danger" type="button" :disabled="busy" @click="applyDelta(-10)">-10</button>
@@ -18,19 +23,52 @@
       <button class="mini-button positive" type="button" :disabled="busy" @click="applyDelta(10)">+10</button>
     </div>
 
-    <div class="custom-row">
-      <label class="custom-input">
-        <span class="muted small">Cantidad libre</span>
-        <input v-model.number="customAmount" :disabled="busy" type="number" step="1" inputmode="numeric" placeholder="+3 o -2" />
-      </label>
-      <ActionButton :disabled="busy || !isCustomAmountValid" @click="applyCustomAmount">
-        Aplicar
-      </ActionButton>
+    <div class="action-row">
+      <div class="custom-actions">
+        <ActionButton :disabled="busy" @click="openCustomAmountModal">
+          Otra cantidad
+        </ActionButton>
+        <ActionButton :disabled="busy" variant="danger" @click="$emit('remove')">Eliminar</ActionButton>
+      </div>
     </div>
 
-    <div class="button-row">
-      <ActionButton :disabled="busy" variant="danger" @click="$emit('remove')">Eliminar</ActionButton>
-    </div>
+    <teleport to="body">
+      <div v-if="isCustomAmountModalOpen" class="modal-backdrop" @click.self="closeCustomAmountModal">
+        <section class="modal custom-amount-modal" role="dialog" aria-modal="true" :aria-labelledby="customAmountModalTitleId">
+          <div class="modal-header">
+            <div>
+              <p class="eyebrow">Cantidad libre</p>
+              <h2 :id="customAmountModalTitleId">{{ instance.displayName }}</h2>
+            </div>
+            <ActionButton @click="closeCustomAmountModal">Cerrar</ActionButton>
+          </div>
+
+          <div class="custom-amount-body">
+            <label class="custom-input">
+              <span class="muted small">Cantidad</span>
+              <input
+                v-model.number="customAmount"
+                :disabled="busy"
+                type="number"
+                min="1"
+                step="1"
+                inputmode="numeric"
+                placeholder="Introduce una cantidad"
+              />
+            </label>
+
+            <div class="custom-modal-actions">
+              <ActionButton :disabled="busy || !isCustomAmountValid" variant="danger" @click="applyCustomDamage">
+                Dañar
+              </ActionButton>
+              <ActionButton :disabled="busy || !isCustomAmountValid" variant="success" @click="applyCustomHeal">
+                Curar
+              </ActionButton>
+            </div>
+          </div>
+        </section>
+      </div>
+    </teleport>
   </article>
 </template>
 
@@ -42,11 +80,19 @@ import type { ActiveSummonInstance } from '@/types/combat';
 
 const props = defineProps<{
   instance: ActiveSummonInstance;
+  defenseSummary?: string;
+  immunitySummary?: string;
+  vulnerabilitySummary?: string;
   busy?: boolean;
 }>();
 
-const customAmount = ref<number | null>(1);
-const isCustomAmountValid = computed(() => Number.isInteger(customAmount.value) && customAmount.value !== 0);
+const customAmountModalTitleId = 'custom-amount-modal-title';
+const isCustomAmountModalOpen = ref(false);
+const customAmount = ref<number | null>(null);
+const isCustomAmountValid = computed(() => Number.isInteger(customAmount.value) && (customAmount.value ?? 0) >= 1);
+const visibleDefenseSummary = computed(() => props.defenseSummary?.trim() || '—');
+const visibleImmunitySummary = computed(() => props.immunitySummary?.trim() || '—');
+const visibleVulnerabilitySummary = computed(() => props.vulnerabilitySummary?.trim() || '—');
 const emit = defineEmits<{
   (event: 'damage', amount: number): void;
   (event: 'heal', amount: number): void;
@@ -73,12 +119,31 @@ function applyDelta(amount: number): void {
   emit('heal', amount);
 }
 
-function applyCustomAmount(): void {
+function openCustomAmountModal(): void {
+  customAmount.value = null;
+  isCustomAmountModalOpen.value = true;
+}
+
+function closeCustomAmountModal(): void {
+  isCustomAmountModalOpen.value = false;
+}
+
+function applyCustomDamage(): void {
   if (!isCustomAmountValid.value || customAmount.value === null) {
     return;
   }
 
-  applyDelta(customAmount.value);
+  emit('damage', customAmount.value);
+  closeCustomAmountModal();
+}
+
+function applyCustomHeal(): void {
+  if (!isCustomAmountValid.value || customAmount.value === null) {
+    return;
+  }
+
+  emit('heal', customAmount.value);
+  closeCustomAmountModal();
 }
 
 </script>
@@ -103,9 +168,18 @@ function applyCustomAmount(): void {
 }
 
 .hp-line,
+.defense-line,
 .muted {
   margin: 0.45rem 0 0;
   color: #cbd5e1;
+}
+
+.defense-line {
+  font-size: 0.84rem;
+}
+
+.defense-line--vulnerability {
+  color: #fca5a5;
 }
 
 .muted {
@@ -126,6 +200,11 @@ function applyCustomAmount(): void {
   border-radius: 0.75rem;
   color: #f8fafc;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
 }
 
 .mini-button.danger {
@@ -136,12 +215,24 @@ function applyCustomAmount(): void {
   background: rgba(22, 101, 52, 0.95);
 }
 
-.custom-row {
+.action-row {
+  margin-top: 0.75rem;
+}
+
+.custom-actions {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.6rem;
-  align-items: end;
-  margin-top: 0.75rem;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.custom-amount-modal {
+  max-width: 32rem;
+}
+
+.custom-amount-body {
+  display: grid;
+  gap: 1rem;
 }
 
 .custom-input {
@@ -156,21 +247,25 @@ function applyCustomAmount(): void {
   background: rgba(15, 23, 42, 0.85);
   color: inherit;
   padding: 0 0.85rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.button-row {
+.custom-modal-actions {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0.5rem;
-  margin-top: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 1024px) {
   .quick-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
 
-  .custom-row {
+@media (max-width: 720px) {
+  .custom-actions,
+  .custom-modal-actions {
     grid-template-columns: 1fr;
   }
 }

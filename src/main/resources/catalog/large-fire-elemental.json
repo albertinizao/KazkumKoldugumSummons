@@ -1,0 +1,102 @@
+{
+  "id": "large-fire-elemental",
+  "nombre": "Large Fire Elemental",
+  "nivelSummon": 5,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "outsider",
+  "subtipos": [
+    "elemental",
+    "extraplanar",
+    "fire"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 9,
+  "sentidos": [
+    "darkvision 60 ft."
+  ],
+  "percepcion": 11,
+  "atributos": {
+    "fuerza": 14,
+    "destreza": 21,
+    "constitucion": 14,
+    "inteligencia": 6,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 19,
+    "toque": 15,
+    "desprevenido": 13,
+    "detalle": "+5 Dex, +1 dodge, +4 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 96,
+    "formula": "(8d10+16)"
+  },
+  "salvaciones": {
+    "fortaleza": 8,
+    "reflejos": 11,
+    "voluntad": 4
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 50
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 12,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+2",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "burn"
+      ]
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "10 ft.",
+  "ataquesEspeciales": [
+    "burn (1d8, DC 16)"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "5/-",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "fire",
+      "notas": null
+    },
+    {
+      "tipo": "VULNERABILITY",
+      "valor": "cold",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 5\nLarge Fire Elemental\nN Large outsider elemental, extraplanar, fire\nInit +9\nSenses darkvision 60 ft.; Perception +11\nAC 19, touch 15, flat-footed 13 (+5 Dex, +1 dodge, +4 natural, -1 size)\nhp 60 (8d10+16)\nFort +8, Ref +11, Will +4\nSpeed 50 ft.\nMelee 2 slams +12 (1d8+2 plus burn)\nSpecial Attacks burn (1d8, DC 16)\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 14, Dex 21, Con 14, Int 6, Wis 11, Cha 11\nBase Atk +8; CMB +11; CMD 27\nFeats Dodge, Improved InitiativeB, Iron Will, Mobility, Spring Attack, Weapon FinesseB\nSkills Acrobatics +14, Climb +9, Escape Artist +12, Intimidate +9, Knowledge (planes) +5, Perception +11\nLanguages Ignan\nEnvironment  any (Plane of Fire)\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDR 5/-\nImmune elemental traits, fire\nWeakness vulnerability to cold\nSource PFRPG Bestiary"
+}

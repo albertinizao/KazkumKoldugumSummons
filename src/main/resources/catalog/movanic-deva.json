@@ -1,0 +1,145 @@
+{
+  "id": "movanic-deva",
+  "nombre": "Movanic Deva",
+  "nivelSummon": 7,
+  "alineamiento": "NG",
+  "tamano": "Medium",
+  "tipo": "outsider",
+  "subtipos": [
+    "angel",
+    "extraplanar",
+    "good"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 7,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "detect evil",
+    "low-light vision"
+  ],
+  "percepcion": 26,
+  "atributos": {
+    "fuerza": 19,
+    "destreza": 17,
+    "constitucion": 18,
+    "inteligencia": 17,
+    "sabiduria": 17,
+    "carisma": 19
+  },
+  "ca": {
+    "normal": 24,
+    "toque": 13,
+    "desprevenido": 21,
+    "detalle": "+3 Dex, +11 natural, +4 deflection vs. evil"
+  },
+  "pg": {
+    "maximos": 180,
+    "formula": "(12d10+60)"
+  },
+  "salvaciones": {
+    "fortaleza": 12,
+    "reflejos": 11,
+    "voluntad": 9
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 40
+    },
+    {
+      "tipo": "fly",
+      "valor": 60,
+      "maneuverability": "good"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "flaming-greatsword",
+      "name": "Flaming Greatsword",
+      "attackBonus": 17,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+7",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        },
+        {
+          "formula": "1d6",
+          "damageType": "FIRE",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 19,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/evil",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "acid",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "cold",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "electricity",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "fire",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "death effects",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "energy drain",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "petrification",
+      "notas": null
+    },
+    {
+      "tipo": "SPELL_RESISTANCE",
+      "valor": "21",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Defensive Abilities",
+      "resumen": "nature's pacifism, protected life force"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Defensive Abilities",
+      "texto": "nature's pacifism, protected life force"
+    }
+  ],
+  "fullStatBlock": "CR 10\nMovanic Deva\nNG Medium outsider angel, extraplanar, good\nInit +7\nSenses darkvision 60 ft., detect evil, low-light vision; Perception +26\nAC 24, touch 13, flat-footed 21 (+3 Dex, +11 natural, +4 deflection vs. evil)\nhp 180 (12d10+60)\nFort +12, Ref +11, Will +9\nSpeed 40 ft., fly 60 ft. (good)\nMelee +1 flaming greatsword +17/+12/+7 (2d6+7/19-20 plus 1d6 fire)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nDefensive Abilities nature's pacifism, protected life force\nStatistics Str 19, Dex 17, Con 18, Int 17, Wis 17, Cha 19\nBase Atk +12; CMB +16; CMD 29\nLanguages Celestial, Draconic, Infernal; truespeech\nEnvironment any good-aligned plane\nOrganization solitary, pair, or squad (3-6)\nTreasure double (+1 flaming greatsword, other treasure)\nDR 10/evil\nSR 21\nImmune acid, cold, electricity, fire, death effects, energy drain, petrification\nSource PFRPG Bestiary 2"
+}

@@ -37,6 +37,11 @@ class DefaultCreatureResolverTest {
                 .name("Mole")
                 .subtypes(List.of())
                 .allowedTemplates(List.of(SummonTemplateType.CHTHONIC))
+                .hitPoints(HitPointsDefinition.builder()
+                        .maximum(30)
+                        .formula("5d8+5")
+                        .hitDice(HitDice.builder().count(5).dieSize(8).build())
+                        .build())
                 .speeds(List.of(speed(SpeedType.LAND, 30)))
                 .attacks(List.of(attack("Bite", 3, AttackAbility.STRENGTH, "1d4+1", DamageType.PIERCING)))
                 .specialAttacks(List.of())
@@ -60,7 +65,7 @@ class DefaultCreatureResolverTest {
         assertThat(resolved.getAttacks().getFirst().getDamageComponents().getLast().getDamageType()).isEqualTo(DamageType.ACID);
         assertThat(resolved.getSpecialDefenses())
                 .extracting(defense -> defense.getType().name() + ":" + defense.getValue())
-                .contains("RESISTANCE:acid 10", "OTHER:listed immunities");
+                .contains("DAMAGE_REDUCTION:3/—", "RESISTANCE:acid 15");
         assertThat(resolved.getFullStatBlock()).contains("NG Small beast");
     }
 
@@ -87,7 +92,73 @@ class DefaultCreatureResolverTest {
                 .containsExactly(DamageType.PIERCING, DamageType.FIRE);
         assertThat(resolved.getSpecialDefenses())
                 .extracting(defense -> defense.getType().name() + ":" + defense.getValue())
-                .contains("RESISTANCE:fire 10", "IMMUNITY:fire", "VULNERABILITY:cold");
+                .contains("IMMUNITY:fire", "VULNERABILITY:cold")
+                .doesNotContain("RESISTANCE:fire 10");
+    }
+
+    @Test
+    void calculatesMaximumHitPointsForAnkylosaurusUsingMaximumPossibleBaseRoll() {
+        CreatureTemplate template = baseTemplate()
+                .id("ankylosaurus")
+                .name("Ankylosaurus")
+                .abilities(AbilityScores.builder()
+                        .strength(27)
+                        .dexterity(10)
+                        .constitution(17)
+                        .intelligence(2)
+                        .wisdom(13)
+                        .charisma(8)
+                        .build())
+                .hitPoints(HitPointsDefinition.builder()
+                        .maximum(110)
+                        .formula("10d8+30")
+                        .hitDice(HitDice.builder().count(10).dieSize(8).build())
+                        .build())
+                .build();
+
+        ResolvedCreature resolved = resolver.resolve(template, null, SummonerConfiguration.defaultConfiguration());
+
+        assertThat(resolved.getMaxHitPoints()).isEqualTo(130);
+    }
+
+    @Test
+    void calculatesMaximumHitPointsForAllosaurusUsingMaximumPossibleBaseRoll() {
+        CreatureTemplate template = baseTemplate()
+                .id("allosaurus")
+                .name("Allosaurus")
+                .initiative(5)
+                .senses(List.of("low-light vision", "scent"))
+                .perception(28)
+                .abilities(AbilityScores.builder()
+                        .strength(26)
+                        .dexterity(13)
+                        .constitution(19)
+                        .intelligence(2)
+                        .wisdom(15)
+                        .charisma(10)
+                        .build())
+                .armorClass(ArmorClass.builder()
+                        .normal(19)
+                        .touch(9)
+                        .flatFooted(18)
+                        .detail("+1 Dex, +10 natural, -2 size")
+                        .build())
+                .hitPoints(HitPointsDefinition.builder()
+                        .maximum(132)
+                        .formula("11d8+44")
+                        .hitDice(HitDice.builder().count(11).dieSize(8).build())
+                        .build())
+                .savingThrows(SavingThrows.builder()
+                        .fortitude(11)
+                        .reflex(8)
+                        .will(7)
+                        .fortitudeAbility(SavingThrowAbility.CONSTITUTION)
+                        .build())
+                .build();
+
+        ResolvedCreature resolved = resolver.resolve(template, null, SummonerConfiguration.defaultConfiguration());
+
+        assertThat(resolved.getMaxHitPoints()).isEqualTo(154);
     }
 
     @Test
@@ -114,8 +185,14 @@ class DefaultCreatureResolverTest {
                 .id("archon")
                 .name("Archon")
                 .allowedTemplates(List.of(SummonTemplateType.CELESTIAL))
+                .hitPoints(HitPointsDefinition.builder()
+                        .maximum(12)
+                        .formula("2d8+2")
+                        .hitDice(HitDice.builder().count(2).dieSize(8).build())
+                        .build())
                 .speeds(List.of(speed(SpeedType.FLY, 60)))
                 .attacks(List.of(attack("Aura", 0, AttackAbility.NONE, "—", DamageType.OTHER)))
+                .fullStatBlock("CR 2\nArchon\n...")
                 .build();
 
         ResolvedCreature resolved = resolver.resolve(template, SummonTemplateType.CELESTIAL, SummonerConfiguration.defaultConfiguration());
@@ -124,7 +201,53 @@ class DefaultCreatureResolverTest {
         assertThat(resolved.getSpecialAttacks()).contains("Smite evil 1/day (swift action)");
         assertThat(resolved.getSpecialDefenses())
                 .extracting(defense -> defense.getType().name() + ":" + defense.getValue())
-                .contains("RESISTANCE:cold 10", "RESISTANCE:acid 10", "RESISTANCE:electricity 10");
+                .contains("RESISTANCE:cold 5", "RESISTANCE:acid 5", "RESISTANCE:electricity 5", "SPELL_RESISTANCE:7");
+    }
+
+    @Test
+    void addsSpellResistanceForEntropicCreatures() {
+        CreatureTemplate template = baseTemplate()
+                .id("entropic")
+                .name("Entropic")
+                .allowedTemplates(List.of(SummonTemplateType.ENTROPIC))
+                .hitPoints(HitPointsDefinition.builder()
+                        .maximum(12)
+                        .formula("2d8+2")
+                        .hitDice(HitDice.builder().count(2).dieSize(8).build())
+                        .build())
+                .speeds(List.of(speed(SpeedType.LAND, 60)))
+                .attacks(List.of(attack("Aura", 0, AttackAbility.NONE, "—", DamageType.OTHER)))
+                .fullStatBlock("CR 2\nEntropic\n...")
+                .build();
+
+        ResolvedCreature resolved = resolver.resolve(template, SummonTemplateType.ENTROPIC, SummonerConfiguration.defaultConfiguration());
+
+        assertThat(resolved.getSpecialDefenses())
+                .extracting(defense -> defense.getType().name() + ":" + defense.getValue())
+                .contains("RESISTANCE:acid 5", "RESISTANCE:fire 5", "SPELL_RESISTANCE:7");
+    }
+
+    @Test
+    void addsSpellResistanceForResoluteCreatures() {
+        CreatureTemplate template = baseTemplate()
+                .id("resolute")
+                .name("Resolute")
+                .allowedTemplates(List.of(SummonTemplateType.RESOLUTE))
+                .hitPoints(HitPointsDefinition.builder()
+                        .maximum(12)
+                        .formula("2d8+2")
+                        .hitDice(HitDice.builder().count(2).dieSize(8).build())
+                        .build())
+                .speeds(List.of(speed(SpeedType.LAND, 60)))
+                .attacks(List.of(attack("Aura", 0, AttackAbility.NONE, "—", DamageType.OTHER)))
+                .fullStatBlock("CR 2\nResolute\n...")
+                .build();
+
+        ResolvedCreature resolved = resolver.resolve(template, SummonTemplateType.RESOLUTE, SummonerConfiguration.defaultConfiguration());
+
+        assertThat(resolved.getSpecialDefenses())
+                .extracting(defense -> defense.getType().name() + ":" + defense.getValue())
+                .contains("RESISTANCE:acid 5", "RESISTANCE:cold 5", "RESISTANCE:fire 5", "SPELL_RESISTANCE:7");
     }
 
     @Test

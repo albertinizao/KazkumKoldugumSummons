@@ -1,0 +1,84 @@
+{
+  "id": "dire-shark",
+  "nombre": "Dire Shark (Megalodon)",
+  "nivelSummon": 7,
+  "alineamiento": "N",
+  "tamano": "Gargantuan",
+  "tipo": "animal",
+  "subtipos": [
+    "aquatic"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 6,
+  "sentidos": [
+    "blindsense 30 ft.",
+    "keen scent"
+  ],
+  "percepcion": 25,
+  "atributos": {
+    "fuerza": 30,
+    "destreza": 15,
+    "constitucion": 17,
+    "inteligencia": 1,
+    "sabiduria": 12,
+    "carisma": 10
+  },
+  "ca": {
+    "normal": 23,
+    "toque": 8,
+    "desprevenido": 21,
+    "detalle": "+2 Dex, +15 natural, -4 size"
+  },
+  "pg": {
+    "maximos": 165,
+    "formula": "(15d8+45)"
+  },
+  "salvaciones": {
+    "fortaleza": 14,
+    "reflejos": 13,
+    "voluntad": 8
+  },
+  "velocidades": [
+    {
+      "tipo": "swim",
+      "valor": 60
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 17,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "4d10+15",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 19,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    }
+  ],
+  "espacio": "20 ft.",
+  "alcance": "20 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 9\nDire Shark (Megalodon)\nN Gargantuan animal aquatic\nInit +6\nSenses blindsense 30 ft., keen scent; Perception +25\nAC 23, touch 8, flat-footed 21 (+2 Dex, +15 natural, -4 size)\nhp 165 (15d8+45)\nFort +14, Ref +13, Will +8\nSpeed swim 60 ft.\nMelee bite +17 (4d10+15/19-20 plus grab)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 30, Dex 15, Con 17, Int 1, Wis 12, Cha 10\nBase Atk +11; CMB +2529; CMD 37\nEnvironment any ocean\nOrganization solitary\nTreasure none\nSource PFRPG Bestiary"
+}

@@ -1,0 +1,80 @@
+{
+  "id": "couatl",
+  "nombre": "Couatl",
+  "nivelSummon": 9,
+  "alineamiento": "LG",
+  "tamano": "Large",
+  "tipo": "outsider",
+  "subtipos": [
+    "native"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 7,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "detect chaos/evil/good/law"
+  ],
+  "percepcion": 23,
+  "atributos": {
+    "fuerza": 20,
+    "destreza": 16,
+    "constitucion": 20,
+    "inteligencia": 17,
+    "sabiduria": 19,
+    "carisma": 17
+  },
+  "ca": {
+    "normal": 22,
+    "toque": 13,
+    "desprevenido": 18,
+    "detalle": "+3 Dex, +1 dodge, +9 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 180,
+    "formula": "(12d10+60)"
+  },
+  "salvaciones": {
+    "fortaleza": 9,
+    "reflejos": 13,
+    "voluntad": 14
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "fly",
+      "valor": 60,
+      "maneuverability": "good"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 16,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+7",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": null,
+      "notes": [
+        "grab and poison"
+      ]
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 10\nCouatl\nLG Large outsider native\nInit +7\nSenses darkvision 60 ft., detect chaos/evil/good/law; Perception +23\nAC 22, touch 13, flat-footed 18 (+3 Dex, +1 dodge, +9 natural, -1 size)\nhp 180 (12d10+60)\nFort +9, Ref +13, Will +14\nSpeed 20 ft., fly 60 ft. (good)\nMelee bite +16 (1d8+7 plus grab and poison)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 20, Dex 16, Con 20, Int 17, Wis 19, Cha 17\nBase Atk +12\nCMB +18 (+22 grapple)\nCMD 32 (can't be tripped)\nEnvironment warm forests\nOrganization solitary, pair, or flight (3-6)\nTreasure standard\nSource PFRPG Bestiary"
+}

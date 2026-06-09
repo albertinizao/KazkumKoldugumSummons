@@ -1,0 +1,93 @@
+{
+  "id": "aurochs",
+  "nombre": "Aurochs",
+  "nivelSummon": 3,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 0,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 9,
+  "atributos": {
+    "fuerza": 23,
+    "destreza": 10,
+    "constitucion": 17,
+    "inteligencia": 2,
+    "sabiduria": 11,
+    "carisma": 4
+  },
+  "ca": {
+    "normal": 13,
+    "toque": 9,
+    "desprevenido": 13,
+    "detalle": "+4 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 33,
+    "formula": "(3d8+9)"
+  },
+  "salvaciones": {
+    "fortaleza": 6,
+    "reflejos": 3,
+    "voluntad": 1
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 40
+    }
+  ],
+  "ataques": [
+    {
+      "id": "gore",
+      "name": "Gore",
+      "attackBonus": 7,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+9",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "stampede",
+    "trample (2d6+9, DC 17)"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Stampede (Ex) A stampede occurs if three or more creatures with stampede make a trample attack while remaining adjacent to each other. While stampeding, the creatures can trample foes of their size or smaller, and the trample's save DC increases by +2."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Stampede (Ex) A stampede occurs if three or more creatures with stampede make a trample attack while remaining adjacent to each other. While stampeding, the creatures can trample foes of their size or smaller, and the trample's save DC increases by +2."
+    }
+  ],
+  "fullStatBlock": "CR 2\nAurochs\nN Large animal\nInit +0\nSenses low-light vision, scent; Perception +9\nAC 13, touch 9, flat-footed 13 (+4 natural, -1 size)\nhp 22 ((3d8+9))\nFort +6, Ref +3, Will +1\nSpeed 40 ft.\nMelee Gore +7 (1d8+9 piercing)\nSpecial Attacks stampede, trample (2d6+9, DC 17)\nSpecial Abilities Stampede (Ex) A stampede occurs if three or more creatures with stampede make a trample attack while remaining adjacent to each other. While stampeding, the creatures can trample foes of their size or smaller, and the trample's save DC increases by +2.\nSpell-Like Abilities none\nStatistics Str 23, Dex 10, Con 17, Int 2, Wis 11, Cha 4\nBase Atk +2; CMB +9; CMD 19\nFeats Endurance, Skill Focus (Perception)\nSkills Perception +9\nEnvironment  temperate plains\nOrganization solitary, pair, or herd (3-30)\nTreasure none\nSource PFRPG Bestiary"
+}

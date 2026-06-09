@@ -14,7 +14,7 @@ export const summonTemplates = [
   {
     key: 'fiery',
     label: 'Fiery',
-    short: 'Subtipo fire, fire resistance y daño de fuego',
+    short: 'Subtipo fire, inmunidad al fuego, vulnerabilidad al frío y daño de fuego',
     requiresChoice: true,
   },
   {

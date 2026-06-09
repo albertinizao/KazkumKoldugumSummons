@@ -1,0 +1,100 @@
+{
+  "id": "emperor-cobra",
+  "nombre": "Emperor Cobra",
+  "nivelSummon": 5,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 6,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 13,
+  "atributos": {
+    "fuerza": 22,
+    "destreza": 15,
+    "constitucion": 18,
+    "inteligencia": 1,
+    "sabiduria": 17,
+    "carisma": 2
+  },
+  "ca": {
+    "normal": 18,
+    "toque": 11,
+    "desprevenido": 16,
+    "detalle": "+2 Dex, +7 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 72,
+    "formula": "(6d8+24)"
+  },
+  "salvaciones": {
+    "fortaleza": 9,
+    "reflejos": 7,
+    "voluntad": 5
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    },
+    {
+      "tipo": "swim",
+      "valor": 30
+    },
+    {
+      "tipo": "climb",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 10,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+9",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "poison"
+      ]
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "10 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Poison",
+      "resumen": "Poison (Ex) Bite-injury; save Fort DC 17; frequency 1/round for 6 rounds; effect 1d3 Con; cure 2 consecutive saves."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Poison",
+      "texto": "Poison (Ex) Bite-injury; save Fort DC 17; frequency 1/round for 6 rounds; effect 1d3 Con; cure 2 consecutive saves."
+    }
+  ],
+  "fullStatBlock": "CR 5\nEmperor Cobra\nN Large animal\nInit +6\nSenses low-light vision, scent; Perception +13\nAC 18, touch 11, flat-footed 16 (+2 Dex, +7 natural, -1 size)\nhp 51 (6d8+24)\nFort +9, Ref +7, Will +5\nSpeed 30 ft., climb 30 ft., swim 30 ft.\nMelee bite +10 (2d6+9 plus poison)\nSpecial Abilities Poison (Ex) Bite-injury; save Fort DC 17; frequency 1/round for 6 rounds; effect 1d3 Con; cure 2 consecutive saves.\nSpell-Like Abilities none\nStatistics Str 22, Dex 15, Con 18, Int 1, Wis 17, Cha 2\nBase Atk +4; CMB +11; CMD 23\nFeats Improved Initiative, Skill Focus (Stealth), Weapon Focus (bite)\nSkills Acrobatics +10, Climb +14, Perception +13, Stealth +11, Swim +14\nEnvironment  temperate or warm swamps\nOrganization solitary, pair, or nest (3-8)\nTreasure none\nSource PFRPG Bestiary 2"
+}

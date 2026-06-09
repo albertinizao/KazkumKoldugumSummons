@@ -1,0 +1,120 @@
+{
+  "id": "greater-ice-elemental",
+  "nombre": "Greater Ice Elemental",
+  "nivelSummon": 7,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "outsider",
+  "subtipos": [
+    "air",
+    "cold",
+    "elemental",
+    "extraplanar",
+    "water"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 8,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "snow vision"
+  ],
+  "percepcion": 16,
+  "atributos": {
+    "fuerza": 28,
+    "destreza": 18,
+    "constitucion": 19,
+    "inteligencia": 8,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 23,
+    "toque": 13,
+    "desprevenido": 18,
+    "detalle": "+4 Dex, +1 dodge, +10 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 182,
+    "formula": "(13d10+52)"
+  },
+  "salvaciones": {
+    "fortaleza": 12,
+    "reflejos": 14,
+    "voluntad": 4
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "burrow",
+      "valor": 20,
+      "notes": "ice and snow only"
+    },
+    {
+      "tipo": "swim",
+      "valor": 60
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 20,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d8+9",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        },
+        {
+          "formula": "2d6",
+          "damageType": "COLD",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/-",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "cold",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Qualities",
+      "resumen": "ice glide, icewalking"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Qualities",
+      "texto": "ice glide, icewalking"
+    }
+  ],
+  "fullStatBlock": "CR 9\nGreater Ice Elemental\nN Huge outsider air, cold, elemental, extraplanar, water\nInit +8\nSenses darkvision 60 ft., snow vision; Perception +16\nAC 23, touch 13, flat-footed 18 (+4 Dex, +1 dodge, +10 natural, -2 size)\nhp 182 (13d10+52)\nFort +12, Ref +14, Will +4\nSpeed 20 ft., burrow (ice and snow only) 20 ft., swim 60 ft.\nMelee 2 slams +20 (2d8+9 plus 2d6 cold)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nSpecial Qualities ice glide, icewalking\nStatistics Str 28, Dex 18, Con 19, Int 8, Wis 11, Cha 11\nBase Atk +13; CMB +24; CMD 39\nLanguages Aquan\nEnvironment any land or water (Plane of Water)\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDR 10/-\nImmune cold, elemental traits\nSource PFRPG Bestiary 2"
+}

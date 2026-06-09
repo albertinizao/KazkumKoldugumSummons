@@ -15,10 +15,20 @@
         </div>
 
         <div class="toolbar">
+          <label class="level-filter">
+            <span class="field-label">Nivel</span>
+            <select class="level-filter__select" :value="store.catalogLevelFilter ?? ''" @change="onLevelFilterChange">
+              <option :value="''">Todos</option>
+              <option v-for="level in summonLevels" :key="level" :value="level">
+                {{ level }}
+              </option>
+            </select>
+          </label>
+
           <label>
             <span class="field-label">Criatura</span>
             <select :value="store.selectedCreatureId ?? ''" @change="onCreatureChange">
-              <option v-for="item in store.catalogItems" :key="item.id" :value="item.id">
+              <option v-for="item in store.filteredCatalogItems" :key="item.id" :value="item.id">
                 {{ item.name }} · nivel {{ item.summonLevel }}
               </option>
             </select>
@@ -40,7 +50,7 @@
               Invocar
             </ActionButton>
             <ActionButton :disabled="store.busy" variant="danger" @click="handleClearSummons">
-              Limpiar invocaciones
+              Limpiar
             </ActionButton>
           </div>
         </div>
@@ -189,6 +199,9 @@
             <div><strong>Espacio:</strong> {{ expandedGroup.resolvedCreature.space }}</div>
             <div><strong>Alcance:</strong> {{ expandedGroup.resolvedCreature.reach }}</div>
             <div><strong>Ataques especiales:</strong> {{ joinOrDash(expandedGroup.resolvedCreature.specialAttacks) }}</div>
+            <div><strong>Inmunidades / SR:</strong> {{ formatSpecialDefenseList(expandedGroup.resolvedCreature.specialDefenses, ['IMMUNITY', 'SPELL_RESISTANCE'], true) }}</div>
+            <div><strong>Vulnerabilidades:</strong> {{ formatSpecialDefenseList(expandedGroup.resolvedCreature.specialDefenses, ['VULNERABILITY']) }}</div>
+            <div><strong>RD / resistencias:</strong> {{ formatSpecialDefenseList(expandedGroup.resolvedCreature.specialDefenses, ['DAMAGE_REDUCTION', 'RESISTANCE']) }}</div>
             <div><strong>Defensas especiales:</strong> {{ joinOrDash(expandedGroup.resolvedCreature.specialDefenses.map(defense => formatSpecialDefense(defense))) }}</div>
             <div><strong>Reglas aplicadas:</strong> {{ joinOrDash(expandedGroup.resolvedCreature.appliedRules.map(rule => rule.description)) }}</div>
             <div><strong>Aptitudes resumidas:</strong> {{ joinOrDash(expandedGroup.resolvedCreature.shortAbilities.map(ability => `${ability.name}: ${ability.summary}`)) }}</div>
@@ -216,6 +229,7 @@ import StatusBadge from '@/components/StatusBadge.vue';
 import { useCombatStore } from '@/stores/combat';
 import type { SummonTemplateType } from '@/types/catalog';
 import { formatCreatureTypeWithSubtypes } from '@/utils/creatureDisplay';
+import { formatSpecialDefense, formatSpecialDefenseList } from '@/utils/specialDefenseDisplay';
 
 const store = useCombatStore();
 const expandedGroupId = ref<string | null>(null);
@@ -224,6 +238,7 @@ const globalRollResult = ref<{ title: string; displayText: string } | null>(null
 const summonToast = ref<string | null>(null);
 let summonToastTimer: number | undefined;
 const globalRollResultTitleId = 'global-roll-result-title';
+const summonLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const allowedTemplates = computed(() => store.selectedCreatureAllowedTemplates);
 const templateSelectionRequired = computed(() => allowedTemplates.value.length > 1);
@@ -260,20 +275,6 @@ function joinOrDashTexts(value: string): string {
   return value && value.trim() ? value : '—';
 }
 
-function formatSpecialDefense(defense: { type: string; value?: string | null; notes?: string | null }): string {
-  const labelMap: Record<string, string> = {
-    DAMAGE_REDUCTION: 'RD',
-    RESISTANCE: 'Resistencia',
-    IMMUNITY: 'Inmunidad',
-    VULNERABILITY: 'Vulnerabilidad',
-    OTHER: 'Otros',
-  };
-
-  const value = defense.value ? ` ${defense.value}` : '';
-  const notes = defense.notes ? ` (${defense.notes})` : '';
-  return `${labelMap[defense.type] ?? defense.type}${value}${notes}`;
-}
-
 function showSummonToast(): void {
   const result = store.lastRollResult;
   if (result?.type !== 'SUMMON_QUANTITY') {
@@ -302,6 +303,12 @@ function showSummonToast(): void {
 function onCreatureChange(event: Event): void {
   const target = event.target as HTMLSelectElement;
   store.selectCreature(target.value);
+}
+
+function onLevelFilterChange(event: Event): void {
+  const target = event.target as HTMLSelectElement;
+  const value = target.value ? Number(target.value) : null;
+  store.selectCatalogLevel(value);
 }
 
 function onTemplateChange(event: Event): void {
@@ -439,9 +446,18 @@ p {
 
 .toolbar {
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
+  grid-template-columns: auto minmax(0, 1.35fr) minmax(0, 1.1fr) auto;
   gap: 0.75rem;
   align-items: end;
+}
+
+.level-filter {
+  max-width: 5.5rem;
+}
+
+.level-filter__select {
+  min-width: 5.5rem;
+  width: 100%;
 }
 
 .field-label {

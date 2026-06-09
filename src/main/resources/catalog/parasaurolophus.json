@@ -1,0 +1,82 @@
+{
+  "id": "parasaurolophus",
+  "nombre": "Parasaurolophus",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 13,
+  "atributos": {
+    "fuerza": 23,
+    "destreza": 14,
+    "constitucion": 17,
+    "inteligencia": 2,
+    "sabiduria": 13,
+    "carisma": 10
+  },
+  "ca": {
+    "normal": 17,
+    "toque": 10,
+    "desprevenido": 15,
+    "detalle": "+2 Dex, +7 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 66,
+    "formula": "(6d8+18)"
+  },
+  "salvaciones": {
+    "fortaleza": 8,
+    "reflejos": 7,
+    "voluntad": 3
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "tail-slap",
+      "name": "Tail Slap",
+      "attackBonus": 8,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+9",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [
+    "trample (2d6+9; DC 19)"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 4\nParasaurolophus\nN Huge animal\nInit +2\nSenses low-light vision, scent; Perception +13\nAC 17, touch 10, flat-footed 15 (+2 Dex, +7 natural, -1 size)\nhp 45 ((6d8+18))\nFort +8, Ref +7, Will +3\nSpeed 30 ft.\nMelee Tail Slap +8 (2d6+9 bludgeoning)\nSpecial Attacks trample (2d6+9; DC 19)\nSpell-Like Abilities none\nStatistics Str 23, Dex 14, Con 17, Int 2, Wis 13, Cha 10\nBase Atk +4; CMB +12; CMD 24\nFeats Improved Bull Rush, Power Attack, Skill Focus (Perception)\nSkills Perception +13\nEnvironment  warm forests or plains\nOrganization solitary, pair, or herd (3-12)\nTreasure none\nSource PFRPG Bestiary 2"
+}

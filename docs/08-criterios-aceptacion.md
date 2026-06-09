@@ -332,13 +332,17 @@ También debe cumplirse:
 
 ## CA-24 — Ajuste de PG con defensas visibles
 
-**Dado** que la criatura tiene RD, resistencia, inmunidad o vulnerabilidad,  
+**Dado** que la criatura tiene RD, resistencia, inmunidad, SR o vulnerabilidad,  
 **cuando** el usuario ajusta sus PG,  
 **entonces** la interfaz debe mostrar esas defensas como referencia.
 
 La aplicación no debe aplicar automáticamente estas defensas.
 
 El usuario introduce el daño final.
+
+Las inmunidades y la SR deben verse a nivel de grupo.
+
+La RD y las resistencias deben verse junto al PG de cada instancia individual.
 
 ## CA-25 — Marcar caída a 0 PG o menos
 

@@ -1,0 +1,81 @@
+{
+  "id": "immense-tortoise",
+  "nombre": "Immense Tortoise",
+  "nivelSummon": 6,
+  "alineamiento": "N",
+  "tamano": "Colossal",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": -2,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 14,
+  "atributos": {
+    "fuerza": 40,
+    "destreza": 7,
+    "constitucion": 24,
+    "inteligencia": 2,
+    "sabiduria": 11,
+    "carisma": 9
+  },
+  "ca": {
+    "normal": 25,
+    "toque": 0,
+    "desprevenido": 25,
+    "detalle": "-2 Dex, +25 natural, -8 size"
+  },
+  "pg": {
+    "maximos": 165,
+    "formula": "(11d8+77)"
+  },
+  "salvaciones": {
+    "fortaleza": 16,
+    "reflejos": 5,
+    "voluntad": 3
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 15,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "4d6+22",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 19,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "30 ft.",
+  "alcance": "30 ft.",
+  "ataquesEspeciales": [
+    "trample (2d8 + 22, DC 30)"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 8\nImmense Tortoise\nN Colossal animal\nInit +-2\nSenses low-light vision; Perception +14\nAC 25, touch 0, flat-footed 25 (-2 Dex, +25 natural, -8 size)\nhp 126 (11d8+77)\nFort +16, Ref +5, Will +3\nSpeed 20 ft.\nMelee bite +15 (4d6+22/19-20)\nSpecial Attacks trample (2d8 + 22, DC 30)\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 40, Dex 7, Con 24, Int 2, Wis 11, Cha 9\nBase Atk +8; CMB +31; CMD 39\nFeats Critical Focus, Endurance, Great Fortitude, Improved Critical (bite), Improved Great Fortitude, Power Attack\nSkills Perception +14 (+10 for sound-based checks)\nEnvironment  warm islands\nOrganization solitary\nTreasure none\nSource PFRPG Bestiary 4"
+}

@@ -1,0 +1,142 @@
+{
+  "id": "silvanshee",
+  "nombre": "Silvanshee",
+  "nivelSummon": 3,
+  "alineamiento": "NG",
+  "tamano": "Tiny",
+  "tipo": "outsider",
+  "subtipos": [
+    "agathion",
+    "extraplanar",
+    "good"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 6,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "low-light vision"
+  ],
+  "percepcion": 10,
+  "atributos": {
+    "fuerza": 3,
+    "destreza": 15,
+    "constitucion": 12,
+    "inteligencia": 10,
+    "sabiduria": 12,
+    "carisma": 13
+  },
+  "ca": {
+    "normal": 15,
+    "toque": 14,
+    "desprevenido": 13,
+    "detalle": "+2 Dex, +1 natural, +2 size"
+  },
+  "pg": {
+    "maximos": 22,
+    "formula": "(2d10+2)"
+  },
+  "salvaciones": {
+    "fortaleza": 5,
+    "reflejos": 6,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    },
+    {
+      "tipo": "fly",
+      "valor": 90,
+      "maneuverability": "good"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 6,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d3-4",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "claw",
+      "name": "Claw",
+      "attackBonus": 6,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d2-4",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "heroic strength",
+    "pounce"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "IMMUNITY",
+      "valor": "electricity",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "petrification",
+      "notas": null
+    },
+    {
+      "tipo": "RESISTANCE",
+      "valor": "cold 10",
+      "notas": null
+    },
+    {
+      "tipo": "RESISTANCE",
+      "valor": "sonic 10",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Cat's Luck (Su) A silvanshee adds its Charisma modifier as a luck bonus on all its saving throws. Once per day as a standard action, it can also grant this bonus to one ally within 30 feet for 10 minutes.  Heroic Strength (Su) Once per day, a silvanshee can grant itself a +8 enhancement bonus to Strength for 1 minute.  Spectral Mist (Su) A silvanshee can assume an eerie, mist-like form roughly the size and shape of a cat. This ability has the same effect as a gaseous form spell, except the silvanshee retains its own DR and supernatural abilities and can move at its normal speed. It can remain in mist form up to 5 minutes per day. This duration does not have to be consecutive, but it must be used in 1-minute increments."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Cat's Luck (Su) A silvanshee adds its Charisma modifier as a luck bonus on all its saving throws. Once per day as a standard action, it can also grant this bonus to one ally within 30 feet for 10 minutes.  Heroic Strength (Su) Once per day, a silvanshee can grant itself a +8 enhancement bonus to Strength for 1 minute.  Spectral Mist (Su) A silvanshee can assume an eerie, mist-like form roughly the size and shape of a cat. This ability has the same effect as a gaseous form spell, except the silvanshee retains its own DR and supernatural abilities and can move at its normal speed. It can remain in mist form up to 5 minutes per day. This duration does not have to be consecutive, but it must be used in 1-minute increments."
+    }
+  ],
+  "fullStatBlock": "CR 2\nSilvanshee\nNG Tiny outsider agathion, extraplanar, good\nInit +6\nSenses darkvision 60 ft., low-light vision; Perception +10\nAC 15, touch 14, flat-footed 13 (+2 Dex, +1 natural, +2 size)\nhp 13 ((2d10+2))\nFort +5, Ref +6, Will +2\nSpeed 30 ft., fly 90 ft. (good)\nMelee Bite +6 (1d3-4 piercing)\nMelee 2 claw +6 (1d2-4 slashing)\nSpecial Attacks heroic strength, pounce\nSpecial Abilities Cat's Luck (Su) A silvanshee adds its Charisma modifier as a luck bonus on all its saving throws. Once per day as a standard action, it can also grant this bonus to one ally within 30 feet for 10 minutes.  Heroic Strength (Su) Once per day, a silvanshee can grant itself a +8 enhancement bonus to Strength for 1 minute.  Spectral Mist (Su) A silvanshee can assume an eerie, mist-like form roughly the size and shape of a cat. This ability has the same effect as a gaseous form spell, except the silvanshee retains its own DR and supernatural abilities and can move at its normal speed. It can remain in mist form up to 5 minutes per day. This duration does not have to be consecutive, but it must be used in 1-minute increments.\nSpell-Like Abilities none\nStatistics Str 3, Dex 15, Con 12, Int 10, Wis 12, Cha 13\nBase Atk +2; CMB +2; CMD 8\nFeats Improved Initiative, Weapon FinesseB\nSkills Acrobatics +11, Climb +7, Fly +6, Knowledge (arcana) +5, Knowledge (planes) +5, Perception +10, Stealth +19\nLanguages Celestial, Draconic, Infernal; speak with animals, truespeech\nEnvironment  any land (Nirvana)\nOrganization solitary, pair, or clowder (3-10)\nTreasure standard\nImmune electricity, petrification\nResist cold 10, sonic 10\nSource PFRPG Bestiary 2"
+}

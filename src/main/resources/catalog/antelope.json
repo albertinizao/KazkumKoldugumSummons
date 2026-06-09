@@ -1,0 +1,81 @@
+{
+  "id": "antelope",
+  "nombre": "Antelope",
+  "nivelSummon": 1,
+  "alineamiento": "N",
+  "tamano": "Small",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 3,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 5,
+  "atributos": {
+    "fuerza": 10,
+    "destreza": 17,
+    "constitucion": 14,
+    "inteligencia": 2,
+    "sabiduria": 13,
+    "carisma": 7
+  },
+  "ca": {
+    "normal": 14,
+    "toque": 14,
+    "desprevenido": 11,
+    "detalle": "+3 Dex, +1 size"
+  },
+  "pg": {
+    "maximos": 10,
+    "formula": "1d8+2"
+  },
+  "salvaciones": {
+    "fortaleza": 4,
+    "reflejos": 7,
+    "voluntad": 0
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 60
+    }
+  ],
+  "ataques": [
+    {
+      "id": "gore",
+      "name": "Gore",
+      "attackBonus": 1,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "powerful charge"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 1/2\nAntelope\nN Small animal\nInit +3\nSenses low-light vision; Perception +5\nAC 14, touch 14, flat-footed 11 (+3 Dex, +1 size)\nhp 6 (1d8+2)\nFort +4, Ref +7, Will +0\nSpeed 60 ft.\nMelee gore +1 (1d4)\nSpace 5 ft.; Reach 5 ft.\nSpecial Attacks powerful charge (gore, 1d4+2)\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 10, Dex 17, Con 14, Int 2, Wis 13, Cha 7\nCMB -1; CMD 12\nFeats Lightning Reflexes, Run\nSkills Perception +5\nEnvironment temperate or warm plains\nOrganization solitary, pair, or herd (3-50)\nTreasure none\nSource PFRPG Bestiary 3"
+}

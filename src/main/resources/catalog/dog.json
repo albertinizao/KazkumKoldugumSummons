@@ -1,0 +1,80 @@
+{
+  "id": "dog",
+  "nombre": "Dog",
+  "nivelSummon": 1,
+  "alineamiento": "N",
+  "tamano": "Small",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 1,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 8,
+  "atributos": {
+    "fuerza": 13,
+    "destreza": 13,
+    "constitucion": 15,
+    "inteligencia": 2,
+    "sabiduria": 12,
+    "carisma": 6
+  },
+  "ca": {
+    "normal": 13,
+    "toque": 12,
+    "desprevenido": 12,
+    "detalle": "+1 Dex, +1 natural, +1 size"
+  },
+  "pg": {
+    "maximos": 10,
+    "formula": "1d8+2"
+  },
+  "salvaciones": {
+    "fortaleza": 4,
+    "reflejos": 3,
+    "voluntad": 1
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 40
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 2,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4+1",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 1/3\nDog\nN Small animal\nInit +1\nSenses low-light vision, scent; Perception +8\nAC 13, touch 12, flat-footed 12 (+1 Dex, +1 natural, +1 size)\nhp 6 (1d8+2)\nFort +4, Ref +3, Will +1\nSpeed 40 ft.\nMelee bite +2 (1d4+1)\nSpace 5 ft.; Reach 5 ft.\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 13, Dex 13, Con 15, Int 2, Wis 12, Cha 6\nCMD 11\nFeats Skill Focus (Perception)\nSkills Acrobatics +1 (+9 jumping), Perception +8, Survival +1 (+5 scent tracking)\nRacial Modifiers +4 Acrobatics when jumping, +4 Survival when tracking by scent\nEnvironment any\nOrganization solitary, pair, or pack (3-12)\nTreasure none\nSource PFRPG Bestiary"
+}

@@ -1,0 +1,92 @@
+{
+  "id": "iguanodon",
+  "nombre": "Iguanodon",
+  "nivelSummon": 5,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 12,
+  "atributos": {
+    "fuerza": 27,
+    "destreza": 14,
+    "constitucion": 19,
+    "inteligencia": 2,
+    "sabiduria": 12,
+    "carisma": 7
+  },
+  "ca": {
+    "normal": 19,
+    "toque": 10,
+    "desprevenido": 17,
+    "detalle": "+2 Dex, +9 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 108,
+    "formula": "(9d8+36)"
+  },
+  "salvaciones": {
+    "fortaleza": 10,
+    "reflejos": 8,
+    "voluntad": 4
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "claws",
+      "name": "Claws",
+      "attackBonus": 13,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+8",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 3
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [
+    "thumb spikes"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Thumb Spikes",
+      "resumen": "Thumb Spikes (Ex) An iguanodon's thumb spikes can inflict grievous wounds-they deal triple damage on a successful critical hit."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Thumb Spikes",
+      "texto": "Thumb Spikes (Ex) An iguanodon's thumb spikes can inflict grievous wounds-they deal triple damage on a successful critical hit."
+    }
+  ],
+  "fullStatBlock": "CR 6\nIguanodon\nN Huge animal\nInit +2\nSenses low-light vision, scent; Perception +12\nAC 19, touch 10, flat-footed 17 (+2 Dex, +9 natural, -2 size)\nhp 76 (9d8+36)\nFort +10, Ref +8, Will +4\nSpeed 30 ft.\nMelee 2 claws +13 (1d8+8/x3)\nSpecial Attacks thumb spikes\nSpecial Abilities Thumb Spikes (Ex) An iguanodon's thumb spikes can inflict grievous wounds-they deal triple damage on a successful critical hit.\nSpell-Like Abilities none\nStatistics Str 27, Dex 14, Con 19, Int 2, Wis 12, Cha 7\nBase Atk +6; CMB +16; CMD 28\nFeats Power Attack, Run, Skill Focus (Perception), Skill Focus (Stealth), Weapon Focus (claw)\nSkills Perception +12, Stealth +4\nEnvironment  warm forests or swamps\nOrganization solitary, pair, or pack (3-6)\nTreasure none\nSource PFRPG Bestiary 3"
+}

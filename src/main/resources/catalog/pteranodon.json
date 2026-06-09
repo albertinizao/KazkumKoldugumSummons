@@ -1,0 +1,84 @@
+{
+  "id": "pteranodon",
+  "nombre": "Pteranodon",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 8,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 11,
+  "atributos": {
+    "fuerza": 16,
+    "destreza": 19,
+    "constitucion": 15,
+    "inteligencia": 2,
+    "sabiduria": 15,
+    "carisma": 12
+  },
+  "ca": {
+    "normal": 16,
+    "toque": 14,
+    "desprevenido": 11,
+    "detalle": "+4 Dex, +1 dodge, +2 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 50,
+    "formula": "(5d8+10)"
+  },
+  "salvaciones": {
+    "fortaleza": 6,
+    "reflejos": 8,
+    "voluntad": 3
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 10
+    },
+    {
+      "tipo": "fly",
+      "valor": 50
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 5,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+4",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "10 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 3\nPteranodon\nN Large animal\nInit +8\nSenses low-light vision, scent; Perception +11\nAC 16, touch 14, flat-footed 11 (+4 Dex, +1 dodge, +2 natural, -1 size)\nhp 32 ((5d8+10))\nFort +6, Ref +8, Will +3\nSpeed 10 ft., fly 50 ft. (clumsy)\nMelee Bite +5 (2d6+4 piercing)\nSpell-Like Abilities none\nStatistics Str 16, Dex 19, Con 15, Int 2, Wis 15, Cha 12\nBase Atk +3; CMB +7; CMD 21\nFeats Dodge, Improved Initiative, Skill Focus (Perception)\nSkills Fly -1, Perception +11\nEnvironment  warm coastline\nOrganization solitary, pair, or flock (3-12)\nTreasure none\nSource PFRPG Bestiary"
+}

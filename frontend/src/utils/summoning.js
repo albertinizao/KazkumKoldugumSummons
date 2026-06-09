@@ -75,11 +75,10 @@ export function resolveCreature(creature, templateKey = 'none') {
     specialDefenses.push('Listed immunities')
   } else if (templateKey === 'fiery') {
     notes.push('Adds fire subtype and darkvision 60 ft.')
-    specialDefenses.push('Resistance fire 10')
     specialDefenses.push('Immunity fire')
     specialDefenses.push('Vulnerability cold')
   } else if (templateKey === 'celestial' || templateKey === 'entropic' || templateKey === 'resolute') {
-    notes.push('Adds darkvision 60 ft and the template-listed resistances.')
+    notes.push('Adds darkvision 60 ft and the template-listed defenses.')
     const smite = templateSpecialAttack(templateKey)
     if (smite) {
       specialAttacks.push(smite)

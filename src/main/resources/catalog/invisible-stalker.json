@@ -1,0 +1,98 @@
+{
+  "id": "invisible-stalker",
+  "nombre": "Invisible Stalker",
+  "nivelSummon": 6,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "outsider",
+  "subtipos": [
+    "air",
+    "elemental",
+    "extraplanar"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 8,
+  "sentidos": [
+    "darkvision 60 ft."
+  ],
+  "percepcion": 12,
+  "atributos": {
+    "fuerza": 18,
+    "destreza": 19,
+    "constitucion": 22,
+    "inteligencia": 14,
+    "sabiduria": 15,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 20,
+    "toque": 14,
+    "desprevenido": 16,
+    "detalle": "+4 Dex, +6 natural"
+  },
+  "pg": {
+    "maximos": 112,
+    "formula": "(7d10+42)"
+  },
+  "salvaciones": {
+    "fortaleza": 11,
+    "reflejos": 11,
+    "voluntad": 4
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 12,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+4",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    },
+    {
+      "tipo": "OTHER",
+      "valor": "natural invisibility",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Improved Tracking (Ex) An invisible stalker takes no penalty to Survival checks when tracking and moving at any speed. Natural Invisibility (Ex) This ability is constant-an invisible stalker remains invisible at all times, even when attacking. As this ability is inherent, it is not subject to the invisibility purge spell. Against foes that cannot pinpoint it, the invisible stalker gains a +20 bonus on Stealth checks when moving, or +40 when standing still-these bonuses are not included in the statistics above."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Improved Tracking (Ex) An invisible stalker takes no penalty to Survival checks when tracking and moving at any speed. Natural Invisibility (Ex) This ability is constant-an invisible stalker remains invisible at all times, even when attacking. As this ability is inherent, it is not subject to the invisibility purge spell. Against foes that cannot pinpoint it, the invisible stalker gains a +20 bonus on Stealth checks when moving, or +40 when standing still-these bonuses are not included in the statistics above."
+    }
+  ],
+  "fullStatBlock": "CR 7\nInvisible Stalker\nN Medium outsider air, elemental, extraplanar\nInit +8\nSenses darkvision 60 ft.; Perception +12\nAC 20, touch 14, flat-footed 16 (+4 Dex, +6 natural)\nhp 80 (7d10+42)\nFort +11, Ref +11, Will +4\nSpeed 30 ft., fly 30 (perfect)\nMelee 2 slams +12 (2d6+4)\nSpecial Abilities Improved Tracking (Ex) An invisible stalker takes no penalty to Survival checks when tracking and moving at any speed. Natural Invisibility (Ex) This ability is constant-an invisible stalker remains invisible at all times, even when attacking. As this ability is inherent, it is not subject to the invisibility purge spell. Against foes that cannot pinpoint it, the invisible stalker gains a +20 bonus on Stealth checks when moving, or +40 when standing still-these bonuses are not included in the statistics above.\nSpell-Like Abilities none\nStatistics Str 18, Dex 19, Con 22, Int 14, Wis 15, Cha 11\nBase Atk +7; CMB +11; CMD 25\nFeats Combat Reflexes, Improved Initiative, Lightning Reflexes, Weapon Focus (slam)\nSkills Acrobatics +14, Bluff +10, Fly +22, Knowledge (planes) +12, Perception +12, Sense Motive +12, Stealth +14, Survival +12\nLanguages Auran, Common\nEnvironment  any (Plane of Air)\nOrganization solitary\nTreasure standard\nDefensive Abilities natural invisibility\nImmune elemental traits\nSource PFRPG Bestiary"
+}

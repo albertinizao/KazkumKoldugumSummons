@@ -1,0 +1,109 @@
+{
+  "id": "whale",
+  "nombre": "Whale",
+  "nivelSummon": 7,
+  "alineamiento": "N",
+  "tamano": "Gargantuan",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "blindsight 120 ft.",
+    "low-light vision"
+  ],
+  "percepcion": 23,
+  "atributos": {
+    "fuerza": 38,
+    "destreza": 6,
+    "constitucion": 23,
+    "inteligencia": 2,
+    "sabiduria": 11,
+    "carisma": 5
+  },
+  "ca": {
+    "normal": 22,
+    "toque": 4,
+    "desprevenido": 22,
+    "detalle": "-2 Dex, +18 natural, -4 size"
+  },
+  "pg": {
+    "maximos": 210,
+    "formula": "(15d8+90)"
+  },
+  "salvaciones": {
+    "fortaleza": 17,
+    "reflejos": 7,
+    "voluntad": 7
+  },
+  "velocidades": [
+    {
+      "tipo": "swim",
+      "valor": 40
+    }
+  ],
+  "ataques": [
+    {
+      "id": "tail-slap",
+      "name": "Tail Slap",
+      "attackBonus": 21,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "4d6+21",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 21,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "4d6+21",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "20 ft.",
+  "alcance": "20 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Qualities",
+      "resumen": "hold breath"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Qualities",
+      "texto": "hold breath"
+    }
+  ],
+  "fullStatBlock": "CR 10\nWhale\nN Gargantuan animal\nInit +2\nSenses blindsight 120 ft., low-light vision; Perception +23\nAC 22, touch 4, flat-footed 22 (-2 Dex, +18 natural, -4 size)\nhp 210 (15d8+90)\nFort +17, Ref +7, Will +7\nSpeed swim 40 ft.\nMelee tail slap +21 (4d6+21) or  bite +21 (4d6+21)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nSpecial Qualities hold breath\nStatistics Str 38, Dex 6, Con 23, Int 2, Wis 11, Cha 5\nBase Atk +11; CMB +29; CMD 37\nEnvironment any oceans\nOrganization solitary, pair, or pod (3-16)\nTreasure none\nSource PFRPG Bestiary 2"
+}

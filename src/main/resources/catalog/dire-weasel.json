@@ -1,0 +1,86 @@
+{
+  "id": "dire-weasel",
+  "nombre": "Dire Weasel",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 3,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 11,
+  "atributos": {
+    "fuerza": 21,
+    "destreza": 16,
+    "constitucion": 14,
+    "inteligencia": 2,
+    "sabiduria": 13,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 17,
+    "toque": 12,
+    "desprevenido": 14,
+    "detalle": "+3 Dex, +5 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 50,
+    "formula": "(5d8+10)"
+  },
+  "salvaciones": {
+    "fortaleza": 6,
+    "reflejos": 7,
+    "voluntad": 2
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 40
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 8,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+7",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "10 ft.",
+  "ataquesEspeciales": [
+    "blood drain (1d4+1 Con)",
+    "blood rage",
+    "grab"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 3\nDire Weasel\nN Large animal\nInit +3\nSenses low-light vision, scent; Perception +11\nAC 17, touch 12, flat-footed 14 (+3 Dex, +5 natural, -1 size)\nhp 32 ((5d8+10))\nFort +6, Ref +7, Will +2\nSpeed 40 ft.\nMelee Bite +8 (1d8+7 piercing)\nSpecial Attacks blood drain (1d4+1 Con), blood rage, grab\nSpell-Like Abilities none\nStatistics Str 21, Dex 16, Con 14, Int 2, Wis 13, Cha 11\nBase Atk +3; CMB +9; CMD 22\nFeats Combat Reflexes, Skill Focus (Perception), Weapon Focus (bite)\nSkills Climb +9, Perception +11, Stealth +10, Swim +11\nEnvironment  any land\nOrganization solitary, pair, or den (3-6)\nTreasure incidental\nSource PFRPG Bestiary 4"
+}

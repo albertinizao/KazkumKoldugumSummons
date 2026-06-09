@@ -1,0 +1,99 @@
+{
+  "id": "greater-air-elemental",
+  "nombre": "Greater Air Elemental",
+  "nivelSummon": 7,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "outsider",
+  "subtipos": [
+    "air",
+    "elemental",
+    "extraplanar"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 14,
+  "sentidos": [
+    "darkvision 60 ft."
+  ],
+  "percepcion": 16,
+  "atributos": {
+    "fuerza": 24,
+    "destreza": 31,
+    "constitucion": 18,
+    "inteligencia": 8,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 25,
+    "toque": 19,
+    "desprevenido": 14,
+    "detalle": "+10 Dex, +1 dodge, +6 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 182,
+    "formula": "(13d10+52)"
+  },
+  "salvaciones": {
+    "fortaleza": 12,
+    "reflejos": 18,
+    "voluntad": 6
+  },
+  "velocidades": [
+    {
+      "tipo": "fly",
+      "valor": 100,
+      "maneuverability": "perfect"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 21,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d8+7",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/-",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Defensive Abilities",
+      "resumen": "air mastery"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Defensive Abilities",
+      "texto": "air mastery"
+    }
+  ],
+  "fullStatBlock": "CR 9\nGreater Air Elemental\nN Huge outsider air, elemental, extraplanar\nInit +14\nSenses darkvision 60 ft.; Perception +16\nAC 25, touch 19, flat-footed 14 (+10 Dex, +1 dodge, +6 natural, -2 size)\nhp 182 (13d10+52)\nFort +12, Ref +18, Will +6\nSpeed fly 100 ft. (perfect)\nMelee 2 slams +21 (2d8+7)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nDefensive Abilities air mastery\nStatistics Str 24, Dex 31, Con 18, Int 8, Wis 11, Cha 11\nBase Atk +13; CMB +22; CMD 43\nLanguages Auran\nEnvironment Plane of Air\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDR 10/- Immune elemental traits\nSource PFRPG Bestiary"
+}

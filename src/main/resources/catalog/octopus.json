@@ -1,0 +1,122 @@
+{
+  "id": "octopus",
+  "nombre": "Octopus",
+  "nivelSummon": 2,
+  "alineamiento": "N",
+  "tamano": "Small",
+  "tipo": "animal",
+  "subtipos": [
+    "aquatic"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 3,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 1,
+  "atributos": {
+    "fuerza": 12,
+    "destreza": 17,
+    "constitucion": 14,
+    "inteligencia": 2,
+    "sabiduria": 13,
+    "carisma": 3
+  },
+  "ca": {
+    "normal": 15,
+    "toque": 14,
+    "desprevenido": 12,
+    "detalle": "+3 Dex, +1 natural, +1 size"
+  },
+  "pg": {
+    "maximos": 20,
+    "formula": "2d8+4"
+  },
+  "salvaciones": {
+    "fortaleza": 5,
+    "reflejos": 6,
+    "voluntad": 1
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "land",
+      "valor": 200
+    },
+    {
+      "tipo": "swim",
+      "valor": 30
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 5,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d3+1",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "poison"
+      ]
+    },
+    {
+      "id": "tentacles",
+      "name": "Tentacles",
+      "attackBonus": 3,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "OTHER",
+      "valor": "ink cloud",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Ink Cloud",
+      "resumen": "Ink Cloud (Ex) An octopus can emit a 10-foot-radius sphere of ink once per minute as a free action. The ink provides total concealment in water, and persists for 1 minute. Jet (Ex) An octopus can jet backward once per round as a full-round action, at a speed of 200 feet. It must move in a straight line while jetting, and does not provoke attacks of opportunity when it does so. Poison (Ex) Bite-injury; save Fort DC 13; frequency 1/round for 6 rounds; effect 1 Str; cure 1 save."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Ink Cloud",
+      "texto": "Ink Cloud (Ex) An octopus can emit a 10-foot-radius sphere of ink once per minute as a free action. The ink provides total concealment in water, and persists for 1 minute. Jet (Ex) An octopus can jet backward once per round as a full-round action, at a speed of 200 feet. It must move in a straight line while jetting, and does not provoke attacks of opportunity when it does so. Poison (Ex) Bite-injury; save Fort DC 13; frequency 1/round for 6 rounds; effect 1 Str; cure 1 save."
+    }
+  ],
+  "fullStatBlock": "CR 1\nOctopus\nN Small animal aquatic\nInit +3\nSenses low-light vision; Perception +1\nAC 15, touch 14, flat-footed 12 (+3 Dex, +1 natural, +1 size)\nhp 13 (2d8+4)\nFort +5, Ref +6, Will +1\nSpeed 20 ft., swim 30 ft., jet 200 ft.\nMelee bite +5 (1d3+1 plus poison), tentacles +3 (grab)\nSpace 5 ft.; Reach 5 ft.\nSpecial Abilities Ink Cloud (Ex) An octopus can emit a 10-foot-radius sphere of ink once per minute as a free action. The ink provides total concealment in water, and persists for 1 minute. Jet (Ex) An octopus can jet backward once per round as a full-round action, at a speed of 200 feet. It must move in a straight line while jetting, and does not provoke attacks of opportunity when it does so. Poison (Ex) Bite-injury; save Fort DC 13; frequency 1/round for 6 rounds; effect 1 Str; cure 1 save.\nSpell-Like Abilities none\nStatistics Str 12, Dex 17, Con 14, Int 2, Wis 13, Cha 3\nBase Atk +1; CMB +1; CMD 14\nFeats MultiattackB, Weapon Finesse\nSkills Escape Artist +13, Stealth +20, Swim +9\nRacial Modifiers +8 Stealth, +10 Escape Artist\nEnvironment  temperate or cold ocean\nOrganization solitary\nTreasure none\nDefensive Abilities ink cloud\nSource PFRPG Bestiary\nDescription The octopus is a cunning animal capable of using complex tactics to get food. Octopus Companions Starting Statistics: Size Small; AC +1 natural; Speed 20 ft., swim 30 ft., jet 200 ft.; Attack bite (1d3), tentacles (grab); Ability Scores Str 12, Dex 17, Con 14, Int 2, Wis 12, Cha 3; Special Qualities low-light vision, ink cloud. 4th-Level Advancement: Attack bite (1d3 plus poison); Ability Scores Str +2, Con +2."
+}

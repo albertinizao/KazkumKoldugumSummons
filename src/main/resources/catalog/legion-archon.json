@@ -1,0 +1,155 @@
+{
+  "id": "legion-archon",
+  "nombre": "Legion Archon",
+  "nivelSummon": 6,
+  "alineamiento": "LG",
+  "tamano": "Medium",
+  "tipo": "outsider",
+  "subtipos": [
+    "archon",
+    "extraplanar",
+    "good",
+    "lawful"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 1,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "detect evil",
+    "low-light vision"
+  ],
+  "percepcion": 13,
+  "atributos": {
+    "fuerza": 16,
+    "destreza": 12,
+    "constitucion": 19,
+    "inteligencia": 10,
+    "sabiduria": 15,
+    "carisma": 17
+  },
+  "ca": {
+    "normal": 23,
+    "toque": 11,
+    "desprevenido": 22,
+    "detalle": "+9 armor, +1 Dex, +3 natural, +2 deflection vs. evil"
+  },
+  "pg": {
+    "maximos": 112,
+    "formula": "(8d10+32)"
+  },
+  "salvaciones": {
+    "fortaleza": 10,
+    "reflejos": 3,
+    "voluntad": 8
+  },
+  "velocidades": [
+    {
+      "tipo": "fly",
+      "valor": 90,
+      "maneuverability": "average"
+    },
+    {
+      "tipo": "land",
+      "valor": 40
+    }
+  ],
+  "ataques": [
+    {
+      "id": "flaming-burst-greatsword",
+      "name": "Flaming Burst Greatsword",
+      "attackBonus": 13,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+5",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        },
+        {
+          "formula": "1d6",
+          "damageType": "FIRE",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 17,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "flaming-javelin",
+      "name": "Flaming Javelin",
+      "attackBonus": 10,
+      "quantity": 1,
+      "attackType": "RANGED",
+      "damageComponents": [
+        {
+          "formula": "1d6+4",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        },
+        {
+          "formula": "1d6",
+          "damageType": "FIRE",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "flames of faith"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/evil",
+      "notas": null
+    },
+    {
+      "tipo": "OTHER",
+      "valor": "spell resistance 18",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "electricity",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "petrification",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [
+    "El arma sagrada del origen se conserva como ataque con mejora y daño de fuego separados de forma conservadora."
+  ],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Flames of Faith (Ex) A legion archon can manifest a +1 flaming burst greatsword or +1 flaming javelin as a move-equivalent action. The legion archon's sword vanishes if it leaves its hand, and its javelin vanishes after striking or missing its target.  Second Skin (Ex) A legion archon is proficient in all forms of armor. It takes no reduction to its speed or any armor check penalties from wearing any sort of armor. Most legion archons wear full plate armor."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Flames of Faith (Ex) A legion archon can manifest a +1 flaming burst greatsword or +1 flaming javelin as a move-equivalent action. The legion archon's sword vanishes if it leaves its hand, and its javelin vanishes after striking or missing its target.  Second Skin (Ex) A legion archon is proficient in all forms of armor. It takes no reduction to its speed or any armor check penalties from wearing any sort of armor. Most legion archons wear full plate armor."
+    }
+  ],
+  "fullStatBlock": "CR 7\nLegion Archon\nLG Medium outsider archon, extraplanar, good, lawful\nInit +1\nSenses darkvision 60 ft., detect evil, low-light vision; Perception +13\nAC 23, touch 11, flat-footed 22 (+9 armor, +1 Dex, +3 natural, +2 deflection vs. evil)\nhp 76 (8d10+32)\nFort +10, Ref +3, Will +8\nSpeed 40 ft., fly 90 ft. (average)\nMelee +1 flaming burst greatsword +13/+8 (2d6+5/17-20 plus 1d6 fire)\nRanged +1 flaming javelin +10 (1d6+4 plus 1d6 fire)\nSpecial Attacks flames of faith\nSpecial Abilities Flames of Faith (Ex) A legion archon can manifest a +1 flaming burst greatsword or +1 flaming javelin as a move-equivalent action. The legion archon's sword vanishes if it leaves its hand, and its javelin vanishes after striking or missing its target.  Second Skin (Ex) A legion archon is proficient in all forms of armor. It takes no reduction to its speed or any armor check penalties from wearing any sort of armor. Most legion archons wear full plate armor.\nSpell-Like Abilities none\nStatistics Str 16, Dex 12, Con 19, Int 10, Wis 15, Cha 17\nBase Atk +8; CMB +11; CMD 22\nFeats Improved Bull Rush, Improved Critical (greatsword)B, Power Attack, Vital Strike, Weapon Focus (greatsword), Whirlwind AttackB\nSkills Diplomacy +14, Fly +12, Intimidate +14, Knowledge (religion) +11, Perception +13, Sense Motive +9, Survival +9\nLanguages Celestial, Draconic, Infernal; truespeech\nEnvironment  any (Heaven)\nOrganization solitary, pair, or squad (3-12)\nTreasure standard (masterwork full plate, other treasure)\nDR 10/evil\nSR 18\nImmune electricity, petrification\nSource PFRPG Bestiary 3"
+}

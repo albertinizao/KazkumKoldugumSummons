@@ -1,0 +1,85 @@
+{
+  "id": "giant-gar",
+  "nombre": "Giant Gar",
+  "nivelSummon": 5,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "animal",
+  "subtipos": [
+    "aquatic"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 4,
+  "sentidos": [
+    "low-light vision"
+  ],
+  "percepcion": 11,
+  "atributos": {
+    "fuerza": 30,
+    "destreza": 10,
+    "constitucion": 23,
+    "inteligencia": 1,
+    "sabiduria": 13,
+    "carisma": 2
+  },
+  "ca": {
+    "normal": 19,
+    "toque": 8,
+    "desprevenido": 19,
+    "detalle": "+11 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 98,
+    "formula": "(7d8+42)"
+  },
+  "salvaciones": {
+    "fortaleza": 11,
+    "reflejos": 7,
+    "voluntad": 5
+  },
+  "velocidades": [
+    {
+      "tipo": "swim",
+      "valor": 60
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 13,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+15",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [
+    "swallow whole (2d6+10 bludgeoning damage, AC 15, hp 7)"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 6\nGiant Gar\nN Huge animal aquatic\nInit +4\nSenses low-light vision; Perception +11\nAC 19, touch 8, flat-footed 19 (+11 natural, -2 size)\nhp 73 (7d8+42)\nFort +11, Ref +7, Will +5\nSpeed swim 60 ft.\nMelee bite +13 (2d6+15 plus grab)\nSpecial Attacks swallow whole (2d6+10 bludgeoning damage, AC 15, hp 7)\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 30, Dex 10, Con 23, Int 1, Wis 13, Cha 2\nBase Atk +5; CMB +17; CMD 27\nFeats Improved Initiative, Iron Will, Lightning Reflexes, Power Attack\nSkills Perception +11, Swim +18\nEnvironment  temperate freshwater\nOrganization solitary, pair, or school (3-6)\nTreasure none\nSource PFRPG Bestiary 2"
+}

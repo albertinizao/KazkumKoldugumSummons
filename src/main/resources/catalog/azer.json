@@ -1,0 +1,125 @@
+{
+  "id": "azer",
+  "nombre": "Azer",
+  "nivelSummon": 3,
+  "alineamiento": "LN",
+  "tamano": "Medium",
+  "tipo": "outsider",
+  "subtipos": [
+    "extraplanar",
+    "fire"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 1,
+  "sentidos": [
+    "darkvision 60 ft."
+  ],
+  "percepcion": 6,
+  "atributos": {
+    "fuerza": 13,
+    "destreza": 12,
+    "constitucion": 15,
+    "inteligencia": 12,
+    "sabiduria": 12,
+    "carisma": 9
+  },
+  "ca": {
+    "normal": 18,
+    "toque": 11,
+    "desprevenido": 17,
+    "detalle": "+5 armor, +1 Dex, +2 natural"
+  },
+  "pg": {
+    "maximos": 24,
+    "formula": "(2d10+4)"
+  },
+  "salvaciones": {
+    "fortaleza": 5,
+    "reflejos": 1,
+    "voluntad": 4
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 30,
+      "notes": "20 ft. in armor"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "warhammer",
+      "name": "Warhammer",
+      "attackBonus": 4,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+1",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        },
+        {
+          "formula": "1d6",
+          "damageType": "FIRE",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 3
+      },
+      "notes": []
+    },
+    {
+      "id": "light-hammer",
+      "name": "Light Hammer",
+      "attackBonus": 3,
+      "quantity": 1,
+      "attackType": "RANGED",
+      "damageComponents": [
+        {
+          "formula": "1d4+1",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        },
+        {
+          "formula": "1d6",
+          "damageType": "FIRE",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "heat (1d6 fire)"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "IMMUNITY",
+      "valor": "fire",
+      "notas": null
+    },
+    {
+      "tipo": "VULNERABILITY",
+      "valor": "cold",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 2\nAzer\nLN Medium outsider extraplanar, fire\nInit +1\nSenses darkvision 60 ft.; Perception +6\nAC 18, touch 11, flat-footed 17 (+5 armor, +1 Dex, +2 natural)\nhp 15 ((2d10+4))\nFort +5, Ref +1, Will +4\nSpeed 30 ft. (20 ft. in armor)\nMelee Warhammer +4 (1d8+1 bludgeoning + 1d6 fire)\nRanged Light Hammer +3 (1d4+1 bludgeoning + 1d6 fire)\nSpecial Attacks heat (1d6 fire)\nSpell-Like Abilities none\nStatistics Str 13, Dex 12, Con 15, Int 12, Wis 12, Cha 9\nBase Atk +2; CMB +3; CMD 14\nFeats Power Attack\nSkills Acrobatics +0, Appraise +6, Climb +3, Craft (any two) +6, Knowledge (nobility) +6, Perception +6\nLanguages Common, Ignan\nEnvironment  any land (Plane of Fire)\nOrganization solitary, pair, team (3-6), squad (11-20 plus 2 sergeants of 3rd level and 1 leader of 3rd-6th level), or clan (30-100 plus 50% noncombatants plus 1 sergeant of 3rd level per 20 adults, 5 lieutenants of 5th level, and 3 captains of 7th level)\nTreasure standard (masterwork scale mail, masterwork warhammer, light hammer, other treasure)\nImmune fire\nWeakness vulnerability to cold\nSource PFRPG Bestiary 2"
+}

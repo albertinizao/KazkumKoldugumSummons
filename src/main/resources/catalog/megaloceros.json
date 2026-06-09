@@ -1,0 +1,103 @@
+{
+  "id": "megaloceros",
+  "nombre": "Megaloceros",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 9,
+  "atributos": {
+    "fuerza": 20,
+    "destreza": 15,
+    "constitucion": 18,
+    "inteligencia": 2,
+    "sabiduria": 15,
+    "carisma": 5
+  },
+  "ca": {
+    "normal": 16,
+    "toque": 11,
+    "desprevenido": 14,
+    "detalle": "+2 Dex, +5 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 48,
+    "formula": "(4d8+16)"
+  },
+  "salvaciones": {
+    "fortaleza": 8,
+    "reflejos": 8,
+    "voluntad": 3
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 50
+    }
+  ],
+  "ataques": [
+    {
+      "id": "gore",
+      "name": "Gore",
+      "attackBonus": 7,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+5",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "hooves",
+      "name": "Hooves",
+      "attackBonus": 2,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4+2",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "powerful charge (4d6+7)"
+  ],
+  "defensasEspeciales": [],
+  "notasTacticas": [
+    "Source record is named Megaloceros Elk; normalized to the shorter summon name."
+  ],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 4\nMegaloceros\nN Large animal\nInit +2\nSenses low-light vision, scent; Perception +9\nAC 16, touch 11, flat-footed 14 (+2 Dex, +5 natural, -1 size)\nhp 34 ((4d8+16))\nFort +8, Ref +8, Will +3\nSpeed 50 ft.\nMelee Gore +7 (2d6+5 piercing)\nMelee 2 hooves +2 (1d4+2 bludgeoning)\nSpecial Attacks powerful charge (4d6+7)\nSpell-Like Abilities none\nStatistics Str 20, Dex 15, Con 18, Int 2, Wis 15, Cha 5\nBase Atk +3; CMB +9; CMD 21\nFeats Endurance, Lightning Reflexes, RunB\nSkills Perception +9\nEnvironment  cold or temperate forest and plains\nOrganization solitary, pair, or herd (3-50)\nTreasure none\nSource PFRPG Bestiary 2"
+}

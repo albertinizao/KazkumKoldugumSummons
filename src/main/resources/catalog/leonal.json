@@ -1,0 +1,135 @@
+{
+  "id": "leonal",
+  "nombre": "Leonal",
+  "nivelSummon": 8,
+  "alineamiento": "NG",
+  "tamano": "Medium",
+  "tipo": "outsider",
+  "subtipos": [
+    "agathion",
+    "extraplanar",
+    "good"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 7,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 19,
+  "atributos": {
+    "fuerza": 27,
+    "destreza": 17,
+    "constitucion": 20,
+    "inteligencia": 14,
+    "sabiduria": 14,
+    "carisma": 15
+  },
+  "ca": {
+    "normal": 27,
+    "toque": 14,
+    "desprevenido": 23,
+    "detalle": "+3 Dex, +1 dodge, +13 natural, +4 deflection vs. evil"
+  },
+  "pg": {
+    "maximos": 210,
+    "formula": "(14d10+70)"
+  },
+  "salvaciones": {
+    "fortaleza": 14,
+    "reflejos": 12,
+    "voluntad": 6
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 60
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 23,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+8",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": null,
+      "notes": [
+        "grab"
+      ]
+    },
+    {
+      "id": "claws",
+      "name": "Claws",
+      "attackBonus": 23,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d6+8",
+          "damageType": "SLASHING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": null,
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/evil and silver",
+      "notas": null
+    },
+    {
+      "tipo": "RESISTANCE",
+      "valor": "cold 10",
+      "notas": null
+    },
+    {
+      "tipo": "RESISTANCE",
+      "valor": "sonic 10",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "electricity",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "petrification",
+      "notas": null
+    },
+    {
+      "tipo": "SPELL_RESISTANCE",
+      "valor": "23",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Qualities",
+      "resumen": "lay on hands (7d6, 9/day, as a 14th-level paladin)"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Qualities",
+      "texto": "lay on hands (7d6, 9/day, as a 14th-level paladin)"
+    }
+  ],
+  "fullStatBlock": "CR 12\nLeonal\nNG Medium outsider agathion, extraplanar, good\nInit +7\nSenses darkvision 60 ft., low-light vision, scent; Perception +19\nAura protective aura (20 ft.)\nAC 27, touch 14, flat-footed 23 (+3 Dex, +1 dodge, +13 natural, +4 deflection vs. evil)\nhp 210 (14d10+70)\nFort +14, Ref +12, Will +6; +4 vs. poison, +4 resistance vs. evil\nSpeed 60 ft.\nMelee bite +23 (1d8+8 plus grab), 2 claws +23 (1d6+8)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nSpecial Qualities lay on hands (7d6, 9/day, as a 14th-level paladin)\nStatistics Str 27, Dex 17, Con 20, Int 14, Wis 14, Cha 15\nBase Atk +14\nCMB +22 (+26 grapple)\nCMD 36\nEnvironment any land (Nirvana)\nOrganization solitary, pair, or pride (3-8)\nTreasure standard\nDR 10/evil and silver\nResist cold 10, sonic 10\nImmune electricity, petrification\nSR 23\nSource PFRPG Bestiary 2"
+}

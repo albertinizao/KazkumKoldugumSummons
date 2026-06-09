@@ -1,0 +1,96 @@
+{
+  "id": "giant-snapping-turtle",
+  "nombre": "Giant Snapping Turtle",
+  "nivelSummon": 7,
+  "alineamiento": "N",
+  "tamano": "Gargantuan",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 21,
+  "atributos": {
+    "fuerza": 32,
+    "destreza": 6,
+    "constitucion": 21,
+    "inteligencia": 1,
+    "sabiduria": 13,
+    "carisma": 6
+  },
+  "ca": {
+    "normal": 23,
+    "toque": 4,
+    "desprevenido": 23,
+    "detalle": "-2 Dex, +19 natural, -4 size"
+  },
+  "pg": {
+    "maximos": 154,
+    "formula": "(11d8+66)"
+  },
+  "salvaciones": {
+    "fortaleza": 12,
+    "reflejos": 5,
+    "voluntad": 6
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "swim",
+      "valor": 20
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 16,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "4d6+16",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "grab"
+      ]
+    }
+  ],
+  "espacio": "20 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Qualities",
+      "resumen": "armored stomach, hold breath, shell"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Qualities",
+      "texto": "armored stomach, hold breath, shell"
+    }
+  ],
+  "fullStatBlock": "CR 9\nGiant Snapping Turtle\nN Gargantuan animal\nInit +2\nSenses low-light vision, scent; Perception +21\nAC 23, touch 4, flat-footed 23 (-2 Dex, +19 natural, -4 size)\nhp 154 (11d8+66)\nFort +12, Ref +5, Will +6\nSpeed 20 ft., swim 20 ft.\nMelee bite +16 (4d6+16 plus grab)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nSpecial Qualities armored stomach, hold breath, shell\nStatistics Str 32, Dex 6, Con 21, Int 1, Wis 13, Cha 6\nBase Atk +8; CMB +2327; CMD 3135\nEnvironment temperate or warm water or shore\nOrganization solitary or band (2-5)\nTreasure none\nSource PFRPG Bestiary 2"
+}

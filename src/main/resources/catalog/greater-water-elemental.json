@@ -1,0 +1,92 @@
+{
+  "id": "greater-water-elemental",
+  "nombre": "Greater Water Elemental",
+  "nivelSummon": 7,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "outsider",
+  "subtipos": [
+    "elemental",
+    "extraplanar",
+    "water"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 5,
+  "sentidos": [
+    "darkvision 60 ft."
+  ],
+  "percepcion": 16,
+  "atributos": {
+    "fuerza": 28,
+    "destreza": 20,
+    "constitucion": 19,
+    "inteligencia": 8,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 23,
+    "toque": 14,
+    "desprevenido": 17,
+    "detalle": "+5 Dex, +1 dodge, +9 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 182,
+    "formula": "(13d10+52)"
+  },
+  "salvaciones": {
+    "fortaleza": 12,
+    "reflejos": 15,
+    "voluntad": 4
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "swim",
+      "valor": 90
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 20,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d8+9",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/-",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 9\nGreater Water Elemental\nN Huge outsider elemental, extraplanar, water\nInit +5\nSenses darkvision 60 ft.; Perception +16\nAC 23, touch 14, flat-footed 17 (+5 Dex, +1 dodge, +9 natural, -2 size)\nhp 182 (13d10+52)\nFort +12, Ref +15, Will +4\nSpeed 20 ft., swim 90 ft.\nMelee 2 slams +20 (2d8+9)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 28, Dex 20, Con 19, Int 8, Wis 11, Cha 11\nBase Atk +13; CMB +24; CMD 40\nLanguages Aquan\nEnvironment any (Plane of Water)\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDR 10/-\nImmune elemental traits\nSource PFRPG Bestiary"
+}

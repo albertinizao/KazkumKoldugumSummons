@@ -1,0 +1,97 @@
+{
+  "id": "giant-vulture",
+  "nombre": "Giant Vulture",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Large",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "low-light vision",
+    "scent"
+  ],
+  "percepcion": 14,
+  "atributos": {
+    "fuerza": 22,
+    "destreza": 15,
+    "constitucion": 18,
+    "inteligencia": 2,
+    "sabiduria": 15,
+    "carisma": 7
+  },
+  "ca": {
+    "normal": 17,
+    "toque": 11,
+    "desprevenido": 15,
+    "detalle": "+2 Dex, +6 natural, -1 size"
+  },
+  "pg": {
+    "maximos": 60,
+    "formula": "(5d8+20)"
+  },
+  "salvaciones": {
+    "fortaleza": 10,
+    "reflejos": 6,
+    "voluntad": 3
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 10
+    },
+    {
+      "tipo": "fly",
+      "valor": 50,
+      "maneuverability": "average"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "attackBonus": 9,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+9",
+          "damageType": "PIERCING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "disease"
+      ]
+    }
+  ],
+  "espacio": "10 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Diseased (Ex) Due to their filthy eating habits and constant exposure to decaying flesh, giant vultures are harbingers of disease-much more so than the standard vulture. Any creature bitten by a giant vulture has a 10% chance of being exposed to filth fever, blinding sickness, or a similar disease (Core Rulebook 557). Once this check is made, a victim can no longer be infected by this particular giant vulture, though attacks by different giant vultures are resolved normally and may result in multiple illnesses. While vultures aren't immune to all diseases, they do gain a +4 racial bonus on all saving throws against such ailments."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Diseased (Ex) Due to their filthy eating habits and constant exposure to decaying flesh, giant vultures are harbingers of disease-much more so than the standard vulture. Any creature bitten by a giant vulture has a 10% chance of being exposed to filth fever, blinding sickness, or a similar disease (Core Rulebook 557). Once this check is made, a victim can no longer be infected by this particular giant vulture, though attacks by different giant vultures are resolved normally and may result in multiple illnesses. While vultures aren't immune to all diseases, they do gain a +4 racial bonus on all saving throws against such ailments."
+    }
+  ],
+  "fullStatBlock": "CR 4\nGiant Vulture\nN Large animal\nInit +2\nSenses low-light vision, scent; Perception +14\nAC 17, touch 11, flat-footed 15 (+2 Dex, +6 natural, -1 size)\nhp 42 ((5d8+20))\nFort +10, Ref +6, Will +3\nSpeed 10 ft., fly 50 ft. (average)\nMelee Bite +9 (2d6+9 piercing)\nSpecial Abilities Diseased (Ex) Due to their filthy eating habits and constant exposure to decaying flesh, giant vultures are harbingers of disease-much more so than the standard vulture. Any creature bitten by a giant vulture has a 10% chance of being exposed to filth fever, blinding sickness, or a similar disease (Core Rulebook 557). Once this check is made, a victim can no longer be infected by this particular giant vulture, though attacks by different giant vultures are resolved normally and may result in multiple illnesses. While vultures aren't immune to all diseases, they do gain a +4 racial bonus on all saving throws against such ailments.\nSpell-Like Abilities none\nStatistics Str 22, Dex 15, Con 18, Int 2, Wis 15, Cha 7\nBase Atk +3; CMB +10; CMD 22\nFeats Great Fortitude, Toughness, Weapon Focus (bite)\nSkills Fly +7, Perception +14\nEnvironment  warm plains or hills\nOrganization solitary, pair, or flock (3-8)\nTreasure none\nSource PFRPG Bestiary 3"
+}

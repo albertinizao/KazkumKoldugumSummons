@@ -1,0 +1,90 @@
+{
+  "id": "dolphin",
+  "nombre": "Dolphin",
+  "nivelSummon": 1,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "animal",
+  "subtipos": [],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 2,
+  "sentidos": [
+    "blindsight 120 ft.",
+    "low-light vision"
+  ],
+  "percepcion": 9,
+  "atributos": {
+    "fuerza": 12,
+    "destreza": 15,
+    "constitucion": 13,
+    "inteligencia": 2,
+    "sabiduria": 13,
+    "carisma": 6
+  },
+  "ca": {
+    "normal": 13,
+    "toque": 12,
+    "desprevenido": 11,
+    "detalle": "+2 Dex, +1 natural"
+  },
+  "pg": {
+    "maximos": 18,
+    "formula": "2d8+2"
+  },
+  "salvaciones": {
+    "fortaleza": 4,
+    "reflejos": 5,
+    "voluntad": 1
+  },
+  "velocidades": [
+    {
+      "tipo": "swim",
+      "valor": 80
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slam",
+      "name": "Slam",
+      "attackBonus": 3,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4+1",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Hold Breath",
+      "resumen": "Puede aguantar la respiración durante varios minutos antes de ahogarse."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Hold Breath",
+      "texto": "Hold Breath (Ex) The dolphin can hold its breath for 6 times its Constitution score in minutes before it risks drowning."
+    }
+  ],
+  "fullStatBlock": "CR 1/2\nDolphin\nN Medium animal\nInit +2\nSenses blindsight 120 ft., low-light vision; Perception +9\nAC 13, touch 12, flat-footed 11 (+2 Dex, +1 natural)\nhp 11 (2d8+2)\nFort +4, Ref +5, Will +1\nSpeed swim 80 ft.\nMelee slam +3 (1d4+1)\nSpace 5 ft.; Reach 5 ft.\nSpecial Abilities Hold Breath (Ex) The dolphin can hold its breath for 6 times its Constitution score in minutes before drowning risk begins.\nSpell-Like Abilities none\nStatistics Str 12, Dex 15, Con 13, Int 2, Wis 13, Cha 6\nBase Atk +1; CMB +2; CMD 14\nFeats Weapon Finesse\nSkills Perception +9, Swim +13\nRacial Modifiers +4 Perception\nEnvironment any ocean\nOrganization solitary, pair, or pod (3-18)\nTreasure none\nSource PFRPG Bestiary"
+}

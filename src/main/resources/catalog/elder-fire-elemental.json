@@ -1,0 +1,92 @@
+{
+  "id": "elder-fire-elemental",
+  "nombre": "Elder Fire Elemental",
+  "nivelSummon": 8,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "outsider",
+  "subtipos": [
+    "elemental",
+    "extraplanar",
+    "fire"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 13,
+  "sentidos": [
+    "darkvision 60 ft."
+  ],
+  "percepcion": 19,
+  "atributos": {
+    "fuerza": 26,
+    "destreza": 29,
+    "constitucion": 18,
+    "inteligencia": 10,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 26,
+    "toque": 18,
+    "desprevenido": 16,
+    "detalle": "+9 Dex, +1 dodge, +8 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 224,
+    "formula": "(16d10+64)"
+  },
+  "salvaciones": {
+    "fortaleza": 14,
+    "reflejos": 19,
+    "voluntad": 7
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 60
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 23,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d8+8",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": null,
+      "notes": [
+        "burn"
+      ]
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "10/-,",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "fire",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [],
+  "habilidadesCompletas": [],
+  "fullStatBlock": "CR 11\nElder Fire Elemental\nN Huge outsider elemental, extraplanar, fire\nInit +13\nSenses darkvision 60 ft.; Perception +19\nAC 26, touch 18, flat-footed 16 (+9 Dex, +1 dodge, +8 natural, -2 size)\nhp 224 (16d10+64)\nFort +14, Ref +19, Will +7\nSpeed 60 ft.\nMelee 2 slams +23 (2d8+8 plus burn)\nSpecial Attacks —\nSpecial Abilities none\nSpell-Like Abilities none\nStatistics Str 26, Dex 29, Con 18, Int 10, Wis 11, Cha 11\nBase Atk +16\nCMB +26\nCMD 46\nEnvironment any (Plane of Fire)\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDR 10/-,\nImmune elemental traits, fire\nSource PFRPG Bestiary"
+}

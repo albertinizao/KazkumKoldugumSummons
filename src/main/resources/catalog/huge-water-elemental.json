@@ -1,0 +1,106 @@
+{
+  "id": "huge-water-elemental",
+  "nombre": "Huge Water Elemental",
+  "nivelSummon": 6,
+  "alineamiento": "N",
+  "tamano": "Huge",
+  "tipo": "outsider",
+  "subtipos": [
+    "elemental",
+    "extraplanar",
+    "water"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": 4,
+  "sentidos": [
+    "darkvision 60 ft."
+  ],
+  "percepcion": 13,
+  "atributos": {
+    "fuerza": 24,
+    "destreza": 18,
+    "constitucion": 19,
+    "inteligencia": 6,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 21,
+    "toque": 13,
+    "desprevenido": 16,
+    "detalle": "+4 Dex, +1 dodge, +8 natural, -2 size"
+  },
+  "pg": {
+    "maximos": 140,
+    "formula": "(10d10+40)"
+  },
+  "salvaciones": {
+    "fortaleza": 11,
+    "reflejos": 11,
+    "voluntad": 3
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "swim",
+      "valor": 90
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slams",
+      "name": "Slams",
+      "attackBonus": 15,
+      "quantity": 2,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "2d6+7",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "15 ft.",
+  "alcance": "15 ft.",
+  "ataquesEspeciales": [
+    "drench",
+    "vortex (DC 22)",
+    "water mastery"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "5/-",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Drench (Ex) The elemental's touch puts out nonmagical flames of Large size or smaller. The creature can dispel magical fire it touches as dispel magic (caster level equals elemental's HD). Vortex (Su) A water elemental can create a whirlpool as a standard action, at will. This ability functions identically to the whirlwind special attack (see page 306), but can only form underwater and cannot leave the water. Water Mastery (Ex) A water elemental gains a +1 bonus on attack and damage rolls if both it and its opponent are touching water. If the opponent or the elemental is touching the ground, the elemental takes a -4 penalty on attack and damage rolls. These modifiers apply to bull rush and overrun maneuvers, whether the elemental is initiating or resisting these kinds of attacks."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Drench (Ex) The elemental's touch puts out nonmagical flames of Large size or smaller. The creature can dispel magical fire it touches as dispel magic (caster level equals elemental's HD). Vortex (Su) A water elemental can create a whirlpool as a standard action, at will. This ability functions identically to the whirlwind special attack (see page 306), but can only form underwater and cannot leave the water. Water Mastery (Ex) A water elemental gains a +1 bonus on attack and damage rolls if both it and its opponent are touching water. If the opponent or the elemental is touching the ground, the elemental takes a -4 penalty on attack and damage rolls. These modifiers apply to bull rush and overrun maneuvers, whether the elemental is initiating or resisting these kinds of attacks."
+    }
+  ],
+  "fullStatBlock": "CR 7\nHuge Water Elemental\nN Huge outsider elemental, extraplanar, water\nInit +4\nSenses darkvision 60 ft.; Perception +13\nAC 21, touch 13, flat-footed 16 (+4 Dex, +1 dodge, +8 natural, -2 size)\nhp 95 (10d10+40)\nFort +11, Ref +11, Will +3\nSpeed 20 ft., swim 90 ft.\nMelee 2 slams +15 (2d6+7)\nSpecial Attacks drench, vortex (DC 22), water mastery\nSpecial Abilities Drench (Ex) The elemental's touch puts out nonmagical flames of Large size or smaller. The creature can dispel magical fire it touches as dispel magic (caster level equals elemental's HD). Vortex (Su) A water elemental can create a whirlpool as a standard action, at will. This ability functions identically to the whirlwind special attack (see page 306), but can only form underwater and cannot leave the water. Water Mastery (Ex) A water elemental gains a +1 bonus on attack and damage rolls if both it and its opponent are touching water. If the opponent or the elemental is touching the ground, the elemental takes a -4 penalty on attack and damage rolls. These modifiers apply to bull rush and overrun maneuvers, whether the elemental is initiating or resisting these kinds of attacks.\nSpell-Like Abilities none\nStatistics Str 24, Dex 18, Con 19, Int 6, Wis 11, Cha 11\nBase Atk +10; CMB +19; CMD 34\nFeats Cleave, Dodge, Great Cleave, Improved Bull Rush, Power Attack\nSkills Acrobatics +11, Escape Artist +15, Knowledge (planes) +7, Perception +13, Stealth +3, Swim +26\nLanguages Aquan\nEnvironment  any (Plane of Water)\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nDR 5/-\nImmune elemental traits\nSource PFRPG Bestiary"
+}

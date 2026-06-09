@@ -1,0 +1,109 @@
+{
+  "id": "lantern-archon",
+  "nombre": "Lantern Archon",
+  "nivelSummon": 3,
+  "alineamiento": "LG",
+  "tamano": "Small",
+  "tipo": "outsider",
+  "subtipos": [
+    "archon",
+    "extraplanar",
+    "good",
+    "lawful"
+  ],
+  "plantillasPermitidas": [
+    "chthonic",
+    "fiery",
+    "celestial",
+    "entropic",
+    "resolute"
+  ],
+  "iniciativa": 4,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "low-light vision"
+  ],
+  "percepcion": 4,
+  "atributos": {
+    "fuerza": 1,
+    "destreza": 11,
+    "constitucion": 12,
+    "inteligencia": 6,
+    "sabiduria": 11,
+    "carisma": 10
+  },
+  "ca": {
+    "normal": 15,
+    "toque": 11,
+    "desprevenido": 15,
+    "detalle": "+4 natural, +1 size +2 deflect vs. evil"
+  },
+  "pg": {
+    "maximos": 22,
+    "formula": "(2d10+2)"
+  },
+  "salvaciones": {
+    "fortaleza": 4,
+    "reflejos": 3,
+    "voluntad": 0
+  },
+  "velocidades": [
+    {
+      "tipo": "fly",
+      "valor": 60,
+      "maneuverability": "perfect"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "light-ray",
+      "name": "Light Ray",
+      "attackBonus": 3,
+      "quantity": 2,
+      "attackType": "RANGED",
+      "damageComponents": [
+        {
+          "formula": "1d6",
+          "damageType": "OTHER",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": [
+        "ranged touch"
+      ]
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [],
+  "defensasEspeciales": [
+    {
+      "tipo": "IMMUNITY",
+      "valor": "electricity",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "petrification",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Gestalt (Su) Nine lantern archons can fuse together as a full-round action, becoming a single Large entity that is more powerful than the individual archons that make up its parts. Looking like a whirlwind of dancing firefly lights, the gestalt has all the powers and abilities of a Large air elemental plus the following: archon, good, and lawful subtypes; archon traits (aura of menace DC 16); 2 light rays (2d6); DR 5/evil and magic. The archons can remain in this form for 2d4 rounds. When the gestalt separates back into individual lantern archons, its remaining hit points are divided evenly among them; if it had less than 9 hit points, some of the component archons die when the gestalt ends. Light Ray (Ex) A lantern archon can fire beams of light to damage foes. These light rays have a maximum range of 30 feet. This attack overcomes damage reduction of any type."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Gestalt (Su) Nine lantern archons can fuse together as a full-round action, becoming a single Large entity that is more powerful than the individual archons that make up its parts. Looking like a whirlwind of dancing firefly lights, the gestalt has all the powers and abilities of a Large air elemental plus the following: archon, good, and lawful subtypes; archon traits (aura of menace DC 16); 2 light rays (2d6); DR 5/evil and magic. The archons can remain in this form for 2d4 rounds. When the gestalt separates back into individual lantern archons, its remaining hit points are divided evenly among them; if it had less than 9 hit points, some of the component archons die when the gestalt ends. Light Ray (Ex) A lantern archon can fire beams of light to damage foes. These light rays have a maximum range of 30 feet. This attack overcomes damage reduction of any type."
+    }
+  ],
+  "fullStatBlock": "CR 2\nLantern Archon\nLG Small outsider archon, extraplanar, good, lawful\nInit +4\nSenses darkvision 60 ft., low-light vision; Perception +4\nAC 15, touch 11, flat-footed 15 (+4 natural, +1 size +2 deflect vs. evil)\nhp 13 ((2d10+2))\nFort +4, Ref +3, Will +0\nSpeed fly 60 ft. (perfect)\nRanged 2 light ray +3 (1d6)\nSpecial Abilities Gestalt (Su) Nine lantern archons can fuse together as a full-round action, becoming a single Large entity that is more powerful than the individual archons that make up its parts. Looking like a whirlwind of dancing firefly lights, the gestalt has all the powers and abilities of a Large air elemental plus the following: archon, good, and lawful subtypes; archon traits (aura of menace DC 16); 2 light rays (2d6); DR 5/evil and magic. The archons can remain in this form for 2d4 rounds. When the gestalt separates back into individual lantern archons, its remaining hit points are divided evenly among them; if it had less than 9 hit points, some of the component archons die when the gestalt ends. Light Ray (Ex) A lantern archon can fire beams of light to damage foes. These light rays have a maximum range of 30 feet. This attack overcomes damage reduction of any type.\nSpell-Like Abilities none\nStatistics Str 1, Dex 11, Con 12, Int 6, Wis 11, Cha 10\nBase Atk +2; CMB -4; CMD 6\nFeats Improved Initiative\nSkills Diplomacy +5, Fly +14, Knowledge (planes) +3, Perception +4, Sense Motive +5\nLanguages Celestial, Draconic, Infernal; truespeech\nEnvironment  any (Heaven)\nOrganization solitary, pair, or squad (3-6)\nTreasure none\nImmune electricity, petrification\nSource PFRPG Bestiary"
+}

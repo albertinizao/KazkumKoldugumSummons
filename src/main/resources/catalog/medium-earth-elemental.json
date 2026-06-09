@@ -1,0 +1,102 @@
+{
+  "id": "medium-earth-elemental",
+  "nombre": "Medium Earth Elemental",
+  "nivelSummon": 4,
+  "alineamiento": "N",
+  "tamano": "Medium",
+  "tipo": "outsider",
+  "subtipos": [
+    "earth",
+    "elemental",
+    "extraplanar"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": -1,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "tremorsense 60 ft."
+  ],
+  "percepcion": 7,
+  "atributos": {
+    "fuerza": 20,
+    "destreza": 8,
+    "constitucion": 17,
+    "inteligencia": 4,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 18,
+    "toque": 9,
+    "desprevenido": 18,
+    "detalle": "-1 Dex, +9 natural"
+  },
+  "pg": {
+    "maximos": 52,
+    "formula": "(4d10+12)"
+  },
+  "salvaciones": {
+    "fortaleza": 7,
+    "reflejos": 0,
+    "voluntad": 4
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20,
+      "notes": "earth glide"
+    },
+    {
+      "tipo": "burrow",
+      "valor": 20,
+      "notes": "earth glide"
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slam",
+      "name": "Slam",
+      "attackBonus": 9,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d8+7",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "earth mastery"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "Special Abilities",
+      "resumen": "Earth Glide (Ex) A burrowing earth elemental can pass through stone, dirt, or almost any other sort of earth except metal as easily as a fish swims through water. If protected against fire damage, it can even glide through lava. Its burrowing leaves behind no tunnel or hole, nor does it create any ripple or other sign of its presence. A move earth spell cast on an area containing a burrowing earth elemental flings the elemental back 30 feet, stunning the creature for 1 round unless it succeeds on a DC 15 Fortitude save. Earth Mastery (Ex) An earth elemental gains a +1 bonus on attack and damage rolls if both it and its foe are touching the ground. If an opponent is airborne or waterborne, the elemental takes a -4 penalty on attack and damage rolls. These modifiers apply to bull rush and overrun maneuvers, whether the elemental is initiating or resisting these kinds of attacks. (These modifiers are not included in the statistics block.)"
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "Special Abilities",
+      "texto": "Earth Glide (Ex) A burrowing earth elemental can pass through stone, dirt, or almost any other sort of earth except metal as easily as a fish swims through water. If protected against fire damage, it can even glide through lava. Its burrowing leaves behind no tunnel or hole, nor does it create any ripple or other sign of its presence. A move earth spell cast on an area containing a burrowing earth elemental flings the elemental back 30 feet, stunning the creature for 1 round unless it succeeds on a DC 15 Fortitude save. Earth Mastery (Ex) An earth elemental gains a +1 bonus on attack and damage rolls if both it and its foe are touching the ground. If an opponent is airborne or waterborne, the elemental takes a -4 penalty on attack and damage rolls. These modifiers apply to bull rush and overrun maneuvers, whether the elemental is initiating or resisting these kinds of attacks. (These modifiers are not included in the statistics block.)"
+    }
+  ],
+  "fullStatBlock": "CR 3\nMedium Earth Elemental\nN Medium outsider earth, elemental, extraplanar\nInit -1\nSenses darkvision 60 ft., tremorsense 60 ft.; Perception +7\nAC 18, touch 9, flat-footed 18 (-1 Dex, +9 natural)\nhp 34 ((4d10+12))\nFort +7, Ref +0, Will +4\nSpeed 20 ft., burrow 20 ft., earth glide\nMelee Slam +9 (1d8+7 bludgeoning)\nSpecial Attacks earth mastery\nSpecial Abilities Earth Glide (Ex) A burrowing earth elemental can pass through stone, dirt, or almost any other sort of earth except metal as easily as a fish swims through water. If protected against fire damage, it can even glide through lava. Its burrowing leaves behind no tunnel or hole, nor does it create any ripple or other sign of its presence. A move earth spell cast on an area containing a burrowing earth elemental flings the elemental back 30 feet, stunning the creature for 1 round unless it succeeds on a DC 15 Fortitude save. Earth Mastery (Ex) An earth elemental gains a +1 bonus on attack and damage rolls if both it and its foe are touching the ground. If an opponent is airborne or waterborne, the elemental takes a -4 penalty on attack and damage rolls. These modifiers apply to bull rush and overrun maneuvers, whether the elemental is initiating or resisting these kinds of attacks. (These modifiers are not included in the statistics block.)\nSpell-Like Abilities none\nStatistics Str 20, Dex 8, Con 17, Int 4, Wis 11, Cha 11\nBase Atk +4; CMB +9; CMD 18\nFeats Cleave, Improved Bull RushB, Power Attack\nSkills Appraise +1, Climb +10, Knowledge (dungeoneering) +2, Knowledge (planes) +2, Perception +7, Stealth +3\nLanguages Terran\nEnvironment  any (Plane of Earth)\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nImmune elemental traits\nSource PFRPG Bestiary"
+}

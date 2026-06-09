@@ -1,0 +1,154 @@
+{
+  "id": "small-ice-elemental",
+  "nombre": "Small Ice Elemental",
+  "nivelSummon": 2,
+  "alineamiento": "N",
+  "tamano": "Small",
+  "tipo": "outsider",
+  "subtipos": [
+    "air",
+    "cold",
+    "elemental",
+    "extraplanar",
+    "water"
+  ],
+  "plantillasPermitidas": [],
+  "iniciativa": -1,
+  "sentidos": [
+    "darkvision 60 ft.",
+    "snow vision"
+  ],
+  "percepcion": 5,
+  "atributos": {
+    "fuerza": 12,
+    "destreza": 8,
+    "constitucion": 13,
+    "inteligencia": 4,
+    "sabiduria": 11,
+    "carisma": 11
+  },
+  "ca": {
+    "normal": 16,
+    "toque": 10,
+    "desprevenido": 16,
+    "detalle": "-1 Dex, +6 natural, +1 size"
+  },
+  "pg": {
+    "maximos": 22,
+    "formula": "2d10+2"
+  },
+  "salvaciones": {
+    "fortaleza": 4,
+    "reflejos": 2,
+    "voluntad": 0
+  },
+  "velocidades": [
+    {
+      "tipo": "land",
+      "valor": 20
+    },
+    {
+      "tipo": "burrow",
+      "valor": 20,
+      "notes": "ice and snow only"
+    },
+    {
+      "tipo": "swim",
+      "valor": 60
+    }
+  ],
+  "ataques": [
+    {
+      "id": "slam",
+      "name": "Slam",
+      "attackBonus": 4,
+      "quantity": 1,
+      "attackType": "MELEE",
+      "damageComponents": [
+        {
+          "formula": "1d4+1",
+          "damageType": "BLUDGEONING",
+          "multipliesOnCritical": true
+        },
+        {
+          "formula": "1d3",
+          "damageType": "COLD",
+          "multipliesOnCritical": true
+        }
+      ],
+      "critical": {
+        "threatRangeStart": 20,
+        "multiplier": 2
+      },
+      "notes": []
+    }
+  ],
+  "espacio": "5 ft.",
+  "alcance": "5 ft.",
+  "ataquesEspeciales": [
+    "numbing cold (DC 12)"
+  ],
+  "defensasEspeciales": [
+    {
+      "tipo": "IMMUNITY",
+      "valor": "cold",
+      "notas": null
+    },
+    {
+      "tipo": "IMMUNITY",
+      "valor": "elemental traits",
+      "notas": null
+    },
+    {
+      "tipo": "VULNERABILITY",
+      "valor": "fire",
+      "notas": null
+    }
+  ],
+  "notasTacticas": [],
+  "habilidadesResumidas": [
+    {
+      "nombre": "numbing cold",
+      "resumen": "numbing cold (DC 12)"
+    },
+    {
+      "nombre": "Ice Glide",
+      "resumen": "Ice Glide (Su) A burrowing ice elemental can pass through nonmagical ice and snow as easily as a fish swims through water. Its burrowing leaves behind no tunnel or hole, nor does it create any ripple or other sign of its presence. A control water spell cast on an area containing a burrowing ice elemental flings the elemental back 30 feet, stunning the creature for 1 round unless it succeeds on a DC 15 Fortitude save."
+    },
+    {
+      "nombre": "Icewalking",
+      "resumen": "Icewalking (Ex) This ability works like the spider climb spell, but the surfaces the elemental climbs must be icy. The elemental can move across icy surfaces without penalty and does not need to make Acrobatics checks to run or charge on ice."
+    },
+    {
+      "nombre": "Numbing Cold",
+      "resumen": "Numbing Cold (Su) When an ice elemental deals cold damage to a creature, that creature must succeed on a Fortitude save or be staggered for 1 round. The save DC is listed in the elemental's stat block and is Constitution-based."
+    },
+    {
+      "nombre": "Snow Vision",
+      "resumen": "Snow Vision (Ex) An ice elemental can see perfectly well in snowy conditions and does not take any penalties on Perception checks while in snow."
+    }
+  ],
+  "habilidadesCompletas": [
+    {
+      "nombre": "numbing cold",
+      "texto": "numbing cold (DC 12)"
+    },
+    {
+      "nombre": "Ice Glide",
+      "texto": "Ice Glide (Su) A burrowing ice elemental can pass through nonmagical ice and snow as easily as a fish swims through water. Its burrowing leaves behind no tunnel or hole, nor does it create any ripple or other sign of its presence. A control water spell cast on an area containing a burrowing ice elemental flings the elemental back 30 feet, stunning the creature for 1 round unless it succeeds on a DC 15 Fortitude save."
+    },
+    {
+      "nombre": "Icewalking",
+      "texto": "Icewalking (Ex) This ability works like the spider climb spell, but the surfaces the elemental climbs must be icy. The elemental can move across icy surfaces without penalty and does not need to make Acrobatics checks to run or charge on ice."
+    },
+    {
+      "nombre": "Numbing Cold",
+      "texto": "Numbing Cold (Su) When an ice elemental deals cold damage to a creature, that creature must succeed on a Fortitude save or be staggered for 1 round. The save DC is listed in the elemental's stat block and is Constitution-based."
+    },
+    {
+      "nombre": "Snow Vision",
+      "texto": "Snow Vision (Ex) An ice elemental can see perfectly well in snowy conditions and does not take any penalties on Perception checks while in snow."
+    }
+  ],
+  "fullStatBlock": "CR 1\nSmall Ice Elemental\nN Small outsider air, cold, elemental, extraplanar, water\nInit -1\nSenses darkvision 60 ft., snow vision; Perception +5\nAC 16, touch 10, flat-footed 16 (-1 Dex, +6 natural, +1 size)\nhp 13 (2d10+2)\nFort +4, Ref +2, Will 0\nSpeed 20 ft., burrow 20 ft. (ice and snow only), swim 60 ft.\nMelee slam +4 (1d4+1 bludgeoning + 1d3 cold)\nSpace 5 ft.; Reach 5 ft.\nSpecial Attacks numbing cold (DC 12)\nSpecial Abilities Ice Glide (Su) A burrowing ice elemental can pass through nonmagical ice and snow as easily as a fish swims through water. Its burrowing leaves behind no tunnel or hole, nor does it create any ripple or other sign of its presence. A control water spell cast on an area containing a burrowing ice elemental flings the elemental back 30 feet, stunning the creature for 1 round unless it succeeds on a DC 15 Fortitude save. Icewalking (Ex) This ability works like the spider climb spell, but the surfaces the elemental climbs must be icy. The elemental can move across icy surfaces without penalty and does not need to make Acrobatics checks to run or charge on ice. Numbing Cold (Su) When an ice elemental deals cold damage to a creature, that creature must succeed on a Fortitude save or be staggered for 1 round. The save DC is listed in the elemental's stat block and is Constitution-based. Snow Vision (Ex) An ice elemental can see perfectly well in snowy conditions and does not take any penalties on Perception checks while in snow.\nSpell-Like Abilities none\nStatistics Str 12, Dex 8, Con 13, Int 4, Wis 11, Cha 11\nBase Atk +2; CMB +2; CMD 11\nFeats Power Attack\nSkills Knowledge (planes) +2, Perception +5, Stealth +8, Swim +9\nLanguages Aquan\nEnvironment  any land or water (Plane of Water)\nOrganization solitary, pair, or gang (3-8)\nTreasure none\nImmune cold, elemental traits\nWeakness vulnerable to fire\nSource PFRPG Bestiary 2"
+}
