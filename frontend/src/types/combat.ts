@@ -80,6 +80,12 @@ export interface GroupAttackRollResponse {
   combatState: CombatState;
 }
 
+export interface GlobalCombatRollResult {
+  title: string;
+  displayText: string;
+  results: CombatRollResult[];
+}
+
 export interface CreatureSavingThrowsRollResult {
   instanceId: string;
   instanceDisplayName: string;

@@ -22,6 +22,7 @@ import com.pathfinder.summons.domain.model.SavingThrows;
 import com.pathfinder.summons.domain.model.SingleAttackRollResult;
 import com.pathfinder.summons.domain.model.Speed;
 import com.pathfinder.summons.domain.model.SpeedType;
+import com.pathfinder.summons.domain.model.SummonTemplateType;
 import com.pathfinder.summons.domain.service.DiceRoller;
 import java.util.ArrayDeque;
 import java.util.List;
@@ -68,6 +69,26 @@ class CombatRollServiceTest {
         assertThat(secondAttack.criticalThreat()).isNull();
         assertThat(secondAttack.normalDamage().total()).isEqualTo(6);
         assertThat(result.displayText()).contains("Daño si impacta");
+    }
+
+    @Test
+    void rollsElementalDamageDiceForNaturalAttacks() {
+        SequencedDiceRoller diceRoller = new SequencedDiceRoller()
+                .enqueueD20(diceRoll("1d20+5", 11, 5, 16))
+                .enqueueFormula(diceRoll("1d6+2", 4, 2, 6))
+                .enqueueFormula(diceRoll("2d6", 7, 0, 7));
+
+        CombatRollService service = new CombatRollService(diceRoller);
+        ActiveSummonGroup group = groupWithOneInstance(creatureWithElementalDamage());
+
+        var result = service.rollGroupAttacks(group);
+
+        var attackResult = result.instanceResults().getFirst().attackResults().getFirst();
+        assertThat(attackResult.normalDamage().components()).hasSize(2);
+        assertThat(attackResult.normalDamage().components().get(0).roll().getFormula()).isEqualTo("1d6+2");
+        assertThat(attackResult.normalDamage().components().get(1).roll().getFormula()).isEqualTo("2d6");
+        assertThat(attackResult.normalDamage().total()).isEqualTo(13);
+        assertThat(result.displayText()).contains("1d6+2 = 6 piercing + 2d6 = 7 fire");
     }
 
     @Test
@@ -164,6 +185,70 @@ class CombatRollServiceTest {
                         .notes(List.of())
                         .build()))
                 .attacksText("Claw +4 (1d3+2 + 1 fire)")
+                .space("5 ft.")
+                .reach("5 ft.")
+                .specialAttacks(List.of())
+                .specialDefenses(List.of())
+                .shortAbilities(List.of())
+                .expandedAbilities(List.of())
+                .fullStatBlock("fiery badger")
+                .appliedRules(List.of())
+                .build();
+    }
+
+    private static ResolvedCreature creatureWithElementalDamage() {
+        return ResolvedCreature.builder()
+                .id("resolved-2")
+                .baseTemplateId("badger")
+                .displayName("Fiery Badger")
+                .summonLevel(1)
+                .appliedTemplate(SummonTemplateType.FIERY)
+                .alignment(Alignment.NG)
+                .size(CreatureSize.SMALL)
+                .creatureType("animal")
+                .subtypes(List.of("fire"))
+                .initiative(1)
+                .senses(List.of("low-light vision"))
+                .perception(5)
+                .armorClass(ArmorClass.builder().normal(13).touch(12).flatFooted(12).build())
+                .maxHitPoints(6)
+                .savingThrows(SavingThrows.builder()
+                        .fortitude(4)
+                        .reflex(2)
+                        .will(1)
+                        .fortitudeAbility(SavingThrowAbility.CONSTITUTION)
+                        .build())
+                .speeds(List.of(Speed.builder().type(SpeedType.LAND).valueFeet(30).build()))
+                .speedsText("Speed 30 ft.")
+                .attacks(List.of(Attack.builder()
+                        .id("bite")
+                        .name("Bite")
+                        .attackBonus(5)
+                        .attackAbility(AttackAbility.STRENGTH)
+                        .quantity(1)
+                        .attackType(AttackType.MELEE)
+                        .damageComponents(List.of(
+                                DamageComponent.builder()
+                                        .formula("1d6+2")
+                                        .damageType(DamageType.PIERCING)
+                                        .multipliesOnCritical(true)
+                                        .damageAbility(DamageAbility.STRENGTH)
+                                        .damageAbilityMultiplier(1.0)
+                                        .build(),
+                                DamageComponent.builder()
+                                        .formula("2d6")
+                                        .damageType(DamageType.FIRE)
+                                        .multipliesOnCritical(true)
+                                        .damageAbility(DamageAbility.NONE)
+                                        .damageAbilityMultiplier(0.0)
+                                        .build()))
+                        .critical(CriticalProfile.builder()
+                                .threatRangeStart(20)
+                                .multiplier(2)
+                                .build())
+                        .notes(List.of())
+                        .build()))
+                .attacksText("Bite +5 (1d6+2 + 2d6 fire)")
                 .space("5 ft.")
                 .reach("5 ft.")
                 .specialAttacks(List.of())

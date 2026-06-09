@@ -28,6 +28,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.Optional;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
@@ -35,6 +36,20 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DefaultCreatureResolver implements CreatureResolver {
+
+    private static final Set<String> NATURAL_ATTACK_NAMES = Set.of(
+            "bite",
+            "claw",
+            "gore",
+            "hoof",
+            "tentacle",
+            "wing",
+            "pincer",
+            "tail",
+            "slam",
+            "sting",
+            "talon",
+            "other");
 
     @Override
     public ResolvedCreature resolve(CreatureTemplate template, SummonTemplateType templateType, SummonerConfiguration config) {
@@ -52,7 +67,7 @@ public class DefaultCreatureResolver implements CreatureResolver {
         List<com.pathfinder.summons.domain.model.SpecialDefense> resolvedSpecialDefenses = resolveSpecialDefenses(template, templateType, hitDiceCount, template.getChallengeRating());
         boolean deepGuardianApplied = hasDeepGuardian(template, resolvedSpeeds);
 
-        List<Attack> resolvedAttacks = resolveAttacks(template.getAttacks(), baseAbilities, augmentedAbilities, deepGuardianApplied, templateType);
+        List<Attack> resolvedAttacks = resolveAttacks(template.getAttacks(), baseAbilities, augmentedAbilities, deepGuardianApplied, templateType, hitDiceCount);
         ArmorClass armorClass = resolveArmorClass(template.getArmorClass(), deepGuardianApplied);
         SavingThrows savingThrows = resolveSavingThrows(template.getSavingThrows(), baseAbilities, augmentedAbilities);
         int maxHitPoints = resolveHitPoints(template.getHitPoints(), baseAbilities, augmentedAbilities);
@@ -205,7 +220,8 @@ public class DefaultCreatureResolver implements CreatureResolver {
                                         AbilityScores baseAbilities,
                                         AbilityScores augmentedAbilities,
                                         boolean deepGuardianApplied,
-                                        SummonTemplateType templateType) {
+                                        SummonTemplateType templateType,
+                                        int hitDiceCount) {
         int strengthDelta = augmentedAbilities.getStrengthModifier() - baseAbilities.getStrengthModifier();
         int dexterityDelta = augmentedAbilities.getDexterityModifier() - baseAbilities.getDexterityModifier();
         int attackBonusAdjustment = deepGuardianApplied ? 1 : 0;
@@ -219,10 +235,10 @@ public class DefaultCreatureResolver implements CreatureResolver {
                     };
 
                     List<DamageComponent> adjustedComponents = attack.getDamageComponents().stream()
-                            .map(component -> adjustDamageComponent(component, strengthDelta, dexterityDelta))
+                            .map(component -> adjustDamageComponent(attack, component, strengthDelta, dexterityDelta))
                             .toList();
 
-                    List<DamageComponent> templateComponents = templateDamageComponents(templateType);
+                    List<DamageComponent> templateComponents = templateDamageComponents(templateType, attack, hitDiceCount);
                     List<DamageComponent> mergedComponents = new ArrayList<>(adjustedComponents);
                     mergedComponents.addAll(templateComponents);
 
@@ -241,7 +257,8 @@ public class DefaultCreatureResolver implements CreatureResolver {
                 .toList();
     }
 
-    private DamageComponent adjustDamageComponent(DamageComponent component,
+    private DamageComponent adjustDamageComponent(Attack attack,
+                                                  DamageComponent component,
                                                   int strengthDelta,
                                                   int dexterityDelta) {
         int abilityDelta = switch (component.getDamageAbility()) {
@@ -252,7 +269,7 @@ public class DefaultCreatureResolver implements CreatureResolver {
 
         return DamageComponent.builder()
                 .formula(adjustFormula(component.getFormula(), abilityDelta))
-                .damageType(component.getDamageType())
+                .damageType(resolveDamageType(attack, component))
                 .multipliesOnCritical(component.isMultipliesOnCritical())
                 .damageAbility(component.getDamageAbility())
                 .damageAbilityMultiplier(component.getDamageAbilityMultiplier())
@@ -260,34 +277,92 @@ public class DefaultCreatureResolver implements CreatureResolver {
                 .build();
     }
 
-    private List<DamageComponent> templateDamageComponents(SummonTemplateType templateType) {
-        if (templateType == null) {
+    private List<DamageComponent> templateDamageComponents(SummonTemplateType templateType, Attack attack, int hitDiceCount) {
+        if (templateType == null || !isNaturalAttack(attack)) {
             return List.of();
         }
 
+        String formula = templateDamageFormula(templateType, hitDiceCount);
+        if (formula == null) {
+            return List.of();
+        }
+
+        DamageType damageType = templateType == SummonTemplateType.FIERY ? DamageType.FIRE : DamageType.ACID;
+        if (damageType == null) {
+            return List.of();
+        }
+
+        return List.of(DamageComponent.builder()
+                .formula(formula)
+                .damageType(damageType)
+                .multipliesOnCritical(true)
+                .damageAbility(DamageAbility.NONE)
+                .damageAbilityMultiplier(0.0)
+                .label(damageType.name().toLowerCase(Locale.ROOT))
+                .build());
+    }
+
+    private String templateDamageFormula(SummonTemplateType templateType, int hitDiceCount) {
         if (templateType == SummonTemplateType.FIERY) {
-            return List.of(DamageComponent.builder()
-                    .formula("1")
-                    .damageType(DamageType.FIRE)
-                    .multipliesOnCritical(true)
-                    .damageAbility(DamageAbility.NONE)
-                    .damageAbilityMultiplier(0.0)
-                    .label("fire")
-                    .build());
+            if (hitDiceCount >= 11) {
+                return "2d6";
+            }
+            if (hitDiceCount >= 5) {
+                return "1d6";
+            }
+            return "1";
         }
 
         if (templateType == SummonTemplateType.CHTHONIC) {
-            return List.of(DamageComponent.builder()
-                    .formula("1")
-                    .damageType(DamageType.ACID)
-                    .multipliesOnCritical(true)
-                    .damageAbility(DamageAbility.NONE)
-                    .damageAbilityMultiplier(0.0)
-                    .label("acid")
-                    .build());
+            if (hitDiceCount >= 11) {
+                return "2d6";
+            }
+            if (hitDiceCount >= 5) {
+                return "1d6";
+            }
+            return "1";
+        }
+        return null;
+    }
+
+    private boolean isNaturalAttack(Attack attack) {
+        if (attack == null || attack.getAttackType() != AttackType.MELEE) {
+            return false;
         }
 
-        return List.of();
+        String name = attack.getName();
+        if (name == null || name.isBlank()) {
+            return false;
+        }
+
+        return NATURAL_ATTACK_NAMES.contains(normalizeAttackName(name)) || normalizeAttackName(name).startsWith("tail");
+    }
+
+    private String normalizeAttackName(String name) {
+        return name.trim().toLowerCase(Locale.ROOT);
+    }
+
+    private DamageType resolveDamageType(Attack attack, DamageComponent component) {
+        if (component.getDamageType() != DamageType.OTHER || attack == null) {
+            return component.getDamageType();
+        }
+
+        String attackName = normalizeAttackName(attack.getName());
+        if (attackName.startsWith("bite") || attackName.startsWith("gore") || attackName.startsWith("sting")) {
+            return DamageType.PIERCING;
+        }
+        if (attackName.startsWith("claw") || attackName.startsWith("talon") || attackName.startsWith("wing")) {
+            return DamageType.SLASHING;
+        }
+        if (attackName.startsWith("hoof")
+                || attackName.startsWith("tentacle")
+                || attackName.startsWith("pincer")
+                || attackName.startsWith("tail")
+                || attackName.startsWith("slam")) {
+            return DamageType.BLUDGEONING;
+        }
+
+        return DamageType.BLUDGEONING;
     }
 
     private ArmorClass resolveArmorClass(ArmorClass baseArmorClass, boolean deepGuardianApplied) {
