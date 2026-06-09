@@ -224,13 +224,13 @@ p {
   min-width: 0;
 }
 
-@media (min-width: 721px) and (max-width: 1024px) {
+@media (min-width: 421px) and (max-width: 1024px) {
   .summary-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 420px) {
   .group-header {
     flex-direction: column;
   }

@@ -19,21 +19,52 @@
       <button class="mini-button positive" type="button" :disabled="busy" @click="applyDelta(10)">+10</button>
     </div>
 
-    <div class="custom-row">
-      <label class="custom-input">
-        <span class="muted small">Cantidad libre</span>
-        <input v-model.number="customAmount" :disabled="busy" type="number" min="1" step="1" inputmode="numeric" placeholder="3" />
-      </label>
+    <div class="action-row">
       <div class="custom-actions">
-        <ActionButton :disabled="busy || !isCustomAmountValid" variant="danger" @click="applyCustomDamage">
-          Dañar
-        </ActionButton>
-        <ActionButton :disabled="busy || !isCustomAmountValid" variant="success" @click="applyCustomHeal">
-          Curar
+        <ActionButton :disabled="busy" @click="openCustomAmountModal">
+          Otra cantidad
         </ActionButton>
         <ActionButton :disabled="busy" variant="danger" @click="$emit('remove')">Eliminar</ActionButton>
       </div>
     </div>
+
+    <teleport to="body">
+      <div v-if="isCustomAmountModalOpen" class="modal-backdrop" @click.self="closeCustomAmountModal">
+        <section class="modal custom-amount-modal" role="dialog" aria-modal="true" :aria-labelledby="customAmountModalTitleId">
+          <div class="modal-header">
+            <div>
+              <p class="eyebrow">Cantidad libre</p>
+              <h2 :id="customAmountModalTitleId">{{ instance.displayName }}</h2>
+            </div>
+            <ActionButton @click="closeCustomAmountModal">Cerrar</ActionButton>
+          </div>
+
+          <div class="custom-amount-body">
+            <label class="custom-input">
+              <span class="muted small">Cantidad</span>
+              <input
+                v-model.number="customAmount"
+                :disabled="busy"
+                type="number"
+                min="1"
+                step="1"
+                inputmode="numeric"
+                placeholder="Introduce una cantidad"
+              />
+            </label>
+
+            <div class="custom-modal-actions">
+              <ActionButton :disabled="busy || !isCustomAmountValid" variant="danger" @click="applyCustomDamage">
+                Dañar
+              </ActionButton>
+              <ActionButton :disabled="busy || !isCustomAmountValid" variant="success" @click="applyCustomHeal">
+                Curar
+              </ActionButton>
+            </div>
+          </div>
+        </section>
+      </div>
+    </teleport>
   </article>
 </template>
 
@@ -49,7 +80,9 @@ const props = defineProps<{
   busy?: boolean;
 }>();
 
-const customAmount = ref<number | null>(1);
+const customAmountModalTitleId = 'custom-amount-modal-title';
+const isCustomAmountModalOpen = ref(false);
+const customAmount = ref<number | null>(null);
 const isCustomAmountValid = computed(() => Number.isInteger(customAmount.value) && (customAmount.value ?? 0) >= 1);
 const visibleDefenseSummary = computed(() => props.defenseSummary?.trim() || '—');
 const emit = defineEmits<{
@@ -78,12 +111,22 @@ function applyDelta(amount: number): void {
   emit('heal', amount);
 }
 
+function openCustomAmountModal(): void {
+  customAmount.value = null;
+  isCustomAmountModalOpen.value = true;
+}
+
+function closeCustomAmountModal(): void {
+  isCustomAmountModalOpen.value = false;
+}
+
 function applyCustomDamage(): void {
   if (!isCustomAmountValid.value || customAmount.value === null) {
     return;
   }
 
   emit('damage', customAmount.value);
+  closeCustomAmountModal();
 }
 
 function applyCustomHeal(): void {
@@ -92,6 +135,7 @@ function applyCustomHeal(): void {
   }
 
   emit('heal', customAmount.value);
+  closeCustomAmountModal();
 }
 
 </script>
@@ -154,12 +198,24 @@ function applyCustomHeal(): void {
   background: rgba(22, 101, 52, 0.95);
 }
 
-.custom-row {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: 0.6rem;
-  align-items: end;
+.action-row {
   margin-top: 0.75rem;
+}
+
+.custom-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.custom-amount-modal {
+  max-width: 32rem;
+}
+
+.custom-amount-body {
+  display: grid;
+  gap: 1rem;
 }
 
 .custom-input {
@@ -174,37 +230,25 @@ function applyCustomHeal(): void {
   background: rgba(15, 23, 42, 0.85);
   color: inherit;
   padding: 0 0.85rem;
-  max-width: 8rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.custom-actions {
+.custom-modal-actions {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(7rem, auto);
-  gap: 0.5rem;
-  align-items: stretch;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
 }
 
-.button-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-}
-
-@media (max-width: 720px) {
+@media (max-width: 1024px) {
   .quick-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
 
-  .custom-row {
-    grid-template-columns: 1fr;
-  }
-
-  .custom-input input {
-    max-width: none;
-  }
-
-  .custom-actions {
+@media (max-width: 720px) {
+  .custom-actions,
+  .custom-modal-actions {
     grid-template-columns: 1fr;
   }
 }
