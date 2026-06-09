@@ -81,6 +81,11 @@
   "ataquesEspeciales": [],
   "defensasEspeciales": [
     {
+      "tipo": "DAMAGE_REDUCTION",
+      "valor": "5/bludgeoning",
+      "notas": null
+    },
+    {
       "tipo": "IMMUNITY",
       "valor": "poison",
       "notas": null

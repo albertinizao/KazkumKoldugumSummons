@@ -37,6 +37,11 @@ class DefaultCreatureResolverTest {
                 .name("Mole")
                 .subtypes(List.of())
                 .allowedTemplates(List.of(SummonTemplateType.CHTHONIC))
+                .hitPoints(HitPointsDefinition.builder()
+                        .maximum(30)
+                        .formula("5d8+5")
+                        .hitDice(HitDice.builder().count(5).dieSize(8).build())
+                        .build())
                 .speeds(List.of(speed(SpeedType.LAND, 30)))
                 .attacks(List.of(attack("Bite", 3, AttackAbility.STRENGTH, "1d4+1", DamageType.PIERCING)))
                 .specialAttacks(List.of())
@@ -60,7 +65,7 @@ class DefaultCreatureResolverTest {
         assertThat(resolved.getAttacks().getFirst().getDamageComponents().getLast().getDamageType()).isEqualTo(DamageType.ACID);
         assertThat(resolved.getSpecialDefenses())
                 .extracting(defense -> defense.getType().name() + ":" + defense.getValue())
-                .contains("RESISTANCE:acid 10", "OTHER:listed immunities");
+                .contains("DAMAGE_REDUCTION:3/—", "RESISTANCE:acid 15");
         assertThat(resolved.getFullStatBlock()).contains("NG Small beast");
     }
 
@@ -139,8 +144,14 @@ class DefaultCreatureResolverTest {
                 .id("archon")
                 .name("Archon")
                 .allowedTemplates(List.of(SummonTemplateType.CELESTIAL))
+                .hitPoints(HitPointsDefinition.builder()
+                        .maximum(12)
+                        .formula("2d8+2")
+                        .hitDice(HitDice.builder().count(2).dieSize(8).build())
+                        .build())
                 .speeds(List.of(speed(SpeedType.FLY, 60)))
                 .attacks(List.of(attack("Aura", 0, AttackAbility.NONE, "—", DamageType.OTHER)))
+                .fullStatBlock("CR 2\nArchon\n...")
                 .build();
 
         ResolvedCreature resolved = resolver.resolve(template, SummonTemplateType.CELESTIAL, SummonerConfiguration.defaultConfiguration());
@@ -149,7 +160,53 @@ class DefaultCreatureResolverTest {
         assertThat(resolved.getSpecialAttacks()).contains("Smite evil 1/day (swift action)");
         assertThat(resolved.getSpecialDefenses())
                 .extracting(defense -> defense.getType().name() + ":" + defense.getValue())
-                .contains("RESISTANCE:cold 10", "RESISTANCE:acid 10", "RESISTANCE:electricity 10");
+                .contains("RESISTANCE:cold 5", "RESISTANCE:acid 5", "RESISTANCE:electricity 5", "SPELL_RESISTANCE:7");
+    }
+
+    @Test
+    void addsSpellResistanceForEntropicCreatures() {
+        CreatureTemplate template = baseTemplate()
+                .id("entropic")
+                .name("Entropic")
+                .allowedTemplates(List.of(SummonTemplateType.ENTROPIC))
+                .hitPoints(HitPointsDefinition.builder()
+                        .maximum(12)
+                        .formula("2d8+2")
+                        .hitDice(HitDice.builder().count(2).dieSize(8).build())
+                        .build())
+                .speeds(List.of(speed(SpeedType.LAND, 60)))
+                .attacks(List.of(attack("Aura", 0, AttackAbility.NONE, "—", DamageType.OTHER)))
+                .fullStatBlock("CR 2\nEntropic\n...")
+                .build();
+
+        ResolvedCreature resolved = resolver.resolve(template, SummonTemplateType.ENTROPIC, SummonerConfiguration.defaultConfiguration());
+
+        assertThat(resolved.getSpecialDefenses())
+                .extracting(defense -> defense.getType().name() + ":" + defense.getValue())
+                .contains("RESISTANCE:acid 5", "RESISTANCE:fire 5", "SPELL_RESISTANCE:7");
+    }
+
+    @Test
+    void addsSpellResistanceForResoluteCreatures() {
+        CreatureTemplate template = baseTemplate()
+                .id("resolute")
+                .name("Resolute")
+                .allowedTemplates(List.of(SummonTemplateType.RESOLUTE))
+                .hitPoints(HitPointsDefinition.builder()
+                        .maximum(12)
+                        .formula("2d8+2")
+                        .hitDice(HitDice.builder().count(2).dieSize(8).build())
+                        .build())
+                .speeds(List.of(speed(SpeedType.LAND, 60)))
+                .attacks(List.of(attack("Aura", 0, AttackAbility.NONE, "—", DamageType.OTHER)))
+                .fullStatBlock("CR 2\nResolute\n...")
+                .build();
+
+        ResolvedCreature resolved = resolver.resolve(template, SummonTemplateType.RESOLUTE, SummonerConfiguration.defaultConfiguration());
+
+        assertThat(resolved.getSpecialDefenses())
+                .extracting(defense -> defense.getType().name() + ":" + defense.getValue())
+                .contains("RESISTANCE:acid 5", "RESISTANCE:cold 5", "RESISTANCE:fire 5", "SPELL_RESISTANCE:7");
     }
 
     @Test

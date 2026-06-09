@@ -199,6 +199,8 @@
             <div><strong>Espacio:</strong> {{ expandedGroup.resolvedCreature.space }}</div>
             <div><strong>Alcance:</strong> {{ expandedGroup.resolvedCreature.reach }}</div>
             <div><strong>Ataques especiales:</strong> {{ joinOrDash(expandedGroup.resolvedCreature.specialAttacks) }}</div>
+            <div><strong>Inmunidades / SR:</strong> {{ formatSpecialDefenseList(expandedGroup.resolvedCreature.specialDefenses, ['IMMUNITY', 'SPELL_RESISTANCE'], true) }}</div>
+            <div><strong>RD / resistencias:</strong> {{ formatSpecialDefenseList(expandedGroup.resolvedCreature.specialDefenses, ['DAMAGE_REDUCTION', 'RESISTANCE']) }}</div>
             <div><strong>Defensas especiales:</strong> {{ joinOrDash(expandedGroup.resolvedCreature.specialDefenses.map(defense => formatSpecialDefense(defense))) }}</div>
             <div><strong>Reglas aplicadas:</strong> {{ joinOrDash(expandedGroup.resolvedCreature.appliedRules.map(rule => rule.description)) }}</div>
             <div><strong>Aptitudes resumidas:</strong> {{ joinOrDash(expandedGroup.resolvedCreature.shortAbilities.map(ability => `${ability.name}: ${ability.summary}`)) }}</div>
@@ -226,6 +228,7 @@ import StatusBadge from '@/components/StatusBadge.vue';
 import { useCombatStore } from '@/stores/combat';
 import type { SummonTemplateType } from '@/types/catalog';
 import { formatCreatureTypeWithSubtypes } from '@/utils/creatureDisplay';
+import { formatSpecialDefense, formatSpecialDefenseList } from '@/utils/specialDefenseDisplay';
 
 const store = useCombatStore();
 const expandedGroupId = ref<string | null>(null);
@@ -269,20 +272,6 @@ function joinOrDash(values: string[]): string {
 
 function joinOrDashTexts(value: string): string {
   return value && value.trim() ? value : '—';
-}
-
-function formatSpecialDefense(defense: { type: string; value?: string | null; notes?: string | null }): string {
-  const labelMap: Record<string, string> = {
-    DAMAGE_REDUCTION: 'RD',
-    RESISTANCE: 'Resistencia',
-    IMMUNITY: 'Inmunidad',
-    VULNERABILITY: 'Vulnerabilidad',
-    OTHER: 'Otros',
-  };
-
-  const value = defense.value ? ` ${defense.value}` : '';
-  const notes = defense.notes ? ` (${defense.notes})` : '';
-  return `${labelMap[defense.type] ?? defense.type}${value}${notes}`;
 }
 
 function showSummonToast(): void {

@@ -43,6 +43,7 @@
         <p><strong>Tipo:</strong> {{ creatureTypeLabel }}</p>
         <p><strong>Velocidades:</strong> {{ group.resolvedCreature.speedsText }}</p>
         <p><strong>Ataques especiales:</strong> {{ specialAttacks }}</p>
+        <p v-if="groupDefenses !== '—'"><strong>Inmunidades / SR:</strong> {{ groupDefenses }}</p>
       </div>
       <div class="details-column">
         <p><strong>PG:</strong> {{ hitPointsLabel }}</p>
@@ -67,6 +68,7 @@
         v-for="instance in group.instances"
         :key="instance.id"
         :instance="instance"
+        :defense-summary="instanceDefenses"
         :busy="busy"
         @damage="$emit('damage', instance.id, $event)"
         @heal="$emit('heal', instance.id, $event)"
@@ -83,6 +85,7 @@ import CreatureCard from '@/components/CreatureCard.vue';
 import StatusBadge from '@/components/StatusBadge.vue';
 import type { ActiveSummonGroup } from '@/types/combat';
 import { formatCreatureTypeWithSubtypes } from '@/utils/creatureDisplay';
+import { formatSpecialDefenseList } from '@/utils/specialDefenseDisplay';
 
 const props = defineProps<{
   group: ActiveSummonGroup;
@@ -114,6 +117,12 @@ const specialAttacks = computed(() => {
 
   return props.group.resolvedCreature.specialAttacks.join(' · ');
 });
+const groupDefenses = computed(() =>
+  formatSpecialDefenseList(props.group.resolvedCreature.specialDefenses, ['IMMUNITY', 'SPELL_RESISTANCE'], true),
+);
+const instanceDefenses = computed(() =>
+  formatSpecialDefenseList(props.group.resolvedCreature.specialDefenses, ['DAMAGE_REDUCTION', 'RESISTANCE']),
+);
 </script>
 
 <style scoped>
@@ -215,12 +224,21 @@ p {
   min-width: 0;
 }
 
+@media (min-width: 721px) and (max-width: 1024px) {
+  .summary-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 @media (max-width: 720px) {
   .group-header {
     flex-direction: column;
   }
 
-  .summary-grid,
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
   .summary-core {
     grid-template-columns: 1fr;
   }

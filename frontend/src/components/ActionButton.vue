@@ -9,7 +9,7 @@ import { computed } from 'vue';
 
 const props = withDefaults(defineProps<{
   disabled?: boolean;
-  variant?: 'primary' | 'danger' | 'neutral';
+  variant?: 'primary' | 'danger' | 'neutral' | 'success';
 }>(), {
   variant: 'primary',
 });
@@ -46,6 +46,10 @@ const buttonClass = computed(() => {
 
 .action-button--danger {
   background: linear-gradient(135deg, #dc2626, #7f1d1d);
+}
+
+.action-button--success {
+  background: linear-gradient(135deg, #15803d, #14532d);
 }
 
 .action-button--neutral {

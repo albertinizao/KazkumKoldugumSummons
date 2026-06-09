@@ -8,6 +8,7 @@
     </div>
 
     <p class="hp-line">PG: {{ instance.currentHitPoints }} / {{ instance.maxHitPoints }}</p>
+    <p v-if="visibleDefenseSummary !== '—'" class="defense-line">{{ visibleDefenseSummary }}</p>
 
     <div class="quick-grid">
       <button class="mini-button danger" type="button" :disabled="busy" @click="applyDelta(-10)">-10</button>
@@ -21,15 +22,17 @@
     <div class="custom-row">
       <label class="custom-input">
         <span class="muted small">Cantidad libre</span>
-        <input v-model.number="customAmount" :disabled="busy" type="number" step="1" inputmode="numeric" placeholder="+3 o -2" />
+        <input v-model.number="customAmount" :disabled="busy" type="number" min="1" step="1" inputmode="numeric" placeholder="3" />
       </label>
-      <ActionButton :disabled="busy || !isCustomAmountValid" @click="applyCustomAmount">
-        Aplicar
-      </ActionButton>
-    </div>
-
-    <div class="button-row">
-      <ActionButton :disabled="busy" variant="danger" @click="$emit('remove')">Eliminar</ActionButton>
+      <div class="custom-actions">
+        <ActionButton :disabled="busy || !isCustomAmountValid" variant="danger" @click="applyCustomDamage">
+          Dañar
+        </ActionButton>
+        <ActionButton :disabled="busy || !isCustomAmountValid" variant="success" @click="applyCustomHeal">
+          Curar
+        </ActionButton>
+        <ActionButton :disabled="busy" variant="danger" @click="$emit('remove')">Eliminar</ActionButton>
+      </div>
     </div>
   </article>
 </template>
@@ -42,11 +45,13 @@ import type { ActiveSummonInstance } from '@/types/combat';
 
 const props = defineProps<{
   instance: ActiveSummonInstance;
+  defenseSummary?: string;
   busy?: boolean;
 }>();
 
 const customAmount = ref<number | null>(1);
-const isCustomAmountValid = computed(() => Number.isInteger(customAmount.value) && customAmount.value !== 0);
+const isCustomAmountValid = computed(() => Number.isInteger(customAmount.value) && (customAmount.value ?? 0) >= 1);
+const visibleDefenseSummary = computed(() => props.defenseSummary?.trim() || '—');
 const emit = defineEmits<{
   (event: 'damage', amount: number): void;
   (event: 'heal', amount: number): void;
@@ -73,12 +78,20 @@ function applyDelta(amount: number): void {
   emit('heal', amount);
 }
 
-function applyCustomAmount(): void {
+function applyCustomDamage(): void {
   if (!isCustomAmountValid.value || customAmount.value === null) {
     return;
   }
 
-  applyDelta(customAmount.value);
+  emit('damage', customAmount.value);
+}
+
+function applyCustomHeal(): void {
+  if (!isCustomAmountValid.value || customAmount.value === null) {
+    return;
+  }
+
+  emit('heal', customAmount.value);
 }
 
 </script>
@@ -103,9 +116,14 @@ function applyCustomAmount(): void {
 }
 
 .hp-line,
+.defense-line,
 .muted {
   margin: 0.45rem 0 0;
   color: #cbd5e1;
+}
+
+.defense-line {
+  font-size: 0.84rem;
 }
 
 .muted {
@@ -138,7 +156,7 @@ function applyCustomAmount(): void {
 
 .custom-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: 0.6rem;
   align-items: end;
   margin-top: 0.75rem;
@@ -156,6 +174,14 @@ function applyCustomAmount(): void {
   background: rgba(15, 23, 42, 0.85);
   color: inherit;
   padding: 0 0.85rem;
+  max-width: 8rem;
+}
+
+.custom-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(7rem, auto);
+  gap: 0.5rem;
+  align-items: stretch;
 }
 
 .button-row {
@@ -171,6 +197,14 @@ function applyCustomAmount(): void {
   }
 
   .custom-row {
+    grid-template-columns: 1fr;
+  }
+
+  .custom-input input {
+    max-width: none;
+  }
+
+  .custom-actions {
     grid-template-columns: 1fr;
   }
 }

@@ -88,7 +88,7 @@ export interface Attack {
 }
 
 export interface SpecialDefense {
-  type: 'DAMAGE_REDUCTION' | 'RESISTANCE' | 'IMMUNITY' | 'VULNERABILITY' | 'OTHER';
+  type: 'DAMAGE_REDUCTION' | 'RESISTANCE' | 'IMMUNITY' | 'SPELL_RESISTANCE' | 'VULNERABILITY' | 'OTHER';
   value?: string | null;
   notes?: string | null;
 }
