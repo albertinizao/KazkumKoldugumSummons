@@ -2,6 +2,7 @@
   "id": "fire-beetle",
   "nombre": "Fire Beetle",
   "nivelSummon": 1,
+  "challengeRating": "1/3",
   "alineamiento": "N",
   "tamano": "Small",
   "tipo": "vermin",

@@ -2,6 +2,7 @@
   "id": "huge-air-elemental",
   "nombre": "Huge Air Elemental",
   "nivelSummon": 6,
+  "challengeRating": "7",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "outsider",

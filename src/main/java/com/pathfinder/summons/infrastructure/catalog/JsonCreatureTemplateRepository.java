@@ -35,6 +35,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -48,6 +50,7 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
             DamageType.SLASHING,
             DamageType.BLUDGEONING
     );
+    private static final Pattern CHALLENGE_RATING_PATTERN = Pattern.compile("^\\s*CR\\s+([0-9]+(?:/[0-9]+)?)\\b", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 
     private final Map<String, CreatureTemplate> templatesById;
     private final List<CreatureTemplate> templatesInOrder;
@@ -104,6 +107,7 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
                 .id(raw.id())
                 .name(raw.nombre())
                 .summonLevel(raw.nivelSummon())
+                .challengeRating(resolveChallengeRating(raw.challengeRating(), raw.fullStatBlock()))
                 .alignment(parseAlignment(raw.alineamiento()))
                 .size(parseCreatureSize(raw.tamano()))
                 .creatureType(raw.tipo())
@@ -173,6 +177,23 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
                         .toList())
                 .fullStatBlock(raw.fullStatBlock())
                 .build();
+    }
+
+    private String resolveChallengeRating(String explicitChallengeRating, String fullStatBlock) {
+        if (explicitChallengeRating != null && !explicitChallengeRating.isBlank()) {
+            return explicitChallengeRating.trim();
+        }
+
+        if (fullStatBlock == null || fullStatBlock.isBlank()) {
+            throw new IllegalStateException("La criatura no incluye challengeRating ni fullStatBlock para derivarlo");
+        }
+
+        Matcher matcher = CHALLENGE_RATING_PATTERN.matcher(fullStatBlock);
+        if (matcher.find()) {
+            return matcher.group(1).trim();
+        }
+
+        throw new IllegalStateException("No se pudo derivar challengeRating desde fullStatBlock");
     }
 
     private boolean isOutsider(String creatureType) {
@@ -315,6 +336,7 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
             String id,
             @JsonProperty("nombre") String nombre,
             @JsonProperty("nivelSummon") int nivelSummon,
+            @JsonProperty("challengeRating") String challengeRating,
             @JsonProperty("alineamiento") String alineamiento,
             @JsonProperty("tamano") String tamano,
             @JsonProperty("tipo") String tipo,

@@ -2,6 +2,7 @@
   "id": "giant-ant-drone",
   "nombre": "Giant Ant (Drone)",
   "nivelSummon": 4,
+  "challengeRating": "2",
   "alineamiento": "N",
   "tamano": "Medium",
   "tipo": "vermin",

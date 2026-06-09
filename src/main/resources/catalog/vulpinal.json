@@ -2,6 +2,7 @@
   "id": "vulpinal",
   "nombre": "Vulpinal",
   "nivelSummon": 5,
+  "challengeRating": "6",
   "alineamiento": "NG",
   "tamano": "Small",
   "tipo": "outsider",

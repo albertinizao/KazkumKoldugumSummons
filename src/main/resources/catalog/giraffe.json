@@ -2,6 +2,7 @@
   "id": "giraffe",
   "nombre": "Giraffe",
   "nivelSummon": 4,
+  "challengeRating": "3",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "animal",

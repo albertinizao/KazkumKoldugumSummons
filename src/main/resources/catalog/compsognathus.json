@@ -2,6 +2,7 @@
   "id": "compsognathus",
   "nombre": "Compsognathus",
   "nivelSummon": 2,
+  "challengeRating": "1/2",
   "alineamiento": "N",
   "tamano": "Tiny",
   "tipo": "animal",

@@ -2,6 +2,7 @@
   "id": "foo-dog",
   "nombre": "Foo Dog",
   "nivelSummon": 3,
+  "challengeRating": "2",
   "alineamiento": "NG",
   "tamano": "Medium",
   "tipo": "outsider",

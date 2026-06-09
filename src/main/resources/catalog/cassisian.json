@@ -2,6 +2,7 @@
   "id": "cassisian",
   "nombre": "Cassisian",
   "nivelSummon": 3,
+  "challengeRating": "2",
   "alineamiento": "NG",
   "tamano": "Small",
   "tipo": "outsider",

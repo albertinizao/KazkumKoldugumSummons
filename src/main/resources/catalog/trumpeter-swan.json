@@ -2,6 +2,7 @@
   "id": "trumpeter-swan",
   "nombre": "Trumpeter Swan",
   "nivelSummon": 1,
+  "challengeRating": "1/3",
   "alineamiento": "N",
   "tamano": "Small",
   "tipo": "animal",

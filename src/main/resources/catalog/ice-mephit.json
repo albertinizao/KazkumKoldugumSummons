@@ -2,6 +2,7 @@
   "id": "ice-mephit",
   "nombre": "Ice Mephit",
   "nivelSummon": 4,
+  "challengeRating": "3",
   "alineamiento": "N",
   "tamano": "Small",
   "tipo": "outsider",

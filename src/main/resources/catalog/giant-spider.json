@@ -2,6 +2,7 @@
   "id": "giant-spider",
   "nombre": "Giant Spider",
   "nivelSummon": 2,
+  "challengeRating": "1",
   "alineamiento": "N",
   "tamano": "Medium",
   "tipo": "vermin",

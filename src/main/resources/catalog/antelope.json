@@ -2,6 +2,7 @@
   "id": "antelope",
   "nombre": "Antelope",
   "nivelSummon": 1,
+  "challengeRating": "1/2",
   "alineamiento": "N",
   "tamano": "Small",
   "tipo": "animal",

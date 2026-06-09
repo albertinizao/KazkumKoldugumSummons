@@ -57,7 +57,7 @@ public class CreatureCatalogService {
                 .filter(creature -> matchesQuery(creature, query))
                 .filter(creature -> summonLevel == null || creature.getSummonLevel() == summonLevel)
                 .filter(creature -> maxSummonLevel == null || creature.getSummonLevel() <= maxSummonLevel)
-                .filter(creature -> template == null || creature.getAllowedTemplates().contains(template))
+                .filter(creature -> template == null || !isOutsider(creature))
                 .toList();
     }
 
@@ -126,6 +126,11 @@ public class CreatureCatalogService {
 
     private String pluralize(String name) {
         return name.endsWith("s") ? name : name + "s";
+    }
+
+    private boolean isOutsider(CreatureTemplate creature) {
+        String creatureType = creature.getCreatureType();
+        return creatureType != null && creatureType.toLowerCase(Locale.ROOT).contains("outsider");
     }
 
     public record CreatureCatalogItemSummary(

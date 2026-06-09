@@ -2,6 +2,7 @@
   "id": "dire-shark",
   "nombre": "Dire Shark (Megalodon)",
   "nivelSummon": 7,
+  "challengeRating": "9",
   "alineamiento": "N",
   "tamano": "Gargantuan",
   "tipo": "animal",

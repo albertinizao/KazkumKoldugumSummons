@@ -2,6 +2,7 @@
   "id": "manta-ray",
   "nombre": "Manta Ray",
   "nivelSummon": 2,
+  "challengeRating": "1",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "animal",

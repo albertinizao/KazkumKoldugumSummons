@@ -2,6 +2,7 @@
   "id": "giant-seahorse",
   "nombre": "Giant Seahorse",
   "nivelSummon": 4,
+  "challengeRating": "3",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "animal",

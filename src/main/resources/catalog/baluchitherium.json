@@ -2,6 +2,7 @@
   "id": "baluchitherium",
   "nombre": "Baluchitherium",
   "nivelSummon": 6,
+  "challengeRating": "8",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "animal",

@@ -2,6 +2,7 @@
   "id": "large-fire-elemental",
   "nombre": "Large Fire Elemental",
   "nivelSummon": 5,
+  "challengeRating": "5",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "outsider",

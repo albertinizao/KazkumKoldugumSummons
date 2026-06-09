@@ -2,6 +2,7 @@
   "id": "leopard",
   "nombre": "Leopard",
   "nivelSummon": 3,
+  "challengeRating": "2",
   "alineamiento": "N",
   "tamano": "Medium",
   "tipo": "animal",

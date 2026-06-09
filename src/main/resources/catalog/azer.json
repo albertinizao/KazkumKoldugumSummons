@@ -2,6 +2,7 @@
   "id": "azer",
   "nombre": "Azer",
   "nivelSummon": 3,
+  "challengeRating": "2",
   "alineamiento": "LN",
   "tamano": "Medium",
   "tipo": "outsider",

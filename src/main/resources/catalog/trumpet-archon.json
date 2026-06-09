@@ -2,6 +2,7 @@
   "id": "trumpet-archon",
   "nombre": "Trumpet Archon",
   "nivelSummon": 9,
+  "challengeRating": "14",
   "alineamiento": "LG",
   "tamano": "Medium",
   "tipo": "outsider",

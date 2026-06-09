@@ -107,6 +107,7 @@ export interface CreatureTemplate {
   id: string;
   name: string;
   summonLevel: number;
+  challengeRating: string;
   alignment: Alignment;
   size: CreatureSize;
   creatureType: string;
@@ -145,6 +146,7 @@ export interface ResolvedCreature {
   baseTemplateId: string;
   displayName: string;
   summonLevel: number;
+  challengeRating: string;
   appliedTemplate: SummonTemplateType | null;
   alignment: Alignment;
   size: CreatureSize;

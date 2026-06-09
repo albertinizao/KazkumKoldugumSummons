@@ -2,6 +2,7 @@
   "id": "greater-earth-elemental",
   "nombre": "Greater Earth Elemental",
   "nivelSummon": 7,
+  "challengeRating": "9",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "outsider",

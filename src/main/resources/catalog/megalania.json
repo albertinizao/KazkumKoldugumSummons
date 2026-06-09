@@ -2,6 +2,7 @@
   "id": "megalania",
   "nombre": "Megalania",
   "nivelSummon": 6,
+  "challengeRating": "7",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "animal",

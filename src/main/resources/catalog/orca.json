@@ -2,6 +2,7 @@
   "id": "orca",
   "nombre": "Orca",
   "nivelSummon": 5,
+  "challengeRating": "5",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "animal",

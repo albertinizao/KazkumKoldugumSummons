@@ -2,6 +2,7 @@
   "id": "giant-scorpion",
   "nombre": "Giant Scorpion",
   "nivelSummon": 4,
+  "challengeRating": "3",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "vermin",

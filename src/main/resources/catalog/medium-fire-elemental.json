@@ -2,6 +2,7 @@
   "id": "medium-fire-elemental",
   "nombre": "Medium Fire Elemental",
   "nivelSummon": 4,
+  "challengeRating": "3",
   "alineamiento": "N",
   "tamano": "Medium",
   "tipo": "outsider",

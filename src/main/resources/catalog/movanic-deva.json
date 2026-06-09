@@ -2,6 +2,7 @@
   "id": "movanic-deva",
   "nombre": "Movanic Deva",
   "nivelSummon": 7,
+  "challengeRating": "10",
   "alineamiento": "NG",
   "tamano": "Medium",
   "tipo": "outsider",

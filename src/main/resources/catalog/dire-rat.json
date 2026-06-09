@@ -2,6 +2,7 @@
   "id": "dire-rat",
   "nombre": "Dire Rat",
   "nivelSummon": 1,
+  "challengeRating": "1/3",
   "alineamiento": "N",
   "tamano": "Small",
   "tipo": "animal",

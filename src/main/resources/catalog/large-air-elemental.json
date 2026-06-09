@@ -2,6 +2,7 @@
   "id": "large-air-elemental",
   "nombre": "Large Air Elemental",
   "nivelSummon": 5,
+  "challengeRating": "5",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "outsider",

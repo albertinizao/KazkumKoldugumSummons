@@ -2,6 +2,7 @@
   "id": "shark",
   "nombre": "Shark",
   "nivelSummon": 3,
+  "challengeRating": "2",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "animal",

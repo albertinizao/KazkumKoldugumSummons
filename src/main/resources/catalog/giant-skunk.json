@@ -2,6 +2,7 @@
   "id": "giant-skunk",
   "nombre": "Giant Skunk",
   "nivelSummon": 4,
+  "challengeRating": "3",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "animal",

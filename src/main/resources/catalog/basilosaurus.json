@@ -2,6 +2,7 @@
   "id": "basilosaurus",
   "nombre": "Basilosaurus",
   "nivelSummon": 8,
+  "challengeRating": "12",
   "alineamiento": "N",
   "tamano": "Gargantuan",
   "tipo": "animal",

@@ -2,6 +2,7 @@
   "id": "giant-snapping-turtle",
   "nombre": "Giant Snapping Turtle",
   "nivelSummon": 7,
+  "challengeRating": "9",
   "alineamiento": "N",
   "tamano": "Gargantuan",
   "tipo": "animal",

@@ -2,6 +2,7 @@
   "id": "greater-water-elemental",
   "nombre": "Greater Water Elemental",
   "nivelSummon": 7,
+  "challengeRating": "9",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "outsider",

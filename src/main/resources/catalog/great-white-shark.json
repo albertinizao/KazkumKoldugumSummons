@@ -2,6 +2,7 @@
   "id": "great-white-shark",
   "nombre": "Great White Shark",
   "nivelSummon": 4,
+  "challengeRating": "4",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "animal",

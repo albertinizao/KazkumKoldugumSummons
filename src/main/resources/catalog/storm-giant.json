@@ -2,6 +2,7 @@
   "id": "storm-giant",
   "nombre": "Storm Giant",
   "nivelSummon": 9,
+  "challengeRating": "13",
   "alineamiento": "CG",
   "tamano": "Huge",
   "tipo": "humanoid",

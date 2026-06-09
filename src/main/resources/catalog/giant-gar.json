@@ -2,6 +2,7 @@
   "id": "giant-gar",
   "nombre": "Giant Gar",
   "nivelSummon": 5,
+  "challengeRating": "6",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "animal",

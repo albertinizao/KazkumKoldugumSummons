@@ -2,6 +2,7 @@
   "id": "monitor-lizard",
   "nombre": "Monitor Lizard",
   "nivelSummon": 3,
+  "challengeRating": "2",
   "alineamiento": "N",
   "tamano": "Medium",
   "tipo": "animal",

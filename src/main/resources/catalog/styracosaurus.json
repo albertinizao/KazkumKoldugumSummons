@@ -2,6 +2,7 @@
   "id": "styracosaurus",
   "nombre": "Styracosaurus",
   "nivelSummon": 5,
+  "challengeRating": "5",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "animal",

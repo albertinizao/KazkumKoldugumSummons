@@ -2,6 +2,7 @@
   "id": "giant-octopus",
   "nombre": "Giant Octopus",
   "nivelSummon": 6,
+  "challengeRating": "8",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "animal",

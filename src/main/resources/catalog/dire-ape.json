@@ -2,6 +2,7 @@
   "id": "dire-ape",
   "nombre": "Dire Ape",
   "nivelSummon": 4,
+  "challengeRating": "3",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "animal",

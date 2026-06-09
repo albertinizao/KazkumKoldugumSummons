@@ -2,6 +2,7 @@
   "id": "elder-mud-elemental",
   "nombre": "Elder Mud Elemental",
   "nivelSummon": 8,
+  "challengeRating": "11",
   "alineamiento": "N",
   "tamano": "Huge",
   "tipo": "outsider",

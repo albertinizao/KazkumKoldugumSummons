@@ -2,6 +2,7 @@
   "id": "mephit",
   "nombre": "Mephit",
   "nivelSummon": 4,
+  "challengeRating": "3",
   "alineamiento": "N",
   "tamano": "Small",
   "tipo": "outsider",

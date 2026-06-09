@@ -2,6 +2,7 @@
   "id": "goblin-dog",
   "nombre": "Goblin Dog",
   "nivelSummon": 2,
+  "challengeRating": "1",
   "alineamiento": "N",
   "tamano": "Medium",
   "tipo": "animal",

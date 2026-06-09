@@ -46,6 +46,17 @@ class JsonCreatureTemplateRepositoryTest {
     }
 
     @Test
+    void loadsExplicitChallengeRatingFromCatalogJson() {
+        JsonCreatureTemplateRepository repository = new JsonCreatureTemplateRepository();
+
+        assertThat(repository.findById("badger"))
+                .isPresent()
+                .get()
+                .extracting(template -> template.getChallengeRating())
+                .isEqualTo("1/2");
+    }
+
+    @Test
     void loadsMaximumPossibleHitPointsFromCatalogJson() {
         JsonCreatureTemplateRepository repository = new JsonCreatureTemplateRepository();
 

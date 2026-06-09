@@ -2,6 +2,7 @@
   "id": "large-ice-elemental",
   "nombre": "Large Ice Elemental",
   "nivelSummon": 5,
+  "challengeRating": "5",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "outsider",

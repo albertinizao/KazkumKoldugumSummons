@@ -2,6 +2,7 @@
   "id": "axe-beak",
   "nombre": "Axe Beak",
   "nivelSummon": 3,
+  "challengeRating": "2",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "animal",

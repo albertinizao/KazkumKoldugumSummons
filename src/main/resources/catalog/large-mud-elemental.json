@@ -2,6 +2,7 @@
   "id": "large-mud-elemental",
   "nombre": "Large Mud Elemental",
   "nivelSummon": 5,
+  "challengeRating": "5",
   "alineamiento": "N",
   "tamano": "Large",
   "tipo": "outsider",

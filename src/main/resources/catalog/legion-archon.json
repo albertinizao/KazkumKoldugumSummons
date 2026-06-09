@@ -2,6 +2,7 @@
   "id": "legion-archon",
   "nombre": "Legion Archon",
   "nivelSummon": 6,
+  "challengeRating": "7",
   "alineamiento": "LG",
   "tamano": "Medium",
   "tipo": "outsider",

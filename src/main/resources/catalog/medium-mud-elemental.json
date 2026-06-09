@@ -2,6 +2,7 @@
   "id": "medium-mud-elemental",
   "nombre": "Medium Mud Elemental",
   "nivelSummon": 4,
+  "challengeRating": "3",
   "alineamiento": "N",
   "tamano": "Medium",
   "tipo": "outsider",

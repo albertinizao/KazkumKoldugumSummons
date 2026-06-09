@@ -2,6 +2,7 @@
   "id": "tripurasura",
   "nombre": "Tripurasura",
   "nivelSummon": 3,
+  "challengeRating": "2",
   "alineamiento": "LE",
   "tamano": "Tiny",
   "tipo": "outsider",

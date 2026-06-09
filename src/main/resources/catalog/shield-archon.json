@@ -2,6 +2,7 @@
   "id": "shield-archon",
   "nombre": "Shield Archon",
   "nivelSummon": 7,
+  "challengeRating": "10",
   "alineamiento": "LG",
   "tamano": "Large",
   "tipo": "outsider",

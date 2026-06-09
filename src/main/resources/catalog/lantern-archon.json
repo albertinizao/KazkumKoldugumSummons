@@ -2,6 +2,7 @@
   "id": "lantern-archon",
   "nombre": "Lantern Archon",
   "nivelSummon": 3,
+  "challengeRating": "2",
   "alineamiento": "LG",
   "tamano": "Small",
   "tipo": "outsider",

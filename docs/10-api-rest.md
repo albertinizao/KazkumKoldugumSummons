@@ -252,7 +252,7 @@ Debe permitir búsqueda y filtrado básico.
 | `query` | string | No | Texto de búsqueda |
 | `summonLevel` | integer | No | Filtra por nivel exacto de Summon Monster |
 | `maxSummonLevel` | integer | No | Devuelve criaturas de nivel igual o inferior |
-| `template` | string | No | Filtra criaturas que permitan una plantilla |
+| `template` | string | No | Filtra criaturas que no sean `outsider` |
 | `limit` | integer | No | Límite de resultados |
 | `offset` | integer | No | Desplazamiento |
 
@@ -297,6 +297,7 @@ Debe permitir búsqueda y filtrado básico.
 - Devuelve criaturas base, no criaturas finales.
 - No aplica reglas fijas del personaje.
 - No valida legalidad de invocación más allá de filtros simples.
+- Para plantillas, las criaturas que no sean `outsider` se consideran válidas; `outsider` se excluye.
 - El frontend puede usarlo para el modal de búsqueda manual.
 
 ---
@@ -318,6 +319,7 @@ Obtiene detalle completo de una criatura base del catálogo.
   "id": "badger",
   "name": "Badger",
   "summonLevel": 1,
+  "challengeRating": "1/2",
   "alignment": "N",
   "size": "SMALL",
   "creatureType": "animal",
@@ -427,6 +429,7 @@ GET /api/catalog/creatures/badger/resolved-preview?template=FIERY
   "baseTemplateId": "badger",
   "displayName": "Fiery Badger",
   "summonLevel": 1,
+  "challengeRating": "1/2",
   "appliedTemplate": "FIERY",
   "alignment": "N",
   "size": "SMALL",

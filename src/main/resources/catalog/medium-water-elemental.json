@@ -2,6 +2,7 @@
   "id": "medium-water-elemental",
   "nombre": "Medium Water Elemental",
   "nivelSummon": 4,
+  "challengeRating": "3",
   "alineamiento": "N",
   "tamano": "Medium",
   "tipo": "outsider",

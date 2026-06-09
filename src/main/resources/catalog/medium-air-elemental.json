@@ -2,6 +2,7 @@
   "id": "medium-air-elemental",
   "nombre": "Medium Air Elemental",
   "nivelSummon": 4,
+  "challengeRating": "3",
   "alineamiento": "N",
   "tamano": "Medium",
   "tipo": "outsider",
