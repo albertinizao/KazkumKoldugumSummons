@@ -2,114 +2,6 @@
   <section class="combat-view">
     <div v-if="store.error" class="error-banner">{{ store.error }}</div>
 
-    <div class="top-grid">
-      <DailyUsesPanel />
-
-      <section class="summon-panel card">
-        <div class="section-title">
-          <div>
-            <p class="eyebrow">Invocación</p>
-            <h2>Seleccionar criatura</h2>
-          </div>
-          <StatusBadge variant="neutral">{{ store.configuration.maxSummonMonsterLevel }}</StatusBadge>
-        </div>
-
-        <div class="toolbar">
-          <label class="level-filter">
-            <span class="field-label">Nivel</span>
-            <select class="level-filter__select" :value="store.catalogLevelFilter ?? ''" @change="onLevelFilterChange">
-              <option :value="''">Todos</option>
-              <option v-for="level in summonLevels" :key="level" :value="level">
-                {{ level }}
-              </option>
-            </select>
-          </label>
-
-          <label>
-            <span class="field-label">Criatura</span>
-            <select :value="store.selectedCreatureId ?? ''" @change="onCreatureChange">
-              <option v-for="item in store.filteredCatalogItems" :key="item.id" :value="item.id">
-                {{ item.name }} · nivel {{ item.summonLevel }}
-              </option>
-            </select>
-          </label>
-
-          <label>
-            <span class="field-label">Plantilla</span>
-            <select :value="store.selectedTemplate ?? ''" @change="onTemplateChange">
-              <option v-if="templateSelectionRequired" :value="''">Elige plantilla</option>
-              <option v-else-if="allowedTemplates.length === 0" :value="''">Sin plantilla</option>
-              <option v-for="template in allowedTemplates" :key="template" :value="template">
-                {{ templateLabel(template) }}
-              </option>
-            </select>
-          </label>
-
-          <div class="button-stack">
-            <ActionButton :disabled="store.busy || !canSummon" @click="handleSummon">
-              Invocar
-            </ActionButton>
-            <ActionButton :disabled="store.busy" variant="neutral" @click="openSummonAssistant">
-              Asistente de invocación
-            </ActionButton>
-            <ActionButton :disabled="store.busy" variant="danger" @click="handleClearSummons">
-              Limpiar
-            </ActionButton>
-          </div>
-        </div>
-
-        <section class="history-section">
-          <div class="section-title">
-            <div>
-              <p class="eyebrow">Historial</p>
-              <h2>Últimas usadas y más usadas</h2>
-            </div>
-            <div class="inline-meta">
-              <span class="meta-pill">Activas: {{ store.activeInstanceCount }}</span>
-              <span class="meta-pill">Grupos: {{ store.groups.length }}</span>
-            </div>
-          </div>
-
-          <div class="dual-grid">
-            <div>
-              <h3>Últimas usadas</h3>
-              <div class="chip-list">
-                <button
-                  v-for="shortcut in store.recentlyUsedSummons"
-                  :key="shortcut.id"
-                  class="chip-button"
-                  type="button"
-                  :disabled="store.busy"
-                  @click="handleShortcutSummon(shortcut.id, 'RECENT')"
-                >
-                  {{ shortcut.displayName }}
-                </button>
-                <p v-if="store.recentlyUsedSummons.length === 0" class="muted">Todavía no hay accesos recientes.</p>
-              </div>
-            </div>
-
-            <div>
-              <h3>Más usadas</h3>
-              <div class="chip-list">
-                <button
-                  v-for="shortcut in store.mostUsedSummons"
-                  :key="shortcut.id"
-                  class="chip-button"
-                  type="button"
-                  :disabled="store.busy"
-                  @click="handleShortcutSummon(shortcut.id, 'MOST_USED')"
-                >
-                  {{ shortcut.displayName }} · {{ shortcut.usageCount }}
-                </button>
-                <p v-if="store.mostUsedSummons.length === 0" class="muted">Todavía no hay accesos populares.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-      </section>
-    </div>
-
     <section class="card">
       <div class="section-title">
         <div>
@@ -145,13 +37,6 @@
     </section>
 
     <teleport to="body">
-      <SummonAssistantModal
-        :open="isSummonAssistantOpen"
-        :max-summon-monster-level="store.configuration.maxSummonMonsterLevel"
-        @cancel="closeSummonAssistant"
-        @invoke="handleAssistantSummon"
-      />
-
       <div v-if="isRollResultModalOpen && store.lastCombatRollResult" class="modal-backdrop" @click.self="closeRollResultModal">
         <section class="modal roll-modal" role="dialog" aria-modal="true" aria-labelledby="roll-result-title">
           <div class="modal-header">
@@ -221,68 +106,27 @@
           <pre class="statblock">{{ expandedGroup.resolvedCreature.fullStatBlock }}</pre>
         </section>
       </div>
-
-      <div v-if="summonToast" class="toast" role="status" aria-live="polite">
-        {{ summonToast }}
-      </div>
     </teleport>
   </section>
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import ActionButton from '@/components/ActionButton.vue';
 import CombatGroupCard from '@/components/CombatGroupCard.vue';
 import CombatRollResultPanel from '@/components/CombatRollResultPanel.vue';
 import GlobalCombatRollResultPanel from '@/components/GlobalCombatRollResultPanel.vue';
-import DailyUsesPanel from '@/components/DailyUsesPanel.vue';
-import SummonAssistantModal from '@/components/SummonAssistantModal.vue';
-import StatusBadge from '@/components/StatusBadge.vue';
 import { useCombatStore } from '@/stores/combat';
-import type { SummonTemplateType } from '@/types/catalog';
 import type { GlobalCombatRollResult } from '@/types/combat';
-import type { SummonAssistantChoiceNv3 } from '@/data/summonAssistantChoicesNv3';
-import type { SummonAssistantChoiceNv4 } from '@/data/summonAssistantChoicesNv4';
-import type { SummonAssistantChoiceNv5 } from '@/data/summonAssistantChoicesNv5';
-import type { SummonAssistantChoiceNv6 } from '@/data/summonAssistantChoicesNv6';
-import type { SummonAssistantChoiceNv7 } from '@/data/summonAssistantChoicesNv7';
-import type { SummonAssistantChoiceNv8 } from '@/data/summonAssistantChoicesNv8';
-import type { SummonAssistantChoiceNv9 } from '@/data/summonAssistantChoicesNv9';
 import { formatCreatureTypeWithSubtypes } from '@/utils/creatureDisplay';
 import { formatSpecialDefense, formatSpecialDefenseList } from '@/utils/specialDefenseDisplay';
 
 const store = useCombatStore();
 const expandedGroupId = ref<string | null>(null);
-const isSummonAssistantOpen = ref(false);
 const isRollResultModalOpen = ref(false);
 const globalRollResult = ref<GlobalCombatRollResult | null>(null);
-const summonToast = ref<string | null>(null);
-let summonToastTimer: number | undefined;
 const globalRollResultTitleId = 'global-roll-result-title';
-const summonLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-const allowedTemplates = computed(() => store.selectedCreatureAllowedTemplates);
-const templateSelectionRequired = computed(() => allowedTemplates.value.length > 1);
-const canSummon = computed(() => {
-  if (!store.selectedCreature) {
-    return false;
-  }
-
-  return !templateSelectionRequired.value || store.selectedTemplate !== null;
-});
 const expandedGroup = computed(() => store.groups.find(group => group.id === expandedGroupId.value) ?? null);
-
-function templateLabel(template: SummonTemplateType): string {
-  const labels: Record<SummonTemplateType, string> = {
-    CHTHONIC: 'Chthonic',
-    FIERY: 'Fiery',
-    CELESTIAL: 'Celestial',
-    ENTROPIC: 'Entropic',
-    RESOLUTE: 'Resolute',
-  };
-
-  return labels[template];
-}
 
 function creatureTypeLabel(creature: { creatureType: string; subtypes: string[] }): string {
   return formatCreatureTypeWithSubtypes(creature.creatureType, creature.subtypes);
@@ -294,89 +138,6 @@ function joinOrDash(values: string[]): string {
 
 function joinOrDashTexts(value: string): string {
   return value && value.trim() ? value : '—';
-}
-
-function showSummonToast(): void {
-  const result = store.lastRollResult;
-  if (result?.type !== 'SUMMON_QUANTITY') {
-    return;
-  }
-
-  const contentParts = result.content.split('=');
-  const quantityText = contentParts[contentParts.length - 1]?.trim();
-  const title = result.title ?? 'Invocación completada';
-
-  if (!quantityText) {
-    return;
-  }
-
-  summonToast.value = `${title.replace('Cantidad invocada: ', '')}: ${quantityText} criatura(s).`;
-
-  if (summonToastTimer) {
-    window.clearTimeout(summonToastTimer);
-  }
-
-  summonToastTimer = window.setTimeout(() => {
-    summonToast.value = null;
-  }, 2500);
-}
-
-function onCreatureChange(event: Event): void {
-  const target = event.target as HTMLSelectElement;
-  store.selectCreature(target.value);
-}
-
-function onLevelFilterChange(event: Event): void {
-  const target = event.target as HTMLSelectElement;
-  const value = target.value ? Number(target.value) : null;
-  store.selectCatalogLevel(value);
-}
-
-function onTemplateChange(event: Event): void {
-  const target = event.target as HTMLSelectElement;
-  store.selectTemplate(target.value ? (target.value as SummonTemplateType) : null);
-}
-
-function openSummonAssistant(): void {
-  isSummonAssistantOpen.value = true;
-}
-
-function closeSummonAssistant(): void {
-  isSummonAssistantOpen.value = false;
-}
-
-async function handleSummon(): Promise<void> {
-  summonToast.value = null;
-  await store.summonSelectedCreature();
-  showSummonToast();
-}
-
-async function handleAssistantSummon(suggestion: SummonAssistantChoiceNv3 | SummonAssistantChoiceNv4 | SummonAssistantChoiceNv5 | SummonAssistantChoiceNv6 | SummonAssistantChoiceNv7 | SummonAssistantChoiceNv8 | SummonAssistantChoiceNv9): Promise<void> {
-  summonToast.value = null;
-  closeSummonAssistant();
-  await store.summonCreatureById(suggestion.creatureId, suggestion.template);
-  showSummonToast();
-}
-
-async function handleShortcutSummon(shortcutId: string, source: 'RECENT' | 'MOST_USED'): Promise<void> {
-  const shortcut = source === 'RECENT'
-    ? store.recentlyUsedSummons.find(item => item.id === shortcutId)
-    : store.mostUsedSummons.find(item => item.id === shortcutId);
-
-  if (!shortcut) {
-    return;
-  }
-
-  summonToast.value = null;
-  await store.summonFromShortcut(shortcut, source);
-  showSummonToast();
-}
-
-async function handleClearSummons(): Promise<void> {
-  await store.clearSummons();
-  isRollResultModalOpen.value = false;
-  globalRollResult.value = null;
-  summonToast.value = null;
 }
 
 async function handleAttack(groupId: string): Promise<void> {
@@ -426,12 +187,6 @@ function closeGlobalRollResultModal(): void {
 onMounted(() => {
   void store.initialize();
 });
-
-onBeforeUnmount(() => {
-  if (summonToastTimer) {
-    window.clearTimeout(summonToastTimer);
-  }
-});
 </script>
 
 <style scoped>
@@ -448,22 +203,11 @@ onBeforeUnmount(() => {
   color: #fecaca;
 }
 
-.top-grid {
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: 1rem;
-}
-
 .card {
   padding: 1rem;
   border-radius: 1rem;
   border: 1px solid rgba(148, 163, 184, 0.15);
   background: rgba(15, 23, 42, 0.72);
-}
-
-.summon-panel {
-  display: grid;
-  gap: 1rem;
 }
 
 .section-title {
@@ -480,85 +224,14 @@ p {
   margin: 0;
 }
 
-.toolbar {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1.35fr) minmax(0, 1.1fr) auto;
-  gap: 0.75rem;
-  align-items: end;
-}
-
-.level-filter {
-  max-width: 5.5rem;
-}
-
-.level-filter__select {
-  min-width: 5.5rem;
-  width: 100%;
-}
-
-.field-label {
-  display: block;
-  margin-bottom: 0.35rem;
-  color: #cbd5e1;
-  font-size: 0.82rem;
-}
-
-.button-stack {
-  display: grid;
-  gap: 0.5rem;
-}
-
 .global-actions {
   display: grid;
   gap: 0.75rem;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
-.history-section {
-  display: grid;
-  gap: 1rem;
-}
-
-.inline-meta {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-.meta-pill {
-  padding: 0.35rem 0.7rem;
-  border-radius: 999px;
-  background: rgba(30, 41, 59, 0.75);
-  border: 1px solid rgba(148, 163, 184, 0.15);
-  color: #cbd5e1;
-  font-size: 0.82rem;
-}
-
 .muted {
   color: #94a3b8;
-}
-
-.dual-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-.chip-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-}
-
-.chip-button {
-  min-height: 2.5rem;
-  padding: 0.65rem 0.9rem;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  background: rgba(30, 41, 59, 0.6);
-  color: inherit;
 }
 
 .groups-list {
@@ -615,30 +288,9 @@ p {
   word-break: break-word;
 }
 
-.toast {
-  position: fixed;
-  right: 1rem;
-  bottom: 1rem;
-  z-index: 70;
-  padding: 0.85rem 1rem;
-  border-radius: 0.9rem;
-  background: rgba(15, 23, 42, 0.96);
-  border: 1px solid rgba(34, 197, 94, 0.35);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-  color: #dcfce7;
-  max-width: min(90vw, 360px);
-}
-
 @media (max-width: 980px) {
-  .top-grid,
-  .toolbar,
-  .dual-grid,
   .expanded-meta {
     grid-template-columns: 1fr;
-  }
-
-  .inline-meta {
-    justify-content: flex-start;
   }
 }
 </style>
