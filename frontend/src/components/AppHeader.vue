@@ -7,6 +7,7 @@
     </div>
     <nav class="nav" aria-label="Navegación principal">
       <RouterLink to="/">Combate</RouterLink>
+      <RouterLink to="/invocaciones">Invocaciones</RouterLink>
       <RouterLink to="/catalogo">Catálogo</RouterLink>
       <RouterLink to="/configuracion">Configuración</RouterLink>
     </nav>

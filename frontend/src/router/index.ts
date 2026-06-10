@@ -9,6 +9,12 @@ const router = createRouter({
       component: () => import('@/views/CombatView.vue'),
     },
     {
+      path: '/invocaciones',
+      alias: '/invocacion',
+      name: 'invocaciones',
+      component: () => import('@/views/InvocationsView.vue'),
+    },
+    {
       path: '/catalogo',
       name: 'catalogo',
       component: () => import('@/views/CatalogView.vue'),
