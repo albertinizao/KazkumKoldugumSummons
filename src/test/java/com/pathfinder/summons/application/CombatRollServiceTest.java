@@ -62,7 +62,10 @@ class CombatRollServiceTest {
         assertThat(firstAttack.criticalThreat()).isNotNull();
         assertThat(firstAttack.normalDamage().components()).hasSize(2);
         assertThat(firstAttack.normalDamage().total()).isEqualTo(5);
+        assertThat(firstAttack.criticalThreat().criticalDamage().components().get(0).appliedFormula()).isEqualTo("2d3+4");
+        assertThat(firstAttack.criticalThreat().criticalDamage().components().get(1).appliedFormula()).isEqualTo("1");
         assertThat(firstAttack.criticalThreat().criticalDamage().total()).isEqualTo(9);
+        assertThat(firstAttack.criticalThreat().criticalDamage().displayText()).contains("2d3+4 = 8 piercing", "1 = 1 fire");
 
         SingleAttackRollResult secondAttack = creatureResult.attackResults().get(1);
         assertThat(secondAttack.attackIndex()).isEqualTo(2);
@@ -89,6 +92,28 @@ class CombatRollServiceTest {
         assertThat(attackResult.normalDamage().components().get(1).roll().getFormula()).isEqualTo("2d6");
         assertThat(attackResult.normalDamage().total()).isEqualTo(13);
         assertThat(result.displayText()).contains("1d6+2 = 6 piercing + 2d6 = 7 fire");
+    }
+
+    @Test
+    void scalesCriticalDamageFormulaUsingTheAppliedCriticalMultiplier() {
+        SequencedDiceRoller diceRoller = new SequencedDiceRoller()
+                .enqueueD20(diceRoll("1d20+5", 20, 5, 25))
+                .enqueueFormula(diceRoll("1d6+2", 4, 2, 6))
+                .enqueueFormula(diceRoll("2d6", 7, 0, 7))
+                .enqueueD20(diceRoll("1d20+5", 10, 5, 15))
+                .enqueueFormula(diceRoll("1d6+2", 4, 2, 6))
+                .enqueueFormula(diceRoll("2d6", 7, 0, 7));
+
+        CombatRollService service = new CombatRollService(diceRoller);
+        ActiveSummonGroup group = groupWithOneInstance(creatureWithElementalDamage());
+
+        var result = service.rollGroupAttacks(group);
+
+        var criticalDamage = result.instanceResults().getFirst().attackResults().getFirst().criticalThreat().criticalDamage();
+        assertThat(criticalDamage.components()).hasSize(2);
+        assertThat(criticalDamage.components().get(0).appliedFormula()).isEqualTo("2d6+4");
+        assertThat(criticalDamage.components().get(1).appliedFormula()).isEqualTo("4d6");
+        assertThat(criticalDamage.displayText()).contains("2d6+4 = 12 piercing", "4d6 = 14 fire");
     }
 
     @Test
