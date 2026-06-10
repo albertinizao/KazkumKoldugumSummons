@@ -241,7 +241,13 @@ import StatusBadge from '@/components/StatusBadge.vue';
 import { useCombatStore } from '@/stores/combat';
 import type { SummonTemplateType } from '@/types/catalog';
 import type { GlobalCombatRollResult } from '@/types/combat';
-import type { SummonAssistantSuggestion } from '@/data/summonAssistant';
+import type { SummonAssistantChoiceNv3 } from '@/data/summonAssistantChoicesNv3';
+import type { SummonAssistantChoiceNv4 } from '@/data/summonAssistantChoicesNv4';
+import type { SummonAssistantChoiceNv5 } from '@/data/summonAssistantChoicesNv5';
+import type { SummonAssistantChoiceNv6 } from '@/data/summonAssistantChoicesNv6';
+import type { SummonAssistantChoiceNv7 } from '@/data/summonAssistantChoicesNv7';
+import type { SummonAssistantChoiceNv8 } from '@/data/summonAssistantChoicesNv8';
+import type { SummonAssistantChoiceNv9 } from '@/data/summonAssistantChoicesNv9';
 import { formatCreatureTypeWithSubtypes } from '@/utils/creatureDisplay';
 import { formatSpecialDefense, formatSpecialDefenseList } from '@/utils/specialDefenseDisplay';
 
@@ -345,10 +351,10 @@ async function handleSummon(): Promise<void> {
   showSummonToast();
 }
 
-async function handleAssistantSummon(suggestion: SummonAssistantSuggestion): Promise<void> {
+async function handleAssistantSummon(suggestion: SummonAssistantChoiceNv3 | SummonAssistantChoiceNv4 | SummonAssistantChoiceNv5 | SummonAssistantChoiceNv6 | SummonAssistantChoiceNv7 | SummonAssistantChoiceNv8 | SummonAssistantChoiceNv9): Promise<void> {
   summonToast.value = null;
   closeSummonAssistant();
-  await store.summonCreatureById(suggestion.variant.creatureId, suggestion.variant.template);
+  await store.summonCreatureById(suggestion.creatureId, suggestion.template);
   showSummonToast();
 }
 

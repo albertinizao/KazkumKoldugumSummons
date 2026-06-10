@@ -272,8 +272,13 @@ Este campo es importante para detectar reglas como `Deep Guardian`.
 
 Lista de plantillas que pueden aplicarse a la criatura mediante `Versatile Summon Monster`.
 
-Regla práctica del MVP: cualquier criatura que **no** sea `outsider` puede usar plantillas, aunque la lista esté vacía en el JSON.
+Regla práctica del MVP: cualquier criatura que **no** sea `outsider` puede usar **todas** las plantillas disponibles del sistema, aunque la lista del JSON esté vacía o incompleta.
 Las criaturas `outsider` no pueden recibir plantillas.
+
+Por tanto, en el asistente y en la lógica de invocación la restricción real es:
+
+- si la criatura es `outsider`, no se le aplica plantilla;
+- si la criatura no es `outsider`, puede elegir entre `chthonic`, `fiery`, `celestial`, `entropic` y `resolute`.
 
 Ejemplo:
 
@@ -295,7 +300,8 @@ Las plantillas previstas inicialmente son:
 - `entropic`;
 - `resolute`.
 
-Si una criatura tiene varias plantillas posibles y se invoca desde búsqueda manual, la aplicación debe preguntar cuál aplicar.
+Si una criatura tiene varias plantillas posibles y se invoca desde búsqueda manual, la aplicación debe preguntar cuál aplicar.  
+Si la criatura no es `outsider`, el asistente puede resolver la plantilla sin depender de una lista restringida del JSON.
 
 Si se invoca desde últimas usadas o más usadas, puede usarse directamente la combinación previa de criatura + plantilla.
 

@@ -18,8 +18,8 @@ import {
 } from '@/services/combatApi';
 import type { CreatureCatalogItem, SummonTemplateType } from '@/types/catalog';
 import type { CombatRollResult, CombatState, GlobalCombatRollResult, SummonShortcut } from '@/types/combat';
-import { summonTemplates } from '@/data/summonTemplates';
 import { readCombatStateSnapshot, writeCombatStateSnapshot } from '@/utils/combatStatePersistence';
+import { getAllowedSummonTemplatesForCreatureType } from '@/utils/summonAssistantTemplateResolution';
 
 const defaultCombatState: CombatState = {
   activeGroups: [],
@@ -83,14 +83,7 @@ export const useCombatStore = defineStore('combat', {
         return [];
       }
 
-      const creatureType = creature.creatureType.toLowerCase();
-      if (creatureType.includes('outsider')) {
-        return [];
-      }
-
-      return summonTemplates
-        .filter(template => template.key !== 'none')
-        .map(template => template.key.toUpperCase() as SummonTemplateType);
+      return getAllowedSummonTemplatesForCreatureType(creature.creatureType);
     },
     activeInstanceCount: state => state.combatState.activeGroups.reduce((total, group) => total + group.instances.length, 0),
   },
