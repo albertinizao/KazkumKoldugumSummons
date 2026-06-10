@@ -69,12 +69,16 @@
         {
           "formula": "1d4+1",
           "damageType": "BLUDGEONING",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 1.5
         },
         {
           "formula": "1d3",
           "damageType": "COLD",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "NONE",
+          "damageAbilityMultiplier": 0.0
         }
       ],
       "critical": {

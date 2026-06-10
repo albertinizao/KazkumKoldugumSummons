@@ -124,6 +124,90 @@ class DefaultCreatureResolverTest {
         assertThat(resolved.getAttacks().getFirst().getDamageComponents().getLast().getFormula()).isEqualTo("2d6");
     }
 
+    @Test
+    void recalculatesStrengthDamageUsingOneAndHalfStrengthWhenSingleNaturalAttackMatchesThatPattern() {
+        CreatureTemplate template = baseTemplate()
+                .id("ankylosaurus")
+                .name("Ankylosaurus")
+                .abilities(AbilityScores.builder()
+                        .strength(27)
+                        .dexterity(10)
+                        .constitution(17)
+                        .intelligence(2)
+                        .wisdom(13)
+                        .charisma(8)
+                        .build())
+                .attacks(List.of(attack("Tail", 14, AttackAbility.STRENGTH, "3d6+12", 1.5, DamageType.BLUDGEONING)))
+                .build();
+
+        ResolvedCreature resolved = resolver.resolve(template, null, SummonerConfiguration.defaultConfiguration());
+
+        assertThat(resolved.getAttacks().getFirst().getDamageComponents().getFirst().getFormula()).isEqualTo("3d6+15");
+    }
+
+    @Test
+    void recalculatesStrengthDamageUsingFullStrengthWhenTheBaseFormulaMatchesFullStrength() {
+        CreatureTemplate template = baseTemplate()
+                .id("lion")
+                .name("Lion")
+                .abilities(AbilityScores.builder()
+                        .strength(21)
+                        .dexterity(17)
+                        .constitution(15)
+                        .intelligence(2)
+                        .wisdom(12)
+                        .charisma(6)
+                        .build())
+                .attacks(List.of(attack("Bite", 7, AttackAbility.STRENGTH, "1d8+5", DamageType.PIERCING)))
+                .build();
+
+        ResolvedCreature resolved = resolver.resolve(template, null, SummonerConfiguration.defaultConfiguration());
+
+        assertThat(resolved.getAttacks().getFirst().getDamageComponents().getFirst().getFormula()).isEqualTo("1d8+7");
+    }
+
+    @Test
+    void recalculatesStrengthDamageUsingHalfStrengthWhenTheBaseFormulaMatchesHalfStrength() {
+        CreatureTemplate template = baseTemplate()
+                .id("half-strength")
+                .name("Half Strength")
+                .abilities(AbilityScores.builder()
+                        .strength(14)
+                        .dexterity(10)
+                        .constitution(10)
+                        .intelligence(2)
+                        .wisdom(10)
+                        .charisma(10)
+                        .build())
+                .attacks(List.of(attack("Claw", 3, AttackAbility.STRENGTH, "1d4+1", 0.5, DamageType.SLASHING)))
+                .build();
+
+        ResolvedCreature resolved = resolver.resolve(template, null, SummonerConfiguration.defaultConfiguration());
+
+        assertThat(resolved.getAttacks().getFirst().getDamageComponents().getFirst().getFormula()).isEqualTo("1d4+2");
+    }
+
+    @Test
+    void preservesStaticWeaponBonusesWhileRecalculatingStrengthDamage() {
+        CreatureTemplate template = baseTemplate()
+                .id("astral-deva")
+                .name("Astral Deva")
+                .abilities(AbilityScores.builder()
+                        .strength(26)
+                        .dexterity(19)
+                        .constitution(21)
+                        .intelligence(18)
+                        .wisdom(18)
+                        .charisma(23)
+                        .build())
+                .attacks(List.of(attack("Disrupting warhammer", 26, AttackAbility.STRENGTH, "1d8+14", 1.5, DamageType.BLUDGEONING)))
+                .build();
+
+        ResolvedCreature resolved = resolver.resolve(template, null, SummonerConfiguration.defaultConfiguration());
+
+        assertThat(resolved.getAttacks().getFirst().getDamageComponents().getFirst().getFormula()).isEqualTo("1d8+17");
+    }
+
     @ParameterizedTest
     @CsvSource({
             "CHTHONIC,1,1,ACID",
@@ -464,6 +548,15 @@ class DefaultCreatureResolverTest {
     }
 
     private Attack attack(String name, int attackBonus, AttackAbility attackAbility, String damageFormula, DamageType damageType) {
+        return attack(name, attackBonus, attackAbility, damageFormula, 1.0, damageType);
+    }
+
+    private Attack attack(String name,
+                          int attackBonus,
+                          AttackAbility attackAbility,
+                          String damageFormula,
+                          double damageAbilityMultiplier,
+                          DamageType damageType) {
         return Attack.builder()
                 .id(name.toLowerCase())
                 .name(name)
@@ -476,7 +569,7 @@ class DefaultCreatureResolverTest {
                         .damageType(damageType)
                         .multipliesOnCritical(true)
                         .damageAbility(attackAbility == AttackAbility.NONE ? DamageAbility.NONE : DamageAbility.STRENGTH)
-                        .damageAbilityMultiplier(1.0)
+                        .damageAbilityMultiplier(damageAbilityMultiplier)
                         .build()))
                 .critical(CriticalProfile.builder()
                         .threatRangeStart(20)

@@ -69,12 +69,16 @@
         {
           "formula": "2d8+9",
           "damageType": "BLUDGEONING",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 1.0
         },
         {
           "formula": "2d6",
           "damageType": "COLD",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "NONE",
+          "damageAbilityMultiplier": 0.0
         }
       ],
       "critical": {

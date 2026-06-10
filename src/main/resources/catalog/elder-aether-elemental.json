@@ -59,7 +59,9 @@
         {
           "formula": "2d8+6",
           "damageType": "BLUDGEONING",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 1.0
         }
       ],
       "critical": null,
@@ -75,7 +77,9 @@
         {
           "formula": "10d6+7",
           "damageType": "FORCE",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "NONE",
+          "damageAbilityMultiplier": 0.0
         }
       ],
       "critical": {

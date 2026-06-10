@@ -2,9 +2,11 @@ package com.pathfinder.summons.infrastructure.catalog;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.pathfinder.summons.domain.model.DamageAbility;
 import com.pathfinder.summons.domain.model.HitDice;
 import com.pathfinder.summons.domain.model.SpecialDefenseType;
 import java.lang.reflect.Method;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 class JsonCreatureTemplateRepositoryTest {
@@ -71,5 +73,24 @@ class JsonCreatureTemplateRepositoryTest {
                 .get()
                 .extracting(template -> template.getHitPoints().getMaximum())
                 .isEqualTo(132);
+    }
+
+    @Test
+    void loadsExplicitDamageAbilityMultipliersPerAttackFromCatalogJson() {
+        JsonCreatureTemplateRepository repository = new JsonCreatureTemplateRepository();
+
+        var houndArchon = repository.findById("hound-archon").orElseThrow();
+        Map<String, Double> multipliers = houndArchon.getAttacks().stream()
+                .collect(java.util.stream.Collectors.toMap(
+                        attack -> attack.getName().toLowerCase(),
+                        attack -> attack.getDamageComponents().getFirst().getDamageAbilityMultiplier()));
+
+        Map<String, DamageAbility> abilities = houndArchon.getAttacks().stream()
+                .collect(java.util.stream.Collectors.toMap(
+                        attack -> attack.getName().toLowerCase(),
+                        attack -> attack.getDamageComponents().getFirst().getDamageAbility()));
+
+        assertThat(multipliers).containsEntry("bite", 1.5d).containsEntry("slam", 0.5d);
+        assertThat(abilities).containsEntry("bite", DamageAbility.STRENGTH).containsEntry("slam", DamageAbility.STRENGTH);
     }
 }
