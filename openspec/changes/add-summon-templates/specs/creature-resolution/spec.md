@@ -4,7 +4,7 @@
 
 ### Requirement: Apply fixed rules
 
-The system MUST resolve a final creature by applying Augment Summoning, summon templates when selected, Deep Guardian when eligible, and any additional template-derived effects that belong to the final creature.
+The system MUST resolve a final creature by applying Augment Summoning, the selected summon template, and Deep Guardian when eligible.
 
 #### Scenario: Standard summon
 
@@ -18,22 +18,6 @@ The system MUST resolve a final creature by applying Augment Summoning, summon t
 - WHEN resolution runs
 - THEN the final creature MUST include the template effects and derived bonuses
 
-(Previously: resolution only referenced Augment Summoning, Versatile Summon Monster, and Deep Guardian.)
-
-### Requirement: Template handling
-
-The system MUST require a template choice when a manually selected creature allows multiple templates, and MUST reuse the stored template when a shortcut already encodes it.
-
-#### Scenario: Manual vs shortcut
-
-- GIVEN a creature supports several templates
-- WHEN selected manually
-- THEN the app MUST ask which template to apply
-
-- GIVEN the same creature is selected from recent or popular summons
-- WHEN the shortcut already contains a template
-- THEN the app MUST summon it directly
-
 ### Requirement: Deep Guardian trigger
 
 The system MUST grant the Deep Guardian bonus when the resolved creature has burrow speed or the earth subtype.
@@ -44,22 +28,12 @@ The system MUST grant the Deep Guardian bonus when the resolved creature has bur
 - WHEN resolution completes
 - THEN the final creature MUST receive the Deep Guardian attack and AC bonus
 
-### Requirement: Earth or burrow enhancement
-
-The system MUST grant +1 attack and +1 AC normal and flat-footed to any resolved creature that has the earth subtype or a burrow speed, including creatures that had those traits before template application.
-
-#### Scenario: Native earth creature
-
-- GIVEN a creature already has the earth subtype before summoning
-- WHEN resolution completes
-- THEN the enhancement bonus MUST still apply
-
 ### Requirement: Template damage components
 
-The system MUST add acid or fire damage components from Chthonic and Fiery to every attack and MUST keep those components available for critical multiplication when the component is marked as multiplying.
+The system MUST add the template-specific damage components for Chthonic and Fiery to natural attacks and MUST preserve them as typed damage components.
 
 #### Scenario: Critical damage
 
 - GIVEN a Chthonic or Fiery attack threatens critical
 - WHEN critical damage is shown
-- THEN the template damage component MUST follow the configured critical rule
+- THEN the template damage component MUST be visible in the critical damage output

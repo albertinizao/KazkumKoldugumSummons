@@ -2,19 +2,19 @@
 
 ## Purpose
 
-Define what state must survive refreshes and screen reloads.
+Describe the state that survives refreshes.
 
 ## Requirements
 
-### Requirement: Persist combat state
+### Requirement: Combat state persistence
 
-The system MUST persist active groups, instances, hit points, daily uses, configuration, and recent summons after every relevant change.
+The system MUST persist groups, instances, hit points, daily uses, configuration, recent summons, and most-used summons after relevant changes.
 
-#### Scenario: State mutation
+#### Scenario: Mutation
 
 - GIVEN the user summons, damages, heals, or deletes a creature
-- WHEN the operation finishes
-- THEN the updated state MUST be stored immediately
+- WHEN the operation completes
+- THEN the updated combat state MUST be stored
 
 ### Requirement: Restore on reload
 
@@ -26,12 +26,12 @@ The system MUST restore the last valid combat state when the app reloads.
 - WHEN the app boots again
 - THEN the active combat state MUST reappear
 
-### Requirement: Recent and popular summons
+### Requirement: Client snapshot
 
-The system MUST preserve recent and most-used summon shortcuts so the summon flow can reuse them.
+The frontend MAY keep a best-effort snapshot in `localStorage`, but the backend remains the source of truth.
 
-#### Scenario: Shortcut reuse
+#### Scenario: Cached boot
 
-- GIVEN the user summons the same creature repeatedly
-- WHEN the app recomputes shortcut data
-- THEN the shortcut lists MUST be updated
+- GIVEN a snapshot exists
+- WHEN the app loads
+- THEN it MAY render the cached state before the API refresh

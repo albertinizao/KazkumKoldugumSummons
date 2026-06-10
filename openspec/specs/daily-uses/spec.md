@@ -2,36 +2,36 @@
 
 ## Purpose
 
-Define how summon uses are stored, corrected, and bounded.
+Describe the current summon-use counter behavior.
 
 ## Requirements
 
-### Requirement: Valid bounds
+### Requirement: Bounds
 
-The system MUST keep daily uses within the range `0 <= remaining <= maximum` and MUST keep `maximum >= 0`.
+The system MUST keep daily uses within `0 <= remaining <= maximum` and `maximum >= 0`.
 
-#### Scenario: Invalid state
+#### Scenario: Normalization
 
-- GIVEN a persisted state would exceed the bounds
-- WHEN the app loads it
-- THEN the app MUST correct or reject the invalid values
+- GIVEN a stored value is outside the valid bounds
+- WHEN the configuration or combat state loads
+- THEN the values MUST be normalized
 
-### Requirement: Increment, decrement, reset
+### Requirement: Increase, decrease, reset
 
-The system MUST support increasing, decreasing, and resetting daily uses while preserving bounds.
+The system MUST support increasing, decreasing, and resetting the counter.
 
-#### Scenario: Reset uses
+#### Scenario: Reset
 
-- GIVEN the user resets daily uses
+- GIVEN the user presses `Resetear`
 - WHEN the action completes
-- THEN remaining MUST equal maximum
+- THEN `remaining` MUST equal `maximum`
 
 ### Requirement: Non-blocking summon at zero
 
-The system MUST NOT hard-block summoning at zero remaining uses in the MVP.
+The system MUST NOT hard-block summoning when `remaining` is zero.
 
 #### Scenario: Zero remaining
 
 - GIVEN remaining uses are zero
-- WHEN the user summons a valid creature
-- THEN the remaining count MUST stay at zero and MUST NOT go negative
+- WHEN a valid summon is executed
+- THEN remaining MUST stay at zero

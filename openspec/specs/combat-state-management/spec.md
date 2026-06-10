@@ -2,46 +2,46 @@
 
 ## Purpose
 
-Define how active summon groups, individual instances, hit points, and deletion work.
+Describe how the current combat state is stored and mutated.
 
 ## Requirements
 
-### Requirement: Grouped active summons
+### Requirement: Grouped summons
 
-The system MUST represent active summons as groups of instances that share one final creature definition.
+The system MUST represent active summons as groups of instances sharing one resolved creature.
 
-#### Scenario: Shared final creature
+#### Scenario: Same final creature
 
-- GIVEN multiple instances have the same resolved creature
-- WHEN the combat screen renders
-- THEN the app MUST show one group with multiple instances
+- GIVEN two summons resolve to the same creature
+- WHEN they are stored
+- THEN they MUST end up in the same group
 
-### Requirement: Instance hit points
+### Requirement: Independent HP
 
-Each instance MUST track current hit points independently and MUST derive its visible state from current and maximum hit points.
+Each instance MUST track its own hit points and status.
 
-#### Scenario: Damage and recovery
+#### Scenario: One damaged instance
 
 - GIVEN one instance is damaged
-- WHEN the user heals it
-- THEN the instance state MUST recalculate to HEALTHY or DAMAGED
+- WHEN another instance is inspected
+- THEN its hit points MUST remain unchanged
 
-### Requirement: Individual delete and clear all
+### Requirement: Visible states
 
-The system MUST allow deleting one instance without affecting the others and MUST provide a clear-all action for the whole combat state.
+The system MUST expose `HEALTHY`, `DAMAGED`, and `DOWN` as the visible instance states.
 
-#### Scenario: Remove one creature
+#### Scenario: Zero HP
 
-- GIVEN a group has multiple instances
-- WHEN the user deletes one instance
-- THEN the other instances MUST remain visible
+- GIVEN current hit points are 0 or less
+- WHEN the instance is rendered
+- THEN its status MUST be `DOWN`
 
-### Requirement: Derived states
+### Requirement: Remove and clear
 
-The system MUST expose HEALTHY, DAMAGED, and DOWN as the only visible instance states.
+The system MUST support removing a single instance and clearing the whole summon list.
 
-#### Scenario: Zero hit points
+#### Scenario: Clear all
 
-- GIVEN an instance reaches zero or fewer hit points
-- WHEN the screen updates
-- THEN the app MUST mark the instance as DOWN and keep it visible
+- GIVEN active summons exist
+- WHEN the user clears summons
+- THEN the active group list MUST become empty

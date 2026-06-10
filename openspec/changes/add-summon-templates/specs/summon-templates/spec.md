@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Define how summon templates modify resolved creatures.
+Define how summon templates modify resolved creatures in the current codebase.
 
 ## Requirements
 
@@ -28,7 +28,7 @@ The system MUST treat template effects as part of the final creature identity.
 
 ### Requirement: Chthonic template
 
-Chthonic MUST change alignment to NG, add earth subtype, add darkvision 60 ft and tremorsense 60 ft, add burrow speed equal to half of the creature's highest existing speed, add 1 acid damage to all attacks, add acid resistance 10, and add the listed immunities.
+Chthonic MUST change alignment to NG, add the earth subtype, add darkvision 60 ft, add tremorsense when burrow exists, add burrow speed, add acid damage to natural attacks, add acid resistance, and add the template defenses exposed by the current resolver.
 
 #### Scenario: Chthonic creature
 
@@ -38,7 +38,7 @@ Chthonic MUST change alignment to NG, add earth subtype, add darkvision 60 ft an
 
 ### Requirement: Fiery template
 
-Fiery MUST change alignment to NG, add fire subtype, add darkvision 60 ft, add 1 fire damage to all attacks, add immunity to fire, and add vulnerability to cold.
+Fiery MUST change alignment to NG, add the fire subtype, add darkvision 60 ft, add fire damage to natural attacks, add immunity to fire, and add vulnerability to cold.
 
 #### Scenario: Fiery creature
 
@@ -48,7 +48,7 @@ Fiery MUST change alignment to NG, add fire subtype, add darkvision 60 ft, add 1
 
 ### Requirement: Celestial, Entropic, and Resolute templates
 
-Celestial, Entropic, and Resolute MUST change alignment to NG, add darkvision 60 ft, add their listed resistances, and add a single-use swift-action smite special attack with the specified target alignment.
+Celestial, Entropic, and Resolute MUST change alignment to NG, add darkvision 60 ft, add the corresponding resistances, and add a single-use smite special attack with the specified target alignment.
 
 #### Scenario: Smite special attack
 

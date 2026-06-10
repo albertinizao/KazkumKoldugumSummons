@@ -2,36 +2,56 @@
 
 ## Purpose
 
-Define the main screen where the user manages combat in real time.
+Define the current main combat view.
 
 ## Requirements
 
-### Requirement: Main controls
+### Requirement: Global actions
 
-The combat screen MUST always expose Invoke, Clear Summons, daily uses, and the latest roll result when available.
+The combat screen MUST expose global actions for rolling attacks and saving throws across all active groups.
 
-#### Scenario: Main entry
+#### Scenario: Global buttons
 
-- GIVEN the user opens the app
+- GIVEN the combat view is open
+- WHEN active groups exist
+- THEN the user MUST see `Atacar con todas` and `Tirar TS con todas`
+
+### Requirement: Clear summons
+
+The top bar MUST expose a clear-summons action with confirmation.
+
+#### Scenario: Clear all
+
+- GIVEN active summons exist
+- WHEN the user presses `Limpiar`
+- THEN the app MUST ask for confirmation before deleting all summons
+
+### Requirement: Group cards
+
+The combat screen MUST show one card per active summon group with a summary and individual instance cards.
+
+#### Scenario: Active groups
+
+- GIVEN the user has summoned creatures
 - WHEN the combat screen renders
-- THEN the global controls MUST be visible without extra navigation
+- THEN each group MUST show its summary and instances
 
-### Requirement: Group visibility
+### Requirement: Instance actions
 
-The combat screen MUST show active summons grouped by final creature and MUST show each group's summary plus individual cards.
+Each instance card MUST show hit points, status, quick damage/heal buttons, a custom amount modal, and delete.
 
-#### Scenario: Active summons
+#### Scenario: Instance control
 
-- GIVEN one or more groups exist
-- WHEN the screen is displayed
-- THEN the user MUST see each group and its instances
+- GIVEN an instance is visible
+- WHEN the user interacts with the card
+- THEN the app MUST allow damage, healing, and deletion
 
-### Requirement: Tablet-friendly layout
+### Requirement: Expanded stat block
 
-The combat screen SHOULD remain readable and touch-friendly in portrait and landscape modes.
+The combat screen MUST show the final creature's expanded stat block in the group modal.
 
-#### Scenario: Narrow viewport
+#### Scenario: Expand creature
 
-- GIVEN the app runs on a tablet in portrait orientation
-- WHEN the screen renders
-- THEN controls and group cards MUST remain usable without hover
+- GIVEN the user presses `Expandir ficha`
+- WHEN the modal opens
+- THEN the full resolved stat block MUST be visible

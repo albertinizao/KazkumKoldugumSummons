@@ -1,6 +1,18 @@
 # Kazkum Koldugum Summons
 
-Aplicación local para gestionar invocaciones de Pathfinder 1e.
+Aplicación web local para gestionar invocaciones de **Pathfinder 1e** en mesa.
+
+## Estado actual
+
+La versión actual del código expone cuatro vistas principales:
+
+- **Combate** (`/`)
+- **Invocaciones** (`/invocaciones`, alias `/invocacion`)
+- **Catálogo** (`/catalogo`)
+- **Configuración** (`/configuracion`)
+
+El backend es **Java + Spring Boot** y el frontend es **Vue 3 + Vite**.
+El estado persistente se guarda en **H2** en archivo local y el frontend mantiene una caché de respaldo en `localStorage`.
 
 ## Requisitos
 
@@ -8,60 +20,27 @@ Aplicación local para gestionar invocaciones de Pathfinder 1e.
 - Node.js 22 o superior
 - npm
 
-El proyecto usa el wrapper de Maven, así que no necesitas instalar Maven globalmente.
+El proyecto usa el wrapper de Maven, así que no hace falta instalar Maven globalmente.
 
 ## Estructura
 
 - `src/` — backend Spring Boot
 - `frontend/` — frontend Vue 3 + Vite
 - `data/` — base de datos local H2 en archivo
+- `docs/` — documentación funcional y técnica
+- `openspec/` — specs en OpenSpec
 
-## Compilación del backend
-
-Desde la raíz del repositorio:
-
-```powershell
-./mvnw test
-```
-
-Ese comando compila el backend y ejecuta la batería de tests.
-
-Si quieres generar el JAR final:
-
-```powershell
-./mvnw clean package
-```
-
-El artefacto queda en:
-
-```text
-target/kazkum-koldugum-summons-0.0.1-SNAPSHOT.jar
-```
-
-## Compilación del frontend
-
-Desde `frontend/`:
-
-```powershell
-npm install
-npm run build
-```
-
-El resultado de producción se genera en:
-
-```text
-frontend/dist
-```
-
-## Desarrollo en local
+## Ejecución local
 
 ### Backend
+
+Desde la raíz del repositorio:
 
 ```powershell
 ./mvnw spring-boot:run
 ```
 
-Arranca en:
+El backend queda disponible en:
 
 ```text
 http://localhost:8080
@@ -69,30 +48,24 @@ http://localhost:8080
 
 ### Frontend
 
+Desde `frontend/`:
+
 ```powershell
-cd frontend
 npm install
 npm run dev
 ```
 
-Vite arranca en:
+El frontend de desarrollo queda disponible en:
 
 ```text
 http://localhost:5173
 ```
 
-El frontend de desarrollo usa proxy hacia la API en `http://localhost:8080`.
+En desarrollo, Vite proxy a la API del backend.
 
-## Despliegue local completo
+## Build de producción
 
-El backend sirve la interfaz estática desde `src/main/resources/static`, así que el despliegue local completo consiste en:
-
-1. Compilar el frontend.
-2. Copiar el contenido de `frontend/dist` a `src/main/resources/static`.
-3. Compilar el backend.
-4. Ejecutar el JAR.
-
-### Pasos exactos
+### Frontend
 
 ```powershell
 cd frontend
@@ -100,31 +73,39 @@ npm install
 npm run build
 ```
 
-```powershell
-Copy-Item -Recurse -Force .\dist\* ..\src\main\resources\static\
+El bundle queda en:
+
+```text
+frontend/dist
 ```
 
+### Backend empaquetado
+
+La app Spring Boot sirve la interfaz estática desde `src/main/resources/static`.
+
+Pasos habituales:
+
 ```powershell
-cd ..
+Copy-Item -Recurse -Force .\frontend\dist\* .\src\main\resources\static\
 ./mvnw clean package
-```
-
-```powershell
 java -jar .\target\kazkum-koldugum-summons-0.0.1-SNAPSHOT.jar
 ```
 
-La aplicación quedará disponible en:
+## Persistencia
 
-```text
-http://localhost:8080
-```
+- **H2**: `./data/summonsdb`
+- **Spring Data JPA** para el estado del combate y la configuración
+- **localStorage** en el frontend como caché de arranque, siempre subordinada a la API
 
-## Base de datos local
+## Documentación principal
 
-El backend persiste el estado en un archivo H2 local dentro de `data/`.
-
-Si quieres reiniciar el estado completo, elimina ese archivo con la aplicación cerrada.
-
-## Nota operativa
-
-Si cambias el frontend, vuelve a ejecutar `npm run build` y copia de nuevo `frontend/dist` a `src/main/resources/static` antes de empaquetar el backend.
+- [Visión del producto](docs/01-vision-producto.md)
+- [Alcance funcional actual](docs/02-alcance-funcional.md)
+- [Pantallas](docs/03-pantalla-principal.md)
+- [Catálogo](docs/04-catalogo-criaturas.md)
+- [Reglas de tiradas](docs/05-reglas-tiradas.md)
+- [Casos de uso](docs/07-casos-uso.md)
+- [Criterios de aceptación](docs/08-criterios-aceptacion.md)
+- [Glosario](docs/09-glosario.md)
+- [API REST actual](docs/10-api-rest.md)
+- [Modelo de dominio actual](docs/13-modelo-dominio.md)

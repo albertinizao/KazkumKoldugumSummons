@@ -2,46 +2,56 @@
 
 ## Purpose
 
-Define attack rolls, damage presentation, saving throws, and critical handling.
+Define the current roll presentation rules.
 
 ## Requirements
 
 ### Requirement: Group attack rolls
 
-The system MUST roll all attacks for all instances in the selected group and MUST show each creature separately.
+The system MUST roll attacks for every instance in the selected group and MUST render each creature separately.
 
-#### Scenario: Multiple attacks
+#### Scenario: Multi-instance group
 
-- GIVEN a creature has more than one attack or repeated attack quantity
-- WHEN the user chooses Attack All
-- THEN the app MUST roll each attack separately
+- GIVEN a group has several instances
+- WHEN the user presses `Atacar`
+- THEN each instance MUST receive its own attack result set
 
-### Requirement: Damage by type
+### Requirement: Multiple attacks
 
-The system MUST display damage as separate typed components and MUST label it as damage if it hits.
+The system MUST roll repeated attacks separately when `quantity > 1`.
+
+#### Scenario: Two claws
+
+- GIVEN an attack has `quantity = 2`
+- WHEN the attack is rolled
+- THEN the UI MUST show `Claw 1` and `Claw 2`
+
+### Requirement: Critical presentation
+
+The system MUST show the attack roll, normal damage, confirmation roll, and critical damage when a threat occurs.
+
+#### Scenario: Threat
+
+- GIVEN the natural roll threatens a critical hit
+- WHEN the result is displayed
+- THEN the UI MUST show threat and confirmation
+
+### Requirement: Typed damage
+
+The system MUST keep damage components separated by type.
 
 #### Scenario: Mixed damage
 
-- GIVEN an attack has piercing and fire damage
+- GIVEN an attack deals piercing and fire damage
 - WHEN the result is shown
-- THEN the app MUST show both components separately
-
-### Requirement: Critical flow
-
-The system MUST show threat, confirmation, normal damage, and critical damage when a roll threatens a critical hit.
-
-#### Scenario: Threat occurs
-
-- GIVEN the natural die roll threatens a critical
-- WHEN the attack result is produced
-- THEN the app MUST show the confirmation roll and both damage versions
+- THEN both types MUST be visible separately
 
 ### Requirement: Saving throws
 
 The system MUST roll Fortitude, Reflex, and Will for every instance in the selected group.
 
-#### Scenario: Group saving throws
+#### Scenario: Group saves
 
-- GIVEN the user chooses Roll Saves
-- WHEN the action completes
-- THEN the app MUST show the three saving throws per instance
+- GIVEN the user presses `Salvaciones`
+- WHEN the roll resolves
+- THEN each instance MUST show all three saving throws
