@@ -2,36 +2,56 @@
 
 ## Purpose
 
-Define how base creatures are stored, queried, and previewed before invocation.
+Describe the current catalog of base creatures and preview behavior.
 
 ## Requirements
 
-### Requirement: Structured base creatures
+### Requirement: JSON catalog
 
-The catalog MUST store base creatures as structured JSON data with level, alignment, size, type, attacks, defenses, speeds, and full stat block fields.
+The system MUST load creature templates from manually maintained JSON files.
 
-#### Scenario: Catalog item
+#### Scenario: Catalog boot
 
-- GIVEN a creature exists in the catalog
-- WHEN the app loads its entry
-- THEN the app MUST expose the structured fields needed to resolve the final creature
+- GIVEN the backend starts
+- WHEN the catalog repository loads
+- THEN the creature list MUST be available to the API
 
 ### Requirement: Search and filter
 
-The system SHOULD allow the user to search catalog creatures by name and filter by summon level and allowed template.
+The catalog listing MUST support text search and summon-level filters.
 
-#### Scenario: Manual selection
+#### Scenario: Query
 
-- GIVEN the user opens the summon modal
-- WHEN they search for a creature
-- THEN the catalog MUST return matching base creatures
+- GIVEN the user searches the catalog
+- WHEN the API is called
+- THEN matching base creatures MUST be returned
 
-### Requirement: Final preview
+### Requirement: Template parameter
 
-The catalog MUST provide a resolved preview of the final creature after fixed rules and optional template application.
+The listing accepts a `template` parameter, but the current list implementation only excludes outsiders rather than applying a full template-specific filter.
 
-#### Scenario: Preview before summon
+#### Scenario: Template query
 
-- GIVEN a base creature and an allowed template
-- WHEN the user requests preview
-- THEN the app MUST show the resolved creature instead of the raw base creature
+- GIVEN the UI sends a template filter
+- WHEN the listing endpoint resolves the request
+- THEN the list MUST still return the current code's partial filtering behavior
+
+### Requirement: Preview resolved creature
+
+The catalog MUST provide a resolved preview that applies the current fixed rules and optional template.
+
+#### Scenario: Preview
+
+- GIVEN a template is selected
+- WHEN preview is requested
+- THEN the API MUST return the resolved creature
+
+### Requirement: Summary fields
+
+The listing summary MUST expose AC, max HP, saving throws, speeds text, and attack text.
+
+#### Scenario: Listing row
+
+- GIVEN a creature is shown in the list
+- WHEN the card renders
+- THEN those summary fields MUST be available

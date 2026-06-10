@@ -2,40 +2,46 @@
 
 ## Purpose
 
-Define how a base creature becomes the final creature used in combat.
+Describe how a base creature becomes the resolved creature used in play.
 
 ## Requirements
 
-### Requirement: Apply fixed rules
+### Requirement: Fixed rules
 
-The system MUST resolve a final creature by applying Augment Summoning, Versatile Summon Monster when selected, and Deep Guardian when eligible.
+The resolver MUST apply Augment Summoning, optional template effects, and Deep Guardian when eligible.
 
 #### Scenario: Standard summon
 
-- GIVEN a base creature is summoned
-- WHEN resolution runs
-- THEN the final creature MUST include the fixed rules that apply to it
-
-### Requirement: Template handling
-
-The system MUST require a template choice when a manually selected creature allows multiple templates, and MUST reuse the stored template when a shortcut already encodes it.
-
-#### Scenario: Manual vs shortcut
-
-- GIVEN a creature supports several templates
-- WHEN selected manually
-- THEN the app MUST ask which template to apply
-
-- GIVEN the same creature is selected from recent or popular summons
-- WHEN the shortcut already contains a template
-- THEN the app MUST summon it directly
-
-### Requirement: Deep Guardian trigger
-
-The system MUST grant the Deep Guardian bonus when the resolved creature has burrow speed or the earth subtype.
-
-#### Scenario: Earth creature
-
-- GIVEN the resolved creature has burrow speed
+- GIVEN a creature is resolved
 - WHEN resolution completes
-- THEN the final creature MUST receive the Deep Guardian attack and AC bonus
+- THEN the final creature MUST include the applicable fixed rules
+
+### Requirement: Template legality
+
+The resolver MUST reject templates for outsiders.
+
+#### Scenario: Outsider creature
+
+- GIVEN the creature type is outsider
+- WHEN a template is requested
+- THEN resolution MUST fail
+
+### Requirement: Template effects
+
+The resolver MUST add the current template-specific bonuses for Chthonic, Fiery, Celestial, Entropic, and Resolute.
+
+#### Scenario: Fiery summon
+
+- GIVEN the selected template is Fiery
+- WHEN resolution completes
+- THEN fire-related template defenses MUST be present
+
+### Requirement: Deep Guardian
+
+The resolver MUST apply Deep Guardian when the resolved creature has burrow speed or an earth subtype.
+
+#### Scenario: Burrow speed
+
+- GIVEN the creature gains burrow
+- WHEN resolution completes
+- THEN AC and attack bonuses MUST be applied

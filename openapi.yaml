@@ -247,25 +247,6 @@ paths:
           $ref: '#/components/responses/NotFound'
         '409':
           $ref: '#/components/responses/Conflict'
-  /api/combat-state/groups/{groupId}/expanded-stat-block:
-    get:
-      tags:
-      - Combat State
-      summary: Obtener ficha expandida final
-      description: Devuelve la ficha completa final de la criatura de un grupo activo mediante fullStatBlock. No devuelve
-        como ficha principal la criatura base sin transformar.
-      operationId: getExpandedStatBlock
-      parameters:
-      - $ref: '#/components/parameters/GroupIdPath'
-      responses:
-        '200':
-          description: Ficha expandida
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExpandedStatBlockResponse'
-        '404':
-          $ref: '#/components/responses/NotFound'
   /api/configuration:
     get:
       tags:
@@ -1207,33 +1188,6 @@ components:
           $ref: '#/components/schemas/DiceRoll'
         displayText:
           type: string
-          nullable: true
-    ExpandedStatBlockResponse:
-      type: object
-      required:
-      - groupId
-      - resolvedCreatureId
-      - displayName
-      - fullStatBlock
-      properties:
-        groupId:
-          type: string
-        resolvedCreatureId:
-          type: string
-        displayName:
-          type: string
-        expandedAbilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/AbilityDetail'
-        appliedRules:
-          type: array
-          items:
-            $ref: '#/components/schemas/AppliedRule'
-        fullStatBlock:
-          type: string
-          description: Ficha completa final transformada del grupo activo. Es el campo canónico para la ficha expandida en
-            el MVP.
           nullable: true
     Configuration:
       type: object

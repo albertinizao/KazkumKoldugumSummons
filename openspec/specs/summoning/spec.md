@@ -2,46 +2,56 @@
 
 ## Purpose
 
-Define the summon flow from the main screen to active combat state.
+Describe the current summon flow.
 
 ## Requirements
 
-### Requirement: Open summon flow
+### Requirement: Invoke from UI
 
-The system MUST open a summon modal or panel from the main screen when the user chooses Invoke.
+The system MUST allow the user to start summoning from the Invocations screen.
 
 #### Scenario: Entry point
 
-- GIVEN the user is on the combat screen
-- WHEN they press Invoke
-- THEN the app MUST show the summon flow
+- GIVEN the user is on the summon screen
+- WHEN the user chooses `Invocar`
+- THEN the app MUST send a summon request
+
+### Requirement: Invocation assistant
+
+The system MUST provide a guided summon assistant on the Invocations screen.
+
+#### Scenario: Guided choice
+
+- GIVEN the user opens the assistant
+- WHEN they answer the questions
+- THEN the assistant MUST produce a suggested creature/template combination
 
 ### Requirement: Quantity calculation
 
-The system MUST calculate summon quantity from the current maximum summon level and the creature's summon level.
+The system MUST calculate the summon quantity from the configured max summon level and the creature summon level.
 
-#### Scenario: Level difference
+#### Scenario: Lower-level summon
 
-- GIVEN the creature is below the maximum summon level
-- WHEN the user confirms the summon
-- THEN the app MUST roll the configured quantity formula automatically
+- GIVEN the creature is below the maximum level
+- WHEN the summon resolves
+- THEN the amount MUST come from the configured formula
 
-### Requirement: Daily use decrement
+### Requirement: Shortcut reuse
 
-The system MUST decrement daily uses by one on summon and MUST NOT allow the remaining value to go below zero.
+The system MUST reuse recent/popular summon shortcuts when available.
 
-#### Scenario: No remaining uses
+#### Scenario: Shortcut summon
 
-- GIVEN daily uses are already at zero
-- WHEN the user summons a valid creature
-- THEN the summon MAY proceed and remaining uses MUST stay at zero
+- GIVEN a shortcut exists
+- WHEN the user taps it
+- THEN the stored creature-template combination MUST be used
 
-### Requirement: Add to active groups
+### Requirement: Group merge
 
-The system MUST add summoned instances to the matching active group when the final creature already exists, otherwise it MUST create a new group.
+The system MUST append new instances to the existing group when the resolved creature already exists.
 
-#### Scenario: Same final creature
+#### Scenario: Same resolved creature
 
-- GIVEN a group already exists for the same final creature
-- WHEN the user summons it again
-- THEN the app MUST add new instances to that group
+- GIVEN the group already exists
+- WHEN the same resolved creature is summoned again
+- THEN the new instances MUST join the group

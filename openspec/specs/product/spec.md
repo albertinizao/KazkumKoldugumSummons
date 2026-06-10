@@ -2,36 +2,46 @@
 
 ## Purpose
 
-Define the product boundaries and the overall user experience for the summons management app.
+Describe the current tabletop-focused application for managing Pathfinder 1e summons.
 
 ## Requirements
 
-### Requirement: Tabletop support
+### Requirement: Local tabletop app
 
-The system MUST provide a local web application for managing active summons during Pathfinder 1e combat.
+The system MUST remain a local web application focused on a single player at the table.
 
-#### Scenario: Tablet combat use
+#### Scenario: Tablet use
 
-- GIVEN the user opens the app on an Android tablet
-- WHEN they enter combat mode
-- THEN the app MUST be usable without desktop-only interactions
+- GIVEN the app is opened on a tablet
+- WHEN the user navigates through the main screens
+- THEN the UI MUST remain usable without hover-only interactions
 
-### Requirement: Dark, responsive shell
+### Requirement: Current screens
 
-The system MUST use a dark visual theme and SHALL remain usable in portrait and landscape layouts.
+The system MUST expose the current screens: Combat, Summons, Catalog, and Settings.
 
-#### Scenario: Default display
+#### Scenario: Navigation
 
-- GIVEN a fresh app load
-- WHEN the main screen renders
-- THEN dark mode MUST be active and primary controls MUST be readable
+- GIVEN the app is loaded
+- WHEN the user uses the top bar
+- THEN the screens MUST be reachable directly
+
+### Requirement: Clear summons action
+
+The top bar MUST expose a clear-summons button that asks for confirmation.
+
+#### Scenario: Confirm clear
+
+- GIVEN active summons exist
+- WHEN the user presses `Limpiar`
+- THEN the app MUST require confirmation before deleting them
 
 ### Requirement: Non-goals
 
-The system MUST NOT automate contextual Pathfinder rules such as hit resolution, enemy damage application, initiative, flanking, or temporary modifiers.
+The system MUST NOT automate context-dependent Pathfinder rules such as hit resolution, enemy damage application, initiative, or temporary modifiers.
 
-#### Scenario: Contextual combat
+#### Scenario: Attack shown
 
-- GIVEN an attack roll is shown
-- WHEN the user needs to determine if it hits
-- THEN the system MUST leave that decision to the table
+- GIVEN the app rolls an attack
+- WHEN the result is displayed
+- THEN the user MUST still decide the outcome in mesa

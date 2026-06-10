@@ -2,36 +2,36 @@
 
 ## Purpose
 
-Define the configurable values that drive summon availability and summon quantity.
+Describe the current singleton configuration for summons.
 
 ## Requirements
 
 ### Requirement: Maximum summon level
 
-The system MUST persist a configurable `maxSummonMonsterLevel` value and MUST default it to 3.
+The system MUST persist `maxSummonMonsterLevel` and default it to 3.
 
-#### Scenario: Default configuration
+#### Scenario: First start
 
-- GIVEN the app is initialized for the first time
+- GIVEN the app starts for the first time
 - WHEN the configuration is loaded
-- THEN `maxSummonMonsterLevel` MUST equal 3
+- THEN `maxSummonMonsterLevel` MUST be 3
 
-### Requirement: Summon rules use configuration
+### Requirement: Daily uses maximum
 
-The system MUST use `maxSummonMonsterLevel` to determine available creatures and the quantity formula for summons.
+The system MUST persist the maximum daily uses alongside the summon-level configuration.
 
-#### Scenario: Lower-level summon
+#### Scenario: Update config
 
-- GIVEN `maxSummonMonsterLevel` is configured
-- WHEN the user summons a creature below that level
-- THEN the summon quantity MUST follow the configured level difference rules
+- GIVEN the user updates configuration
+- WHEN the save completes
+- THEN both the summon level and the daily-use maximum MUST be stored
 
-### Requirement: Configurable persistence
+### Requirement: Alias endpoint
 
-The system MUST persist configuration changes and restore them on reload.
+The system MUST expose the configuration through `/api/configuration` and `/api/summoner-configuration`.
 
-#### Scenario: User update
+#### Scenario: Read config
 
-- GIVEN the user changes the maximum summon level
-- WHEN the change is saved
-- THEN the new value MUST survive refreshes
+- GIVEN the frontend loads settings
+- WHEN it requests the configuration
+- THEN either path MUST return the same data
