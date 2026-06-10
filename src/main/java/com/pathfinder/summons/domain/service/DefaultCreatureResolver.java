@@ -371,12 +371,7 @@ public class DefaultCreatureResolver implements CreatureResolver {
             return false;
         }
 
-        String name = attack.getName();
-        if (name == null || name.isBlank()) {
-            return false;
-        }
-
-        return NATURAL_ATTACK_NAMES.contains(normalizeAttackName(name)) || normalizeAttackName(name).startsWith("tail");
+        return resolveNaturalAttackFamily(attack.getName()).isPresent();
     }
 
     private String normalizeAttackName(String name) {
@@ -388,7 +383,12 @@ public class DefaultCreatureResolver implements CreatureResolver {
             return component.getDamageType();
         }
 
-        String attackName = normalizeAttackName(attack.getName());
+        Optional<String> naturalAttackFamily = resolveNaturalAttackFamily(attack.getName());
+        if (naturalAttackFamily.isEmpty()) {
+            return DamageType.BLUDGEONING;
+        }
+
+        String attackName = naturalAttackFamily.get();
         if (attackName.startsWith("bite") || attackName.startsWith("gore") || attackName.startsWith("sting")) {
             return DamageType.PIERCING;
         }
@@ -404,6 +404,26 @@ public class DefaultCreatureResolver implements CreatureResolver {
         }
 
         return DamageType.BLUDGEONING;
+    }
+
+    private Optional<String> resolveNaturalAttackFamily(String name) {
+        if (name == null || name.isBlank()) {
+            return Optional.empty();
+        }
+
+        String normalized = normalizeAttackName(name);
+        if (NATURAL_ATTACK_NAMES.contains(normalized) || normalized.startsWith("tail")) {
+            return Optional.of(normalized);
+        }
+
+        if (normalized.endsWith("s")) {
+            String singular = normalized.substring(0, normalized.length() - 1);
+            if (NATURAL_ATTACK_NAMES.contains(singular) || singular.startsWith("tail")) {
+                return Optional.of(singular);
+            }
+        }
+
+        return Optional.empty();
     }
 
     private ArmorClass resolveArmorClass(ArmorClass baseArmorClass, boolean deepGuardianApplied) {

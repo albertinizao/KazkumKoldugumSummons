@@ -117,6 +117,31 @@ class CombatRollServiceTest {
     }
 
     @Test
+    void appliesDefaultCriticalThreatsAndDamageToNaturalAttacksWithoutExplicitCriticalProfile() {
+        SequencedDiceRoller diceRoller = new SequencedDiceRoller()
+                .enqueueD20(diceRoll("1d20+29", 20, 29, 49))
+                .enqueueFormula(diceRoll("2d6+16", 11, 16, 27))
+                .enqueueD20(diceRoll("1d20+29", 15, 29, 44))
+                .enqueueFormula(diceRoll("2d6+16", 11, 16, 27))
+                .enqueueD20(diceRoll("1d20+29", 17, 29, 46))
+                .enqueueFormula(diceRoll("2d6+16", 11, 16, 27));
+
+        CombatRollService service = new CombatRollService(diceRoller);
+        ActiveSummonGroup group = groupWithOneInstance(creatureWithNaturalAttackWithoutCritical());
+
+        var result = service.rollGroupAttacks(group);
+
+        SingleAttackRollResult attackResult = result.instanceResults().getFirst().attackResults().getFirst();
+        assertThat(attackResult.criticalThreat()).isNotNull();
+        assertThat(attackResult.criticalThreat().confirmationRoll().getNaturalResults()).containsExactly(15);
+        assertThat(attackResult.normalDamage().total()).isEqualTo(27);
+        assertThat(attackResult.criticalThreat().criticalDamage().total()).isEqualTo(54);
+        assertThat(result.instanceResults().getFirst().attackResults()).hasSize(2);
+        assertThat(result.instanceResults().getFirst().attackResults().get(1).criticalThreat()).isNull();
+        assertThat(result.displayText()).contains("Amenaza de crítico", "Daño crítico");
+    }
+
+    @Test
     void rollsSavingThrowsForEveryInstance() {
         SequencedDiceRoller diceRoller = new SequencedDiceRoller()
                 .enqueueD20(diceRoll("1d20+4", 12, 4, 16))
@@ -281,6 +306,59 @@ class CombatRollServiceTest {
                 .shortAbilities(List.of())
                 .expandedAbilities(List.of())
                 .fullStatBlock("fiery badger")
+                .appliedRules(List.of())
+                .build();
+    }
+
+    private static ResolvedCreature creatureWithNaturalAttackWithoutCritical() {
+        return ResolvedCreature.builder()
+                .id("resolved-3")
+                .baseTemplateId("storm-giant")
+                .displayName("Chthonic Storm Giant")
+                .summonLevel(9)
+                .appliedTemplate(SummonTemplateType.CHTHONIC)
+                .alignment(Alignment.NG)
+                .size(CreatureSize.HUGE)
+                .creatureType("humanoid")
+                .subtypes(List.of("giant", "earth"))
+                .initiative(2)
+                .senses(List.of("low-light vision", "darkvision 60 ft.", "tremorsense 60 ft."))
+                .perception(27)
+                .armorClass(ArmorClass.builder().normal(29).touch(11).flatFooted(27).build())
+                .maxHitPoints(286)
+                .savingThrows(SavingThrows.builder()
+                        .fortitude(17)
+                        .reflex(8)
+                        .will(13)
+                        .fortitudeAbility(SavingThrowAbility.CONSTITUTION)
+                        .build())
+                .speeds(List.of(Speed.builder().type(SpeedType.LAND).valueFeet(50).build()))
+                .speedsText("Speed 50 ft.")
+                .attacks(List.of(Attack.builder()
+                        .id("slams")
+                        .name("Slams")
+                        .attackBonus(29)
+                        .attackAbility(AttackAbility.STRENGTH)
+                        .quantity(2)
+                        .attackType(AttackType.MELEE)
+                        .damageComponents(List.of(DamageComponent.builder()
+                                .formula("2d6+16")
+                                .damageType(DamageType.BLUDGEONING)
+                                .multipliesOnCritical(true)
+                                .damageAbility(DamageAbility.STRENGTH)
+                                .damageAbilityMultiplier(1.0)
+                                .build()))
+                        .critical(null)
+                        .notes(List.of())
+                        .build()))
+                .attacksText("Melee 2 slams +29 (2d6+16)")
+                .space("15 ft.")
+                .reach("15 ft.")
+                .specialAttacks(List.of())
+                .specialDefenses(List.of())
+                .shortAbilities(List.of())
+                .expandedAbilities(List.of())
+                .fullStatBlock("storm giant")
                 .appliedRules(List.of())
                 .build();
     }
