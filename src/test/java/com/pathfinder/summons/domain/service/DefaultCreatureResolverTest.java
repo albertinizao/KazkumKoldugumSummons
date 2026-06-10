@@ -101,6 +101,45 @@ class DefaultCreatureResolverTest {
     }
 
     @Test
+    void detectsSingularAndPluralNaturalAttacksForTemplateDamageAndDamageTypeInference() {
+        CreatureTemplate template = baseTemplate()
+                .id("plural-natural-attacks")
+                .name("Plural Natural Attacks")
+                .allowedTemplates(List.of(SummonTemplateType.CHTHONIC))
+                .hitPoints(HitPointsDefinition.builder()
+                        .maximum(30)
+                        .formula("5d8+5")
+                        .hitDice(HitDice.builder().count(5).dieSize(8).build())
+                        .build())
+                .attacks(List.of(
+                        attack("Bite", 3, AttackAbility.STRENGTH, "1d4+1", DamageType.PIERCING),
+                        attack("Slams", 3, AttackAbility.STRENGTH, "1d6+1", DamageType.OTHER),
+                        attack("Claws", 3, AttackAbility.STRENGTH, "1d4+1", DamageType.OTHER),
+                        attack("Warhammer", 3, AttackAbility.STRENGTH, "1d8+1", DamageType.BLUDGEONING)))
+                .build();
+
+        ResolvedCreature resolved = resolver.resolve(template, SummonTemplateType.CHTHONIC, SummonerConfiguration.defaultConfiguration());
+
+        assertThat(resolved.getAttacks().get(0).getDamageComponents())
+                .extracting(DamageComponent::getDamageType)
+                .containsExactly(DamageType.PIERCING, DamageType.ACID);
+
+        assertThat(resolved.getAttacks().get(1).getDamageComponents())
+                .extracting(DamageComponent::getDamageType)
+                .containsExactly(DamageType.BLUDGEONING, DamageType.ACID);
+        assertThat(resolved.getAttacks().get(1).getDamageComponents().getLast().getFormula()).isEqualTo("1d6");
+
+        assertThat(resolved.getAttacks().get(2).getDamageComponents())
+                .extracting(DamageComponent::getDamageType)
+                .containsExactly(DamageType.SLASHING, DamageType.ACID);
+        assertThat(resolved.getAttacks().get(2).getDamageComponents().getLast().getFormula()).isEqualTo("1d6");
+
+        assertThat(resolved.getAttacks().get(3).getDamageComponents())
+                .extracting(DamageComponent::getDamageType)
+                .containsExactly(DamageType.BLUDGEONING);
+    }
+
+    @Test
     void appliesElementalDamageToTailAttacksAndInfersLogicalPhysicalDamageType() {
         CreatureTemplate template = baseTemplate()
                 .id("tail-sweep")

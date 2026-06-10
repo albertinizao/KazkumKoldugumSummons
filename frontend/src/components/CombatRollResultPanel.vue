@@ -15,17 +15,26 @@
 
         <div class="roll-entry-stack">
           <article v-for="attack in instance.attackResults" :key="attack.attackId + ':' + String(attack.attackIndex ?? '')" class="roll-entry">
-            <div class="roll-entry__header">
-              <strong>{{ formatAttackName(attack.attackName, attack.attackIndex) }}</strong>
-              <span class="muted">{{ formatDiceRoll(attack.attackRoll, true) }}</span>
-            </div>
+            <p class="roll-line roll-line--summary" :title="formatDiceTooltip(attack.attackRoll)">
+              <strong>{{ formatAttackLabel(attack.attackName, attack.attackIndex) }}:</strong>&nbsp;
+              <span class="roll-value">{{ attack.attackRoll.total }}</span>
+              <span v-if="attack.criticalThreat" class="roll-critical-label"> (amenaza de crítico)</span>
+            </p>
 
-            <p class="roll-line"><strong>Daño si impacta:</strong> {{ formatDamageRoll(attack.normalDamage) }}</p>
+            <p class="roll-line roll-line--summary" :title="formatDamageTooltip(attack.normalDamage)">
+              <strong>Daño:</strong>&nbsp;
+              <span class="roll-value">{{ formatDamageSummary(attack.normalDamage) }}</span>
+            </p>
 
             <div v-if="attack.criticalThreat" class="roll-critical">
-              <p class="roll-line"><strong>Amenaza de crítico:</strong> {{ formatDiceRoll(attack.attackRoll, true) }}</p>
-              <p class="roll-line"><strong>Confirmación:</strong> {{ formatDiceRoll(attack.criticalThreat.confirmationRoll, true) }}</p>
-              <p class="roll-line"><strong>Daño crítico:</strong> {{ formatDamageRoll(attack.criticalThreat.criticalDamage) }}</p>
+              <p class="roll-line roll-line--summary" :title="formatDiceTooltip(attack.criticalThreat.confirmationRoll)">
+                <strong>Confirmación crítico:</strong>&nbsp;
+                <span class="roll-value">{{ attack.criticalThreat.confirmationRoll.total }}</span>
+              </p>
+              <p class="roll-line roll-line--summary" :title="formatDamageTooltip(attack.criticalThreat.criticalDamage)">
+                <strong>Daño crítico:</strong>&nbsp;
+                <span class="roll-value">{{ formatDamageSummary(attack.criticalThreat.criticalDamage) }}</span>
+              </p>
             </div>
           </article>
         </div>
@@ -38,9 +47,18 @@
 
         <div class="roll-entry-stack">
           <article class="roll-entry">
-            <p class="roll-line"><strong>Fortaleza:</strong> {{ formatDiceRoll(instance.fortitude, true) }}</p>
-            <p class="roll-line"><strong>Reflejos:</strong> {{ formatDiceRoll(instance.reflex, true) }}</p>
-            <p class="roll-line"><strong>Voluntad:</strong> {{ formatDiceRoll(instance.will, true) }}</p>
+            <p class="roll-line roll-line--summary" :title="formatDiceTooltip(instance.fortitude)">
+              <strong>Fortaleza:</strong>&nbsp;
+              <span class="roll-value">{{ instance.fortitude.total }}</span>
+            </p>
+            <p class="roll-line roll-line--summary" :title="formatDiceTooltip(instance.reflex)">
+              <strong>Reflejos:</strong>&nbsp;
+              <span class="roll-value">{{ instance.reflex.total }}</span>
+            </p>
+            <p class="roll-line roll-line--summary" :title="formatDiceTooltip(instance.will)">
+              <strong>Voluntad:</strong>&nbsp;
+              <span class="roll-value">{{ instance.will.total }}</span>
+            </p>
           </article>
         </div>
       </section>
@@ -74,30 +92,62 @@ const createdAtLabel = computed(() => new Date(props.result.createdAt).toLocaleS
 const kindLabel = computed(() => (isAttackResult.value ? 'Ataques de grupo' : 'Tiradas de salvación'));
 const badgeLabel = computed(() => (isAttackResult.value ? 'Ataque' : 'TS'));
 const badgeVariant = computed(() => (isAttackResult.value ? 'warning' : 'success'));
-const showRaw = computed(() => props.showRaw !== false);
+const showRaw = computed(() => props.showRaw === true);
 
-function formatAttackName(name: string, index: number | null): string {
+function formatAttackLabel(name: string, index: number | null): string {
   return index === null ? name : `${name} ${index}`;
 }
 
-function formatDiceRoll(roll: DiceRoll, attackStyle = false): string {
-  const formula = attackStyle && roll.formula.startsWith('1d20')
-    ? 'd20'
-    : roll.formula;
+function formatDiceTooltip(roll: DiceRoll): string {
+  const formula = formatFormulaWithNaturalResults(roll);
 
+  if (!formula) {
+    return String(roll.total);
+  }
+
+  return formula;
+}
+
+function formatDamageSummary(result: DamageRollResult): string {
+  return result.components
+    .map(component => `${component.total} ${damageLabel(component.damageType)}`)
+    .join(' +');
+}
+
+function formatDamageTooltip(result: DamageRollResult): string {
+  return result.components
+    .map(component => {
+      const rolledFormula = formatFormulaWithNaturalResults(component.roll);
+      const appliedFormula = component.appliedFormula ?? component.formula;
+      const damageType = damageLabel(component.damageType);
+
+      const formulaLabel = appliedFormula === component.formula ? rolledFormula : appliedFormula;
+      return `${formulaLabel} -> ${component.total} ${damageType}`;
+    })
+    .join('\n');
+}
+
+function damageLabel(damageType: DamageComponentRollResult['damageType']): string {
+  return damageType.toLowerCase();
+}
+
+function formatFormulaWithNaturalResults(roll: DiceRoll): string {
+  const match = roll.formula.match(/^(\d*)[dD](\d+)([+-]\d+)?$/);
+  if (!match) {
+    return roll.formula;
+  }
+
+  const diceCount = match[1] === '' ? '1' : match[1];
+  const dieSize = match[2];
+  const modifier = match[3];
   const naturalResults = roll.naturalResults.length === 0
-    ? '0'
-    : roll.naturalResults.join(' + ');
+    ? ''
+    : `[${roll.naturalResults.join(' + ')}]`;
+  const modifierText = modifier
+    ? ` ${modifier.startsWith('+') ? '+' : '-'} ${Math.abs(Number(modifier.slice(1)))}`
+    : '';
 
-  return `${formula} ${naturalResults} + ${roll.modifier} = ${roll.total}`;
-}
-
-function formatDamageComponent(component: DamageComponentRollResult): string {
-  return `${component.formula} = ${component.total} ${component.damageType.toLowerCase()}`;
-}
-
-function formatDamageRoll(result: DamageRollResult): string {
-  return result.components.map(formatDamageComponent).join(' + ');
+  return `${diceCount}d${dieSize}${naturalResults}${modifierText}`;
 }
 </script>
 
@@ -146,16 +196,23 @@ function formatDamageRoll(result: DamageRollResult): string {
   gap: 0.4rem;
 }
 
-.roll-entry__header {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.75rem;
-  align-items: baseline;
-}
-
 .roll-line {
   margin: 0;
   color: #e2e8f0;
+}
+
+.roll-line--summary {
+  cursor: help;
+}
+
+.roll-value {
+  text-decoration: underline dotted rgba(148, 163, 184, 0.7);
+  text-underline-offset: 0.16em;
+}
+
+.roll-critical-label {
+  color: #fbbf24;
+  font-weight: 600;
 }
 
 .roll-critical {

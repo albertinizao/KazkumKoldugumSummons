@@ -30,6 +30,7 @@ export interface DiceRoll {
 
 export interface DamageComponentRollResult {
   formula: string;
+  appliedFormula: string;
   roll: DiceRoll;
   damageType: 'PIERCING' | 'SLASHING' | 'BLUDGEONING' | 'FIRE' | 'COLD' | 'ACID' | 'ELECTRICITY' | 'SONIC' | 'FORCE' | 'UNTYPED' | 'OTHER';
   multipliesOnCritical: boolean;

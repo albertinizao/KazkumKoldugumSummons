@@ -18,7 +18,7 @@
       />
     </div>
 
-    <section class="raw-section" aria-labelledby="raw-result-title">
+    <section v-if="showRaw" class="raw-section" aria-labelledby="raw-result-title">
       <div class="raw-section__header">
         <p class="eyebrow">RAW</p>
         <h4 id="raw-result-title">Resultado bruto</h4>
@@ -36,12 +36,14 @@ import type { GlobalCombatRollResult } from '@/types/combat';
 
 const props = defineProps<{
   result: GlobalCombatRollResult;
+  showRaw?: boolean;
 }>();
 
 const isAttackResult = computed(() => props.result.results.some(result => result.type === 'ATTACK_GROUP'));
 const kindLabel = computed(() => (isAttackResult.value ? 'Ataques globales' : 'TS globales'));
 const badgeLabel = computed(() => (isAttackResult.value ? 'Ataque' : 'TS'));
 const badgeVariant = computed(() => (isAttackResult.value ? 'warning' : 'success'));
+const showRaw = computed(() => props.showRaw === true);
 </script>
 
 <style scoped>

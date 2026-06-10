@@ -17,16 +17,37 @@ import com.pathfinder.summons.domain.model.RollDisplayType;
 import com.pathfinder.summons.domain.model.SavingThrows;
 import com.pathfinder.summons.domain.model.SingleAttackRollResult;
 import com.pathfinder.summons.domain.service.DiceRoller;
+import com.pathfinder.summons.domain.model.AttackType;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CombatRollService {
+
+    private static final Pattern DAMAGE_FORMULA_PATTERN = Pattern.compile("^(?:(\\d*)[dD](\\d+))(?:([+-]\\d+))?$");
+    private static final Pattern DAMAGE_NUMBER_PATTERN = Pattern.compile("^[+-]?\\d+$");
+    private static final Set<String> NATURAL_ATTACK_NAMES = Set.of(
+            "bite",
+            "claw",
+            "gore",
+            "hoof",
+            "tentacle",
+            "wing",
+            "pincer",
+            "tail",
+            "slam",
+            "sting",
+            "talon",
+            "other");
 
     private final DiceRoller diceRoller;
 
@@ -109,11 +130,12 @@ public class CombatRollService {
 
     private SingleAttackRollResult rollSingleAttack(Attack attack, Integer attackIndex) {
         DiceRoll attackRoll = diceRoller.roll(1, 20, attack.getAttackBonus());
-        DamageRollResult normalDamage = rollDamage(attack, false);
-        CriticalThreatResult criticalThreat = isCriticalThreat(attack, attackRoll)
+        CriticalProfile effectiveCritical = resolveCriticalProfile(attack);
+        DamageRollResult normalDamage = rollDamage(attack, false, effectiveCritical);
+        CriticalThreatResult criticalThreat = isCriticalThreat(effectiveCritical, attackRoll)
                 ? new CriticalThreatResult(
                         diceRoller.roll(1, 20, attack.getAttackBonus()),
-                        rollDamage(attack, true))
+                        rollDamage(attack, true, effectiveCritical))
                 : null;
 
         return new SingleAttackRollResult(
@@ -126,8 +148,7 @@ public class CombatRollService {
                 formatSingleAttackDisplayText(attack, attackIndex, attackRoll, normalDamage, criticalThreat));
     }
 
-    private boolean isCriticalThreat(Attack attack, DiceRoll attackRoll) {
-        CriticalProfile critical = attack.getCritical();
+    private boolean isCriticalThreat(CriticalProfile critical, DiceRoll attackRoll) {
         if (critical == null || attackRoll.getNaturalResults().isEmpty()) {
             return false;
         }
@@ -136,8 +157,8 @@ public class CombatRollService {
         return naturalRoll >= critical.getThreatRangeStart();
     }
 
-    private DamageRollResult rollDamage(Attack attack, boolean critical) {
-        int multiplier = critical && attack.getCritical() != null ? Math.max(1, attack.getCritical().getMultiplier()) : 1;
+    private DamageRollResult rollDamage(Attack attack, boolean critical, CriticalProfile effectiveCritical) {
+        int multiplier = critical && effectiveCritical != null ? Math.max(1, effectiveCritical.getMultiplier()) : 1;
         List<DamageComponentRollResult> components = attack.getDamageComponents().stream()
                 .map(component -> rollDamageComponent(component, multiplier))
                 .toList();
@@ -149,12 +170,58 @@ public class CombatRollService {
                 formatDamageDisplayText(components));
     }
 
+    private CriticalProfile resolveCriticalProfile(Attack attack) {
+        if (attack == null) {
+            return null;
+        }
+
+        if (attack.getCritical() != null) {
+            return attack.getCritical();
+        }
+
+        return isNaturalAttack(attack)
+                ? CriticalProfile.builder()
+                .threatRangeStart(20)
+                .multiplier(2)
+                .build()
+                : null;
+    }
+
+    private boolean isNaturalAttack(Attack attack) {
+        if (attack == null || attack.getAttackType() != AttackType.MELEE) {
+            return false;
+        }
+
+        return resolveNaturalAttackFamily(attack.getName()).isPresent();
+    }
+
+    private Optional<String> resolveNaturalAttackFamily(String name) {
+        if (name == null || name.isBlank()) {
+            return Optional.empty();
+        }
+
+        String normalized = name.trim().toLowerCase(Locale.ROOT);
+        if (NATURAL_ATTACK_NAMES.contains(normalized) || normalized.startsWith("tail")) {
+            return Optional.of(normalized);
+        }
+
+        if (normalized.endsWith("s")) {
+            String singular = normalized.substring(0, normalized.length() - 1);
+            if (NATURAL_ATTACK_NAMES.contains(singular) || singular.startsWith("tail")) {
+                return Optional.of(singular);
+            }
+        }
+
+        return Optional.empty();
+    }
+
     private DamageComponentRollResult rollDamageComponent(DamageComponent component, int multiplier) {
         DiceRoll roll = diceRoller.roll(component.getFormula());
         int componentMultiplier = component.isMultipliesOnCritical() ? multiplier : 1;
         int total = roll.getTotal() * componentMultiplier;
         return new DamageComponentRollResult(
                 component.getFormula(),
+                scaleDamageFormula(component.getFormula(), componentMultiplier),
                 roll,
                 component.getDamageType(),
                 component.isMultipliesOnCritical(),
@@ -206,7 +273,7 @@ public class CombatRollService {
 
     private String formatDamageDisplayText(List<DamageComponentRollResult> components) {
         return components.stream()
-                .map(component -> component.formula() + " = " + component.total() + " " + damageLabel(component))
+                .map(component -> component.appliedFormula() + " = " + component.total() + " " + damageLabel(component))
                 .collect(Collectors.joining(" + "));
     }
 
@@ -231,5 +298,40 @@ public class CombatRollService {
             return String.valueOf(naturalResults.getFirst());
         }
         return naturalResults.stream().map(String::valueOf).collect(Collectors.joining(" + "));
+    }
+
+    private String scaleDamageFormula(String formula, int multiplier) {
+        if (formula == null || multiplier <= 1) {
+            return formula;
+        }
+
+        String normalized = formula.replace(" ", "");
+        if (DAMAGE_NUMBER_PATTERN.matcher(normalized).matches()) {
+            return String.valueOf(Integer.parseInt(normalized) * multiplier);
+        }
+
+        Matcher matcher = DAMAGE_FORMULA_PATTERN.matcher(normalized);
+        if (!matcher.matches()) {
+            return formula;
+        }
+
+        int diceCount = matcher.group(1) == null || matcher.group(1).isBlank() ? 1 : Integer.parseInt(matcher.group(1));
+        int dieSize = Integer.parseInt(matcher.group(2));
+        String modifierPart = matcher.group(3);
+
+        int scaledDiceCount = diceCount * multiplier;
+        String scaledModifier = "";
+        if (modifierPart != null) {
+            int modifier = Integer.parseInt(modifierPart);
+            int scaledValue = modifier * multiplier;
+            scaledModifier = scaledValue > 0 ? "+" + scaledValue : String.valueOf(scaledValue);
+        }
+
+        String scaledDiceFormula = scaledDiceCount + "d" + dieSize;
+        if (scaledModifier.isBlank()) {
+            return scaledDiceFormula;
+        }
+
+        return scaledDiceFormula + scaledModifier;
     }
 }
