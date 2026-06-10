@@ -49,6 +49,9 @@
             <ActionButton :disabled="store.busy || !canSummon" @click="handleSummon">
               Invocar
             </ActionButton>
+            <ActionButton :disabled="store.busy" variant="neutral" @click="openSummonAssistant">
+              Asistente de invocación
+            </ActionButton>
             <ActionButton :disabled="store.busy" variant="danger" @click="handleClearSummons">
               Limpiar
             </ActionButton>
@@ -142,6 +145,13 @@
     </section>
 
     <teleport to="body">
+      <SummonAssistantModal
+        :open="isSummonAssistantOpen"
+        :max-summon-monster-level="store.configuration.maxSummonMonsterLevel"
+        @cancel="closeSummonAssistant"
+        @invoke="handleAssistantSummon"
+      />
+
       <div v-if="isRollResultModalOpen && store.lastCombatRollResult" class="modal-backdrop" @click.self="closeRollResultModal">
         <section class="modal roll-modal" role="dialog" aria-modal="true" aria-labelledby="roll-result-title">
           <div class="modal-header">
@@ -226,15 +236,18 @@ import CombatGroupCard from '@/components/CombatGroupCard.vue';
 import CombatRollResultPanel from '@/components/CombatRollResultPanel.vue';
 import GlobalCombatRollResultPanel from '@/components/GlobalCombatRollResultPanel.vue';
 import DailyUsesPanel from '@/components/DailyUsesPanel.vue';
+import SummonAssistantModal from '@/components/SummonAssistantModal.vue';
 import StatusBadge from '@/components/StatusBadge.vue';
 import { useCombatStore } from '@/stores/combat';
 import type { SummonTemplateType } from '@/types/catalog';
 import type { GlobalCombatRollResult } from '@/types/combat';
+import type { SummonAssistantSuggestion } from '@/data/summonAssistant';
 import { formatCreatureTypeWithSubtypes } from '@/utils/creatureDisplay';
 import { formatSpecialDefense, formatSpecialDefenseList } from '@/utils/specialDefenseDisplay';
 
 const store = useCombatStore();
 const expandedGroupId = ref<string | null>(null);
+const isSummonAssistantOpen = ref(false);
 const isRollResultModalOpen = ref(false);
 const globalRollResult = ref<GlobalCombatRollResult | null>(null);
 const summonToast = ref<string | null>(null);
@@ -318,9 +331,24 @@ function onTemplateChange(event: Event): void {
   store.selectTemplate(target.value ? (target.value as SummonTemplateType) : null);
 }
 
+function openSummonAssistant(): void {
+  isSummonAssistantOpen.value = true;
+}
+
+function closeSummonAssistant(): void {
+  isSummonAssistantOpen.value = false;
+}
+
 async function handleSummon(): Promise<void> {
   summonToast.value = null;
   await store.summonSelectedCreature();
+  showSummonToast();
+}
+
+async function handleAssistantSummon(suggestion: SummonAssistantSuggestion): Promise<void> {
+  summonToast.value = null;
+  closeSummonAssistant();
+  await store.summonCreatureById(suggestion.variant.creatureId, suggestion.variant.template);
   showSummonToast();
 }
 

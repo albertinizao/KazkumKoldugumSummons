@@ -225,6 +225,26 @@ export const useCombatStore = defineStore('combat', {
         this.busy = false;
       }
     },
+    async summonCreatureById(creatureTemplateId: string, selectedTemplate: SummonTemplateType | null) {
+      this.busy = true;
+      this.error = '';
+
+      try {
+        this.selectedCreatureId = creatureTemplateId;
+        this.selectedTemplate = selectedTemplate;
+        this.combatState = normalizeCombatState(await summonCreature({
+          creatureTemplateId,
+          selectedTemplate,
+          source: 'MANUAL_SEARCH',
+        }));
+        writeCombatStateSnapshot(this.combatState);
+        this.ensureSelectedTemplateIsAllowed();
+      } catch (error) {
+        this.error = error instanceof Error ? error.message : 'No se pudo invocar la criatura.';
+      } finally {
+        this.busy = false;
+      }
+    },
     async summonFromShortcut(shortcut: SummonShortcut, source: 'RECENT' | 'MOST_USED') {
       this.busy = true;
       this.error = '';
