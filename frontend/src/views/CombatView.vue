@@ -49,6 +49,9 @@
             <ActionButton :disabled="store.busy || !canSummon" @click="handleSummon">
               Invocar
             </ActionButton>
+            <ActionButton :disabled="store.busy" variant="neutral" @click="openSummonAssistant">
+              Asistente de invocación
+            </ActionButton>
             <ActionButton :disabled="store.busy" variant="danger" @click="handleClearSummons">
               Limpiar
             </ActionButton>
@@ -142,6 +145,13 @@
     </section>
 
     <teleport to="body">
+      <SummonAssistantModal
+        :open="isSummonAssistantOpen"
+        :max-summon-monster-level="store.configuration.maxSummonMonsterLevel"
+        @cancel="closeSummonAssistant"
+        @invoke="handleAssistantSummon"
+      />
+
       <div v-if="isRollResultModalOpen && store.lastCombatRollResult" class="modal-backdrop" @click.self="closeRollResultModal">
         <section class="modal roll-modal" role="dialog" aria-modal="true" aria-labelledby="roll-result-title">
           <div class="modal-header">
@@ -226,15 +236,24 @@ import CombatGroupCard from '@/components/CombatGroupCard.vue';
 import CombatRollResultPanel from '@/components/CombatRollResultPanel.vue';
 import GlobalCombatRollResultPanel from '@/components/GlobalCombatRollResultPanel.vue';
 import DailyUsesPanel from '@/components/DailyUsesPanel.vue';
+import SummonAssistantModal from '@/components/SummonAssistantModal.vue';
 import StatusBadge from '@/components/StatusBadge.vue';
 import { useCombatStore } from '@/stores/combat';
 import type { SummonTemplateType } from '@/types/catalog';
 import type { GlobalCombatRollResult } from '@/types/combat';
+import type { SummonAssistantChoiceNv3 } from '@/data/summonAssistantChoicesNv3';
+import type { SummonAssistantChoiceNv4 } from '@/data/summonAssistantChoicesNv4';
+import type { SummonAssistantChoiceNv5 } from '@/data/summonAssistantChoicesNv5';
+import type { SummonAssistantChoiceNv6 } from '@/data/summonAssistantChoicesNv6';
+import type { SummonAssistantChoiceNv7 } from '@/data/summonAssistantChoicesNv7';
+import type { SummonAssistantChoiceNv8 } from '@/data/summonAssistantChoicesNv8';
+import type { SummonAssistantChoiceNv9 } from '@/data/summonAssistantChoicesNv9';
 import { formatCreatureTypeWithSubtypes } from '@/utils/creatureDisplay';
 import { formatSpecialDefense, formatSpecialDefenseList } from '@/utils/specialDefenseDisplay';
 
 const store = useCombatStore();
 const expandedGroupId = ref<string | null>(null);
+const isSummonAssistantOpen = ref(false);
 const isRollResultModalOpen = ref(false);
 const globalRollResult = ref<GlobalCombatRollResult | null>(null);
 const summonToast = ref<string | null>(null);
@@ -318,9 +337,24 @@ function onTemplateChange(event: Event): void {
   store.selectTemplate(target.value ? (target.value as SummonTemplateType) : null);
 }
 
+function openSummonAssistant(): void {
+  isSummonAssistantOpen.value = true;
+}
+
+function closeSummonAssistant(): void {
+  isSummonAssistantOpen.value = false;
+}
+
 async function handleSummon(): Promise<void> {
   summonToast.value = null;
   await store.summonSelectedCreature();
+  showSummonToast();
+}
+
+async function handleAssistantSummon(suggestion: SummonAssistantChoiceNv3 | SummonAssistantChoiceNv4 | SummonAssistantChoiceNv5 | SummonAssistantChoiceNv6 | SummonAssistantChoiceNv7 | SummonAssistantChoiceNv8 | SummonAssistantChoiceNv9): Promise<void> {
+  summonToast.value = null;
+  closeSummonAssistant();
+  await store.summonCreatureById(suggestion.creatureId, suggestion.template);
   showSummonToast();
 }
 
