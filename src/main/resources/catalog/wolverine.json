@@ -68,7 +68,9 @@
         {
           "formula": "1d6+2",
           "damageType": "SLASHING",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 1.0
         }
       ],
       "critical": {
@@ -87,7 +89,9 @@
         {
           "formula": "1d4+2",
           "damageType": "PIERCING",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 1.0
         }
       ],
       "critical": {

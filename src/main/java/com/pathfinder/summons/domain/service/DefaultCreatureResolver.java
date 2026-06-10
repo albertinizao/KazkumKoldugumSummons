@@ -222,20 +222,12 @@ public class DefaultCreatureResolver implements CreatureResolver {
                                         boolean deepGuardianApplied,
                                         SummonTemplateType templateType,
                                         int hitDiceCount) {
-        int strengthDelta = augmentedAbilities.getStrengthModifier() - baseAbilities.getStrengthModifier();
-        int dexterityDelta = augmentedAbilities.getDexterityModifier() - baseAbilities.getDexterityModifier();
         int attackBonusAdjustment = deepGuardianApplied ? 1 : 0;
 
         return baseAttacks.stream()
                 .map(attack -> {
-                    int abilityDelta = switch (attack.getAttackAbility()) {
-                        case DEXTERITY -> dexterityDelta;
-                        case NONE, OTHER -> 0;
-                        case STRENGTH -> strengthDelta;
-                    };
-
                     List<DamageComponent> adjustedComponents = attack.getDamageComponents().stream()
-                            .map(component -> adjustDamageComponent(attack, component, strengthDelta, dexterityDelta))
+                            .map(component -> adjustDamageComponent(attack, component, baseAbilities, augmentedAbilities))
                             .toList();
 
                     List<DamageComponent> templateComponents = templateDamageComponents(templateType, attack, hitDiceCount);
@@ -245,7 +237,7 @@ public class DefaultCreatureResolver implements CreatureResolver {
                     return Attack.builder()
                             .id(attack.getId())
                             .name(attack.getName())
-                            .attackBonus(attack.getAttackBonus() + abilityDelta + attackBonusAdjustment)
+                            .attackBonus(attack.getAttackBonus() + resolvedAttackBonusDelta(attack, baseAbilities, augmentedAbilities) + attackBonusAdjustment)
                             .attackAbility(attack.getAttackAbility())
                             .quantity(attack.getQuantity())
                             .attackType(attack.getAttackType())
@@ -259,22 +251,71 @@ public class DefaultCreatureResolver implements CreatureResolver {
 
     private DamageComponent adjustDamageComponent(Attack attack,
                                                   DamageComponent component,
-                                                  int strengthDelta,
-                                                  int dexterityDelta) {
-        int abilityDelta = switch (component.getDamageAbility()) {
-            case DEXTERITY -> dexterityDelta;
-            case NONE, OTHER -> 0;
-            case STRENGTH -> strengthDelta * (int) Math.round(component.getDamageAbilityMultiplier() <= 0 ? 1 : component.getDamageAbilityMultiplier());
-        };
+                                                  AbilityScores baseAbilities,
+                                                  AbilityScores augmentedAbilities) {
+        if (component.getDamageAbility() == DamageAbility.NONE || component.getDamageAbility() == DamageAbility.OTHER) {
+            return component;
+        }
+
+        double damageMultiplier = component.getDamageAbilityMultiplier() <= 0 ? 1.0d : component.getDamageAbilityMultiplier();
+        int baseAbilityModifier = component.getDamageAbility() == DamageAbility.DEXTERITY
+                ? baseAbilities.getDexterityModifier()
+                : baseAbilities.getStrengthModifier();
+        int augmentedAbilityModifier = component.getDamageAbility() == DamageAbility.DEXTERITY
+                ? augmentedAbilities.getDexterityModifier()
+                : augmentedAbilities.getStrengthModifier();
+        int currentBonus = extractDamageBonus(component.getFormula());
+        int baseContribution = scaledAbilityContribution(baseAbilityModifier, damageMultiplier);
+        int staticBonus = currentBonus - baseContribution;
+        int adjustedBonus = staticBonus + scaledAbilityContribution(augmentedAbilityModifier, damageMultiplier);
+        int delta = adjustedBonus - currentBonus;
 
         return DamageComponent.builder()
-                .formula(adjustFormula(component.getFormula(), abilityDelta))
+                .formula(adjustFormula(component.getFormula(), delta))
                 .damageType(resolveDamageType(attack, component))
                 .multipliesOnCritical(component.isMultipliesOnCritical())
                 .damageAbility(component.getDamageAbility())
                 .damageAbilityMultiplier(component.getDamageAbilityMultiplier())
                 .label(component.getLabel())
                 .build();
+    }
+
+    private int resolvedAttackBonusDelta(Attack attack, AbilityScores baseAbilities, AbilityScores augmentedAbilities) {
+        return switch (attack.getAttackAbility()) {
+            case DEXTERITY -> augmentedAbilities.getDexterityModifier() - baseAbilities.getDexterityModifier();
+            case NONE, OTHER -> 0;
+            case STRENGTH -> augmentedAbilities.getStrengthModifier() - baseAbilities.getStrengthModifier();
+        };
+    }
+
+    private int scaledAbilityContribution(int abilityModifier, double multiplier) {
+        return (int) Math.floor(abilityModifier * multiplier);
+    }
+
+    private int extractDamageBonus(String formula) {
+        if (formula == null || formula.isBlank()) {
+            return 0;
+        }
+
+        String normalized = formula.replace(" ", "");
+        int signIndex = findDamageBonusSignIndex(normalized);
+        if (signIndex < 0) {
+            return 0;
+        }
+
+        try {
+            return Integer.parseInt(normalized.substring(signIndex));
+        } catch (NumberFormatException ex) {
+            return 0;
+        }
+    }
+
+    private int findDamageBonusSignIndex(String normalizedFormula) {
+        int dIndex = normalizedFormula.toLowerCase(Locale.ROOT).indexOf('d');
+        int plusIndex = normalizedFormula.lastIndexOf('+');
+        int minusIndex = normalizedFormula.lastIndexOf('-');
+        int signIndex = Math.max(plusIndex, minusIndex > dIndex ? minusIndex : -1);
+        return signIndex > dIndex ? signIndex : -1;
     }
 
     private List<DamageComponent> templateDamageComponents(SummonTemplateType templateType, Attack attack, int hitDiceCount) {

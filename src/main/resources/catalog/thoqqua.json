@@ -69,7 +69,9 @@
         {
           "formula": "1d6+1",
           "damageType": "BLUDGEONING",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 1.5
         }
       ],
       "critical": {

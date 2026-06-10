@@ -66,7 +66,9 @@
         {
           "formula": "2d6+3",
           "damageType": "SLASHING",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 1.0
         }
       ],
       "critical": {
@@ -85,7 +87,9 @@
         {
           "formula": "2d6+1",
           "damageType": "BLUDGEONING",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 0.5
         }
       ],
       "critical": {

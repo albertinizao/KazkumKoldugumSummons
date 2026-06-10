@@ -60,7 +60,9 @@
         {
           "formula": "1d10+7",
           "damageType": "SLASHING",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 1.0
         }
       ],
       "critical": {

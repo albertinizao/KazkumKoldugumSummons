@@ -54,7 +54,9 @@
         {
           "formula": "6d6+20",
           "damageType": "PIERCING",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 1.0
         }
       ],
       "critical": {
@@ -73,7 +75,9 @@
         {
           "formula": "3d6+10",
           "damageType": "BLUDGEONING",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 0.5
         }
       ],
       "critical": null,

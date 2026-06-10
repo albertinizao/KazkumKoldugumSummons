@@ -63,12 +63,16 @@
         {
           "formula": "1d8+1",
           "damageType": "BLUDGEONING",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 1.0
         },
         {
           "formula": "1d6",
           "damageType": "FIRE",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 1.0
         }
       ],
       "critical": {
@@ -87,12 +91,16 @@
         {
           "formula": "1d4+1",
           "damageType": "BLUDGEONING",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 1.0
         },
         {
           "formula": "1d6",
           "damageType": "FIRE",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 1.0
         }
       ],
       "critical": {

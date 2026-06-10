@@ -64,7 +64,9 @@
         {
           "formula": "4d6+16",
           "damageType": "PIERCING",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 1.5
         }
       ],
       "critical": {

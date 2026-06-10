@@ -154,7 +154,7 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
                                 .build())
                         .toList())
                 .attacks(safeList(raw.ataques()).stream()
-                        .map(this::mapAttack)
+                        .map(attack -> mapAttack(attack, raw.atributos().fuerza()))
                         .toList())
                 .space(raw.espacio())
                 .reach(raw.alcance())
@@ -200,16 +200,14 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
         return creatureType != null && creatureType.trim().equalsIgnoreCase("outsider");
     }
 
-    private Attack mapAttack(RawAttack rawAttack) {
+    private Attack mapAttack(RawAttack rawAttack, int baseStrengthScore) {
         AttackType attackType = parseAttackType(rawAttack.attackType());
-        AttackAbility attackAbility = attackType == AttackType.RANGED ? AttackAbility.DEXTERITY : AttackAbility.STRENGTH;
-        DamageAbility damageAbility = attackType == AttackType.RANGED ? DamageAbility.DEXTERITY : DamageAbility.STRENGTH;
 
         return Attack.builder()
                 .id(rawAttack.id())
                 .name(rawAttack.name())
                 .attackBonus(rawAttack.attackBonus())
-                .attackAbility(attackAbility)
+                .attackAbility(attackType == AttackType.RANGED ? AttackAbility.DEXTERITY : AttackAbility.STRENGTH)
                 .quantity(rawAttack.quantity())
                 .attackType(attackType)
                 .damageComponents(safeList(rawAttack.damageComponents()).stream()
@@ -217,8 +215,8 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
                                 .formula(component.formula())
                                 .damageType(parseDamageType(component.damageType()))
                                 .multipliesOnCritical(component.multipliesOnCritical())
-                                .damageAbility(damageAbility)
-                                .damageAbilityMultiplier(damageAbility == DamageAbility.NONE ? 0.0 : 1.0)
+                                .damageAbility(parseDamageAbility(component.damageAbility(), attackType, component.damageType()))
+                                .damageAbilityMultiplier(resolveDamageAbilityMultiplier(component.damageAbilityMultiplier(), component.damageAbility(), attackType, component.damageType(), component.formula(), baseStrengthScore))
                                 .build())
                         .toList())
                 .critical(rawAttack.critical() == null ? null : CriticalProfile.builder()
@@ -251,6 +249,101 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
 
     private DamageType parseDamageType(String value) {
         return DamageType.valueOf(value.trim().toUpperCase(Locale.ROOT));
+    }
+
+    private DamageAbility parseDamageAbility(String value, AttackType attackType, String damageType) {
+        if (value != null && !value.isBlank()) {
+            return DamageAbility.valueOf(value.trim().toUpperCase(Locale.ROOT));
+        }
+
+        if (isPhysicalDamageType(damageType)) {
+            return attackType == AttackType.RANGED ? DamageAbility.STRENGTH : DamageAbility.STRENGTH;
+        }
+
+        return DamageAbility.NONE;
+    }
+
+    private double resolveDamageAbilityMultiplier(Double explicitMultiplier,
+                                                  String explicitDamageAbility,
+                                                  AttackType attackType,
+                                                  String damageType,
+                                                  String formula,
+                                                  int baseStrengthScore) {
+        if (explicitMultiplier != null) {
+            return explicitMultiplier;
+        }
+
+        DamageAbility damageAbility = parseDamageAbility(explicitDamageAbility, attackType, damageType);
+        if (damageAbility == DamageAbility.NONE) {
+            return 0.0;
+        }
+
+        if (damageAbility == DamageAbility.DEXTERITY) {
+            return 1.0;
+        }
+
+        return inferStrengthMultiplier(formula, attackType, damageType, baseStrengthScore);
+    }
+
+    private double inferStrengthMultiplier(String formula, AttackType attackType, String damageType, int baseStrengthScore) {
+        if (!isPhysicalDamageType(damageType)) {
+            return 0.0;
+        }
+
+        int bonus = extractFlatBonus(formula);
+        int baseModifier = AbilityScores.getModifierForScore(baseStrengthScore);
+        List<Double> candidates = List.of(0.5d, 1.0d, 1.5d);
+        double bestCandidate = 1.0d;
+        int smallestStaticBonus = Integer.MAX_VALUE;
+
+        // We cannot infer the source ability score from the raw catalog alone here, so
+        // use the existing attack type as a stable fallback for legacy entries.
+        for (double candidate : candidates) {
+            int staticBonus = bonus - (int) Math.floor(baseModifier * candidate);
+            if (staticBonus >= 0 && staticBonus < smallestStaticBonus) {
+                smallestStaticBonus = staticBonus;
+                bestCandidate = candidate;
+            }
+        }
+
+        if (smallestStaticBonus == Integer.MAX_VALUE) {
+            return 1.0d;
+        }
+
+        return bestCandidate;
+    }
+
+    private int extractFlatBonus(String formula) {
+        if (formula == null) {
+            return 0;
+        }
+
+        String normalized = formula.replace(" ", "");
+        int dIndex = normalized.toLowerCase(Locale.ROOT).indexOf('d');
+        int plusIndex = normalized.lastIndexOf('+');
+        int minusIndex = normalized.lastIndexOf('-');
+        int signIndex = Math.max(plusIndex, minusIndex > dIndex ? minusIndex : -1);
+        if (signIndex <= dIndex) {
+            return 0;
+        }
+
+        try {
+            return Integer.parseInt(normalized.substring(signIndex));
+        } catch (NumberFormatException ex) {
+            return 0;
+        }
+    }
+
+    private boolean isPhysicalDamageType(String damageType) {
+        if (damageType == null) {
+            return false;
+        }
+
+        try {
+            return PHYSICAL_DAMAGE_TYPES.contains(DamageType.valueOf(damageType.trim().toUpperCase(Locale.ROOT)));
+        } catch (IllegalArgumentException ex) {
+            return false;
+        }
     }
 
     private SpecialDefenseType parseSpecialDefenseType(String value) {
@@ -410,7 +503,9 @@ public class JsonCreatureTemplateRepository implements CreatureTemplateRepositor
     private record RawDamageComponent(
             @JsonProperty("formula") String formula,
             @JsonProperty("damageType") String damageType,
-            @JsonProperty("multipliesOnCritical") boolean multipliesOnCritical
+            @JsonProperty("multipliesOnCritical") boolean multipliesOnCritical,
+            @JsonProperty("damageAbility") String damageAbility,
+            @JsonProperty("damageAbilityMultiplier") Double damageAbilityMultiplier
     ) {
     }
 

@@ -64,7 +64,9 @@
         {
           "formula": "2d6+11",
           "damageType": "SLASHING",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 1.0
         }
       ],
       "critical": {

@@ -63,12 +63,16 @@
         {
           "formula": "1d3-1",
           "damageType": "BLUDGEONING",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "STRENGTH",
+          "damageAbilityMultiplier": 1.0
         },
         {
           "formula": "1d6",
           "damageType": "ELECTRICITY",
-          "multipliesOnCritical": true
+          "multipliesOnCritical": true,
+          "damageAbility": "NONE",
+          "damageAbilityMultiplier": 0.0
         }
       ],
       "critical": {
